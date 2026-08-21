@@ -138,8 +138,16 @@ for index, rij in enumerate(rijen, start=1):
         nette_status = "Idee"
         rapport["status_aangevuld"].append((nr, titel))
 
+    nummer = None
+    if nr is not None and str(nr).strip().isdigit():
+        nummer = int(str(nr).strip())
+    else:
+        rapport.setdefault("nummer_ontbreekt", []).append((index, titel))
+
     use_cases.append({
-        "id": f"uc-{index:03d}",
+        # Het id volgt het nummer uit de sheet, zodat beide naar dezelfde rij wijzen.
+        "id": f"uc-{nummer:03d}" if nummer is not None else f"uc-r{index:03d}",
+        "nummer": nummer,
         "titel": titel,
         "bedrijf": net_bedrijf,
         "team": net_team,
@@ -178,6 +186,10 @@ print(f"{len(use_cases)} use cases weggeschreven naar {DOEL}")
 print("modus: ANONIEM (instuurder leeg, bekende namen uit vrije tekst)"
       if ANONIEM else "modus: met namen")
 print()
+ontbreekt = rapport.get("nummer_ontbreekt", [])
+if ontbreekt:
+    print(f"LET OP - geen nummer in kolom A bij {len(ontbreekt)} rijen: "
+          + ", ".join(t[:30] for _, t in ontbreekt[:5]))
 print(f"Status leeg -> Idee gezet: {len(rapport['status_aangevuld'])}")
 print(f"Besparing niet overgenomen: {len(rapport['uren_leeggelaten'])}")
 for nr, titel, ruw, reden in rapport["uren_leeggelaten"]:

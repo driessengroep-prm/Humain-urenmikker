@@ -660,7 +660,7 @@ textarea {
 
 .lijst-blok {
   /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
-  --lijst-kolommen: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 138px 116px 104px;
+  --lijst-kolommen: 42px minmax(0, 2.1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 132px 112px 100px;
   /*
    * De lijst staat naast de buis, dus zijn eigen breedte bepaalt of de kolommen
    * nog passen - niet die van het venster.
@@ -695,8 +695,8 @@ textarea {
   letter-spacing: 0.07em;
   color: var(--tekst-zacht);
 }
-.lijst__kop span:nth-child(5),
-.lijst__kop span:nth-child(6) {
+.lijst__kop span:nth-child(6),
+.lijst__kop span:nth-child(7) {
   text-align: right;
 }
 
@@ -745,6 +745,15 @@ textarea {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--tekst-zacht);
+}
+
+/* Volgnummer uit de bronsheet; smal en rustig, het is een verwijzing. */
+.rij__nr {
+  font-family: var(--font-kop);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--tekst-zacht);
+  font-variant-numeric: tabular-nums;
 }
 
 .rij__titel {
@@ -817,7 +826,7 @@ textarea {
 }
 
 /* Past het raster niet meer in de kolom, dan worden de rijen blokjes. */
-@container (max-width: 1020px) {
+@container (max-width: 1080px) {
   .lijst__kop {
     display: none;
   }
@@ -825,6 +834,9 @@ textarea {
     grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
     gap: 12px;
     align-items: start;
+  }
+  .rij__cel--nummer {
+    grid-column: 1 / -1;
   }
   .rij__cel--titel {
     grid-column: 1 / -1;

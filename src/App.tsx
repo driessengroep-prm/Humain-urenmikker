@@ -91,6 +91,8 @@ export default function App() {
           urenPerJaar(b.tijdsbesparing_uren_per_week, werkweken) -
           urenPerJaar(a.tijdsbesparing_uren_per_week, werkweken),
       );
+    } else if (sortering === 'nummer') {
+      gesorteerd.sort((a, b) => (a.nummer ?? Infinity) - (b.nummer ?? Infinity));
     } else if (sortering === 'in-te-vullen') {
       gesorteerd.sort((a, b) => {
         const aLeeg = a.tijdsbesparing_uren_per_week === null ? 0 : 1;
@@ -234,6 +236,7 @@ export default function App() {
           ) : (
             <div className="lijst-blok">
               <div className="lijst__kop" aria-hidden="true">
+                <span>Nr</span>
                 <span>Use case</span>
                 <span>Instuurder</span>
                 <span>Bedrijf</span>

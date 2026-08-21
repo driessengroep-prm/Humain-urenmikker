@@ -103,8 +103,10 @@ function parseUseCase(ruw: unknown, index: number): UseCase {
     console.warn(`Onbekend bedrijf ${JSON.stringify(ruwBedrijf)} in use case ${r.id}.`);
   }
   const uren = r.tijdsbesparing_uren_per_week;
+  const nummer = r.nummer;
   return {
     id: typeof r.id === 'string' && r.id ? r.id : `uc-${index + 1}`,
+    nummer: typeof nummer === 'number' && Number.isFinite(nummer) ? nummer : null,
     titel: typeof r.titel === 'string' ? r.titel : 'Zonder titel',
     bedrijf,
     team: typeof r.team === 'string' && r.team.trim() ? r.team.trim() : null,

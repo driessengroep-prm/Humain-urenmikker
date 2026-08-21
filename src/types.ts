@@ -30,6 +30,8 @@ export type Bedrijf = (typeof BEDRIJVEN)[number];
  */
 export interface UseCase {
   id: string;
+  /** Volgnummer uit kolom A van de bronsheet; null voor cases die hier zijn toegevoegd. */
+  nummer: number | null;
   titel: string;
   bedrijf: Bedrijf;
   /** Afdeling of team binnen het bedrijf, vrije tekst. */

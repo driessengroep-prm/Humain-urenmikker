@@ -95,6 +95,13 @@ export function UseCaseRij({
       onBlur={() => onMarkeer(null)}
     >
       <div className="rij__hoofd">
+        <div className="rij__cel rij__cel--nummer">
+          <span className="rij__label">Nr</span>
+          <span className={useCase.nummer === null ? 'rij__leeg' : 'rij__nr'}>
+            {useCase.nummer ?? 'nieuw'}
+          </span>
+        </div>
+
         <div className="rij__cel rij__cel--titel">
           <h3 className="rij__titel">{useCase.titel}</h3>
           {useCase.omschrijving && <p className="rij__omschrijving">{useCase.omschrijving}</p>}

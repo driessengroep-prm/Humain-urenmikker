@@ -48,6 +48,7 @@ export function NieuweUseCaseModal({
         instuurder: instuurder.trim() || null,
         tijdsbesparing_uren_per_week: waarde,
         opmerkingen: null,
+        nummer: null,
       });
       onSluit();
     } catch (error) {

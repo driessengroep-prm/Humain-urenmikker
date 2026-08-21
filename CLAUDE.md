@@ -79,8 +79,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   rekeninstellingen, besparing per bedrijf) met hun paneel eronder. Daaronder de
   band: de buis links, meescrollend, en rechts de filters met de use case-lijst.
   Elke knop toont zijn getal ook als het paneel dicht is.
-- De use cases staan in een lijst met kolommen (use case, instuurder, bedrijf,
-  afdeling/team, tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
+- De use cases staan in een lijst met kolommen (nr, use case, instuurder,
+  bedrijf, afdeling/team, tijdsbesparing, status). `nummer` is het volgnummer uit
+  kolom A van de sheet en bepaalt ook het `id` (`uc-042`); een case die in de
+  tool wordt toegevoegd heeft geen nummer en toont "nieuw". Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
   variabele aan. De lijst staat naast de buis, dus of de kolommen passen hangt af
   van zijn eigen kolombreedte en niet van het venster: dat gaat via een container

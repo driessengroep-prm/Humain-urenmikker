@@ -51,6 +51,7 @@ te bewerken als op de gepubliceerde site op te vragen.
   "use_cases": [
     {
       "id": "uc-001",
+      "nummer": 1,                           // volgnummer uit kolom A van de sheet
       "titel": "Automatisch samenvatten van intakegesprekken",
       "bedrijf": "Driessen Groep",
       "team": "Programmamanagement",           // afdeling of team, mag null zijn
@@ -87,7 +88,9 @@ pip install openpyxl
 python3 scripts/converteer-excel.py AIideeen.xlsx public/use-cases.json
 ```
 
-Het script normaliseert de bedrijfsnamen, vult een lege status aan als `Idee` en
+Het `id` volgt het nummer uit kolom A (`nummer: 42` wordt `uc-042`), zodat een
+regel in de tool en een regel in de sheet naar hetzelfde verwijzen. Het script
+normaliseert de bedrijfsnamen, vult een lege status aan als `Idee` en
 laat een besparing leeg als die niet eenduidig te herleiden is (`Onbekend`,
 `1 tot 6`, `540 uur` zonder periode). Het rapporteert precies welke rijen dat
 betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
