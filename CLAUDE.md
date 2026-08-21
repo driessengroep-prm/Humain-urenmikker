@@ -69,15 +69,17 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
-- Indeling van de pagina: bovenaan twee uitklapknoppen (gerealiseerde besparing
-  en rekeninstellingen) met hun paneel eronder, daarna de band met de buis links
-  en de besparing per bedrijf ernaast, daaronder de filters en de lijst over de
-  volle breedte. De knop toont het getal ook als het paneel dicht is.
+- Indeling van de pagina: bovenaan drie uitklapknoppen (gerealiseerde besparing,
+  rekeninstellingen, besparing per bedrijf) met hun paneel eronder. Daaronder de
+  band: de buis links, meescrollend, en rechts de filters met de use case-lijst.
+  Elke knop toont zijn getal ook als het paneel dicht is.
 - De use cases staan in een lijst met kolommen (use case, instuurder, bedrijf,
   afdeling/team, tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
-  variabele aan. Onder 1080 px klapt een regel om naar een blokje en worden de
-  kolomnamen per veld zichtbaar (`.rij__label`).
+  variabele aan. De lijst staat naast de buis, dus of de kolommen passen hangt af
+  van zijn eigen kolombreedte en niet van het venster: dat gaat via een container
+  query op `.lijst-blok`. Onder 1020 px klapt een regel om naar een blokje en
+  worden de kolomnamen per veld zichtbaar (`.rij__label`).
 - Responsive vanaf 320 px, geen horizontale scroll. Let bij rasters op
   `min-width: 0` en `minmax(min(…, 100%), 1fr)`: lange woorden duwen anders de
   kolom breder dan het scherm. Datzelfde geldt voor formuliervelden: een `input`

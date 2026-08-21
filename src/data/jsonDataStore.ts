@@ -1,6 +1,6 @@
 import { config } from '../config';
-import { isBedrijf, isStatus } from '../types';
-import type { NieuweUseCase, UseCase, UseCasePatch, UseCasesBestand } from '../types';
+import { BEDRIJVEN, isBedrijf, isStatus } from '../types';
+import type { Bedrijf, NieuweUseCase, UseCase, UseCasePatch, UseCasesBestand } from '../types';
 import { UseCaseNietGevondenError, type DataStore } from './dataStore';
 
 /**
@@ -94,7 +94,14 @@ function parseUseCase(ruw: unknown, index: number): UseCase {
   const status = isStatus(r.status) ? r.status : 'Idee';
   // `afdeling` is de oude veldnaam voor `bedrijf`; oudere bestanden blijven werken.
   const ruwBedrijf = r.bedrijf ?? r.afdeling;
-  const bedrijf = isBedrijf(ruwBedrijf) ? ruwBedrijf : 'Overig';
+  let bedrijf: Bedrijf;
+  if (isBedrijf(ruwBedrijf)) {
+    bedrijf = ruwBedrijf;
+  } else {
+    // Niet stilzwijgend ergens onderbrengen: melden en op het eerste bedrijf zetten.
+    bedrijf = BEDRIJVEN[0];
+    console.warn(`Onbekend bedrijf ${JSON.stringify(ruwBedrijf)} in use case ${r.id}.`);
+  }
   const uren = r.tijdsbesparing_uren_per_week;
   return {
     id: typeof r.id === 'string' && r.id ? r.id : `uc-${index + 1}`,

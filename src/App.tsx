@@ -28,6 +28,7 @@ export default function App() {
   const [gemarkeerdeId, setGemarkeerdeId] = useState<string | null>(null);
   const [toonTeller, setToonTeller] = useState(false);
   const [toonInstellingen, setToonInstellingen] = useState(false);
+  const [toonBedrijven, setToonBedrijven] = useState(false);
   const [toonNieuw, setToonNieuw] = useState(false);
   const [toonExport, setToonExport] = useState(false);
 
@@ -112,7 +113,7 @@ export default function App() {
       <a className="overslaan" href="#use-cases">
         Naar de use cases
       </a>
-      <Kop onNieuweUseCase={() => setToonNieuw(true)} onExporteer={() => setToonExport(true)} />
+      <Kop onNieuweUseCase={() => setToonNieuw(true)} />
 
       <main className="hoofd">
         {laadStatus === 'fout' && (
@@ -127,8 +128,11 @@ export default function App() {
             <i className="melding__punt" aria-hidden="true" />
             <span>
               Je wijzigingen staan alleen in deze browsersessie — ze zijn nog niet opgeslagen voor
-              anderen. Gebruik <strong>Exporteer bijgewerkte JSON</strong> en laat een beheerder het
-              bestand in de repository vervangen.
+              anderen en verdwijnen bij het verversen van de pagina.{' '}
+              <button type="button" className="melding__link" onClick={() => setToonExport(true)}>
+                Exporteer de bijgewerkte JSON
+              </button>{' '}
+              om ze te bewaren.
             </span>
           </p>
         )}
@@ -149,6 +153,13 @@ export default function App() {
               open={toonInstellingen}
               paneelId="paneel-instellingen"
               onClick={() => setToonInstellingen((huidig) => !huidig)}
+            />
+            <PaneelKnop
+              waarde={`${bedrijfTotalen.length}`}
+              label="bedrijven · besparing per bedrijf"
+              open={toonBedrijven}
+              paneelId="paneel-bedrijven"
+              onClick={() => setToonBedrijven((huidig) => !huidig)}
             />
           </div>
 
@@ -171,6 +182,9 @@ export default function App() {
                 onTelModus={setTelModus}
               />
             )}
+          </div>
+          <div id="paneel-bedrijven" hidden={!toonBedrijven}>
+            {toonBedrijven && <BedrijfOverzicht totalen={bedrijfTotalen} />}
           </div>
         </div>
 
@@ -196,54 +210,55 @@ export default function App() {
             />
           </section>
 
-          <BedrijfOverzicht totalen={bedrijfTotalen} />
+          <div className="band__lijst">
+          <h2 id="use-cases" className="alleen-screenreader">
+            Use cases
+          </h2>
+          <Filters
+            bedrijf={bedrijfFilter}
+            team={teamFilter}
+            status={statusFilter}
+            sortering={sortering}
+            aantal={zichtbaar.length}
+            teams={teams}
+            onBedrijf={setBedrijfFilter}
+            onTeam={setTeamFilter}
+            onStatus={setStatusFilter}
+            onSortering={setSortering}
+          />
+
+          {laadStatus === 'laden' ? (
+            <p className="leeg">Use cases worden geladen…</p>
+          ) : zichtbaar.length === 0 ? (
+            <p className="leeg">Geen use cases die aan dit filter voldoen.</p>
+          ) : (
+            <div className="lijst-blok">
+              <div className="lijst__kop" aria-hidden="true">
+                <span>Use case</span>
+                <span>Instuurder</span>
+                <span>Bedrijf</span>
+                <span>Afdeling / team</span>
+                <span>Tijdsbesparing</span>
+                <span>Status</span>
+                <span />
+              </div>
+              <ul className="lijst">
+                {zichtbaar.map((useCase) => (
+                  <UseCaseRij
+                    key={useCase.id}
+                    useCase={useCase}
+                    werkweken={werkweken}
+                    teltMee={teltMee(useCase, telModus)}
+                    onMarkeer={setGemarkeerdeId}
+                    onOpslaan={werkBij}
+                  />
+                ))}
+              </ul>
+            </div>
+          )}
+          </div>
         </div>
 
-        <h2 id="use-cases" className="alleen-screenreader">
-          Use cases
-        </h2>
-        <Filters
-          bedrijf={bedrijfFilter}
-          team={teamFilter}
-          status={statusFilter}
-          sortering={sortering}
-          aantal={zichtbaar.length}
-          teams={teams}
-          onBedrijf={setBedrijfFilter}
-          onTeam={setTeamFilter}
-          onStatus={setStatusFilter}
-          onSortering={setSortering}
-        />
-
-        {laadStatus === 'laden' ? (
-          <p className="leeg">Use cases worden geladen…</p>
-        ) : zichtbaar.length === 0 ? (
-          <p className="leeg">Geen use cases die aan dit filter voldoen.</p>
-        ) : (
-          <div className="lijst-blok">
-            <div className="lijst__kop" aria-hidden="true">
-              <span>Use case</span>
-              <span>Instuurder</span>
-              <span>Bedrijf</span>
-              <span>Afdeling / team</span>
-              <span>Tijdsbesparing</span>
-              <span>Status</span>
-              <span />
-            </div>
-            <ul className="lijst">
-              {zichtbaar.map((useCase) => (
-                <UseCaseRij
-                  key={useCase.id}
-                  useCase={useCase}
-                  werkweken={werkweken}
-                  teltMee={teltMee(useCase, telModus)}
-                  onMarkeer={setGemarkeerdeId}
-                  onOpslaan={werkBij}
-                />
-              ))}
-            </ul>
-          </div>
-        )}
       </main>
 
       <footer className="voet">

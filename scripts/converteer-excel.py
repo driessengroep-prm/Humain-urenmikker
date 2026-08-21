@@ -30,7 +30,7 @@ DOEL = ARGS[1] if len(ARGS) > 1 else "public/use-cases.json"
 # De kolom in de sheet heet "Bedrijf/bedrijfsonderdeel" en bevat allebei door
 # elkaar; hier wordt dat uit elkaar getrokken.
 BEDRIJVEN = {
-    "driessen": ("Driessen Groep", None),
+    "driessen": ("Driessen", None),
     "driessen groep": ("Driessen Groep", None),
     "driessen groep en ijk": ("Driessen Groep", None),  # staat op twee bedrijven; zie rapport
     "ijk": ("IJK", None),
@@ -125,7 +125,9 @@ for index, rij in enumerate(rijen, start=1):
     titel = tekst(naam) or "Zonder titel"
 
     ruw_bedrijf = tekst(bedrijf) or ""
-    net_bedrijf, net_team = BEDRIJVEN.get(ruw_bedrijf.lower(), ("Overig", None))
+    if ruw_bedrijf.lower() not in BEDRIJVEN:
+        rapport.setdefault("bedrijf_onbekend", []).append((nr, ruw_bedrijf))
+    net_bedrijf, net_team = BEDRIJVEN.get(ruw_bedrijf.lower(), ("Driessen Groep", None))
     if net_bedrijf.lower() != ruw_bedrijf.lower():
         rapport["bedrijf_hernoemd"].append((ruw_bedrijf, net_bedrijf, net_team))
 
@@ -182,3 +184,8 @@ for nr, titel, ruw, reden in rapport["uren_leeggelaten"]:
     print(f"  nr {nr:>4} | {titel[:48]:50} | {ruw!r} ({reden})")
 from collections import Counter
 print("\nBedrijf hernoemd:", Counter(rapport["bedrijf_hernoemd"]).most_common())
+onbekend = rapport.get("bedrijf_onbekend", [])
+if onbekend:
+    print("\nLET OP - bedrijf niet herkend, op Driessen Groep gezet:")
+    for nr, waarde in onbekend:
+        print(f"  nr {nr}: {waarde!r}  -> voeg een regel toe aan BEDRIJVEN in dit script")

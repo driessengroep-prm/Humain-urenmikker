@@ -2,10 +2,9 @@ import { Buddy } from './Buddy';
 
 interface KopProps {
   onNieuweUseCase(): void;
-  onExporteer(): void;
 }
 
-export function Kop({ onNieuweUseCase, onExporteer }: KopProps) {
+export function Kop({ onNieuweUseCase }: KopProps) {
   return (
     <header className="kop">
       <div className="kop__binnen">
@@ -23,9 +22,6 @@ export function Kop({ onNieuweUseCase, onExporteer }: KopProps) {
           </div>
         </div>
         <div className="kop__acties">
-          <button type="button" className="knop knop--rand" onClick={onExporteer}>
-            Exporteer <span className="alleen-breed">bijgewerkte </span>JSON
-          </button>
           <button type="button" className="knop knop--goud" onClick={onNieuweUseCase}>
             + Nieuwe use case
           </button>

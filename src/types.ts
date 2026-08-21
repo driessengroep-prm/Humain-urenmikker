@@ -8,6 +8,7 @@ export type Status = (typeof STATUSSEN)[number];
  * deze lijst maar in het losse veld `team`.
  */
 export const BEDRIJVEN = [
+  'Driessen',
   'Driessen Groep',
   'IJK',
   'Reijn',
@@ -18,7 +19,6 @@ export const BEDRIJVEN = [
   'Jeij',
   'TSF',
   'Lüün',
-  'Overig',
 ] as const;
 export type Bedrijf = (typeof BEDRIJVEN)[number];
 

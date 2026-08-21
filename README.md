@@ -64,15 +64,19 @@ te bewerken als op de gepubliceerde site op te vragen.
 }
 ```
 
-Bedrijven (veld `bedrijf`): Driessen Groep, IJK, Reijn, Haert, Bloeij, Brainport
-Human Campus, Driessen Foundation, Jeij, TSF, Lüün, Overig. Een afdeling of team
+Bedrijven (veld `bedrijf`): Driessen, Driessen Groep, IJK, Reijn, Haert, Bloeij,
+Brainport Human Campus, Driessen Foundation, Jeij, TSF, Lüün. Driessen en
+Driessen Groep zijn twee aparte werkmaatschappijen; de bronsheet gebruikt beide
+namen door elkaar en het conversiescript houdt ze uit elkaar. Een afdeling of team
 binnen zo'n bedrijf hoort niet in die lijst maar in het vrije veld `team`
 (bijvoorbeeld bedrijf `Driessen Groep` met team `Programmamanagement`).
 
 Het oudere veld `afdeling` wordt bij het inlezen nog geaccepteerd als alias voor
 `bedrijf`, zodat bestanden van voor deze wijziging blijven werken.
-Onbekende waarden voor `status` of `bedrijf` vallen bij het inlezen terug op
-`Idee` respectievelijk `Overig`, zodat een typefout de app niet breekt. Een kale
+Een onbekende `status` valt bij het inlezen terug op `Idee`. Een onbekend
+`bedrijf` komt op het eerste bedrijf uit de lijst te staan met een waarschuwing
+in de console; het conversiescript meldt zulke waarden apart, zodat je er een
+mapping voor toevoegt in plaats van dat ze stilzwijgend ergens belanden. Een kale
 array in plaats van het object hierboven wordt ook geaccepteerd.
 
 De dataset komt uit de AI-ideeën Excel van Driessen Groep, omgezet met
@@ -97,8 +101,8 @@ betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
 1. Open de tool en vul besparing en status in bij de regels in de lijst, of voeg use cases
    toe met **+ Nieuwe use case**. Wijzigingen blijven in je browsersessie; de app
    zegt dat er ook bij.
-2. Klik op **Exporteer bijgewerkte JSON** en kies downloaden of kopiëren naar het
-   klembord.
+2. In diezelfde melding staat **Exporteer de bijgewerkte JSON**; kies daar
+   downloaden of kopiëren naar het klembord.
 3. Vervang `public/use-cases.json` in de repository door dat bestand en commit
    naar `main`.
 4. De Actions-workflow bouwt en publiceert automatisch; daarna ziet iedereen de

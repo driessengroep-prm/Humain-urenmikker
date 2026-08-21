@@ -128,7 +128,7 @@
     {
       "id": "uc-012",
       "titel": "Automatisering tbv trainingen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 2,
@@ -139,7 +139,7 @@
     {
       "id": "uc-013",
       "titel": "HR toolkit voor leidinggevenden",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -150,7 +150,7 @@
     {
       "id": "uc-014",
       "titel": "CRM-automatisering",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 5,
@@ -161,7 +161,7 @@
     {
       "id": "uc-015",
       "titel": "Wab aanbod in de workflow",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 3,
@@ -172,7 +172,7 @@
     {
       "id": "uc-016",
       "titel": "Vacatureteksten automatisch invoeren",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -183,7 +183,7 @@
     {
       "id": "uc-017",
       "titel": "Automatisering gespreksverslagen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 7,
@@ -194,7 +194,7 @@
     {
       "id": "uc-018",
       "titel": "Automatisering overeenkomsten in Invio",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 2,
@@ -205,7 +205,7 @@
     {
       "id": "uc-019",
       "titel": "Rapporten maken",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 2,
@@ -216,7 +216,7 @@
     {
       "id": "uc-020",
       "titel": "Signalering niet goed lopende vacatures",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 4,
@@ -227,7 +227,7 @@
     {
       "id": "uc-021",
       "titel": "Vacatureteksten genereren",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 20,
@@ -238,7 +238,7 @@
     {
       "id": "uc-022",
       "titel": "AI-chatbot ondersteuning",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 12,
@@ -249,7 +249,7 @@
     {
       "id": "uc-023",
       "titel": "Automatiseren vastlegging subsidies",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 9,
@@ -260,7 +260,7 @@
     {
       "id": "uc-024",
       "titel": "Acties koppelen aan conclusies",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -271,7 +271,7 @@
     {
       "id": "uc-025",
       "titel": "Analyse van cijfers",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 8,
@@ -282,7 +282,7 @@
     {
       "id": "uc-026",
       "titel": "Automatisch uploaden van contactpersonen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 0.25,
@@ -293,7 +293,7 @@
     {
       "id": "uc-027",
       "titel": "Slim plannen van afspraken",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 1,
@@ -304,7 +304,7 @@
     {
       "id": "uc-028",
       "titel": "Conceptteksten voor offertes",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -315,7 +315,7 @@
     {
       "id": "uc-029",
       "titel": "Secrets vervangen door AI",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 12,
@@ -326,7 +326,7 @@
     {
       "id": "uc-030",
       "titel": "Inzicht in frequentie klantcontact + signalering",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -337,7 +337,7 @@
     {
       "id": "uc-031",
       "titel": "Goede mailinglijsten genereren",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -348,7 +348,7 @@
     {
       "id": "uc-032",
       "titel": "Geautomatiseerde analyse bestek aanbestedingen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 8,
@@ -359,7 +359,7 @@
     {
       "id": "uc-033",
       "titel": "Slim plannen van afspraken",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -370,7 +370,7 @@
     {
       "id": "uc-034",
       "titel": "Automatische uitnodigingen bedrijfsarts",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 6,
@@ -381,7 +381,7 @@
     {
       "id": "uc-035",
       "titel": "Automatiseren van recruitmentproces",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 2.5,
@@ -392,7 +392,7 @@
     {
       "id": "uc-036",
       "titel": "Geautomatiseerd uitnodigen consult bedrijfsarts",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 12,
@@ -403,7 +403,7 @@
     {
       "id": "uc-037",
       "titel": "Geautomatiseerd beantwoorden van vragen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 7.5,
@@ -414,7 +414,7 @@
     {
       "id": "uc-038",
       "titel": "Whatsapp programma gebruiksvriendelijker",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -425,7 +425,7 @@
     {
       "id": "uc-039",
       "titel": "Automatische screening los van de tests",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 5,
@@ -524,7 +524,7 @@
     {
       "id": "uc-048",
       "titel": "AI planning laten genereren",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": 8,
@@ -777,7 +777,7 @@
     {
       "id": "uc-071",
       "titel": "Geautomatiseerd formuleren invullen",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -865,7 +865,7 @@
     {
       "id": "uc-079",
       "titel": "Automatisch doorzetten niet koppelbare Invio mails",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -887,7 +887,7 @@
     {
       "id": "uc-081",
       "titel": "Invullen formulier aanvraag bloeij spoor",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -909,7 +909,7 @@
     {
       "id": "uc-083",
       "titel": "Invullen uwv formulier plan van aanpak",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
@@ -997,7 +997,7 @@
     {
       "id": "uc-091",
       "titel": "AI 'warm houder' via LinkedIn",
-      "bedrijf": "Driessen Groep",
+      "bedrijf": "Driessen",
       "team": null,
       "instuurder": null,
       "tijdsbesparing_uren_per_week": null,
