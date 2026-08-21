@@ -14,7 +14,7 @@ knikkers vult. Geen backend, geen login: alle data komt uit
 
 1. **Alles loopt via de dataStore.** Componenten en hooks importeren nooit
    `use-cases.json` en doen nooit zelf een `fetch`. De enige toegang is
-   `src/data/dataStore.ts` (`getAll` / `add` / `update`), via
+   `src/data/dataStore.ts` (`getAll` / `add` / `update` / `verwijder`), via
    `createDataStore()` en de hook `useUseCases`. Dit is de reden dat Supabase er
    later in te schuiven is zonder de UI aan te raken — breek het niet.
 2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken en telmodus
@@ -87,8 +87,11 @@ vormgeving te bekijken of te delen zonder `npm install`.
   Elke knop toont zijn getal ook als het paneel dicht is.
 - De use cases staan in een lijst met kolommen (nr, use case, instuurder,
   bedrijf, afdeling/team, tijdsbesparing, status). `nummer` is het volgnummer uit
-  kolom A van de sheet en bepaalt ook het `id` (`uc-042`); een case die in de
-  tool wordt toegevoegd heeft geen nummer en toont "nieuw". Kopregel en regels delen één rasterdefinitie via
+  kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
+  tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
+  de dataStore, want die kent de hele verzameling.
+- Verwijderen zit achter een bevestiging (`Modal` in `UseCaseRij`), en die knop
+  staat in het wijzigformulier zodat je er niet per ongeluk op klikt. Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
   variabele aan. De lijst staat naast de buis, dus of de kolommen passen hangt af
   van zijn eigen kolombreedte en niet van het venster: dat gaat via een container

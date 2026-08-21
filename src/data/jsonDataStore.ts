@@ -16,7 +16,6 @@ export class JsonDataStore implements DataStore {
 
   private useCases: UseCase[] | null = null;
   private laden: Promise<UseCase[]> | null = null;
-  private volgnummer = 0;
 
   constructor(private readonly url: string = bronUrl()) {}
 
@@ -28,7 +27,9 @@ export class JsonDataStore implements DataStore {
 
   async add(nieuwe: NieuweUseCase): Promise<UseCase> {
     const cases = await this.zorgVoorData();
-    const useCase: UseCase = { ...nieuwe, id: this.nieuwId() };
+    // De nummering loopt door op de hoogste die er al is.
+    const nummer = nieuwe.nummer ?? this.volgendNummer(cases);
+    const useCase: UseCase = { ...nieuwe, nummer, id: `uc-${String(nummer).padStart(3, '0')}` };
     cases.unshift(useCase);
     return { ...useCase };
   }
@@ -42,9 +43,15 @@ export class JsonDataStore implements DataStore {
     return { ...bijgewerkt };
   }
 
-  private nieuwId(): string {
-    this.volgnummer += 1;
-    return `nieuw-${Date.now().toString(36)}-${this.volgnummer}`;
+  async verwijder(id: string): Promise<void> {
+    const cases = await this.zorgVoorData();
+    const index = cases.findIndex((c) => c.id === id);
+    if (index === -1) throw new UseCaseNietGevondenError(id);
+    cases.splice(index, 1);
+  }
+
+  private volgendNummer(cases: UseCase[]): number {
+    return cases.reduce((hoogste, c) => Math.max(hoogste, c.nummer ?? 0), 0) + 1;
   }
 
   private zorgVoorData(): Promise<UseCase[]> {

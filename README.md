@@ -220,6 +220,7 @@ interface DataStore {
   getAll(): Promise<UseCase[]>;
   add(useCase: NieuweUseCase): Promise<UseCase>;
   update(id: string, patch: UseCasePatch): Promise<UseCase>;
+  verwijder(id: string): Promise<void>;
 }
 ```
 

@@ -16,8 +16,16 @@ import { Teller } from './components/Teller';
 import { UseCaseRij } from './components/UseCaseRij';
 
 export default function App() {
-  const { useCases, laadStatus, foutmelding, heeftWijzigingen, persistent, voegToe, werkBij } =
-    useUseCases();
+  const {
+    useCases,
+    laadStatus,
+    foutmelding,
+    heeftWijzigingen,
+    persistent,
+    voegToe,
+    werkBij,
+    verwijder,
+  } = useUseCases();
 
   const [bedrijfFilter, setBedrijfFilter] = useState<Bedrijf | 'alle'>('alle');
   const [teamFilter, setTeamFilter] = useState<string | 'alle'>('alle');
@@ -254,6 +262,7 @@ export default function App() {
                     teltMee={teltMee(useCase, telModus)}
                     onMarkeer={setGemarkeerdeId}
                     onOpslaan={werkBij}
+                    onVerwijder={verwijder}
                   />
                 ))}
               </ul>

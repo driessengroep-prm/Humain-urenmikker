@@ -31,6 +31,8 @@
  *     with check (auth.uid() = eigenaar);
  *   create policy "eigenaar bewerkt" on use_cases for update
  *     using (auth.uid() = eigenaar);
+ *   create policy "eigenaar verwijdert" on use_cases for delete
+ *     using (auth.uid() = eigenaar);
  */
 
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
@@ -74,5 +76,10 @@ export class SupabaseDataStore implements DataStore {
     if (error) throw new Error(error.message);
     if (!data) throw new UseCaseNietGevondenError(id);
     return data as UseCase;
+  }
+
+  async verwijder(id: string): Promise<void> {
+    const { error } = await this.client.from('use_cases').delete().eq('id', id);
+    if (error) throw new Error(error.message);
   }
 }

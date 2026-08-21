@@ -149,6 +149,17 @@ textarea {
   border-color: var(--terracotta);
   color: var(--terracotta);
 }
+.knop--gevaar {
+  background: var(--wit);
+  color: var(--terracotta-donker);
+  border-color: rgba(222, 90, 44, 0.45);
+}
+.knop--gevaar:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--wit);
+}
+
 .knop--klein {
   padding: 7px 14px;
   font-size: 13px;
@@ -823,6 +834,11 @@ textarea {
 .bewerk__acties {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+}
+/* Verwijderen staat los van opslaan en annuleren. */
+.bewerk__acties .knop--gevaar {
+  margin-left: auto;
 }
 
 /* Past het raster niet meer in de kolom, dan worden de rijen blokjes. */
@@ -974,6 +990,20 @@ textarea {
   font-size: 13px;
   margin: 0;
 }
+.modal__vraag {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.modal__doel {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--creme);
+  border-radius: 14px;
+  font-family: var(--font-kop);
+  font-weight: 600;
+  color: var(--petrol);
+}
+
 .modal__code {
   background: var(--creme);
   border: 1px solid var(--hairline);

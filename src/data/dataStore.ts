@@ -26,6 +26,9 @@ export interface DataStore {
 
   /** Bestaande use case bijwerken; geeft de bijgewerkte case terug. */
   update(id: string, patch: UseCasePatch): Promise<UseCase>;
+
+  /** Use case verwijderen. */
+  verwijder(id: string): Promise<void>;
 }
 
 /** Fout die de dataStore gooit bij een onbekend id. */

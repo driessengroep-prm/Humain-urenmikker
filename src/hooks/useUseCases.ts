@@ -14,6 +14,7 @@ export interface UseCasesResultaat {
   persistent: boolean;
   voegToe(useCase: NieuweUseCase): Promise<UseCase>;
   werkBij(id: string, patch: UseCasePatch): Promise<UseCase>;
+  verwijder(id: string): Promise<void>;
 }
 
 /**
@@ -66,6 +67,15 @@ export function useUseCases(): UseCasesResultaat {
     [store],
   );
 
+  const verwijder = useCallback(
+    async (id: string) => {
+      await store.verwijder(id);
+      setUseCases((huidig) => huidig.filter((c) => c.id !== id));
+      setHeeftWijzigingen(true);
+    },
+    [store],
+  );
+
   return {
     useCases,
     laadStatus,
@@ -74,5 +84,6 @@ export function useUseCases(): UseCasesResultaat {
     persistent: store.persistent,
     voegToe,
     werkBij,
+    verwijder,
   };
 }

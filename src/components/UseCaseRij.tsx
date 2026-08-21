@@ -4,6 +4,7 @@ import type { Bedrijf, Status, UseCase, UseCasePatch } from '../types';
 import { getal, urenPerWeekLabel } from '../lib/format';
 import { urenPerJaar } from '../lib/uren';
 import { StatusBadge } from './StatusBadge';
+import { Modal } from './Modal';
 
 interface UseCaseRijProps {
   useCase: UseCase;
@@ -12,6 +13,7 @@ interface UseCaseRijProps {
   teltMee: boolean;
   onMarkeer(id: string | null): void;
   onOpslaan(id: string, patch: UseCasePatch): Promise<unknown>;
+  onVerwijder(id: string): Promise<void>;
 }
 
 /** Zet de ruwe invoer om naar het aantal uren per week, of null als het leeg is. */
@@ -30,6 +32,7 @@ export function UseCaseRij({
   teltMee,
   onMarkeer,
   onOpslaan,
+  onVerwijder,
 }: UseCaseRijProps) {
   const [wijzigen, setWijzigen] = useState(false);
   const [uren, setUren] = useState('');
@@ -39,6 +42,7 @@ export function UseCaseRij({
   const [team, setTeam] = useState('');
   const [fout, setFout] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
+  const [vraagVerwijderen, setVraagVerwijderen] = useState(false);
   const veldId = useId();
 
   // Formulier synchroon houden met de use case (ook na opslaan of een reset).
@@ -255,8 +259,50 @@ export function UseCaseRij({
             >
               Annuleren
             </button>
+            <button
+              type="button"
+              className="knop knop--gevaar knop--klein"
+              onClick={() => setVraagVerwijderen(true)}
+            >
+              Verwijderen
+              <span className="alleen-screenreader"> — {useCase.titel}</span>
+            </button>
           </div>
         </form>
+      )}
+
+      {vraagVerwijderen && (
+        <Modal titel="Use case verwijderen" onSluit={() => setVraagVerwijderen(false)}>
+          <p className="modal__vraag">Weet je zeker dat je deze use case wilt verwijderen?</p>
+          <p className="modal__doel">
+            {useCase.nummer !== null && <span className="rij__nr">{useCase.nummer}</span>}{' '}
+            {useCase.titel}
+          </p>
+          <div className="modal__acties">
+            <button
+              type="button"
+              className="knop knop--rand"
+              onClick={() => setVraagVerwijderen(false)}
+            >
+              Annuleren
+            </button>
+            <button
+              type="button"
+              className="knop knop--gevaar"
+              disabled={bezig}
+              onClick={async () => {
+                setBezig(true);
+                try {
+                  await onVerwijder(useCase.id);
+                } finally {
+                  setBezig(false);
+                }
+              }}
+            >
+              Verwijderen
+            </button>
+          </div>
+        </Modal>
       )}
     </li>
   );
