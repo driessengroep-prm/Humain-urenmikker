@@ -112,9 +112,19 @@ export function Filters({
         </select>
       </div>
 
-      {/* Niet in beeld, wel hoorbaar: schermlezers melden zo het filterresultaat. */}
-      <p className="alleen-screenreader" aria-live="polite">
-        {aantal} use case{aantal === 1 ? '' : 's'} in beeld
+      {/*
+        Compacte teller van wat het filter oplevert. Het getal staat in beeld,
+        de volledige zin zit in het label voor schermlezers en als tooltip.
+      */}
+      <p
+        className="filters__teller"
+        title={`${aantal} use case${aantal === 1 ? '' : 's'} in beeld`}
+        aria-live="polite"
+      >
+        <span aria-hidden="true">{aantal}</span>
+        <span className="alleen-screenreader">
+          {aantal} use case{aantal === 1 ? '' : 's'} in beeld
+        </span>
       </p>
     </div>
   );

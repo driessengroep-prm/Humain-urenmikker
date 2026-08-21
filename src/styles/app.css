@@ -652,6 +652,26 @@ textarea {
   min-height: 92px;
   font-family: var(--font-body);
 }
+/* Teller rechtsboven de lijst: hoeveel use cases het filter oplevert. */
+.filters__teller {
+  margin: 0 0 0 auto;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wit);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-kop);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--petrol);
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--schaduw-zacht);
+}
+
 .veld--breed {
   width: 100%;
 }
