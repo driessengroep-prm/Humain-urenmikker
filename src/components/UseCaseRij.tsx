@@ -5,7 +5,7 @@ import { getal, urenPerWeekLabel } from '../lib/format';
 import { urenPerJaar } from '../lib/uren';
 import { StatusBadge } from './StatusBadge';
 
-interface UseCaseKaartProps {
+interface UseCaseRijProps {
   useCase: UseCase;
   werkweken: number;
   /** Telt deze case mee in de buis? Bepaalt of hover de buis oplicht. */
@@ -14,16 +14,19 @@ interface UseCaseKaartProps {
   onOpslaan(id: string, patch: UseCasePatch): Promise<unknown>;
 }
 
-export function UseCaseKaart({
+/** Eén regel in de use case-lijst: titel, instuurder, afdeling, besparing, status. */
+export function UseCaseRij({
   useCase,
   werkweken,
   teltMee,
   onMarkeer,
   onOpslaan,
-}: UseCaseKaartProps) {
+}: UseCaseRijProps) {
   const [bewerken, setBewerken] = useState(false);
   const [uren, setUren] = useState(
-    useCase.tijdsbesparing_uren_per_week === null ? '' : String(useCase.tijdsbesparing_uren_per_week),
+    useCase.tijdsbesparing_uren_per_week === null
+      ? ''
+      : String(useCase.tijdsbesparing_uren_per_week),
   );
   const [status, setStatus] = useState<Status>(useCase.status);
   const [bezig, setBezig] = useState(false);
@@ -56,23 +59,62 @@ export function UseCaseKaart({
   }
 
   return (
-    <article
-      className="kaart"
+    <li
+      className="rij"
       onMouseEnter={() => teltMee && onMarkeer(useCase.id)}
       onMouseLeave={() => onMarkeer(null)}
       onFocus={() => teltMee && onMarkeer(useCase.id)}
       onBlur={() => onMarkeer(null)}
     >
-      <div className="kaart__kop">
-        <h3 className="kaart__titel">{useCase.titel}</h3>
-        <StatusBadge status={useCase.status} />
-      </div>
-      <p className="kaart__meta">
-        {useCase.afdeling} · {useCase.instuurder ?? 'anoniem ingestuurd'}
-      </p>
-      <p className="kaart__omschrijving">{useCase.omschrijving}</p>
+      <div className="rij__hoofd">
+        <div className="rij__cel rij__cel--titel">
+          <h3 className="rij__titel">{useCase.titel}</h3>
+          {useCase.omschrijving && <p className="rij__omschrijving">{useCase.omschrijving}</p>}
+        </div>
 
-      {bewerken ? (
+        <div className="rij__cel">
+          <span className="rij__label">Instuurder</span>
+          <span className={useCase.instuurder ? '' : 'rij__leeg'}>
+            {useCase.instuurder ?? 'anoniem ingestuurd'}
+          </span>
+        </div>
+
+        <div className="rij__cel">
+          <span className="rij__label">Afdeling</span>
+          <span>{useCase.afdeling}</span>
+        </div>
+
+        <div className="rij__cel rij__cel--uren">
+          <span className="rij__label">Tijdsbesparing</span>
+          {heeftBesparing ? (
+            <>
+              <span className="rij__uren">{getal(perJaar)} uur/jaar</span>
+              <small>{urenPerWeekLabel(useCase.tijdsbesparing_uren_per_week)}</small>
+            </>
+          ) : (
+            <span className="rij__leeg rij__leeg--nadruk">nog niet ingevuld</span>
+          )}
+        </div>
+
+        <div className="rij__cel rij__cel--status">
+          <span className="rij__label">Status</span>
+          <StatusBadge status={useCase.status} />
+        </div>
+
+        <div className="rij__cel rij__cel--actie">
+          <button
+            type="button"
+            className="knop knop--rand knop--klein"
+            onClick={() => setBewerken((huidig) => !huidig)}
+            aria-expanded={bewerken}
+          >
+            {bewerken ? 'Sluiten' : heeftBesparing ? 'Bewerken' : 'Invullen'}
+            <span className="alleen-screenreader"> — {useCase.titel}</span>
+          </button>
+        </div>
+      </div>
+
+      {bewerken && (
         <form className="bewerk" onSubmit={opslaan}>
           <div className="bewerk__rij">
             <div className="veld">
@@ -120,28 +162,7 @@ export function UseCaseKaart({
             </button>
           </div>
         </form>
-      ) : (
-        <div className="kaart__voet">
-          {heeftBesparing ? (
-            <span className="kaart__uren">
-              {getal(perJaar)} uur/jaar
-              <small>{urenPerWeekLabel(useCase.tijdsbesparing_uren_per_week)}</small>
-            </span>
-          ) : (
-            <span className="kaart__uren kaart__uren--leeg">Besparing nog niet ingevuld</span>
-          )}
-          <span className="kaart__acties">
-            <button
-              type="button"
-              className="knop knop--rand knop--klein"
-              onClick={() => setBewerken(true)}
-            >
-              {heeftBesparing ? 'Bewerken' : 'Invullen'}
-              <span className="alleen-screenreader"> — {useCase.titel}</span>
-            </button>
-          </span>
-        </div>
       )}
-    </article>
+    </li>
   );
 }

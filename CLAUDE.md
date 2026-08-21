@@ -39,7 +39,7 @@ knikkers vult. Geen backend, geen login: alle data komt uit
 | Goud (knikkers, primaire knoppen, logo) | `#E3A93A` |
 | Petrol-teal (cijfers, koppen) | `#2E5561` |
 | Crème (achtergrond) | `#FBF1E9` |
-| Wit (kaarten) | `#FFFFFF` |
+| Wit (kaarten en lijstregels) | `#FFFFFF` |
 | Hairline (randen) | `#EADDCE` |
 
 Poppins voor koppen en cijfers, Inter voor bodytekst. Vormtaal: bogen en halve
@@ -55,6 +55,11 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
+- De use cases staan in een lijst met kolommen (use case, instuurder, afdeling,
+  tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
+  `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
+  variabele aan. Onder 900 px klapt een regel om naar een blokje en worden de
+  kolomnamen per veld zichtbaar (`.rij__label`).
 - Responsive vanaf 320 px, geen horizontale scroll. Let bij rasters op
   `min-width: 0` en `minmax(min(…, 100%), 1fr)`: lange woorden duwen anders de
   kolom breder dan het scherm.

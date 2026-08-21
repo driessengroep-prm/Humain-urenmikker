@@ -73,7 +73,7 @@ array in plaats van het object hierboven wordt ook geaccepteerd.
 
 ### `use-cases.json` bijwerken
 
-1. Open de tool en vul besparing en status in bij de kaarten, of voeg use cases
+1. Open de tool en vul besparing en status in bij de regels in de lijst, of voeg use cases
    toe met **+ Nieuwe use case**. Wijzigingen blijven in je browsersessie; de app
    zegt dat er ook bij.
 2. Klik op **Exporteer bijgewerkte JSON** en kies downloaden of kopiëren naar het
@@ -151,7 +151,7 @@ src/
     knikkers.ts                geometrie van buis en knikkers
     exporteer.ts               dataset → geldige use-cases.json
     format.ts                  Nederlandse getalnotatie
-  components/                  Buis, Teller, kaarten, filters, modals
+  components/                  Buis, Teller, use case-lijst, filters, modals
   styles/app.css               huisstijltokens en layout
 ```
 
@@ -208,7 +208,7 @@ wijzigingen vanzelf. Login en rechten per eigenaar komen erbij als een
 - Skiplink naar de use cases als eerste tabstop.
 - Modals: focus-trap, sluiten met `Escape`, focus keert terug naar de knop die
   hem opende.
-- De buis heeft een tekstalternatief met de actuele stand; kaarten lichten de
-  buis ook op bij toetsenbordfocus, niet alleen bij hover.
+- De buis heeft een tekstalternatief met de actuele stand; een regel in de lijst
+  licht de buis ook op bij toetsenbordfocus, niet alleen bij hover.
 - `prefers-reduced-motion: reduce` zet de animaties uit.
 - Werkt vanaf 320 px breed; geen horizontale scroll.

@@ -27,6 +27,8 @@
   --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
 
   --maxbreedte: 1180px;
+  /* Hoogte van de vastgezette kopbalk op desktop; de kolomkop plakt eronder. */
+  --kop-hoogte: 95px;
 }
 
 *,
@@ -540,85 +542,176 @@ textarea {
   padding-bottom: 10px;
 }
 
-/* --- Kaarten -------------------------------------------------------------- */
+/* --- Use case-lijst ------------------------------------------------------- */
 
-.kaarten {
-  display: grid;
-  /* min() voorkomt dat een lang woord de kolom breder maakt dan het scherm. */
-  grid-template-columns: repeat(auto-fill, minmax(min(290px, 100%), 1fr));
-  gap: 16px;
+.lijst-blok {
+  /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
+  --lijst-kolommen: minmax(0, 2.6fr) minmax(0, 1.15fr) minmax(0, 1.15fr) 150px 130px 112px;
 }
-.kaart {
-  min-width: 0;
-  overflow-wrap: break-word;
+
+.lijst {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.lijst__kop {
+  /* Blijft staan tijdens het scrollen, zodat de kolommen leesbaar blijven. */
+  position: sticky;
+  top: var(--kop-hoogte);
+  z-index: 5;
+  background: rgba(251, 241, 233, 0.9);
+  backdrop-filter: blur(8px);
+  display: grid;
+  grid-template-columns: var(--lijst-kolommen);
+  gap: 16px;
+  /* 1px extra zodat de kop uitlijnt met de rand van de rijen eronder. */
+  padding: 10px 19px 8px;
+  font-family: var(--font-kop);
+  font-size: 11.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--tekst-zacht);
+}
+.lijst__kop span:nth-child(4),
+.lijst__kop span:nth-child(5) {
+  text-align: right;
+}
+
+.rij {
   background: var(--wit);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-kaart);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 14px 18px;
   box-shadow: var(--schaduw-zacht);
-  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
-  position: relative;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  min-width: 0;
+  overflow-wrap: break-word;
 }
-.kaart:hover,
-.kaart:focus-within {
+.rij:hover,
+.rij:focus-within {
   border-color: var(--goud);
-  box-shadow: 0 8px 26px rgba(227, 169, 58, 0.25);
-  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(227, 169, 58, 0.22);
 }
-.kaart__kop {
+
+.rij__hoofd {
+  display: grid;
+  grid-template-columns: var(--lijst-kolommen);
+  gap: 16px;
+  align-items: center;
+}
+
+.rij__cel {
+  min-width: 0;
+  font-size: 13.5px;
+}
+.rij__cel--uren,
+.rij__cel--status {
+  text-align: right;
+}
+.rij__cel--actie {
   display: flex;
-  gap: 10px;
-  align-items: flex-start;
+  justify-content: flex-end;
 }
-.kaart__titel {
+
+/* Kolomnaam per cel: onzichtbaar zolang de kopregel zichtbaar is. */
+.rij__label {
+  display: none;
+  font-family: var(--font-kop);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tekst-zacht);
+}
+
+.rij__titel {
   font-family: var(--font-kop);
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: 15px;
   line-height: 1.35;
   margin: 0;
 }
-.kaart__meta {
+.rij__omschrijving {
+  margin: 3px 0 0;
   font-size: 12.5px;
+  color: #6b7f88;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.rij__leeg {
   color: var(--tekst-zacht);
+  font-style: italic;
 }
-.kaart__omschrijving {
-  font-size: 13.5px;
-  color: #4a616a;
-  margin: 0;
+.rij__leeg--nadruk {
+  color: var(--terracotta);
+  font-style: normal;
+  font-weight: 500;
 }
-.kaart__voet {
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid var(--hairline);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.kaart__uren {
+.rij__uren {
+  display: block;
   font-family: var(--font-kop);
   font-weight: 700;
-  font-size: 19px;
+  font-size: 16px;
   color: var(--petrol);
-  line-height: 1.1;
+  line-height: 1.2;
   font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
-.kaart__uren small {
-  display: block;
-  font-family: var(--font-body);
-  font-weight: 400;
+.rij__cel--uren small {
   font-size: 11.5px;
   color: var(--tekst-zacht);
 }
-.kaart__uren--leeg {
-  color: var(--terracotta);
-  font-size: 14px;
+
+.bewerk {
+  display: grid;
+  gap: 12px;
+  background: var(--creme);
+  border-radius: 14px;
+  padding: 14px;
+  margin-top: 12px;
 }
-.kaart__acties {
-  margin-left: auto;
+.bewerk__rij {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 420px;
+}
+.bewerk__acties {
+  display: flex;
+  gap: 8px;
+}
+
+/* Onder deze breedte past het raster niet meer: rijen worden blokjes. */
+@media (max-width: 900px) {
+  .lijst__kop {
+    display: none;
+  }
+  .rij__hoofd {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .rij__cel--titel {
+    grid-column: 1 / -1;
+  }
+  .rij__cel--uren,
+  .rij__cel--status {
+    text-align: left;
+  }
+  .rij__cel--actie {
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+  }
+  .rij__label {
+    display: block;
+    margin-bottom: 2px;
+  }
 }
 
 .badge {
@@ -819,7 +912,10 @@ textarea {
     width: 100%;
     padding-bottom: 0;
   }
-  .kaarten {
+  .rij {
+    padding: 14px;
+  }
+  .bewerk__rij {
     grid-template-columns: 1fr;
   }
   .modal {
