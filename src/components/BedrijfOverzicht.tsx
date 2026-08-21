@@ -14,7 +14,7 @@ export function BedrijfOverzicht({ totalen }: BedrijfOverzichtProps) {
   return (
     <section className="paneel" aria-labelledby="bedrijven-titel">
       <h2 id="bedrijven-titel" className="paneel__titel">
-        Besparing per bedrijf (uur/jaar)
+        Tijdsbesparing per bedrijf (uur / jaar)
       </h2>
       <div className="afdelingen">
         {totalen.map((totaal) => {
@@ -29,8 +29,9 @@ export function BedrijfOverzicht({ totalen }: BedrijfOverzichtProps) {
                 <i className="potentieel" style={{ width: `${potentieelBreedte}%` }} />
               </span>
               <span className="afdeling__meta">
-                {totaal.aantal} use case{totaal.aantal === 1 ? '' : 's'}
-                {totaal.potentieleUren > 0 && ` · ${getal(totaal.potentieleUren)} potentieel`}
+                {totaal.aantal} use case{totaal.aantal === 1 ? '' : 's'} -{' '}
+                {getal(totaal.potentieleUren)}{' '}
+                {totaal.potentieleUren === 1 ? 'uur' : 'uren'} potentiële tijdsbesparing
               </span>
             </div>
           );
