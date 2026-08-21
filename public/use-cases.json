@@ -1,0 +1,322 @@
+{
+  "versie": 1,
+  "bijgewerkt_op": "2026-08-21",
+  "toelichting": "Bronbestand voor de HUMAIN Urenmikker. tijdsbesparing_uren_per_week is de geschatte besparing PER WEEK; de app rekent dit om naar uren per jaar met het aantal werkweken uit src/config.ts.",
+  "use_cases": [
+    {
+      "id": "uc-001",
+      "titel": "Automatisch samenvatten van intakegesprekken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Team Recruitment",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Done",
+      "omschrijving": "Opnames van intakegesprekken worden automatisch getranscribeerd en samengevat tot een gestructureerd kandidaatprofiel. De recruiter controleert en vult aan in plaats van alles uit te typen."
+    },
+    {
+      "id": "uc-002",
+      "titel": "Vacatureteksten genereren op basis van functieprofiel",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Marketing & Communicatie",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "Done",
+      "omschrijving": "Uit een functieprofiel wordt een eerste versie van de vacaturetekst gegenereerd in de huisstijl en tone-of-voice, inclusief SEO-varianten voor de vacaturesites."
+    },
+    {
+      "id": "uc-003",
+      "titel": "Eerstelijns vragen salarisadministratie via chatassistent",
+      "afdeling": "Driessen Groep",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 9,
+      "status": "In behandeling",
+      "omschrijving": "Een assistent beantwoordt terugkerende vragen van medewerkers over loonstroken, verlofsaldo en reiskostenvergoeding op basis van de eigen kennisbank, met doorzetten naar een medewerker bij twijfel."
+    },
+    {
+      "id": "uc-004",
+      "titel": "Controle op volledigheid van indiensttredingsdossiers",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Backoffice",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Done",
+      "omschrijving": "Bij een nieuw dossier wordt automatisch gecontroleerd of alle verplichte documenten aanwezig en leesbaar zijn, met een signaallijst van wat nog ontbreekt."
+    },
+    {
+      "id": "uc-005",
+      "titel": "CAO-teksten doorzoekbaar maken met natuurlijke taal",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Juridische Zaken",
+      "tijdsbesparing_uren_per_week": 7,
+      "status": "In behandeling",
+      "omschrijving": "Adviseurs stellen een vraag in gewone taal en krijgen het relevante CAO-artikel met bronverwijzing terug, in plaats van handmatig zoeken in pdf's."
+    },
+    {
+      "id": "uc-006",
+      "titel": "Automatisch matchen van kandidaten op openstaande opdrachten",
+      "afdeling": "Driessen Groep",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 8,
+      "status": "Idee",
+      "omschrijving": "Een matchingmodel stelt per opdracht een shortlist van kandidaten voor op basis van ervaring, beschikbaarheid en regio, als startpunt voor de consultant."
+    },
+    {
+      "id": "uc-007",
+      "titel": "Functiebeschrijvingen voorbereiden voor waardering",
+      "afdeling": "IJK",
+      "instuurder": "Adviesteam",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Done",
+      "omschrijving": "Aangeleverde functiebeschrijvingen worden automatisch omgezet naar het IJK-format en gecontroleerd op ontbrekende elementen voordat de adviseur waardeert."
+    },
+    {
+      "id": "uc-008",
+      "titel": "Vergelijking van functieprofielen met referentiemateriaal",
+      "afdeling": "IJK",
+      "instuurder": "Adviesteam",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "In behandeling",
+      "omschrijving": "Een nieuw profiel wordt vergeleken met eerder gewaardeerde referentiefuncties, zodat de adviseur direct ziet welke vergelijkbare functies er zijn."
+    },
+    {
+      "id": "uc-009",
+      "titel": "Concept-adviesrapporten functiewaardering",
+      "afdeling": "IJK",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Op basis van de scores per gezichtspunt wordt een conceptrapport opgesteld dat de adviseur alleen nog inhoudelijk hoeft aan te scherpen."
+    },
+    {
+      "id": "uc-010",
+      "titel": "Verslaglegging van HR-adviesgesprekken",
+      "afdeling": "Reijn",
+      "instuurder": "HR-adviseurs",
+      "tijdsbesparing_uren_per_week": 7,
+      "status": "Done",
+      "omschrijving": "Gespreksverslagen en actiepunten worden automatisch opgesteld na een adviesgesprek, klaar voor controle en versturen naar de klant."
+    },
+    {
+      "id": "uc-011",
+      "titel": "Kennisbank voor arbeidsrechtelijke vragen",
+      "afdeling": "Reijn",
+      "instuurder": "HR-adviseurs",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "In behandeling",
+      "omschrijving": "Interne notities, modelbrieven en jurisprudentie worden ontsloten via een zoekassistent met bronvermelding, zodat adviseurs sneller een onderbouwd antwoord geven."
+    },
+    {
+      "id": "uc-012",
+      "titel": "Opstellen van standaard arbeidsovereenkomsten",
+      "afdeling": "Reijn",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Idee",
+      "omschrijving": "Uit een ingevuld intakeformulier wordt een concept-arbeidsovereenkomst gegenereerd op basis van de juiste modelteksten en CAO."
+    },
+    {
+      "id": "uc-013",
+      "titel": "Roosterknelpunten signaleren in de zorgplanning",
+      "afdeling": "Haert",
+      "instuurder": "Planning",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "In behandeling",
+      "omschrijving": "Het systeem signaleert vooraf welke diensten waarschijnlijk niet ingevuld raken en doet suggesties voor beschikbare medewerkers."
+    },
+    {
+      "id": "uc-014",
+      "titel": "Automatisch verwerken van beschikbaarheidsberichten",
+      "afdeling": "Haert",
+      "instuurder": "Planning",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "Done",
+      "omschrijving": "Losse app- en mailberichten over beschikbaarheid worden herkend en direct in de planning verwerkt in plaats van handmatig overgetypt."
+    },
+    {
+      "id": "uc-015",
+      "titel": "Kwaliteitscheck op zorgdossiers",
+      "afdeling": "Haert",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Controle of dossiers voldoen aan de eisen van de opdrachtgever, met een signaallijst van aandachtspunten. Besparing nog in te schatten."
+    },
+    {
+      "id": "uc-016",
+      "titel": "Onboardingmateriaal personaliseren per medewerker",
+      "afdeling": "Bloeij",
+      "instuurder": "Learning & Development",
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Done",
+      "omschrijving": "Bestaande leermodules worden automatisch samengesteld tot een persoonlijk onboardingpad op basis van functie en ervaring."
+    },
+    {
+      "id": "uc-017",
+      "titel": "Samenvattingen en toetsvragen bij e-learnings",
+      "afdeling": "Bloeij",
+      "instuurder": "Learning & Development",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "In behandeling",
+      "omschrijving": "Bij elke module worden automatisch een samenvatting en concept-toetsvragen gegenereerd, die de ontwikkelaar alleen nog redigeert."
+    },
+    {
+      "id": "uc-018",
+      "titel": "Evaluatieformulieren van trainingen analyseren",
+      "afdeling": "Bloeij",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Idee",
+      "omschrijving": "Open antwoorden uit evaluaties worden geclusterd naar thema's en sentiment, met een korte managementsamenvatting per training."
+    },
+    {
+      "id": "uc-019",
+      "titel": "Subsidie- en projectrapportages voorbereiden",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Programmateam",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "In behandeling",
+      "omschrijving": "Voortgangsrapportages worden opgesteld uit projectdocumentatie en urenregistratie, in het format van de subsidieverstrekker."
+    },
+    {
+      "id": "uc-020",
+      "titel": "Matchen van leervragen aan het opleidingsaanbod",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Idee",
+      "omschrijving": "Vragen van deelnemende bedrijven worden automatisch gekoppeld aan passende opleidingen en partners in het netwerk."
+    },
+    {
+      "id": "uc-021",
+      "titel": "Verwerken van donatie- en aanvraagformulieren",
+      "afdeling": "Driessen Foundation",
+      "instuurder": "Coördinatie",
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Done",
+      "omschrijving": "Binnengekomen aanvragen worden automatisch gecategoriseerd, samengevat en getoetst aan de criteria voordat de commissie beoordeelt."
+    },
+    {
+      "id": "uc-022",
+      "titel": "Beoordelen van maatschappelijke impact van projecten",
+      "afdeling": "Driessen Foundation",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Geen AI",
+      "omschrijving": "Inhoudelijke afweging over toekenning blijft mensenwerk; wel wordt de voorbereiding ondersteund. Niet geschikt als AI-use case."
+    },
+    {
+      "id": "uc-023",
+      "titel": "Kandidaatcommunicatie automatiseren in de flexpool",
+      "afdeling": "Jeij",
+      "instuurder": "Consultants",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "In behandeling",
+      "omschrijving": "Standaardberichten rondom sollicitatie, plaatsing en afronding worden voorgesteld op basis van de status van de kandidaat."
+    },
+    {
+      "id": "uc-024",
+      "titel": "CV's opschonen en anonimiseren voor opdrachtgevers",
+      "afdeling": "Jeij",
+      "instuurder": "Consultants",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Done",
+      "omschrijving": "Aangeleverde CV's worden omgezet naar het eigen format en waar nodig geanonimiseerd, klaar om te delen met de opdrachtgever."
+    },
+    {
+      "id": "uc-025",
+      "titel": "Facturatiecontrole op afwijkende urenregistraties",
+      "afdeling": "TSF",
+      "instuurder": "Financiën",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "In behandeling",
+      "omschrijving": "Afwijkende of onwaarschijnlijke urenregistraties worden gesignaleerd voordat de factuurrun start, zodat correcties achteraf afnemen."
+    },
+    {
+      "id": "uc-026",
+      "titel": "Automatisch afhandelen van declaratievragen",
+      "afdeling": "TSF",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Idee",
+      "omschrijving": "Veelgestelde vragen over declaraties en betaaldata worden direct beantwoord vanuit de eigen procesdocumentatie."
+    },
+    {
+      "id": "uc-027",
+      "titel": "Klantvragen routeren naar de juiste specialist",
+      "afdeling": "Lüün",
+      "instuurder": "Servicedesk",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "Done",
+      "omschrijving": "Binnenkomende mails worden geclassificeerd op onderwerp en urgentie en automatisch bij de juiste specialist neergelegd."
+    },
+    {
+      "id": "uc-028",
+      "titel": "Rapportage over klanttevredenheid uit open feedback",
+      "afdeling": "Lüün",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Idee",
+      "omschrijving": "Open feedback uit enquêtes wordt samengevat tot thema's met voorbeelden, als input voor het kwartaaloverleg."
+    },
+    {
+      "id": "uc-029",
+      "titel": "Notulen en actielijsten van projectoverleggen",
+      "afdeling": "Programmamanagement",
+      "instuurder": "PMO",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Done",
+      "omschrijving": "Van elk projectoverleg worden automatisch notulen en een actielijst met eigenaar en deadline opgesteld."
+    },
+    {
+      "id": "uc-030",
+      "titel": "Voortgangsrapportages samenstellen uit projectbronnen",
+      "afdeling": "Programmamanagement",
+      "instuurder": "PMO",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "In behandeling",
+      "omschrijving": "Statusinformatie uit verschillende systemen wordt gebundeld tot een conceptrapportage per programma."
+    },
+    {
+      "id": "uc-031",
+      "titel": "Opstellen van conceptantwoorden op aanbestedingen",
+      "afdeling": "Programmamanagement",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 7,
+      "status": "Idee",
+      "omschrijving": "Eerdere aanbestedingsteksten worden gebruikt om per vraag een onderbouwd conceptantwoord voor te stellen."
+    },
+    {
+      "id": "uc-032",
+      "titel": "Interne zoekmachine over alle beleidsdocumenten",
+      "afdeling": "Overig",
+      "instuurder": "IT",
+      "tijdsbesparing_uren_per_week": 8,
+      "status": "In behandeling",
+      "omschrijving": "Eén zoekingang over intranet, handboeken en procesbeschrijvingen, met antwoord plus bronverwijzing."
+    },
+    {
+      "id": "uc-033",
+      "titel": "Vertalen van interne communicatie",
+      "afdeling": "Overig",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Done",
+      "omschrijving": "Nieuwsberichten en instructies worden automatisch vertaald voor medewerkers die het Nederlands nog niet machtig zijn."
+    },
+    {
+      "id": "uc-034",
+      "titel": "Beoordelingsgesprekken laten schrijven door AI",
+      "afdeling": "Overig",
+      "instuurder": null,
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Geen AI",
+      "omschrijving": "Bewust niet geautomatiseerd: het oordeel over en gesprek met een medewerker hoort bij de leidinggevende te blijven."
+    },
+    {
+      "id": "uc-035",
+      "titel": "Signaleren van verlopende contracten en certificeringen",
+      "afdeling": "Overig",
+      "instuurder": "Backoffice",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Tijdige signalering van aflopende contracten, VOG's en certificaten met een voorstel voor de vervolgactie. Besparing nog in te schatten."
+    }
+  ]
+}
