@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HUMAIN Urenmikker — visuele referentie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /*
+        Losse referentiepagina: één bestand, geen build. Dit legt de huisstijl en
+        de buis-interactie vast; src/ bevat dezelfde look in React + TypeScript.
+      */
+      :root {
+        --terracotta: #de5a2c;
+        --goud: #e3a93a;
+        --petrol: #2e5561;
+        --creme: #fbf1e9;
+        --hairline: #eaddce;
+        --font-kop: 'Poppins', system-ui, sans-serif;
+        --font-body: 'Inter', system-ui, sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: var(--creme);
+        background-image: radial-gradient(120% 60% at 50% -10%, rgba(227,169,58,.16), rgba(251,241,233,0) 60%);
+        color: var(--petrol);
+        font-family: var(--font-body);
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      h1, h2, h3 { font-family: var(--font-kop); margin: 0; }
+      :focus-visible { outline: 3px solid var(--terracotta); outline-offset: 2px; }
+      header {
+        display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+        max-width: 1100px; margin: 0 auto; padding: 18px 20px;
+        border-bottom: 1px solid var(--hairline);
+      }
+      .titel { font-size: 20px; font-weight: 700; line-height: 1.1; }
+      .titel .ai { color: var(--terracotta); }
+      .sub { font-size: 12.5px; color: #6b7f88; }
+      .knop {
+        margin-left: auto; border: none; border-radius: 999px; padding: 10px 20px;
+        background: var(--goud); color: #40301a; font-family: var(--font-kop);
+        font-weight: 600; font-size: 14px; cursor: pointer;
+      }
+      main { max-width: 1100px; margin: 0 auto; padding: 24px 20px 60px; display: grid;
+        grid-template-columns: 280px 1fr; gap: 22px; align-items: start; }
+      @media (max-width: 780px) { main { grid-template-columns: 1fr; } }
+      .paneel {
+        background: #fff; border: 1px solid var(--hairline); border-radius: 18px;
+        padding: 20px; box-shadow: 0 6px 20px rgba(46,85,97,.06);
+      }
+      .buis { width: 100%; max-width: 240px; display: block; margin: 0 auto; }
+      .knikker { transition: opacity .45s ease, transform .45s cubic-bezier(.22,1.2,.4,1); transform-box: fill-box; transform-origin: center; }
+      .knikker.verborgen { opacity: 0; transform: translateY(26px) scale(.55); }
+      .getal { font-family: var(--font-kop); font-weight: 700; font-size: 56px; line-height: 1; }
+      .doel { color: #6b7f88; font-family: var(--font-kop); font-size: 19px; }
+      .badge-pct { background: var(--petrol); color: #fff; border-radius: 999px; padding: 6px 16px;
+        font-family: var(--font-kop); font-weight: 600; float: right; }
+      .potentieel { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hairline);
+        font-size: 13.5px; color: #6b7f88; }
+      .potentieel strong { color: var(--terracotta); font-family: var(--font-kop); font-size: 17px; }
+      .kaarten { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(260px,100%),1fr));
+        gap: 14px; margin-top: 20px; }
+      .kaart { background: #fff; border: 1px solid var(--hairline); border-radius: 18px; padding: 16px;
+        min-width: 0; overflow-wrap: break-word; transition: border-color .18s, transform .18s; }
+      .kaart:hover, .kaart:focus-within { border-color: var(--goud); transform: translateY(-2px); }
+      .kaart h3 { font-size: 15px; font-weight: 600; }
+      .kaart .meta { font-size: 12.5px; color: #6b7f88; margin: 6px 0 10px; }
+      .kaart .uren { font-family: var(--font-kop); font-weight: 700; font-size: 18px; }
+      .badge { border-radius: 999px; padding: 3px 11px; font-size: 11.5px; font-weight: 600;
+        font-family: var(--font-kop); float: right; }
+      .badge.done { background: rgba(227,169,58,.22); color: #7a5410; }
+      .badge.bezig { background: rgba(46,85,97,.12); color: var(--petrol); }
+      .badge.idee { background: rgba(222,90,44,.12); color: #b8441d; }
+      @media (prefers-reduced-motion: reduce) {
+        * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="17" cy="24.5" r="10.5" fill="none" stroke="#E3A93A" stroke-width="6" />
+        <path d="M30 5 V33" stroke="#2E5561" stroke-width="5.5" stroke-linecap="round" />
+        <path d="M5.5 13.5 A 15 15 0 0 1 26 5.5" stroke="#DE5A2C" stroke-width="4.5" stroke-linecap="round" fill="none" />
+      </svg>
+      <div>
+        <h1 class="titel">HUM<span class="ai">AI</span>N Urenmikker</h1>
+        <p class="sub" style="margin:0">onderdeel van Driessen Groep</p>
+      </div>
+      <button class="knop" type="button">+ Nieuwe use case</button>
+    </header>
+
+    <main>
+      <section class="paneel">
+        <h2 style="font-size:16px;text-align:center">De Urenmikker</h2>
+        <svg class="buis" id="buis" viewBox="0 0 220 540" role="img"
+             aria-label="Vulmeter richting 10.000 uur per jaar"></svg>
+      </section>
+
+      <div>
+        <section class="paneel">
+          <span class="badge-pct" id="pct">0%</span>
+          <div><span class="getal" id="teller">0</span> <span class="doel">van 10.000 uur/jaar</span></div>
+          <p class="potentieel">Potentieel daarbovenop: <strong id="pot">0</strong> uur/jaar.</p>
+        </section>
+        <div class="kaarten" id="kaarten"></div>
+      </div>
+    </main>
+
+    <script>
+      // Referentiedataset; de echte app leest use-cases.json via de dataStore.
+      const WERKWEKEN = 46;
+      const DOEL = 10000;
+      const cases = [
+        { id: 'a', titel: 'Verslaglegging van HR-adviesgesprekken', afdeling: 'Reijn', uren: 7, status: 'Done' },
+        { id: 'b', titel: 'Automatisch samenvatten van intakegesprekken', afdeling: 'Driessen Groep', uren: 6, status: 'Done' },
+        { id: 'c', titel: 'Functiebeschrijvingen voorbereiden voor waardering', afdeling: 'IJK', uren: 6, status: 'Done' },
+        { id: 'd', titel: "CV's opschonen en anonimiseren", afdeling: 'Jeij', uren: 6, status: 'Done' },
+        { id: 'e', titel: 'Notulen en actielijsten van projectoverleggen', afdeling: 'Programmamanagement', uren: 6, status: 'Done' },
+        { id: 'f', titel: 'Controle op volledigheid van dossiers', afdeling: 'Driessen Groep', uren: 5, status: 'Done' },
+        { id: 'g', titel: 'Vacatureteksten genereren', afdeling: 'Driessen Groep', uren: 4, status: 'Done' },
+        { id: 'h', titel: 'Klantvragen routeren naar de juiste specialist', afdeling: 'Lüün', uren: 4, status: 'Done' },
+        { id: 'i', titel: 'Interne zoekmachine over beleidsdocumenten', afdeling: 'Overig', uren: 8, status: 'In behandeling' },
+        { id: 'j', titel: 'Eerstelijns vragen salarisadministratie', afdeling: 'Driessen Groep', uren: 9, status: 'In behandeling' },
+        { id: 'k', titel: 'Matchen van kandidaten op opdrachten', afdeling: 'Driessen Groep', uren: 8, status: 'Idee' },
+        { id: 'l', titel: 'Conceptantwoorden op aanbestedingen', afdeling: 'Programmamanagement', uren: 7, status: 'Idee' },
+      ];
+
+      const nl = new Intl.NumberFormat('nl-NL', { maximumFractionDigits: 0 });
+      const perJaar = (c) => c.uren * WERKWEKEN;
+      const gerealiseerd = cases.filter((c) => c.status === 'Done');
+      const totaal = gerealiseerd.reduce((s, c) => s + perJaar(c), 0);
+      const potentieel = cases.filter((c) => c.status !== 'Done').reduce((s, c) => s + perJaar(c), 0);
+
+      // --- Buisgeometrie: hexagonale stapeling van knikkers -------------------
+      const B = { x: 48, y: 28, b: 96, h: 480, top: 36, bodem: 500, bodemR: 16 };
+      const R = 8, DX = 17.5, DY = 13.6;
+      const pad = (in_ = 0) => {
+        const x = B.x + in_, y = B.y + in_, b = B.b - in_ * 2, h = B.h - in_ * 2;
+        const rt = b / 2, rb = Math.max(B.bodemR - in_, 2);
+        return `M ${x} ${y + rt} A ${rt} ${rt} 0 0 1 ${x + b} ${y + rt} L ${x + b} ${y + h - rb}` +
+          ` A ${rb} ${rb} 0 0 1 ${x + b - rb} ${y + h} L ${x + rb} ${y + h}` +
+          ` A ${rb} ${rb} 0 0 1 ${x} ${y + h - rb} Z`;
+      };
+      const posities = [];
+      for (let rij = 0; ; rij++) {
+        const cy = B.bodem - R - rij * DY;
+        if (cy < B.top + R) break;
+        const offsets = rij % 2 === 0 ? [-1.5, -0.5, 0.5, 1.5] : [-1, 0, 1];
+        offsets.forEach((f) => posities.push({ cx: B.x + B.b / 2 + f * DX, cy }));
+      }
+      const N = posities.length;
+      const yVoor = (u) => B.bodem - Math.min(Math.max(u / DOEL, 0), 1) * (B.bodem - B.top);
+
+      // Elke gerealiseerde case krijgt een urensegment in de buis.
+      const segmenten = {};
+      let cursor = 0;
+      [...gerealiseerd].sort((a, b) => perJaar(b) - perJaar(a)).forEach((c) => {
+        segmenten[c.id] = { van: cursor, tot: cursor + perJaar(c) };
+        cursor += perJaar(c);
+      });
+
+      const svg = document.getElementById('buis');
+      const ticks = Array.from({ length: 11 }, (_, i) => i * 1000)
+        .map((v) => {
+          const y = yVoor(v), groot = v % 2000 === 0;
+          return `<line x1="${B.x + B.b + 4}" y1="${y}" x2="${B.x + B.b + (groot ? 14 : 8)}" y2="${y}"
+            stroke="#c9b7a4" stroke-width="${groot ? 1.6 : 1}" stroke-linecap="round"/>` +
+            (groot ? `<text x="${B.x + B.b + 19}" y="${y + 3.5}" font-size="10" fill="#6b7f88">${nl.format(v)}</text>` : '');
+        }).join('');
+
+      const knikkers = posities.map((p, i) => `
+        <g class="knikker verborgen" data-i="${i}" style="transition-delay:${Math.min(i * 6, 700)}ms">
+          <circle cx="${p.cx}" cy="${p.cy}" r="${R}" fill="url(#goud)" stroke="rgba(120,82,16,.35)" stroke-width=".6"/>
+          <circle cx="${p.cx - 2.6}" cy="${p.cy - 3}" r="2.2" fill="#fff" opacity=".7"/>
+        </g>`).join('');
+
+      svg.innerHTML = `
+        <defs>
+          <linearGradient id="glas" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".95"/>
+            <stop offset="35%" stop-color="#f6efe8" stop-opacity=".6"/>
+            <stop offset="100%" stop-color="#e6d9cb" stop-opacity=".55"/>
+          </linearGradient>
+          <radialGradient id="goud" cx="35%" cy="28%" r="75%">
+            <stop offset="0%" stop-color="#f7ddaa"/><stop offset="45%" stop-color="#e3a93a"/>
+            <stop offset="100%" stop-color="#b8801d"/>
+          </radialGradient>
+          <radialGradient id="markeer" cx="35%" cy="28%" r="75%">
+            <stop offset="0%" stop-color="#ffd9c6"/><stop offset="40%" stop-color="#e8703f"/>
+            <stop offset="100%" stop-color="#a83a17"/>
+          </radialGradient>
+          <pattern id="arcering" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="rgba(222,90,44,.07)"/><rect width="3" height="8" fill="rgba(222,90,44,.22)"/>
+          </pattern>
+          <clipPath id="binnen"><path d="${pad(3)}"/></clipPath>
+        </defs>
+        ${ticks}
+        <path d="${pad()}" fill="url(#glas)" stroke="#eaddce" stroke-width="1.5"/>
+        <g clip-path="url(#binnen)">
+          <rect x="${B.x}" y="${yVoor(Math.min(totaal + potentieel, DOEL))}" width="${B.b}"
+                height="${Math.max(yVoor(totaal) - yVoor(Math.min(totaal + potentieel, DOEL)), 0)}" fill="url(#arcering)"/>
+          <line x1="${B.x}" y1="${yVoor(Math.min(totaal + potentieel, DOEL))}" x2="${B.x + B.b}"
+                y2="${yVoor(Math.min(totaal + potentieel, DOEL))}" stroke="#de5a2c" stroke-width="1.4" stroke-dasharray="5 4" opacity=".75"/>
+          <rect x="${B.x}" y="${yVoor(totaal)}" width="${B.b}" height="${B.bodem - yVoor(totaal)}" fill="rgba(227,169,58,.16)"/>
+          ${knikkers}
+          <rect x="${B.x + 12}" y="${B.y + 18}" width="9" height="${B.h - 60}" rx="4.5" fill="#fff" opacity=".42"/>
+          <g id="markering" style="display:none">
+            <rect id="markeerVlak" x="${B.x + 1}" width="${B.b - 2}" fill="none" stroke="#de5a2c" stroke-width="1.6" rx="2"/>
+          </g>
+        </g>
+        <line x1="${B.x - 12}" y1="${B.top}" x2="${B.x + B.b + 16}" y2="${B.top}" stroke="#2e5561" stroke-width="1.6" stroke-dasharray="6 4"/>
+        <text x="${B.x - 14}" y="${B.top - 7}" font-size="11" font-family="Poppins, sans-serif" font-weight="600" fill="#2e5561">doel 10.000</text>
+        <rect x="${B.x - 8}" y="${B.y + B.h - 4}" width="${B.b + 16}" height="12" rx="6" fill="#eaddce"/>`;
+
+      // Vullen (in een frame later, zodat de CSS-transitie loopt).
+      const zichtbaar = Math.round((totaal / DOEL) * N);
+      requestAnimationFrame(() => {
+        svg.querySelectorAll('.knikker').forEach((g, i) => {
+          if (i < zichtbaar) g.classList.remove('verborgen');
+        });
+      });
+
+      document.getElementById('teller').textContent = nl.format(totaal);
+      document.getElementById('pct').textContent = ((totaal / DOEL) * 100).toFixed(1).replace('.', ',') + '%';
+      document.getElementById('pot').textContent = nl.format(potentieel);
+
+      // --- Kaarten met markering in de buis ---------------------------------
+      const badgeKlasse = { Done: 'done', 'In behandeling': 'bezig', Idee: 'idee', 'Geen AI': 'idee' };
+      document.getElementById('kaarten').innerHTML = [...cases]
+        .sort((a, b) => perJaar(b) - perJaar(a))
+        .map((c) => `
+          <article class="kaart" tabindex="0" data-id="${c.id}">
+            <span class="badge ${badgeKlasse[c.status]}">${c.status}</span>
+            <h3>${c.titel}</h3>
+            <p class="meta">${c.afdeling}</p>
+            <p class="uren">${nl.format(perJaar(c))} uur/jaar</p>
+          </article>`).join('');
+
+      const markering = document.getElementById('markering');
+      const markeerVlak = document.getElementById('markeerVlak');
+      function markeer(id) {
+        const segment = segmenten[id];
+        svg.querySelectorAll('.knikker').forEach((g, i) => {
+          const van = (i / N) * DOEL, tot = ((i + 1) / N) * DOEL;
+          const aan = segment && i < zichtbaar && tot > segment.van && van < segment.tot;
+          g.querySelector('circle').setAttribute('fill', aan ? 'url(#markeer)' : 'url(#goud)');
+        });
+        if (!segment) { markering.style.display = 'none'; return; }
+        markeerVlak.setAttribute('y', yVoor(segment.tot));
+        markeerVlak.setAttribute('height', Math.max(yVoor(segment.van) - yVoor(segment.tot), 3));
+        markering.style.display = '';
+      }
+      document.querySelectorAll('.kaart').forEach((kaart) => {
+        const id = kaart.dataset.id;
+        kaart.addEventListener('mouseenter', () => markeer(id));
+        kaart.addEventListener('focus', () => markeer(id));
+        kaart.addEventListener('mouseleave', () => markeer(null));
+        kaart.addEventListener('blur', () => markeer(null));
+      });
+    </script>
+  </body>
+</html>
