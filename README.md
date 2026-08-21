@@ -183,6 +183,7 @@ repository blijft de deploy kloppen. Bij een eigen domein zet je `BASE_PATH: /`.
 
 ```
 public/use-cases.json          bronbestand met alle use cases
+public/beeldmerk.png           HUMAIN-beeldmerk met Buddy, voor in de kop
 humain-urenmikker.html         losse visuele referentie (één bestand, geen build)
 src/
   config.ts                    jaardoel, werkweken, telmodus

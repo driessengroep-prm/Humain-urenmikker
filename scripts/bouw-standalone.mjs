@@ -38,16 +38,11 @@ const vervang = (bron, patroon, inhoud) => bron.replace(patroon, () => inhoud);
 
 const veiligeData = escape(data);
 
-/** Mascotte Buddy als data-URI, zodat hij ook zonder losse bestanden meekomt. */
-const mimes = { '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
-let buddy = null;
-for (const [extensie, mime] of Object.entries(mimes)) {
-  const pad = join(dist, `buddy${extensie}`);
-  if (existsSync(pad)) {
-    buddy = `data:${mime};base64,${readFileSync(pad).toString('base64')}`;
-    break;
-  }
-}
+/** Het beeldmerk als data-URI, zodat het ook zonder losse bestanden meekomt. */
+const beeldmerkPad = join(dist, 'beeldmerk.png');
+const beeldmerk = existsSync(beeldmerkPad)
+  ? `data:image/png;base64,${readFileSync(beeldmerkPad).toString('base64')}`
+  : null;
 
 let resultaat = vervang(
   html,
@@ -58,7 +53,7 @@ resultaat = vervang(
   resultaat,
   /<script type="module"[^>]*src="[^"]*\/assets\/[^"]*"[^>]*><\/script>/,
   `<script>window.__URENMIKKER_DATA__ = ${veiligeData};${
-    buddy ? `window.__BUDDY__ = ${JSON.stringify(buddy)};` : ''
+    beeldmerk ? `window.__BEELDMERK__ = ${JSON.stringify(beeldmerk)};` : ''
   }</script>\n    <script type="module">${escape(js)}</script>`,
 );
 resultaat = vervang(resultaat, /<link rel="icon"[^>]*>/, '');
@@ -67,6 +62,6 @@ const doel = join(dist, 'humain-urenmikker-standalone.html');
 writeFileSync(doel, resultaat);
 const kb = Math.round(Buffer.byteLength(resultaat) / 1024);
 console.log(
-  `${doel} geschreven (${kb} kB, buddy ${buddy ? 'inbegrepen' : 'niet gevonden'}) — ` +
+  `${doel} geschreven (${kb} kB, beeldmerk ${beeldmerk ? 'inbegrepen' : 'niet gevonden'}) — ` +
     'dubbelklikken werkt, geen server nodig.',
 );

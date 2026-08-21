@@ -48,11 +48,17 @@ knikkers vult. Geen backend, geen login: alle data komt uit
 | Hairline (randen) | `#EADDCE` |
 
 Poppins voor koppen en cijfers, Inter voor bodytekst. Vormtaal: bogen en halve
-cirkels, pill-vormige knoppen. De kop volgt het HUMAIN-logo: de regel
-"makkelijker en menselijker" erboven, de **A** in HUMAIN in goud, en daarnaast
-"Urenmikker" in een lichter gewicht. Mascotte Buddy staat in
-`public/buddy.png`; ontbreekt dat bestand, dan verdwijnt de afbeelding stil
-(`src/components/Buddy.tsx`) en blijft het woordmerk staan. Kleuren staan als CSS-custom-properties boven in
+cirkels, pill-vormige knoppen. De kop bestaat uit het HUMAIN-beeldmerk met
+mascotte Buddy (`public/beeldmerk.png`) en het woord "Urenmikker" ernaast, verder
+niets. Ontbreekt het beeldbestand, dan valt `src/components/Beeldmerk.tsx` terug
+op het woordmerk in tekst.
+
+Het beeldmerk is afgeleid van `Beeldmerk Humain_RGB.png` (1920x1010). Dat bestand
+heeft een halftransparante groene waas over het hele vlak en een spiegeling onder
+de letters; allebei moeten eruit voordat het op de crèmekleurige balk staat.
+Aanpak: alpha <= 45 op nul zetten (haalt de waas weg, laat Buddy's vachtranden
+heel), de band onder y=592 links van x=1440 helemaal wissen (de spiegeling, maar
+niet Buddy's poten), bijsnijden op de inhoud en schalen naar 120 px hoog. Kleuren staan als CSS-custom-properties boven in
 `src/styles/app.css`; gebruik die tokens en geen losse hex-waarden.
 
 `npm run standalone` bouwt één HTML-bestand met alles erin, voor bekijken en
