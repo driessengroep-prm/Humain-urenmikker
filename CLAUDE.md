@@ -77,7 +77,9 @@ vormgeving te bekijken of te delen zonder `npm install`.
   kolomnamen per veld zichtbaar (`.rij__label`).
 - Responsive vanaf 320 px, geen horizontale scroll. Let bij rasters op
   `min-width: 0` en `minmax(min(…, 100%), 1fr)`: lange woorden duwen anders de
-  kolom breder dan het scherm.
+  kolom breder dan het scherm. Datzelfde geldt voor formuliervelden: een `input`
+  of `select` heeft een eigen minimumbreedte en valt zonder `min-width: 0` over
+  het veld ernaast heen.
 - `npm run build` (tsc strict + Vite) moet slagen voordat je commit.
 
 ## Werkwijze

@@ -569,6 +569,17 @@ textarea {
 .veld {
   display: grid;
   gap: 5px;
+  /*
+   * Een input of select heeft een eigen minimumbreedte. Zonder min-width: 0
+   * krimpt de cel daar niet onder, waardoor het veld buiten zijn rasterkolom
+   * loopt en over het volgende veld heen valt.
+   */
+  min-width: 0;
+}
+.veld input,
+.veld select,
+.veld textarea {
+  min-width: 0;
 }
 .veld__label {
   font-size: 12px;
@@ -755,8 +766,8 @@ textarea {
 }
 .bewerk__velden {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
-  gap: 10px 12px;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 12px 14px;
 }
 .bewerk__acties {
   display: flex;
