@@ -41,8 +41,11 @@
         max-width: 1100px; margin: 0 auto; padding: 18px 20px;
         border-bottom: 1px solid var(--hairline);
       }
-      .titel { font-size: 20px; font-weight: 700; line-height: 1.1; }
-      .titel .ai { color: var(--terracotta); }
+      .tagline { margin: 0; font-size: 12px; font-weight: 500; color: var(--petrol);
+        opacity: .85; line-height: 1.2; }
+      .titel { font-size: 24px; font-weight: 700; line-height: 1.05; margin: 1px 0 0; }
+      .titel .a { color: var(--goud); }
+      .titel .product { font-weight: 500; font-size: 20px; opacity: .8; }
       .sub { font-size: 12.5px; color: #6b7f88; }
       .knop {
         margin-left: auto; border: none; border-radius: 999px; padding: 10px 20px;
@@ -86,13 +89,9 @@
   </head>
   <body>
     <header>
-      <svg width="40" height="40" viewBox="0 0 40 40" aria-hidden="true">
-        <circle cx="17" cy="24.5" r="10.5" fill="none" stroke="#E3A93A" stroke-width="6" />
-        <path d="M30 5 V33" stroke="#2E5561" stroke-width="5.5" stroke-linecap="round" />
-        <path d="M5.5 13.5 A 15 15 0 0 1 26 5.5" stroke="#DE5A2C" stroke-width="4.5" stroke-linecap="round" fill="none" />
-      </svg>
       <div>
-        <h1 class="titel">HUM<span class="ai">AI</span>N Urenmikker</h1>
+        <p class="tagline">makkelijker en menselijker</p>
+        <h1 class="titel">HUM<span class="a">A</span>IN <span class="product">Urenmikker</span></h1>
         <p class="sub" style="margin:0">onderdeel van Driessen Groep</p>
       </div>
       <button class="knop" type="button">+ Nieuwe use case</button>

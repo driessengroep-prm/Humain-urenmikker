@@ -1,4 +1,4 @@
-import { Logo } from './Logo';
+import { Buddy } from './Buddy';
 
 interface KopProps {
   onNieuweUseCase(): void;
@@ -10,10 +10,14 @@ export function Kop({ onNieuweUseCase, onExporteer }: KopProps) {
     <header className="kop">
       <div className="kop__binnen">
         <div className="kop__merk">
-          <Logo />
-          <div>
+          <Buddy />
+          <div className="kop__woordmerk">
+            <p className="kop__tagline">makkelijker en menselijker</p>
             <h1 className="kop__titel">
-              HUM<span className="ai">AI</span>N Urenmikker
+              <span className="kop__humain">
+                HUM<span className="kop__a">A</span>IN
+              </span>{' '}
+              <span className="kop__product">Urenmikker</span>
             </h1>
             <p className="kop__sub">onderdeel van Driessen Groep</p>
           </div>

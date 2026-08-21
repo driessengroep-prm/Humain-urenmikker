@@ -28,7 +28,7 @@
 
   --maxbreedte: 1180px;
   /* Hoogte van de vastgezette kopbalk op desktop; de kolomkop plakt eronder. */
-  --kop-hoogte: 95px;
+  --kop-hoogte: 88px;
 }
 
 *,
@@ -182,44 +182,67 @@ textarea {
   align-items: center;
   gap: 12px;
   margin-right: auto;
+  min-width: 0;
 }
+
+/* Mascotte Buddy; verdwijnt stil als het bestand ontbreekt. */
+.kop__buddy {
+  height: 58px;
+  width: auto;
+  flex: none;
+  /* De mascotte staat rechts van het woordmerk, net als in het logo. */
+  order: 2;
+}
+
+.kop__woordmerk {
+  min-width: 0;
+}
+
+.kop__tagline {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--petrol);
+  letter-spacing: 0.005em;
+  line-height: 1.2;
+  opacity: 0.85;
+}
+
 .kop__titel {
-  font-size: 20px;
+  font-size: 26px;
   font-weight: 700;
-  line-height: 1.1;
-}
-.kop__titel .ai {
-  color: var(--terracotta);
-  position: relative;
-}
-.kop__titel .ai::after {
-  content: '';
-  position: absolute;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  height: 6px;
-  background: var(--goud);
-  border-radius: var(--radius-pill);
-  opacity: 0.55;
-  z-index: -1;
-}
-.kop__sub {
-  font-size: 12.5px;
-  color: var(--tekst-zacht);
-}
-.kop__acties {
+  line-height: 1.05;
+  margin: 1px 0 0;
   display: flex;
-  gap: 10px;
+  align-items: baseline;
+  gap: 9px;
   flex-wrap: wrap;
 }
 
-/* Logo: halve cirkel + boog, afgeleid van de "d". */
-.logo {
-  width: 40px;
-  height: 40px;
-  flex: none;
+.kop__humain {
+  color: var(--petrol);
+  letter-spacing: -0.015em;
 }
+
+/* De A uit HUMAIN is goud; dat is het accent uit het merk. */
+.kop__a {
+  color: var(--goud);
+}
+
+.kop__product {
+  font-weight: 500;
+  font-size: 22px;
+  color: var(--petrol);
+  opacity: 0.8;
+}
+
+.kop__sub {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--tekst-zacht);
+  line-height: 1.2;
+}
+
 
 /* --- Layout --------------------------------------------------------------- */
 
@@ -948,7 +971,14 @@ textarea {
     margin-right: 0;
   }
   .kop__titel {
+    font-size: 21px;
+    gap: 7px;
+  }
+  .kop__product {
     font-size: 18px;
+  }
+  .kop__buddy {
+    height: 46px;
   }
   .kop__acties {
     width: 100%;

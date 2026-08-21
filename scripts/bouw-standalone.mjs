@@ -8,7 +8,7 @@
  *
  * Gebruik: npm run standalone
  */
-import { readFileSync, writeFileSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 const dist = 'dist';
@@ -38,6 +38,17 @@ const vervang = (bron, patroon, inhoud) => bron.replace(patroon, () => inhoud);
 
 const veiligeData = escape(data);
 
+/** Mascotte Buddy als data-URI, zodat hij ook zonder losse bestanden meekomt. */
+const mimes = { '.svg': 'image/svg+xml', '.png': 'image/png', '.webp': 'image/webp' };
+let buddy = null;
+for (const [extensie, mime] of Object.entries(mimes)) {
+  const pad = join(dist, `buddy${extensie}`);
+  if (existsSync(pad)) {
+    buddy = `data:${mime};base64,${readFileSync(pad).toString('base64')}`;
+    break;
+  }
+}
+
 let resultaat = vervang(
   html,
   /<link rel="stylesheet"[^>]*href="[^"]*\/assets\/[^"]*"[^>]*>/,
@@ -46,11 +57,16 @@ let resultaat = vervang(
 resultaat = vervang(
   resultaat,
   /<script type="module"[^>]*src="[^"]*\/assets\/[^"]*"[^>]*><\/script>/,
-  `<script>window.__URENMIKKER_DATA__ = ${veiligeData};</script>\n    <script type="module">${escape(js)}</script>`,
+  `<script>window.__URENMIKKER_DATA__ = ${veiligeData};${
+    buddy ? `window.__BUDDY__ = ${JSON.stringify(buddy)};` : ''
+  }</script>\n    <script type="module">${escape(js)}</script>`,
 );
 resultaat = vervang(resultaat, /<link rel="icon"[^>]*>/, '');
 
 const doel = join(dist, 'humain-urenmikker-standalone.html');
 writeFileSync(doel, resultaat);
 const kb = Math.round(Buffer.byteLength(resultaat) / 1024);
-console.log(`${doel} geschreven (${kb} kB) — dubbelklikken werkt, geen server nodig.`);
+console.log(
+  `${doel} geschreven (${kb} kB, buddy ${buddy ? 'inbegrepen' : 'niet gevonden'}) — ` +
+    'dubbelklikken werkt, geen server nodig.',
+);
