@@ -24,13 +24,15 @@ knikkers vult. Geen backend, geen login: alle data komt uit
    enige plek waar die omrekening staat.
 4. **Nederlands in de UI, in de code en in commits.** Ook variabelenamen; de
    veldnamen in de JSON zijn leidend (`tijdsbesparing_uren_per_week`).
-   Let op één bewuste afwijking: in de UI heet het **Bedrijf**, in de data en de
-   code `afdeling`. De sheet en de organisatie spreken van bedrijven; het
-   JSON-veld is niet hernoemd om bestaande bestanden geldig te houden.
-5. **Nullable blijft nullable.** `instuurder` en
+5. **Bedrijf en team zijn twee dingen.** `bedrijf` is een werkmaatschappij uit
+   de vaste lijst in `types.ts`; `team` is de afdeling daarbinnen, vrije tekst
+   en nullable. Zet nooit een afdeling in de bedrijvenlijst — daar ging het mis
+   toen Programmamanagement als bedrijf in de sheet stond. De parser accepteert
+   `afdeling` nog als alias voor `bedrijf` voor oudere bestanden.
+6. **Nullable blijft nullable.** `instuurder`, `team`, `opmerkingen` en
    `tijdsbesparing_uren_per_week` mogen `null` zijn; toon dat als "anoniem
    ingestuurd" en "nog niet ingevuld" in plaats van als 0.
-6. **Wijzigingen zijn niet persistent.** Zolang `dataStore.persistent === false`
+7. **Wijzigingen zijn niet persistent.** Zolang `dataStore.persistent === false`
    moet de UI eerlijk melden dat wijzigingen alleen in deze sessie bestaan, en
    moet de export een geldige `use-cases.json` opleveren.
 
@@ -58,10 +60,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
-- De use cases staan in een lijst met kolommen (use case, instuurder, afdeling,
-  tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
+- De use cases staan in een lijst met kolommen (use case, instuurder, bedrijf,
+  afdeling/team, tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
-  variabele aan. Onder 900 px klapt een regel om naar een blokje en worden de
+  variabele aan. Onder 1080 px klapt een regel om naar een blokje en worden de
   kolomnamen per veld zichtbaar (`.rij__label`).
 - Responsive vanaf 320 px, geen horizontale scroll. Let bij rasters op
   `min-width: 0` en `minmax(min(…, 100%), 1fr)`: lange woorden duwen anders de

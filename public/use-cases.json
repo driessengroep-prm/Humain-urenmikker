@@ -7,7 +7,8 @@
     {
       "id": "uc-001",
       "titel": "Slimme mailroutering",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Walter Sleven",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Idee",
@@ -17,7 +18,8 @@
     {
       "id": "uc-002",
       "titel": "Automatiseren interventie Bloeij",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Amber van Middendorp",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Idee",
@@ -27,7 +29,8 @@
     {
       "id": "uc-003",
       "titel": "Rapportage-automatisering",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Walter Sleven",
       "tijdsbesparing_uren_per_week": 10,
       "status": "Idee",
@@ -37,7 +40,8 @@
     {
       "id": "uc-004",
       "titel": "Rapportage-automatisering",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Aninya van Thull",
       "tijdsbesparing_uren_per_week": 10,
       "status": "Idee",
@@ -47,7 +51,8 @@
     {
       "id": "uc-005",
       "titel": "Automatische samenvattingen",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Amber van Middendorp",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Idee",
@@ -57,7 +62,8 @@
     {
       "id": "uc-006",
       "titel": "Arbeidsdeskundig rapport vullen",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Linda Sanders",
       "tijdsbesparing_uren_per_week": 0,
       "status": "Idee",
@@ -67,7 +73,8 @@
     {
       "id": "uc-007",
       "titel": "Automatiseren scannen mails Tenderned",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Steven Beemer",
       "tijdsbesparing_uren_per_week": 8,
       "status": "Done",
@@ -77,7 +84,8 @@
     {
       "id": "uc-008",
       "titel": "Opdrachten bedenker Bloeij",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Zoë Fleuren",
       "tijdsbesparing_uren_per_week": 0,
       "status": "Idee",
@@ -87,7 +95,8 @@
     {
       "id": "uc-009",
       "titel": "Gesprekken uitwerken Bloeij",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Zoë Fleuren",
       "tijdsbesparing_uren_per_week": 8,
       "status": "Idee",
@@ -97,7 +106,8 @@
     {
       "id": "uc-010",
       "titel": "Geautomatiseerde analyse/advies Bloeij",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Anne Brisko",
       "tijdsbesparing_uren_per_week": 3.6,
       "status": "Idee",
@@ -107,7 +117,8 @@
     {
       "id": "uc-011",
       "titel": "Rapportage-automatisering",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Anne Brisko",
       "tijdsbesparing_uren_per_week": 29,
       "status": "Idee",
@@ -117,7 +128,8 @@
     {
       "id": "uc-012",
       "titel": "Automatisering tbv trainingen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Iris kuilenberg",
       "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
@@ -127,7 +139,8 @@
     {
       "id": "uc-013",
       "titel": "HR toolkit voor leidinggevenden",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Meike Leclercq",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -137,7 +150,8 @@
     {
       "id": "uc-014",
       "titel": "CRM-automatisering",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Curine van der Horst",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Idee",
@@ -147,7 +161,8 @@
     {
       "id": "uc-015",
       "titel": "Wab aanbod in de workflow",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Chantal Wareman",
       "tijdsbesparing_uren_per_week": 3,
       "status": "Idee",
@@ -157,7 +172,8 @@
     {
       "id": "uc-016",
       "titel": "Vacatureteksten automatisch invoeren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Nikki van Berlo",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -167,7 +183,8 @@
     {
       "id": "uc-017",
       "titel": "Automatisering gespreksverslagen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Inger Buster",
       "tijdsbesparing_uren_per_week": 7,
       "status": "In behandeling",
@@ -177,7 +194,8 @@
     {
       "id": "uc-018",
       "titel": "Automatisering overeenkomsten in Invio",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Esmée",
       "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
@@ -187,7 +205,8 @@
     {
       "id": "uc-019",
       "titel": "Rapporten maken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Kirsten",
       "tijdsbesparing_uren_per_week": 2,
       "status": "In behandeling",
@@ -197,7 +216,8 @@
     {
       "id": "uc-020",
       "titel": "Signalering niet goed lopende vacatures",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Kirsten",
       "tijdsbesparing_uren_per_week": 4,
       "status": "In behandeling",
@@ -207,7 +227,8 @@
     {
       "id": "uc-021",
       "titel": "Vacatureteksten genereren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Kirsten",
       "tijdsbesparing_uren_per_week": 20,
       "status": "In behandeling",
@@ -217,7 +238,8 @@
     {
       "id": "uc-022",
       "titel": "AI-chatbot ondersteuning",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Lincy van Middelaar",
       "tijdsbesparing_uren_per_week": 12,
       "status": "Done",
@@ -227,7 +249,8 @@
     {
       "id": "uc-023",
       "titel": "Automatiseren vastlegging subsidies",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Hanan Ejjar",
       "tijdsbesparing_uren_per_week": 9,
       "status": "In behandeling",
@@ -237,7 +260,8 @@
     {
       "id": "uc-024",
       "titel": "Acties koppelen aan conclusies",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Nathalie van den Plas",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -247,7 +271,8 @@
     {
       "id": "uc-025",
       "titel": "Analyse van cijfers",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Nathalie van den Plas",
       "tijdsbesparing_uren_per_week": 8,
       "status": "Idee",
@@ -257,7 +282,8 @@
     {
       "id": "uc-026",
       "titel": "Automatisch uploaden van contactpersonen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Lieke Timmers",
       "tijdsbesparing_uren_per_week": 0.25,
       "status": "Idee",
@@ -267,7 +293,8 @@
     {
       "id": "uc-027",
       "titel": "Slim plannen van afspraken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Aaron Moris",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Idee",
@@ -277,7 +304,8 @@
     {
       "id": "uc-028",
       "titel": "Conceptteksten voor offertes",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Bernhard Bergman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -287,7 +315,8 @@
     {
       "id": "uc-029",
       "titel": "Secrets vervangen door AI",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Rick Voermans",
       "tijdsbesparing_uren_per_week": 12,
       "status": "Done",
@@ -297,7 +326,8 @@
     {
       "id": "uc-030",
       "titel": "Inzicht in frequentie klantcontact + signalering",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Steffanie Schroijen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -307,7 +337,8 @@
     {
       "id": "uc-031",
       "titel": "Goede mailinglijsten genereren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Steffanie Schroijen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -317,7 +348,8 @@
     {
       "id": "uc-032",
       "titel": "Geautomatiseerde analyse bestek aanbestedingen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Onbekend",
       "tijdsbesparing_uren_per_week": 8,
       "status": "Done",
@@ -327,7 +359,8 @@
     {
       "id": "uc-033",
       "titel": "Slim plannen van afspraken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Julia Serné",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -337,7 +370,8 @@
     {
       "id": "uc-034",
       "titel": "Automatische uitnodigingen bedrijfsarts",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Richard van Beek",
       "tijdsbesparing_uren_per_week": 6,
       "status": "Idee",
@@ -347,7 +381,8 @@
     {
       "id": "uc-035",
       "titel": "Automatiseren van recruitmentproces",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Intercedent KI&S",
       "tijdsbesparing_uren_per_week": 2.5,
       "status": "Idee",
@@ -357,7 +392,8 @@
     {
       "id": "uc-036",
       "titel": "Geautomatiseerd uitnodigen consult bedrijfsarts",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Richard van Beek",
       "tijdsbesparing_uren_per_week": 12,
       "status": "Idee",
@@ -367,7 +403,8 @@
     {
       "id": "uc-037",
       "titel": "Geautomatiseerd beantwoorden van vragen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Milou Houkes",
       "tijdsbesparing_uren_per_week": 7.5,
       "status": "Done",
@@ -377,7 +414,8 @@
     {
       "id": "uc-038",
       "titel": "Whatsapp programma gebruiksvriendelijker",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Janneke de Haan",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -387,7 +425,8 @@
     {
       "id": "uc-039",
       "titel": "Automatische screening los van de tests",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Adil Tirsi",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Idee",
@@ -397,7 +436,8 @@
     {
       "id": "uc-040",
       "titel": "Vergaderverslagen incl acties en besluiten",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Frans Coppus",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -407,7 +447,8 @@
     {
       "id": "uc-041",
       "titel": "AI agent Vera (VerAI)",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Vera Evers",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -417,7 +458,8 @@
     {
       "id": "uc-042",
       "titel": "Expert zoeker",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Jessi Gruszka",
       "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
@@ -427,7 +469,8 @@
     {
       "id": "uc-043",
       "titel": "Automatische HR nieuws spotter en samenvatter",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Femke Beemer",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -437,7 +480,8 @@
     {
       "id": "uc-044",
       "titel": "Geautomatiseerde analyse op LinkedIn posts",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Femke Beemer",
       "tijdsbesparing_uren_per_week": 1.0,
       "status": "Idee",
@@ -447,7 +491,8 @@
     {
       "id": "uc-045",
       "titel": "Automatische reacties mediakit-aanvraag",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Femke Beemer",
       "tijdsbesparing_uren_per_week": 1.5,
       "status": "Idee",
@@ -457,7 +502,8 @@
     {
       "id": "uc-046",
       "titel": "Automatiseren toevoegen nieuwe klanten",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Ruben Kuunders",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -467,7 +513,8 @@
     {
       "id": "uc-047",
       "titel": "AI agent die HR vragen beantwoord",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Demi van den Eijnde",
       "tijdsbesparing_uren_per_week": 20,
       "status": "In behandeling",
@@ -477,7 +524,8 @@
     {
       "id": "uc-048",
       "titel": "AI planning laten genereren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Joyce Kampen",
       "tijdsbesparing_uren_per_week": 8,
       "status": "In behandeling",
@@ -487,7 +535,8 @@
     {
       "id": "uc-049",
       "titel": "Automatische samenvattingen van aanbestedingen",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Wendy Spanjaard",
       "tijdsbesparing_uren_per_week": 6,
       "status": "Idee",
@@ -497,7 +546,8 @@
     {
       "id": "uc-050",
       "titel": "Automatisering in Nétive",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Kaoutar",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -507,7 +557,8 @@
     {
       "id": "uc-051",
       "titel": "Automatiseren verslaglegging",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Yvonne Kraaijvanger",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -517,7 +568,8 @@
     {
       "id": "uc-052",
       "titel": "AI-chatbot klanten tickets",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Rogier van Dijk",
       "tijdsbesparing_uren_per_week": 20,
       "status": "Idee",
@@ -527,7 +579,8 @@
     {
       "id": "uc-053",
       "titel": "Plannen van afspraken automatiseren",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Helen Nijssen",
       "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
@@ -537,7 +590,8 @@
     {
       "id": "uc-054",
       "titel": "Urenregistratie automatiseren",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Yari Vinken",
       "tijdsbesparing_uren_per_week": 60,
       "status": "Idee",
@@ -547,7 +601,8 @@
     {
       "id": "uc-055",
       "titel": "Automatisering mbt contactpersonen/dossier prospects",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Marian van Vijfeijken",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -557,7 +612,8 @@
     {
       "id": "uc-056",
       "titel": "Klanttickets via spraak beantwoorden",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Thomas Moonen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -567,7 +623,8 @@
     {
       "id": "uc-057",
       "titel": "Klantgesprekken automatisch inschieten in CRM",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Thomas Moonen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -577,7 +634,8 @@
     {
       "id": "uc-058",
       "titel": "Urenregistratie automatiseren",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Laura Clarijs",
       "tijdsbesparing_uren_per_week": 3,
       "status": "Idee",
@@ -587,7 +645,8 @@
     {
       "id": "uc-059",
       "titel": "Urenregistratie automatiseren",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Laura Clarijs",
       "tijdsbesparing_uren_per_week": 3,
       "status": "Idee",
@@ -597,7 +656,8 @@
     {
       "id": "uc-060",
       "titel": "Ticket vergelijken met eerder ingestuurd",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Sophie van Spreuwel",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -607,7 +667,8 @@
     {
       "id": "uc-061",
       "titel": "Een slimme zoek- en terugvindfunctie in Teams",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Salarisadviseur IJk",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -617,7 +678,8 @@
     {
       "id": "uc-062",
       "titel": "Communicatie beschikbaarheid + uren automatiseren",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Jeroen van Dierendonck",
       "tijdsbesparing_uren_per_week": 8,
       "status": "Idee",
@@ -627,7 +689,8 @@
     {
       "id": "uc-063",
       "titel": "Gebruik van n8n in AFAS",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Casper de koning",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Idee",
@@ -637,7 +700,8 @@
     {
       "id": "uc-064",
       "titel": "Geautomatiseerd functioneel  ontwerp",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Martijn Huisman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -647,7 +711,8 @@
     {
       "id": "uc-065",
       "titel": "Self-service visuals voor data-analyse",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Rens van Kalken",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -657,7 +722,8 @@
     {
       "id": "uc-066",
       "titel": "Activiteitenlogger",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Iris",
       "tijdsbesparing_uren_per_week": 2.5,
       "status": "Idee",
@@ -667,7 +733,8 @@
     {
       "id": "uc-067",
       "titel": "Logger tijd besteed aan klantvragen",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Gerke van Berkel",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -677,7 +744,8 @@
     {
       "id": "uc-068",
       "titel": "Vacature scraper Jeij",
-      "afdeling": "Jeij",
+      "bedrijf": "Jeij",
+      "team": null,
       "instuurder": "Ruud Vermunt",
       "tijdsbesparing_uren_per_week": 5,
       "status": "Done",
@@ -687,7 +755,8 @@
     {
       "id": "uc-069",
       "titel": "AI sourcer/aanjager",
-      "afdeling": "Jeij",
+      "bedrijf": "Jeij",
+      "team": null,
       "instuurder": "Dirk Smulders",
       "tijdsbesparing_uren_per_week": 16,
       "status": "Idee",
@@ -697,7 +766,8 @@
     {
       "id": "uc-070",
       "titel": "Geautomatiseerde e-mails arbeidsbemiddeling",
-      "afdeling": "TSF",
+      "bedrijf": "TSF",
+      "team": null,
       "instuurder": "Priscilla Fleur Hellemons",
       "tijdsbesparing_uren_per_week": 4,
       "status": "Idee",
@@ -707,7 +777,8 @@
     {
       "id": "uc-071",
       "titel": "Geautomatiseerd formuleren invullen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Shajeda van der Made",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -717,7 +788,8 @@
     {
       "id": "uc-072",
       "titel": "Urenregistratie automatiseren in OnsDriessen",
-      "afdeling": "TSF",
+      "bedrijf": "TSF",
+      "team": null,
       "instuurder": "Sheik Rajabali",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -727,7 +799,8 @@
     {
       "id": "uc-073",
       "titel": "Slim plannen van afspraken",
-      "afdeling": "IJK",
+      "bedrijf": "IJK",
+      "team": null,
       "instuurder": "Helen Nijssen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -737,7 +810,8 @@
     {
       "id": "uc-074",
       "titel": "Automatiseringsslagen backoffice Haert",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Renske Cox",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -747,7 +821,8 @@
     {
       "id": "uc-075",
       "titel": "Binnenkomende telefoontjes slim routeren",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Saskia",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -757,7 +832,8 @@
     {
       "id": "uc-076",
       "titel": "Content FvB bundelen + publiceren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Jessi Gruszka",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -767,7 +843,8 @@
     {
       "id": "uc-077",
       "titel": "AI-chatbot opleidingsuitvraag",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Debbie van Ganzenwinkel",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Done",
@@ -777,7 +854,8 @@
     {
       "id": "uc-078",
       "titel": "Lijstenvergelijker Goed Bekend dagen/bijeenkomsten",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Moniek Bax",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Done",
@@ -787,7 +865,8 @@
     {
       "id": "uc-079",
       "titel": "Automatisch doorzetten niet koppelbare Invio mails",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Chantal Scherders",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -797,7 +876,8 @@
     {
       "id": "uc-080",
       "titel": "AI chatbot Mijn Team",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Manon van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -807,7 +887,8 @@
     {
       "id": "uc-081",
       "titel": "Invullen formulier aanvraag bloeij spoor",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Shajeda van der Made",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -817,7 +898,8 @@
     {
       "id": "uc-082",
       "titel": "AI planner terugkerende afspraken officeteam",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Moniek Bax",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -827,7 +909,8 @@
     {
       "id": "uc-083",
       "titel": "Invullen uwv formulier plan van aanpak",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Shajeda van der Made",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -837,7 +920,8 @@
     {
       "id": "uc-084",
       "titel": "Notuleren officeteam overnemen/vergemakkelijken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Moniek Bax",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -847,7 +931,8 @@
     {
       "id": "uc-085",
       "titel": "AI Subsidie en fondsen tracker",
-      "afdeling": "Driessen Foundation",
+      "bedrijf": "Driessen Foundation",
+      "team": null,
       "instuurder": "Bianca van Lieshout",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -857,7 +942,8 @@
     {
       "id": "uc-086",
       "titel": "Automatiseren van contactpersonen/gegevens in CRM",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Moniek Bax",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -867,7 +953,8 @@
     {
       "id": "uc-087",
       "titel": "S(kan) sneller",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Heidi Verhoeven",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -877,7 +964,8 @@
     {
       "id": "uc-088",
       "titel": "SahW matchingsproces automatiseren",
-      "afdeling": "Driessen Foundation",
+      "bedrijf": "Driessen Foundation",
+      "team": null,
       "instuurder": "Bianca van Lieshout",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -887,7 +975,8 @@
     {
       "id": "uc-089",
       "titel": "Ondersteuningsbureau projecten PRM",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Tim Brons",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -897,7 +986,8 @@
     {
       "id": "uc-090",
       "titel": "AI offerteschrijver Haert",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Wendy Spanjaard",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -907,7 +997,8 @@
     {
       "id": "uc-091",
       "titel": "AI 'warm houder' via LinkedIn",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Nick van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -917,7 +1008,8 @@
     {
       "id": "uc-092",
       "titel": "Rappie (RAP herschrijver)",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Manon van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -927,7 +1019,8 @@
     {
       "id": "uc-093",
       "titel": "AI als sparringpartner voor sterke HR-content",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Noortje van Oorschot - de Vries",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -937,7 +1030,8 @@
     {
       "id": "uc-094",
       "titel": "Verjaardag-envelop automatiseerder",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Heidi Verhoeven",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -947,7 +1041,8 @@
     {
       "id": "uc-095",
       "titel": "Marketing toolkit met agents",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Robin Stekelenburg",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -957,7 +1052,8 @@
     {
       "id": "uc-096",
       "titel": "AI-based ICT knowledge base verrijker",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Frans Coppus",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -967,7 +1063,8 @@
     {
       "id": "uc-097",
       "titel": "Facilitator telefonie receptie",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Heidi Verhoeven",
       "tijdsbesparing_uren_per_week": null,
       "status": "Geen AI",
@@ -977,7 +1074,8 @@
     {
       "id": "uc-098",
       "titel": "AI agents ter ondersteuning sales funnel Lüün",
-      "afdeling": "Lüün",
+      "bedrijf": "Lüün",
+      "team": null,
       "instuurder": "Theo Voortman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -987,7 +1085,8 @@
     {
       "id": "uc-099",
       "titel": "B-Corp game",
-      "afdeling": "Programmamanagement",
+      "bedrijf": "Driessen Groep",
+      "team": "Programmamanagement",
       "instuurder": "Koen de Rooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "Done",
@@ -997,7 +1096,8 @@
     {
       "id": "uc-100",
       "titel": "KvK jaarrekeningen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Rob Korzilius",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Done",
@@ -1007,7 +1107,8 @@
     {
       "id": "uc-101",
       "titel": "AI‑gestuurde e‑mailverwerking in Invio",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Heidi Verhoeven",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1017,7 +1118,8 @@
     {
       "id": "uc-102",
       "titel": "OR notulen vereenvoudigen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Kim Senders",
       "tijdsbesparing_uren_per_week": 1,
       "status": "Done",
@@ -1027,7 +1129,8 @@
     {
       "id": "uc-103",
       "titel": "Facturen automatisch inlezen en boeken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Danny Akkers en Leon van den Hoogen",
       "tijdsbesparing_uren_per_week": 80,
       "status": "In behandeling",
@@ -1037,7 +1140,8 @@
     {
       "id": "uc-104",
       "titel": "Verslaglegging kantoorteam Reijn",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Susan van Vijfeyken",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1047,7 +1151,8 @@
     {
       "id": "uc-105",
       "titel": "Terugkoppeling evaluaties interne trainingen",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Susan van Vijfeyken",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1057,7 +1162,8 @@
     {
       "id": "uc-106",
       "titel": "Signaleerder van CAO wijzigingen irt gelijkwaardige beloning",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1067,7 +1173,8 @@
     {
       "id": "uc-107",
       "titel": "Een team van AI HR specialisten",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1077,7 +1184,8 @@
     {
       "id": "uc-108",
       "titel": "Campagneflow Vrouw & Werk whitepaper",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Yvonne de Jong",
       "tijdsbesparing_uren_per_week": 4,
       "status": "Done",
@@ -1087,7 +1195,8 @@
     {
       "id": "uc-109",
       "titel": "Automatiseren rapport 2e spoor",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Walter",
       "tijdsbesparing_uren_per_week": 2.5,
       "status": "Done",
@@ -1097,7 +1206,8 @@
     {
       "id": "uc-110",
       "titel": "Interactieve kennisbank voor medewerkers",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Jip",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1107,7 +1217,8 @@
     {
       "id": "uc-111",
       "titel": "Automatische verzuimrapportage",
-      "afdeling": "Bloeij",
+      "bedrijf": "Bloeij",
+      "team": null,
       "instuurder": "Jip",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1117,7 +1228,8 @@
     {
       "id": "uc-112",
       "titel": "Concept e-mail opstellen nav afspraken in bezoekverslagen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Harm Engelsman",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1127,7 +1239,8 @@
     {
       "id": "uc-113",
       "titel": "Event- en opvolgproces",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Harm Engelsman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1137,7 +1250,8 @@
     {
       "id": "uc-114",
       "titel": "Analyse van CRM bezoekverslagen",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Harm Engelsman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1147,7 +1261,8 @@
     {
       "id": "uc-115",
       "titel": "Nieuwsbriefverwerking en Actualiteitenoverzicht",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Harm Engelsman",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1157,7 +1272,8 @@
     {
       "id": "uc-116",
       "titel": "Medewerker dossier export",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Manon van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1167,7 +1283,8 @@
     {
       "id": "uc-117",
       "titel": "Documenten UWV Portaal",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Manon van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1177,7 +1294,8 @@
     {
       "id": "uc-118",
       "titel": "AI analist talentmanagementdata",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Manon van Oorschot",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1187,7 +1305,8 @@
     {
       "id": "uc-119",
       "titel": "AFAS Profit Dossier AVG",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Susanne Smeets",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1197,7 +1316,8 @@
     {
       "id": "uc-120",
       "titel": "Updaten contactpersonen nav Automatisch Antwoorden mails",
-      "afdeling": "Brainport Human Campus",
+      "bedrijf": "Brainport Human Campus",
+      "team": null,
       "instuurder": "Petra Suurs",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1207,7 +1327,8 @@
     {
       "id": "uc-121",
       "titel": "Opvolging Summerschool",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Yvonne de Jong",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1217,7 +1338,8 @@
     {
       "id": "uc-122",
       "titel": "contactpersonen AFAS verifiëren",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Ad van Zutphen",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1227,7 +1349,8 @@
     {
       "id": "uc-123",
       "titel": "Ted aanbesteding screener | Aanvulling DF en Sprank",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Lincy van Middelaar",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1237,7 +1360,8 @@
     {
       "id": "uc-124",
       "titel": "Ted aanbesteding screener | Aanvulling Tendernet",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": null,
       "instuurder": "Danielle van der Vorst",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1247,7 +1371,8 @@
     {
       "id": "uc-125",
       "titel": "Opdrachtenbeoordelaar",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Renske Cox",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1257,7 +1382,8 @@
     {
       "id": "uc-126",
       "titel": "ondernemerschecklist controleur",
-      "afdeling": "Haert",
+      "bedrijf": "Haert",
+      "team": null,
       "instuurder": "Renske Cox",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1267,7 +1393,8 @@
     {
       "id": "uc-127",
       "titel": "CAO Monitor",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1277,7 +1404,8 @@
     {
       "id": "uc-128",
       "titel": "CAO Monitor - berichtgeving",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1287,7 +1415,8 @@
     {
       "id": "uc-129",
       "titel": "CAO Monitor - scraper",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
@@ -1297,7 +1426,8 @@
     {
       "id": "uc-130",
       "titel": "Agent contentartikelen",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",
@@ -1307,7 +1437,8 @@
     {
       "id": "uc-131",
       "titel": "HRM Quickscan",
-      "afdeling": "Reijn",
+      "bedrijf": "Reijn",
+      "team": null,
       "instuurder": "Koen de Mooij",
       "tijdsbesparing_uren_per_week": null,
       "status": "In behandeling",

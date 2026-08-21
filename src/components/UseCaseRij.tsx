@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
-import { STATUSSEN } from '../types';
-import type { Status, UseCase, UseCasePatch } from '../types';
+import { BEDRIJVEN, STATUSSEN } from '../types';
+import type { Bedrijf, Status, UseCase, UseCasePatch } from '../types';
 import { getal, urenPerWeekLabel } from '../lib/format';
 import { urenPerJaar } from '../lib/uren';
 import { StatusBadge } from './StatusBadge';
@@ -14,7 +14,16 @@ interface UseCaseRijProps {
   onOpslaan(id: string, patch: UseCasePatch): Promise<unknown>;
 }
 
-/** Eén regel in de use case-lijst: titel, instuurder, afdeling, besparing, status. */
+/** Zet de ruwe invoer om naar het aantal uren per week, of null als het leeg is. */
+function leesUren(invoer: string): number | null | undefined {
+  const genormaliseerd = invoer.trim().replace(',', '.');
+  if (genormaliseerd === '') return null;
+  const waarde = Number(genormaliseerd);
+  if (!Number.isFinite(waarde) || waarde < 0) return undefined; // ongeldig
+  return waarde;
+}
+
+/** Eén regel in de use case-lijst: titel, instuurder, bedrijf, team, besparing, status. */
 export function UseCaseRij({
   useCase,
   werkweken,
@@ -22,16 +31,17 @@ export function UseCaseRij({
   onMarkeer,
   onOpslaan,
 }: UseCaseRijProps) {
-  const [bewerken, setBewerken] = useState(false);
-  const [uren, setUren] = useState(
-    useCase.tijdsbesparing_uren_per_week === null
-      ? ''
-      : String(useCase.tijdsbesparing_uren_per_week),
-  );
+  const [wijzigen, setWijzigen] = useState(false);
+  const [uren, setUren] = useState('');
   const [status, setStatus] = useState<Status>(useCase.status);
+  const [instuurder, setInstuurder] = useState('');
+  const [bedrijf, setBedrijf] = useState<Bedrijf>(useCase.bedrijf);
+  const [team, setTeam] = useState('');
+  const [fout, setFout] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
   const veldId = useId();
 
+  // Formulier synchroon houden met de use case (ook na opslaan of een reset).
   useEffect(() => {
     setUren(
       useCase.tijdsbesparing_uren_per_week === null
@@ -39,20 +49,38 @@ export function UseCaseRij({
         : String(useCase.tijdsbesparing_uren_per_week),
     );
     setStatus(useCase.status);
-  }, [useCase.tijdsbesparing_uren_per_week, useCase.status]);
+    setInstuurder(useCase.instuurder ?? '');
+    setBedrijf(useCase.bedrijf);
+    setTeam(useCase.team ?? '');
+  }, [
+    useCase.tijdsbesparing_uren_per_week,
+    useCase.status,
+    useCase.instuurder,
+    useCase.bedrijf,
+    useCase.team,
+  ]);
 
   const perJaar = urenPerJaar(useCase.tijdsbesparing_uren_per_week, werkweken);
   const heeftBesparing = useCase.tijdsbesparing_uren_per_week !== null;
 
   async function opslaan(event: React.FormEvent) {
     event.preventDefault();
-    const genormaliseerd = uren.trim().replace(',', '.');
-    const waarde = genormaliseerd === '' ? null : Number(genormaliseerd);
-    if (waarde !== null && (!Number.isFinite(waarde) || waarde < 0)) return;
+    const urenWaarde = leesUren(uren);
+    if (urenWaarde === undefined) {
+      setFout('Vul een geldig aantal uren per week in, of laat het veld leeg.');
+      return;
+    }
+    setFout(null);
     setBezig(true);
     try {
-      await onOpslaan(useCase.id, { tijdsbesparing_uren_per_week: waarde, status });
-      setBewerken(false);
+      await onOpslaan(useCase.id, {
+        tijdsbesparing_uren_per_week: urenWaarde,
+        status,
+        instuurder: instuurder.trim() || null,
+        bedrijf,
+        team: team.trim() || null,
+      });
+      setWijzigen(false);
     } finally {
       setBezig(false);
     }
@@ -87,7 +115,12 @@ export function UseCaseRij({
 
         <div className="rij__cel">
           <span className="rij__label">Bedrijf</span>
-          <span>{useCase.afdeling}</span>
+          <span>{useCase.bedrijf}</span>
+        </div>
+
+        <div className="rij__cel">
+          <span className="rij__label">Afdeling / team</span>
+          <span className={useCase.team ? '' : 'rij__leeg'}>{useCase.team ?? 'niet ingevuld'}</span>
         </div>
 
         <div className="rij__cel rij__cel--uren">
@@ -111,18 +144,59 @@ export function UseCaseRij({
           <button
             type="button"
             className="knop knop--rand knop--klein"
-            onClick={() => setBewerken((huidig) => !huidig)}
-            aria-expanded={bewerken}
+            onClick={() => setWijzigen((huidig) => !huidig)}
+            aria-expanded={wijzigen}
           >
-            {bewerken ? 'Sluiten' : heeftBesparing ? 'Bewerken' : 'Invullen'}
+            {wijzigen ? 'Sluiten' : 'Wijzigen'}
             <span className="alleen-screenreader"> — {useCase.titel}</span>
           </button>
         </div>
       </div>
 
-      {bewerken && (
+      {wijzigen && (
         <form className="bewerk" onSubmit={opslaan}>
-          <div className="bewerk__rij">
+          <div className="bewerk__velden">
+            <div className="veld">
+              <label className="veld__label" htmlFor={`${veldId}-instuurder`}>
+                Instuurder
+              </label>
+              <input
+                id={`${veldId}-instuurder`}
+                value={instuurder}
+                placeholder="leeg = anoniem"
+                onChange={(event) => setInstuurder(event.target.value)}
+              />
+            </div>
+
+            <div className="veld">
+              <label className="veld__label" htmlFor={`${veldId}-bedrijf`}>
+                Bedrijf
+              </label>
+              <select
+                id={`${veldId}-bedrijf`}
+                value={bedrijf}
+                onChange={(event) => setBedrijf(event.target.value as Bedrijf)}
+              >
+                {BEDRIJVEN.map((naam) => (
+                  <option key={naam} value={naam}>
+                    {naam}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="veld">
+              <label className="veld__label" htmlFor={`${veldId}-team`}>
+                Afdeling / team
+              </label>
+              <input
+                id={`${veldId}-team`}
+                value={team}
+                placeholder="bijv. Programmamanagement"
+                onChange={(event) => setTeam(event.target.value)}
+              />
+            </div>
+
             <div className="veld">
               <label className="veld__label" htmlFor={`${veldId}-uren`}>
                 Uren per week
@@ -138,6 +212,7 @@ export function UseCaseRij({
                 onChange={(event) => setUren(event.target.value)}
               />
             </div>
+
             <div className="veld">
               <label className="veld__label" htmlFor={`${veldId}-status`}>
                 Status
@@ -155,6 +230,13 @@ export function UseCaseRij({
               </select>
             </div>
           </div>
+
+          {fout && (
+            <p className="modal__fout" role="alert">
+              {fout}
+            </p>
+          )}
+
           <div className="bewerk__acties">
             <button type="submit" className="knop knop--goud knop--klein" disabled={bezig}>
               Opslaan
@@ -162,7 +244,7 @@ export function UseCaseRij({
             <button
               type="button"
               className="knop knop--rand knop--klein"
-              onClick={() => setBewerken(false)}
+              onClick={() => setWijzigen(false)}
             >
               Annuleren
             </button>

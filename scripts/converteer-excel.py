@@ -13,21 +13,24 @@ import openpyxl
 BRON = sys.argv[1] if len(sys.argv) > 1 else "AIideeen.xlsx"
 DOEL = sys.argv[2] if len(sys.argv) > 2 else "public/use-cases.json"
 
-# Schrijfwijzen uit de sheet -> de vaste bedrijvenlijst van de tool.
+# Schrijfwijzen uit de sheet -> (bedrijf, afdeling/team).
+# De kolom in de sheet heet "Bedrijf/bedrijfsonderdeel" en bevat allebei door
+# elkaar; hier wordt dat uit elkaar getrokken.
 BEDRIJVEN = {
-    "driessen": "Driessen Groep",
-    "driessen groep": "Driessen Groep",
-    "driessen groep en ijk": "Driessen Groep",   # staat op twee bedrijven; zie rapport
-    "ijk": "IJK",
-    "bhc": "Brainport Human Campus",
-    "bloeij": "Bloeij",
-    "reijn": "Reijn",
-    "haert": "Haert",
-    "jeij": "Jeij",
-    "tsf": "TSF",
-    "driessen foundation": "Driessen Foundation",
-    "lüün": "Lüün",
-    "programmamanagement": "Programmamanagement",
+    "driessen": ("Driessen Groep", None),
+    "driessen groep": ("Driessen Groep", None),
+    "driessen groep en ijk": ("Driessen Groep", None),  # staat op twee bedrijven; zie rapport
+    "ijk": ("IJK", None),
+    "bhc": ("Brainport Human Campus", None),
+    "bloeij": ("Bloeij", None),
+    "reijn": ("Reijn", None),
+    "haert": ("Haert", None),
+    "jeij": ("Jeij", None),
+    "tsf": ("TSF", None),
+    "driessen foundation": ("Driessen Foundation", None),
+    "lüün": ("Lüün", None),
+    # Geen werkmaatschappij maar een team binnen Driessen Groep.
+    "programmamanagement": ("Driessen Groep", "Programmamanagement"),
 }
 
 STATUSSEN = {"idee": "Idee", "in behandeling": "In behandeling",
@@ -69,9 +72,9 @@ for index, rij in enumerate(rijen, start=1):
     titel = tekst(naam) or "Zonder titel"
 
     ruw_bedrijf = tekst(bedrijf) or ""
-    afdeling = BEDRIJVEN.get(ruw_bedrijf.lower(), "Overig")
-    if afdeling.lower() != ruw_bedrijf.lower():
-        rapport["bedrijf_hernoemd"].append((ruw_bedrijf, afdeling))
+    net_bedrijf, net_team = BEDRIJVEN.get(ruw_bedrijf.lower(), ("Overig", None))
+    if net_bedrijf.lower() != ruw_bedrijf.lower():
+        rapport["bedrijf_hernoemd"].append((ruw_bedrijf, net_bedrijf, net_team))
 
     ruw_status = (tekst(status) or "").lower()
     if ruw_status in STATUSSEN:
@@ -83,7 +86,8 @@ for index, rij in enumerate(rijen, start=1):
     use_cases.append({
         "id": f"uc-{index:03d}",
         "titel": titel,
-        "afdeling": afdeling,
+        "bedrijf": net_bedrijf,
+        "team": net_team,
         "instuurder": tekst(instuurder),
         "tijdsbesparing_uren_per_week": parse_uren(uren, nr, titel),
         "status": nette_status,

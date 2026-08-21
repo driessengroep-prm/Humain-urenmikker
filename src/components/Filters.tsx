@@ -1,5 +1,5 @@
-import { AFDELINGEN, STATUSSEN } from '../types';
-import type { Afdeling, Status } from '../types';
+import { BEDRIJVEN, STATUSSEN } from '../types';
+import type { Bedrijf, Status } from '../types';
 
 export type Sortering = 'besparing' | 'nieuwste' | 'in-te-vullen';
 
@@ -10,37 +10,65 @@ export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
 ];
 
 interface FiltersProps {
-  afdeling: Afdeling | 'alle';
+  bedrijf: Bedrijf | 'alle';
+  team: string | 'alle';
   status: Status | 'alle';
   sortering: Sortering;
   aantal: number;
-  onAfdeling(waarde: Afdeling | 'alle'): void;
+  /** Teams die in de huidige selectie voorkomen, alfabetisch. */
+  teams: string[];
+  onBedrijf(waarde: Bedrijf | 'alle'): void;
+  onTeam(waarde: string | 'alle'): void;
   onStatus(waarde: Status | 'alle'): void;
   onSortering(waarde: Sortering): void;
 }
 
 export function Filters({
-  afdeling,
+  bedrijf,
+  team,
   status,
   sortering,
   aantal,
-  onAfdeling,
+  teams,
+  onBedrijf,
+  onTeam,
   onStatus,
   onSortering,
 }: FiltersProps) {
   return (
     <div className="filters">
       <div className="veld">
-        <label className="veld__label" htmlFor="filter-afdeling">
+        <label className="veld__label" htmlFor="filter-bedrijf">
           Bedrijf
         </label>
         <select
-          id="filter-afdeling"
-          value={afdeling}
-          onChange={(event) => onAfdeling(event.target.value as Afdeling | 'alle')}
+          id="filter-bedrijf"
+          value={bedrijf}
+          onChange={(event) => onBedrijf(event.target.value as Bedrijf | 'alle')}
         >
           <option value="alle">Alle bedrijven</option>
-          {AFDELINGEN.map((naam) => (
+          {BEDRIJVEN.map((naam) => (
+            <option key={naam} value={naam}>
+              {naam}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="veld">
+        <label className="veld__label" htmlFor="filter-team">
+          Afdeling / team
+        </label>
+        <select
+          id="filter-team"
+          value={team}
+          onChange={(event) => onTeam(event.target.value)}
+          disabled={teams.length === 0}
+        >
+          <option value="alle">
+            {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
+          </option>
+          {teams.map((naam) => (
             <option key={naam} value={naam}>
               {naam}
             </option>

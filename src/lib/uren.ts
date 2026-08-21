@@ -1,5 +1,5 @@
 import { config } from '../config';
-import type { Afdeling, Status, UseCase } from '../types';
+import type { Bedrijf, Status, UseCase } from '../types';
 
 /** Rekent uren per week om naar uren per jaar met het ingestelde aantal werkweken. */
 export function urenPerJaar(urenPerWeek: number | null | undefined, werkweken = config.werkwekenPerJaar): number {
@@ -28,8 +28,8 @@ export interface Totalen {
   aantalUseCases: number;
   /** Aantal use cases zonder ingevulde besparing. */
   aantalZonderBesparing: number;
-  /** Aantal afdelingen dat minstens één use case heeft. */
-  aantalAfdelingen: number;
+  /** Aantal bedrijven dat minstens één use case heeft. */
+  aantalBedrijven: number;
 }
 
 export interface TelOpties {
@@ -53,11 +53,11 @@ export function berekenTotalen(useCases: UseCase[], opties: TelOpties = {}): Tot
   let gerealiseerdeUren = 0;
   let potentieleUren = 0;
   let aantalZonderBesparing = 0;
-  const afdelingen = new Set<Afdeling>();
+  const bedrijven = new Set<Bedrijf>();
 
   for (const useCase of useCases) {
     const uren = urenPerJaar(useCase.tijdsbesparing_uren_per_week, werkweken);
-    afdelingen.add(useCase.afdeling);
+    bedrijven.add(useCase.bedrijf);
     if (useCase.tijdsbesparing_uren_per_week === null && useCase.status !== 'Geen AI') {
       aantalZonderBesparing += 1;
     }
@@ -73,27 +73,27 @@ export function berekenTotalen(useCases: UseCase[], opties: TelOpties = {}): Tot
     percentage: jaardoel > 0 ? (meetellendeUren / jaardoel) * 100 : 0,
     aantalUseCases: useCases.length,
     aantalZonderBesparing,
-    aantalAfdelingen: afdelingen.size,
+    aantalBedrijven: bedrijven.size,
   };
 }
 
-export interface AfdelingTotaal {
-  afdeling: Afdeling;
+export interface BedrijfTotaal {
+  bedrijf: Bedrijf;
   aantal: number;
   meetellendeUren: number;
   gerealiseerdeUren: number;
   potentieleUren: number;
 }
 
-/** Besparing per afdeling, gesorteerd op meetellende uren (aflopend). */
-export function perAfdeling(useCases: UseCase[], opties: TelOpties = {}): AfdelingTotaal[] {
+/** Besparing per bedrijf, gesorteerd op meetellende uren (aflopend). */
+export function perBedrijf(useCases: UseCase[], opties: TelOpties = {}): BedrijfTotaal[] {
   const werkweken = opties.werkweken ?? config.werkwekenPerJaar;
   const telModus = opties.telModus ?? config.telModus;
-  const map = new Map<Afdeling, AfdelingTotaal>();
+  const map = new Map<Bedrijf, BedrijfTotaal>();
 
   for (const useCase of useCases) {
-    const totaal = map.get(useCase.afdeling) ?? {
-      afdeling: useCase.afdeling,
+    const totaal = map.get(useCase.bedrijf) ?? {
+      bedrijf: useCase.bedrijf,
       aantal: 0,
       meetellendeUren: 0,
       gerealiseerdeUren: 0,
@@ -104,7 +104,7 @@ export function perAfdeling(useCases: UseCase[], opties: TelOpties = {}): Afdeli
     if (isGerealiseerd(useCase.status)) totaal.gerealiseerdeUren += uren;
     if (isPotentieel(useCase.status)) totaal.potentieleUren += uren;
     if (teltMee(useCase, telModus)) totaal.meetellendeUren += uren;
-    map.set(useCase.afdeling, totaal);
+    map.set(useCase.bedrijf, totaal);
   }
 
   return [...map.values()].sort(

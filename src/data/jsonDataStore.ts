@@ -1,5 +1,5 @@
 import { config } from '../config';
-import { isAfdeling, isStatus } from '../types';
+import { isBedrijf, isStatus } from '../types';
 import type { NieuweUseCase, UseCase, UseCasePatch, UseCasesBestand } from '../types';
 import { UseCaseNietGevondenError, type DataStore } from './dataStore';
 
@@ -85,12 +85,15 @@ export function parseBestand(ruw: unknown): UseCase[] {
 function parseUseCase(ruw: unknown, index: number): UseCase {
   const r = ruw as Record<string, unknown>;
   const status = isStatus(r.status) ? r.status : 'Idee';
-  const afdeling = isAfdeling(r.afdeling) ? r.afdeling : 'Overig';
+  // `afdeling` is de oude veldnaam voor `bedrijf`; oudere bestanden blijven werken.
+  const ruwBedrijf = r.bedrijf ?? r.afdeling;
+  const bedrijf = isBedrijf(ruwBedrijf) ? ruwBedrijf : 'Overig';
   const uren = r.tijdsbesparing_uren_per_week;
   return {
     id: typeof r.id === 'string' && r.id ? r.id : `uc-${index + 1}`,
     titel: typeof r.titel === 'string' ? r.titel : 'Zonder titel',
-    afdeling,
+    bedrijf,
+    team: typeof r.team === 'string' && r.team.trim() ? r.team.trim() : null,
     instuurder: typeof r.instuurder === 'string' && r.instuurder.trim() ? r.instuurder : null,
     tijdsbesparing_uren_per_week: typeof uren === 'number' && Number.isFinite(uren) ? uren : null,
     status,

@@ -546,7 +546,7 @@ textarea {
 
 .lijst-blok {
   /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
-  --lijst-kolommen: minmax(0, 2.6fr) minmax(0, 1.15fr) minmax(0, 1.15fr) 150px 130px 112px;
+  --lijst-kolommen: minmax(0, 2.2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 138px 116px 104px;
 }
 
 .lijst {
@@ -566,7 +566,7 @@ textarea {
   backdrop-filter: blur(8px);
   display: grid;
   grid-template-columns: var(--lijst-kolommen);
-  gap: 16px;
+  gap: 14px;
   /* 1px extra zodat de kop uitlijnt met de rand van de rijen eronder. */
   padding: 10px 19px 8px;
   font-family: var(--font-kop);
@@ -576,8 +576,8 @@ textarea {
   letter-spacing: 0.07em;
   color: var(--tekst-zacht);
 }
-.lijst__kop span:nth-child(4),
-.lijst__kop span:nth-child(5) {
+.lijst__kop span:nth-child(5),
+.lijst__kop span:nth-child(6) {
   text-align: right;
 }
 
@@ -600,7 +600,7 @@ textarea {
 .rij__hoofd {
   display: grid;
   grid-template-columns: var(--lijst-kolommen);
-  gap: 16px;
+  gap: 14px;
   align-items: center;
 }
 
@@ -687,11 +687,10 @@ textarea {
   padding: 14px;
   margin-top: 12px;
 }
-.bewerk__rij {
+.bewerk__velden {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 420px;
+  grid-template-columns: repeat(auto-fit, minmax(min(170px, 100%), 1fr));
+  gap: 10px 12px;
 }
 .bewerk__acties {
   display: flex;
@@ -699,12 +698,12 @@ textarea {
 }
 
 /* Onder deze breedte past het raster niet meer: rijen worden blokjes. */
-@media (max-width: 900px) {
+@media (max-width: 1080px) {
   .lijst__kop {
     display: none;
   }
   .rij__hoofd {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
     gap: 12px;
     align-items: start;
   }
@@ -752,23 +751,6 @@ textarea {
 .badge--geen {
   background: #f0eae4;
   color: #7b6f66;
-}
-
-.bewerk {
-  display: grid;
-  gap: 12px;
-  background: var(--creme);
-  border-radius: 14px;
-  padding: 14px;
-}
-.bewerk__rij {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.bewerk__acties {
-  display: flex;
-  gap: 8px;
 }
 
 .leeg {
@@ -864,7 +846,7 @@ textarea {
 }
 @media (max-width: 560px) {
   .modal__rij,
-  .bewerk__rij {
+  .bewerk__velden {
     grid-template-columns: 1fr;
   }
 }
@@ -926,7 +908,7 @@ textarea {
   .rij {
     padding: 14px;
   }
-  .bewerk__rij {
+  .bewerk__velden {
     grid-template-columns: 1fr;
   }
   .modal {

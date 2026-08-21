@@ -1,22 +1,23 @@
 import { useState } from 'react';
-import { AFDELINGEN, STATUSSEN } from '../types';
-import type { Afdeling, NieuweUseCase, Status } from '../types';
+import { BEDRIJVEN, STATUSSEN } from '../types';
+import type { Bedrijf, NieuweUseCase, Status } from '../types';
 import { Modal } from './Modal';
 
 interface NieuweUseCaseModalProps {
-  standaardAfdeling?: Afdeling;
+  standaardBedrijf?: Bedrijf;
   onSluit(): void;
   onOpslaan(useCase: NieuweUseCase): Promise<unknown>;
 }
 
 export function NieuweUseCaseModal({
-  standaardAfdeling,
+  standaardBedrijf,
   onSluit,
   onOpslaan,
 }: NieuweUseCaseModalProps) {
   const [titel, setTitel] = useState('');
   const [omschrijving, setOmschrijving] = useState('');
-  const [afdeling, setAfdeling] = useState<Afdeling>(standaardAfdeling ?? 'Driessen Groep');
+  const [bedrijf, setBedrijf] = useState<Bedrijf>(standaardBedrijf ?? 'Driessen Groep');
+  const [team, setTeam] = useState('');
   const [status, setStatus] = useState<Status>('Idee');
   const [instuurder, setInstuurder] = useState('');
   const [uren, setUren] = useState('');
@@ -41,7 +42,8 @@ export function NieuweUseCaseModal({
       await onOpslaan({
         titel: titel.trim(),
         omschrijving: omschrijving.trim(),
-        afdeling,
+        bedrijf,
+        team: team.trim() || null,
         status,
         instuurder: instuurder.trim() || null,
         tijdsbesparing_uren_per_week: waarde,
@@ -90,15 +92,15 @@ export function NieuweUseCaseModal({
 
           <div className="modal__rij">
             <div className="veld">
-              <label className="veld__label" htmlFor="nieuw-afdeling">
+              <label className="veld__label" htmlFor="nieuw-bedrijf">
                 Bedrijf
               </label>
               <select
-                id="nieuw-afdeling"
-                value={afdeling}
-                onChange={(event) => setAfdeling(event.target.value as Afdeling)}
+                id="nieuw-bedrijf"
+                value={bedrijf}
+                onChange={(event) => setBedrijf(event.target.value as Bedrijf)}
               >
-                {AFDELINGEN.map((naam) => (
+                {BEDRIJVEN.map((naam) => (
                   <option key={naam} value={naam}>
                     {naam}
                   </option>
@@ -125,6 +127,17 @@ export function NieuweUseCaseModal({
 
           <div className="modal__rij">
             <div className="veld">
+              <label className="veld__label" htmlFor="nieuw-team">
+                Afdeling / team (optioneel)
+              </label>
+              <input
+                id="nieuw-team"
+                value={team}
+                onChange={(event) => setTeam(event.target.value)}
+                placeholder="bijv. Programmamanagement"
+              />
+            </div>
+            <div className="veld">
               <label className="veld__label" htmlFor="nieuw-instuurder">
                 Instuurder (optioneel)
               </label>
@@ -135,6 +148,9 @@ export function NieuweUseCaseModal({
                 placeholder="Naam of team — mag leeg blijven"
               />
             </div>
+          </div>
+
+          <div className="modal__rij">
             <div className="veld">
               <label className="veld__label" htmlFor="nieuw-uren">
                 Uren per week (optioneel)

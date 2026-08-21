@@ -52,7 +52,8 @@ te bewerken als op de gepubliceerde site op te vragen.
     {
       "id": "uc-001",
       "titel": "Automatisch samenvatten van intakegesprekken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": "Programmamanagement",           // afdeling of team, mag null zijn
       "instuurder": "Team Recruitment",      // mag null zijn (geanonimiseerd)
       "tijdsbesparing_uren_per_week": 6,     // mag null zijn (nog niet ingeschat)
       "status": "Done",                      // Idee | In behandeling | Done | Geen AI
@@ -63,10 +64,14 @@ te bewerken als op de gepubliceerde site op te vragen.
 }
 ```
 
-Bedrijven (in de code en de JSON heet dit veld `afdeling`): Driessen Groep, IJK,
-Reijn, Haert, Bloeij, Brainport Human Campus, Driessen Foundation, Jeij, TSF,
-Lüün, Programmamanagement, Overig.
-Onbekende waarden voor `status` of `afdeling` vallen bij het inlezen terug op
+Bedrijven (veld `bedrijf`): Driessen Groep, IJK, Reijn, Haert, Bloeij, Brainport
+Human Campus, Driessen Foundation, Jeij, TSF, Lüün, Overig. Een afdeling of team
+binnen zo'n bedrijf hoort niet in die lijst maar in het vrije veld `team`
+(bijvoorbeeld bedrijf `Driessen Groep` met team `Programmamanagement`).
+
+Het oudere veld `afdeling` wordt bij het inlezen nog geaccepteerd als alias voor
+`bedrijf`, zodat bestanden van voor deze wijziging blijven werken.
+Onbekende waarden voor `status` of `bedrijf` vallen bij het inlezen terug op
 `Idee` respectievelijk `Overig`, zodat een typefout de app niet breekt. Een kale
 array in plaats van het object hierboven wordt ook geaccepteerd.
 
@@ -129,8 +134,9 @@ VITE_WERKWEKEN=48 VITE_TELMODUS=alle-statussen npm run build
 In de tool zelf zitten werkweken en telmodus ook onder **Rekeninstellingen**.
 Dat past alleen de huidige sessie aan; de startwaarden komen uit de config.
 
-De meter volgt het **afdelingsfilter** (zo zie je de bijdrage van één label),
-maar niet het statusfilter — welke statussen meetellen bepaalt de telmodus.
+De meter volgt het **bedrijfs- en teamfilter** (zo zie je de bijdrage van één
+label), maar niet het statusfilter — welke statussen meetellen bepaalt de
+telmodus.
 
 ---
 

@@ -1,9 +1,9 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { config, type TelModus } from './config';
 import { useUseCases } from './hooks/useUseCases';
-import { berekenSegmenten, berekenTotalen, perAfdeling, teltMee, urenPerJaar } from './lib/uren';
-import type { Afdeling, NieuweUseCase, Status } from './types';
-import { AfdelingOverzicht } from './components/AfdelingOverzicht';
+import { berekenSegmenten, berekenTotalen, perBedrijf, teltMee, urenPerJaar } from './lib/uren';
+import type { Bedrijf, NieuweUseCase, Status } from './types';
+import { BedrijfOverzicht } from './components/BedrijfOverzicht';
 import { Buis } from './components/Buis';
 import { ExportModal } from './components/ExportModal';
 import { Filters, type Sortering } from './components/Filters';
@@ -17,7 +17,8 @@ export default function App() {
   const { useCases, laadStatus, foutmelding, heeftWijzigingen, persistent, voegToe, werkBij } =
     useUseCases();
 
-  const [afdelingFilter, setAfdelingFilter] = useState<Afdeling | 'alle'>('alle');
+  const [bedrijfFilter, setBedrijfFilter] = useState<Bedrijf | 'alle'>('alle');
+  const [teamFilter, setTeamFilter] = useState<string | 'alle'>('alle');
   const [statusFilter, setStatusFilter] = useState<Status | 'alle'>('alle');
   const [sortering, setSortering] = useState<Sortering>('besparing');
   const [werkweken, setWerkweken] = useState(config.werkwekenPerJaar);
@@ -29,21 +30,39 @@ export default function App() {
   const opties = useMemo(() => ({ werkweken, telModus }), [werkweken, telModus]);
 
   /**
-   * De meter volgt het bedrijfsfilter (zo zie je de bijdrage van één label),
-   * maar niet het statusfilter: welke statussen meetellen bepaalt de telmodus.
+   * De meter volgt het bedrijfs- en teamfilter (zo zie je de bijdrage van één
+   * label), maar niet het statusfilter: welke statussen meetellen bepaalt de
+   * telmodus.
    */
   const meterSet = useMemo(
     () =>
-      afdelingFilter === 'alle'
-        ? useCases
-        : useCases.filter((useCase) => useCase.afdeling === afdelingFilter),
-    [useCases, afdelingFilter],
+      useCases.filter(
+        (useCase) =>
+          (bedrijfFilter === 'alle' || useCase.bedrijf === bedrijfFilter) &&
+          (teamFilter === 'alle' || useCase.team === teamFilter),
+      ),
+    [useCases, bedrijfFilter, teamFilter],
   );
 
+  /** Teams die voorkomen binnen het gekozen bedrijf, alfabetisch en zonder dubbele. */
+  const teams = useMemo(() => {
+    const binnenBedrijf = useCases.filter(
+      (useCase) => bedrijfFilter === 'alle' || useCase.bedrijf === bedrijfFilter,
+    );
+    const namen = new Set<string>();
+    for (const useCase of binnenBedrijf) if (useCase.team) namen.add(useCase.team);
+    return [...namen].sort((a, b) => a.localeCompare(b, 'nl'));
+  }, [useCases, bedrijfFilter]);
+
+  // Een team dat niet meer bestaat binnen het gekozen bedrijf mag niet blijven hangen.
+  useEffect(() => {
+    if (teamFilter !== 'alle' && !teams.includes(teamFilter)) setTeamFilter('alle');
+  }, [teams, teamFilter]);
+
   const totalen = useMemo(() => berekenTotalen(meterSet, opties), [meterSet, opties]);
-  const afdelingTotalen = useMemo(
-    () => perAfdeling(afdelingFilter === 'alle' ? useCases : meterSet, opties),
-    [useCases, meterSet, afdelingFilter, opties],
+  const bedrijfTotalen = useMemo(
+    () => perBedrijf(bedrijfFilter === 'alle' && teamFilter === 'alle' ? useCases : meterSet, opties),
+    [useCases, meterSet, bedrijfFilter, teamFilter, opties],
   );
 
   // Grootste bijdrage onderin de buis, zodat de volgorde stabiel en leesbaar is.
@@ -115,9 +134,11 @@ export default function App() {
             <div className="buis-paneel__kop">
               <h2 id="buis-titel">De Urenmikker</h2>
               <p>
-                {afdelingFilter === 'alle'
+                {bedrijfFilter === 'alle' && teamFilter === 'alle'
                   ? 'Alle bedrijven samen'
-                  : `Selectie: ${afdelingFilter}`}
+                  : `Selectie: ${[bedrijfFilter, teamFilter]
+                      .filter((waarde) => waarde !== 'alle')
+                      .join(' · ')}`}
               </p>
             </div>
             <Buis
@@ -143,7 +164,7 @@ export default function App() {
               onWerkweken={setWerkweken}
               onTelModus={setTelModus}
             />
-            <AfdelingOverzicht totalen={afdelingTotalen} />
+            <BedrijfOverzicht totalen={bedrijfTotalen} />
           </div>
         </div>
 
@@ -151,11 +172,14 @@ export default function App() {
           Use cases
         </h2>
         <Filters
-          afdeling={afdelingFilter}
+          bedrijf={bedrijfFilter}
+          team={teamFilter}
           status={statusFilter}
           sortering={sortering}
           aantal={zichtbaar.length}
-          onAfdeling={setAfdelingFilter}
+          teams={teams}
+          onBedrijf={setBedrijfFilter}
+          onTeam={setTeamFilter}
           onStatus={setStatusFilter}
           onSortering={setSortering}
         />
@@ -170,6 +194,7 @@ export default function App() {
               <span>Use case</span>
               <span>Instuurder</span>
               <span>Bedrijf</span>
+              <span>Afdeling / team</span>
               <span>Tijdsbesparing</span>
               <span>Status</span>
               <span />
@@ -199,7 +224,7 @@ export default function App() {
 
       {toonNieuw && (
         <NieuweUseCaseModal
-          standaardAfdeling={afdelingFilter === 'alle' ? undefined : afdelingFilter}
+          standaardBedrijf={bedrijfFilter === 'alle' ? undefined : bedrijfFilter}
           onSluit={() => setToonNieuw(false)}
           onOpslaan={opslaanNieuw}
         />
