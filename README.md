@@ -56,24 +56,40 @@ te bewerken als op de gepubliceerde site op te vragen.
       "instuurder": "Team Recruitment",      // mag null zijn (geanonimiseerd)
       "tijdsbesparing_uren_per_week": 6,     // mag null zijn (nog niet ingeschat)
       "status": "Done",                      // Idee | In behandeling | Done | Geen AI
-      "omschrijving": "…"
+      "omschrijving": "…",
+      "opmerkingen": "wordt meegenomen bij …"  // mag null zijn
     }
   ]
 }
 ```
 
-Afdelingen: Driessen Groep, IJK, Reijn, Haert, Bloeij, Brainport Human Campus,
-Driessen Foundation, Jeij, TSF, Lüün, Programmamanagement, Overig.
+Bedrijven (in de code en de JSON heet dit veld `afdeling`): Driessen Groep, IJK,
+Reijn, Haert, Bloeij, Brainport Human Campus, Driessen Foundation, Jeij, TSF,
+Lüün, Programmamanagement, Overig.
 Onbekende waarden voor `status` of `afdeling` vallen bij het inlezen terug op
 `Idee` respectievelijk `Overig`, zodat een typefout de app niet breekt. Een kale
 array in plaats van het object hierboven wordt ook geaccepteerd.
 
-> **Let op:** de meegeleverde dataset is voorbeeldmateriaal. Vervang hem door de
-> echte export uit de Excel voordat de tool intern gedeeld wordt.
+De dataset komt uit de AI-ideeën Excel van Driessen Groep, omgezet met
+`scripts/converteer-excel.py`:
+
+```bash
+pip install openpyxl
+python3 scripts/converteer-excel.py AIideeen.xlsx public/use-cases.json
+```
+
+Het script normaliseert de bedrijfsnamen, vult een lege status aan als `Idee` en
+laat een besparing leeg als die niet eenduidig te herleiden is (`Onbekend`,
+`1 tot 6`, `540 uur` zonder periode). Het rapporteert precies welke rijen dat
+betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
+
+> **Let op:** `instuurder` bevat de namen van collega's en deze site is publiek.
+> Overweeg de namen te anonimiseren (het veld mag `null` zijn) of de repository
+> op private te zetten voordat je breed deelt.
 
 ### `use-cases.json` bijwerken
 
-1. Open de tool en vul besparing en status in bij de kaarten, of voeg use cases
+1. Open de tool en vul besparing en status in bij de regels in de lijst, of voeg use cases
    toe met **+ Nieuwe use case**. Wijzigingen blijven in je browsersessie; de app
    zegt dat er ook bij.
 2. Klik op **Exporteer bijgewerkte JSON** en kies downloaden of kopiëren naar het
@@ -151,7 +167,7 @@ src/
     knikkers.ts                geometrie van buis en knikkers
     exporteer.ts               dataset → geldige use-cases.json
     format.ts                  Nederlandse getalnotatie
-  components/                  Buis, Teller, kaarten, filters, modals
+  components/                  Buis, Teller, use case-lijst, filters, modals
   styles/app.css               huisstijltokens en layout
 ```
 
@@ -208,7 +224,7 @@ wijzigingen vanzelf. Login en rechten per eigenaar komen erbij als een
 - Skiplink naar de use cases als eerste tabstop.
 - Modals: focus-trap, sluiten met `Escape`, focus keert terug naar de knop die
   hem opende.
-- De buis heeft een tekstalternatief met de actuele stand; kaarten lichten de
-  buis ook op bij toetsenbordfocus, niet alleen bij hover.
+- De buis heeft een tekstalternatief met de actuele stand; een regel in de lijst
+  licht de buis ook op bij toetsenbordfocus, niet alleen bij hover.
 - `prefers-reduced-motion: reduce` zet de animaties uit.
 - Werkt vanaf 320 px breed; geen horizontale scroll.

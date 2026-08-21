@@ -11,7 +11,7 @@ import { Instellingen } from './components/Instellingen';
 import { Kop } from './components/Kop';
 import { NieuweUseCaseModal } from './components/NieuweUseCaseModal';
 import { Teller } from './components/Teller';
-import { UseCaseKaart } from './components/UseCaseKaart';
+import { UseCaseRij } from './components/UseCaseRij';
 
 export default function App() {
   const { useCases, laadStatus, foutmelding, heeftWijzigingen, persistent, voegToe, werkBij } =
@@ -29,7 +29,7 @@ export default function App() {
   const opties = useMemo(() => ({ werkweken, telModus }), [werkweken, telModus]);
 
   /**
-   * De meter volgt het afdelingsfilter (zo zie je de bijdrage van één label),
+   * De meter volgt het bedrijfsfilter (zo zie je de bijdrage van één label),
    * maar niet het statusfilter: welke statussen meetellen bepaalt de telmodus.
    */
   const meterSet = useMemo(
@@ -116,7 +116,7 @@ export default function App() {
               <h2 id="buis-titel">De Urenmikker</h2>
               <p>
                 {afdelingFilter === 'alle'
-                  ? 'Alle afdelingen samen'
+                  ? 'Alle bedrijven samen'
                   : `Selectie: ${afdelingFilter}`}
               </p>
             </div>
@@ -165,17 +165,27 @@ export default function App() {
         ) : zichtbaar.length === 0 ? (
           <p className="leeg">Geen use cases die aan dit filter voldoen.</p>
         ) : (
-          <div className="kaarten">
-            {zichtbaar.map((useCase) => (
-              <UseCaseKaart
-                key={useCase.id}
-                useCase={useCase}
-                werkweken={werkweken}
-                teltMee={teltMee(useCase, telModus)}
-                onMarkeer={setGemarkeerdeId}
-                onOpslaan={werkBij}
-              />
-            ))}
+          <div className="lijst-blok">
+            <div className="lijst__kop" aria-hidden="true">
+              <span>Use case</span>
+              <span>Instuurder</span>
+              <span>Bedrijf</span>
+              <span>Tijdsbesparing</span>
+              <span>Status</span>
+              <span />
+            </div>
+            <ul className="lijst">
+              {zichtbaar.map((useCase) => (
+                <UseCaseRij
+                  key={useCase.id}
+                  useCase={useCase}
+                  werkweken={werkweken}
+                  teltMee={teltMee(useCase, telModus)}
+                  onMarkeer={setGemarkeerdeId}
+                  onOpslaan={werkBij}
+                />
+              ))}
+            </ul>
           </div>
         )}
       </main>

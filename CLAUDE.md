@@ -24,6 +24,9 @@ knikkers vult. Geen backend, geen login: alle data komt uit
    enige plek waar die omrekening staat.
 4. **Nederlands in de UI, in de code en in commits.** Ook variabelenamen; de
    veldnamen in de JSON zijn leidend (`tijdsbesparing_uren_per_week`).
+   Let op één bewuste afwijking: in de UI heet het **Bedrijf**, in de data en de
+   code `afdeling`. De sheet en de organisatie spreken van bedrijven; het
+   JSON-veld is niet hernoemd om bestaande bestanden geldig te houden.
 5. **Nullable blijft nullable.** `instuurder` en
    `tijdsbesparing_uren_per_week` mogen `null` zijn; toon dat als "anoniem
    ingestuurd" en "nog niet ingevuld" in plaats van als 0.
@@ -39,7 +42,7 @@ knikkers vult. Geen backend, geen login: alle data komt uit
 | Goud (knikkers, primaire knoppen, logo) | `#E3A93A` |
 | Petrol-teal (cijfers, koppen) | `#2E5561` |
 | Crème (achtergrond) | `#FBF1E9` |
-| Wit (kaarten) | `#FFFFFF` |
+| Wit (kaarten en lijstregels) | `#FFFFFF` |
 | Hairline (randen) | `#EADDCE` |
 
 Poppins voor koppen en cijfers, Inter voor bodytekst. Vormtaal: bogen en halve
@@ -55,6 +58,11 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
+- De use cases staan in een lijst met kolommen (use case, instuurder, afdeling,
+  tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
+  `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
+  variabele aan. Onder 900 px klapt een regel om naar een blokje en worden de
+  kolomnamen per veld zichtbaar (`.rij__label`).
 - Responsive vanaf 320 px, geen horizontale scroll. Let bij rasters op
   `min-width: 0` en `minmax(min(…, 100%), 1fr)`: lange woorden duwen anders de
   kolom breder dan het scherm.
@@ -66,8 +74,12 @@ vormgeving te bekijken of te delen zonder `npm install`.
 - Bij een wijziging in het datamodel: `src/types.ts`, de parser in
   `jsonDataStore.ts`, de export in `lib/exporteer.ts` en het voorbeeld in
   `supabaseDataStore.ts.voorbeeld` samen bijwerken.
-- De meegeleverde dataset is voorbeeldmateriaal. Vervang hem door de echte
-  export uit de Excel voordat de tool intern gedeeld wordt.
+- De dataset komt uit de AI-ideeën Excel en wordt gegenereerd met
+  `scripts/converteer-excel.py`. Werk de sheet bij en draai het script opnieuw
+  in plaats van `use-cases.json` handmatig te redigeren; de mappingregels
+  (bedrijfsnamen, lege status, onherleidbare besparing) staan in dat script.
+- `instuurder` bevat echte namen en de site is publiek. Anonimiseren kan door
+  het veld op `null` te zetten; de UI toont dan "anoniem ingestuurd".
 
 ## Wat er nog niet is
 
