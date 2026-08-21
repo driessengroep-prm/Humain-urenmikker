@@ -40,7 +40,7 @@ export function Teller({ totalen, jaardoel, werkweken, telModus }: TellerProps) 
         </div>
         <div className="kerncijfer">
           <div className="kerncijfer__getal">{totalen.aantalAfdelingen}</div>
-          <div className="kerncijfer__label">afdelingen</div>
+          <div className="kerncijfer__label">bedrijven</div>
         </div>
         <div className="kerncijfer">
           <div className="kerncijfer__getal">{totalen.aantalZonderBesparing}</div>

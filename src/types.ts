@@ -32,6 +32,8 @@ export interface UseCase {
   tijdsbesparing_uren_per_week: number | null;
   status: Status;
   omschrijving: string;
+  /** Vrije notitie uit de bronsheet (bijv. "wordt meegenomen bij integratie X"). */
+  opmerkingen: string | null;
 }
 
 /** Velden die de gebruiker opgeeft bij een nieuwe use case; het id komt uit de dataStore. */
@@ -45,6 +47,8 @@ export interface UseCasesBestand {
   versie: number;
   bijgewerkt_op: string;
   toelichting?: string;
+  /** Notitie van de Functionaris Gegevensbescherming bij de hele lijst. */
+  opmerking_fg?: string;
   use_cases: UseCase[];
 }
 

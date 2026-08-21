@@ -32,14 +32,14 @@ export function Filters({
     <div className="filters">
       <div className="veld">
         <label className="veld__label" htmlFor="filter-afdeling">
-          Afdeling
+          Bedrijf
         </label>
         <select
           id="filter-afdeling"
           value={afdeling}
           onChange={(event) => onAfdeling(event.target.value as Afdeling | 'alle')}
         >
-          <option value="alle">Alle afdelingen</option>
+          <option value="alle">Alle bedrijven</option>
           {AFDELINGEN.map((naam) => (
             <option key={naam} value={naam}>
               {naam}

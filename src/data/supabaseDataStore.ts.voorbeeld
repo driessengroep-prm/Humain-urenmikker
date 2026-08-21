@@ -16,6 +16,7 @@
  *     tijdsbesparing_uren_per_week numeric,
  *     status text not null default 'Idee',
  *     omschrijving text not null default '',
+ *     opmerkingen text,
  *     eigenaar uuid references auth.users (id) default auth.uid(),
  *     aangemaakt_op timestamptz not null default now()
  *   );
@@ -47,7 +48,9 @@ export class SupabaseDataStore implements DataStore {
   async getAll(): Promise<UseCase[]> {
     const { data, error } = await this.client
       .from('use_cases')
-      .select('id, titel, afdeling, instuurder, tijdsbesparing_uren_per_week, status, omschrijving')
+      .select(
+        'id, titel, afdeling, instuurder, tijdsbesparing_uren_per_week, status, omschrijving, opmerkingen',
+      )
       .order('aangemaakt_op', { ascending: false });
     if (error) throw new Error(error.message);
     return (data ?? []) as UseCase[];

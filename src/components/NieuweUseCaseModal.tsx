@@ -45,6 +45,7 @@ export function NieuweUseCaseModal({
         status,
         instuurder: instuurder.trim() || null,
         tijdsbesparing_uren_per_week: waarde,
+        opmerkingen: null,
       });
       onSluit();
     } catch (error) {
@@ -90,7 +91,7 @@ export function NieuweUseCaseModal({
           <div className="modal__rij">
             <div className="veld">
               <label className="veld__label" htmlFor="nieuw-afdeling">
-                Afdeling
+                Bedrijf
               </label>
               <select
                 id="nieuw-afdeling"

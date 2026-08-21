@@ -1,322 +1,1318 @@
 {
   "versie": 1,
   "bijgewerkt_op": "2026-08-21",
-  "toelichting": "Bronbestand voor de HUMAIN Urenmikker. tijdsbesparing_uren_per_week is de geschatte besparing PER WEEK; de app rekent dit om naar uren per jaar met het aantal werkweken uit src/config.ts.",
+  "toelichting": "Bron: AI-ideeën sheet van Driessen Groep. tijdsbesparing_uren_per_week is de geschatte besparing PER WEEK; de app rekent dit om naar uren per jaar met het aantal werkweken uit src/config.ts.",
+  "opmerking_fg": "Algemene opmerking FG: houd er rekening mee dat de FG bij nagenoeg ieder traject actief betrokken moet zijn en dat de kans aannemelijk is dat voor het grootste deel van onderstaande een DPIA opgesteld moet worden.",
   "use_cases": [
     {
       "id": "uc-001",
-      "titel": "Automatisch samenvatten van intakegesprekken",
-      "afdeling": "Driessen Groep",
-      "instuurder": "Team Recruitment",
-      "tijdsbesparing_uren_per_week": 6,
-      "status": "Done",
-      "omschrijving": "Opnames van intakegesprekken worden automatisch getranscribeerd en samengevat tot een gestructureerd kandidaatprofiel. De recruiter controleert en vult aan in plaats van alles uit te typen."
+      "titel": "Slimme mailroutering",
+      "afdeling": "Bloeij",
+      "instuurder": "Walter Sleven",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Idee",
+      "omschrijving": "Mails in infomailbox filteren en naar juiste personen / afdelingen sturen",
+      "opmerkingen": null
     },
     {
       "id": "uc-002",
-      "titel": "Vacatureteksten genereren op basis van functieprofiel",
-      "afdeling": "Driessen Groep",
-      "instuurder": "Marketing & Communicatie",
-      "tijdsbesparing_uren_per_week": 4,
-      "status": "Done",
-      "omschrijving": "Uit een functieprofiel wordt een eerste versie van de vacaturetekst gegenereerd in de huisstijl en tone-of-voice, inclusief SEO-varianten voor de vacaturesites."
+      "titel": "Automatiseren interventie Bloeij",
+      "afdeling": "Bloeij",
+      "instuurder": "Amber van Middendorp",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van de handelingen bij het opstarten van een interventie bij Bloeij Arbo",
+      "opmerkingen": null
     },
     {
       "id": "uc-003",
-      "titel": "Eerstelijns vragen salarisadministratie via chatassistent",
-      "afdeling": "Driessen Groep",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 9,
-      "status": "In behandeling",
-      "omschrijving": "Een assistent beantwoordt terugkerende vragen van medewerkers over loonstroken, verlofsaldo en reiskostenvergoeding op basis van de eigen kennisbank, met doorzetten naar een medewerker bij twijfel."
+      "titel": "Rapportage-automatisering",
+      "afdeling": "Bloeij",
+      "instuurder": "Walter Sleven",
+      "tijdsbesparing_uren_per_week": 10,
+      "status": "Idee",
+      "omschrijving": "Automatisering inzetten door transcriptiesoftware uit te rollen, combineren met standaard sjablonen om zo ook rapporteren te automatiseren",
+      "opmerkingen": null
     },
     {
       "id": "uc-004",
-      "titel": "Controle op volledigheid van indiensttredingsdossiers",
-      "afdeling": "Driessen Groep",
-      "instuurder": "Backoffice",
-      "tijdsbesparing_uren_per_week": 5,
-      "status": "Done",
-      "omschrijving": "Bij een nieuw dossier wordt automatisch gecontroleerd of alle verplichte documenten aanwezig en leesbaar zijn, met een signaallijst van wat nog ontbreekt."
+      "titel": "Rapportage-automatisering",
+      "afdeling": "Bloeij",
+      "instuurder": "Aninya van Thull",
+      "tijdsbesparing_uren_per_week": 10,
+      "status": "Idee",
+      "omschrijving": "Rapportages voor een groot deel invullen",
+      "opmerkingen": null
     },
     {
       "id": "uc-005",
-      "titel": "CAO-teksten doorzoekbaar maken met natuurlijke taal",
-      "afdeling": "Driessen Groep",
-      "instuurder": "Juridische Zaken",
-      "tijdsbesparing_uren_per_week": 7,
-      "status": "In behandeling",
-      "omschrijving": "Adviseurs stellen een vraag in gewone taal en krijgen het relevante CAO-artikel met bronverwijzing terug, in plaats van handmatig zoeken in pdf's."
+      "titel": "Automatische samenvattingen",
+      "afdeling": "Bloeij",
+      "instuurder": "Amber van Middendorp",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Automatisch samenvatten van spreekuren in een formatverslag met de belangrijkste gegevens zodat meer gefocust kan worden op het gesprek en minder op de tekst",
+      "opmerkingen": null
     },
     {
       "id": "uc-006",
-      "titel": "Automatisch matchen van kandidaten op openstaande opdrachten",
-      "afdeling": "Driessen Groep",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 8,
+      "titel": "Arbeidsdeskundig rapport vullen",
+      "afdeling": "Bloeij",
+      "instuurder": "Linda Sanders",
+      "tijdsbesparing_uren_per_week": 0,
       "status": "Idee",
-      "omschrijving": "Een matchingmodel stelt per opdracht een shortlist van kandidaten voor op basis van ervaring, beschikbaarheid en regio, als startpunt voor de consultant."
+      "omschrijving": "Dat mijn arbeidsdeskundig rapport voor een deel wordt gevuld door documenten die ik kan uploaden zoals cv, fml, functie huis en functie omschrijving, zodat het veel kopiëren en plakken scheelt.",
+      "opmerkingen": null
     },
     {
       "id": "uc-007",
-      "titel": "Functiebeschrijvingen voorbereiden voor waardering",
-      "afdeling": "IJK",
-      "instuurder": "Adviesteam",
-      "tijdsbesparing_uren_per_week": 6,
+      "titel": "Automatiseren scannen mails Tenderned",
+      "afdeling": "Bloeij",
+      "instuurder": "Steven Beemer",
+      "tijdsbesparing_uren_per_week": 8,
       "status": "Done",
-      "omschrijving": "Aangeleverde functiebeschrijvingen worden automatisch omgezet naar het IJK-format en gecontroleerd op ontbrekende elementen voordat de adviseur waardeert."
+      "omschrijving": "Automatiseren van het scannen van mails van TenderNed om relevante aanbestedingen eruit te halen",
+      "opmerkingen": "Ad gebouwd in N8N, staat live"
     },
     {
       "id": "uc-008",
-      "titel": "Vergelijking van functieprofielen met referentiemateriaal",
-      "afdeling": "IJK",
-      "instuurder": "Adviesteam",
-      "tijdsbesparing_uren_per_week": 4,
-      "status": "In behandeling",
-      "omschrijving": "Een nieuw profiel wordt vergeleken met eerder gewaardeerde referentiefuncties, zodat de adviseur direct ziet welke vergelijkbare functies er zijn."
+      "titel": "Opdrachten bedenker Bloeij",
+      "afdeling": "Bloeij",
+      "instuurder": "Zoë Fleuren",
+      "tijdsbesparing_uren_per_week": 0,
+      "status": "Idee",
+      "omschrijving": "Opdrachten bedenken om met iemand in bepaalde trajecten te doen",
+      "opmerkingen": null
     },
     {
       "id": "uc-009",
-      "titel": "Concept-adviesrapporten functiewaardering",
-      "afdeling": "IJK",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 5,
+      "titel": "Gesprekken uitwerken Bloeij",
+      "afdeling": "Bloeij",
+      "instuurder": "Zoë Fleuren",
+      "tijdsbesparing_uren_per_week": 8,
       "status": "Idee",
-      "omschrijving": "Op basis van de scores per gezichtspunt wordt een conceptrapport opgesteld dat de adviseur alleen nog inhoudelijk hoeft aan te scherpen."
+      "omschrijving": "Gesprekken uitwerken",
+      "opmerkingen": null
     },
     {
       "id": "uc-010",
-      "titel": "Verslaglegging van HR-adviesgesprekken",
-      "afdeling": "Reijn",
-      "instuurder": "HR-adviseurs",
-      "tijdsbesparing_uren_per_week": 7,
-      "status": "Done",
-      "omschrijving": "Gespreksverslagen en actiepunten worden automatisch opgesteld na een adviesgesprek, klaar voor controle en versturen naar de klant."
+      "titel": "Geautomatiseerde analyse/advies Bloeij",
+      "afdeling": "Bloeij",
+      "instuurder": "Anne Brisko",
+      "tijdsbesparing_uren_per_week": 3.6,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van de analyse en adviesuitbreng van bloeij-metingen (tot 3x per jaar per klant) om handmatige verwerking van 1-2 uur per meting te verminderen.",
+      "opmerkingen": null
     },
     {
       "id": "uc-011",
-      "titel": "Kennisbank voor arbeidsrechtelijke vragen",
-      "afdeling": "Reijn",
-      "instuurder": "HR-adviseurs",
-      "tijdsbesparing_uren_per_week": 5,
-      "status": "In behandeling",
-      "omschrijving": "Interne notities, modelbrieven en jurisprudentie worden ontsloten via een zoekassistent met bronvermelding, zodat adviseurs sneller een onderbouwd antwoord geven."
+      "titel": "Rapportage-automatisering",
+      "afdeling": "Bloeij",
+      "instuurder": "Anne Brisko",
+      "tijdsbesparing_uren_per_week": 29,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van de diepgaande jaaranalyse voor arbo klanten (ca. 50 klanten per jaar, kosten 20-40 uur per rapport) om handmatige verwerking te verminderen.",
+      "opmerkingen": null
     },
     {
       "id": "uc-012",
-      "titel": "Opstellen van standaard arbeidsovereenkomsten",
-      "afdeling": "Reijn",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 3,
+      "titel": "Automatisering tbv trainingen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Iris kuilenberg",
+      "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
-      "omschrijving": "Uit een ingevuld intakeformulier wordt een concept-arbeidsovereenkomst gegenereerd op basis van de juiste modelteksten en CAO."
+      "omschrijving": "Deelnemers van trainingen mailen en de training in hun agenda zetten. Achteraf aanwezigheid verwerken.",
+      "opmerkingen": "Opvolggesprek plaatsgevonden, ideeen zijn helder. Worden in april getoetst op haalbaarheid door AI Kernteam Driessen"
     },
     {
       "id": "uc-013",
-      "titel": "Roosterknelpunten signaleren in de zorgplanning",
-      "afdeling": "Haert",
-      "instuurder": "Planning",
-      "tijdsbesparing_uren_per_week": 6,
-      "status": "In behandeling",
-      "omschrijving": "Het systeem signaleert vooraf welke diensten waarschijnlijk niet ingevuld raken en doet suggesties voor beschikbare medewerkers."
+      "titel": "HR toolkit voor leidinggevenden",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Meike Leclercq",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "HR toolkit voor leidinggevenden waarin ze casussen kunnen voorleggen aan AI en die meedenkt in (interne) oplossingen, zodat we het beste voor hebben voor onze medewerkers, maar de resultaten ook worden behaald",
+      "opmerkingen": "Opvolggesprek plaatsgevonden. \nIdee 1: Laagdrempelige HR‑vragen afvangen -> dat zou een AFAS AI agent kunnen doen\nIdee 2: Verzuim inzichtelijker maken: valt onder doorontwikkeling Analyse manager\nIdee 3: WAB‑uren en checks automatiseren: komt op de lijst van use-cases voor het AI kernteam om verder uit te werken"
     },
     {
       "id": "uc-014",
-      "titel": "Automatisch verwerken van beschikbaarheidsberichten",
-      "afdeling": "Haert",
-      "instuurder": "Planning",
-      "tijdsbesparing_uren_per_week": 4,
-      "status": "Done",
-      "omschrijving": "Losse app- en mailberichten over beschikbaarheid worden herkend en direct in de planning verwerkt in plaats van handmatig overgetypt."
+      "titel": "CRM-automatisering",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Curine van der Horst",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Geautomatiseerd projecten aanmaken in crm met behulp van een kostenplaatsoverzicht",
+      "opmerkingen": "Opvolggesprek plaatsgevonden. \nIdee 1: \"Excel → CRM/Invio automatisch omzetten\": actie AI kernteam -> voorbeelden ophalen, verder uitwerken\nIdee 2: \"CRM sneller doorzoekbaar maken\": Ik betwijfel de mate van AI. Dit lijkt me een uitbreiding voor Functioneel Beheer om door te voeren in het CRM. Zeker nuttig"
     },
     {
       "id": "uc-015",
-      "titel": "Kwaliteitscheck op zorgdossiers",
-      "afdeling": "Haert",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": null,
+      "titel": "Wab aanbod in de workflow",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Chantal Wareman",
+      "tijdsbesparing_uren_per_week": 3,
       "status": "Idee",
-      "omschrijving": "Controle of dossiers voldoen aan de eisen van de opdrachtgever, met een signaallijst van aandachtspunten. Besparing nog in te schatten."
+      "omschrijving": "WAB aanbod in de workflow",
+      "opmerkingen": "Moet nog opgevolgd worden"
     },
     {
       "id": "uc-016",
-      "titel": "Onboardingmateriaal personaliseren per medewerker",
-      "afdeling": "Bloeij",
-      "instuurder": "Learning & Development",
-      "tijdsbesparing_uren_per_week": 3,
+      "titel": "Vacatureteksten automatisch invoeren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Nikki van Berlo",
+      "tijdsbesparing_uren_per_week": null,
       "status": "Done",
-      "omschrijving": "Bestaande leermodules worden automatisch samengesteld tot een persoonlijk onboardingpad op basis van functie en ervaring."
+      "omschrijving": "Vacaturetekst automatisch in alle systemen zetten (innovatie)",
+      "opmerkingen": "Andere werkwijze voor gevonden"
     },
     {
       "id": "uc-017",
-      "titel": "Samenvattingen en toetsvragen bij e-learnings",
-      "afdeling": "Bloeij",
-      "instuurder": "Learning & Development",
-      "tijdsbesparing_uren_per_week": 5,
+      "titel": "Automatisering gespreksverslagen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Inger Buster",
+      "tijdsbesparing_uren_per_week": 7,
       "status": "In behandeling",
-      "omschrijving": "Bij elke module worden automatisch een samenvatting en concept-toetsvragen gegenereerd, die de ontwikkelaar alleen nog redigeert."
+      "omschrijving": "Een makkelijke manier om gespreksverslagen te verwerken",
+      "opmerkingen": "Ad heeft gewezen op Spraaktaak, wordt inmiddels gebruikt door Inger. Kunst is om dit verder bekend te maken onder andere collega's"
     },
     {
       "id": "uc-018",
-      "titel": "Evaluatieformulieren van trainingen analyseren",
-      "afdeling": "Bloeij",
-      "instuurder": null,
+      "titel": "Automatisering overeenkomsten in Invio",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Esmée",
       "tijdsbesparing_uren_per_week": 2,
       "status": "Idee",
-      "omschrijving": "Open antwoorden uit evaluaties worden geclusterd naar thema's en sentiment, met een korte managementsamenvatting per training."
+      "omschrijving": "Nieuwe overeenkomst in Invio aanmaken door het inlezen van bijvoorbeeld de loonsomopbouw; Bespaart ongeveer 2 uur per klant per week; kan ook helpen om jaarlijks tarieven te verhogen wat veel meer tijd zou opleveren",
+      "opmerkingen": "Krijgt in april opvolging"
     },
     {
       "id": "uc-019",
-      "titel": "Subsidie- en projectrapportages voorbereiden",
-      "afdeling": "Brainport Human Campus",
-      "instuurder": "Programmateam",
-      "tijdsbesparing_uren_per_week": 4,
+      "titel": "Rapporten maken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Kirsten",
+      "tijdsbesparing_uren_per_week": 2,
       "status": "In behandeling",
-      "omschrijving": "Voortgangsrapportages worden opgesteld uit projectdocumentatie en urenregistratie, in het format van de subsidieverstrekker."
+      "omschrijving": "Rapporten maken",
+      "opmerkingen": "Onderdeel van optimalisatie dashboarding"
     },
     {
       "id": "uc-020",
-      "titel": "Matchen van leervragen aan het opleidingsaanbod",
-      "afdeling": "Brainport Human Campus",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 3,
-      "status": "Idee",
-      "omschrijving": "Vragen van deelnemende bedrijven worden automatisch gekoppeld aan passende opleidingen en partners in het netwerk."
+      "titel": "Signalering niet goed lopende vacatures",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Kirsten",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "In behandeling",
+      "omschrijving": "Vacatures die niet goed lopen signaleren",
+      "opmerkingen": "Onderdeel van optimalisatie dashboarding"
     },
     {
       "id": "uc-021",
-      "titel": "Verwerken van donatie- en aanvraagformulieren",
-      "afdeling": "Driessen Foundation",
-      "instuurder": "Coördinatie",
-      "tijdsbesparing_uren_per_week": 2,
-      "status": "Done",
-      "omschrijving": "Binnengekomen aanvragen worden automatisch gecategoriseerd, samengevat en getoetst aan de criteria voordat de commissie beoordeelt."
+      "titel": "Vacatureteksten genereren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Kirsten",
+      "tijdsbesparing_uren_per_week": 20,
+      "status": "In behandeling",
+      "omschrijving": "Vacatureteksten schrijven",
+      "opmerkingen": "Stond reeds op OGSM en optimalisatie gaat in april naar productie"
     },
     {
       "id": "uc-022",
-      "titel": "Beoordelen van maatschappelijke impact van projecten",
-      "afdeling": "Driessen Foundation",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": null,
-      "status": "Geen AI",
-      "omschrijving": "Inhoudelijke afweging over toekenning blijft mensenwerk; wel wordt de voorbereiding ondersteund. Niet geschikt als AI-use case."
+      "titel": "AI-chatbot ondersteuning",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Lincy van Middelaar",
+      "tijdsbesparing_uren_per_week": 12,
+      "status": "Done",
+      "omschrijving": "Bot maken die helpt met het analyseren van bestek, doet suggesties voor de nota, filtert aandachtspunten en helpt met het stellen van NVI-vragen",
+      "opmerkingen": "Wordt afgedekt met aankoop softwarepakket voor Aanbestedingen"
     },
     {
       "id": "uc-023",
-      "titel": "Kandidaatcommunicatie automatiseren in de flexpool",
-      "afdeling": "Jeij",
-      "instuurder": "Consultants",
-      "tijdsbesparing_uren_per_week": 5,
+      "titel": "Automatiseren vastlegging subsidies",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Hanan Ejjar",
+      "tijdsbesparing_uren_per_week": 9,
       "status": "In behandeling",
-      "omschrijving": "Standaardberichten rondom sollicitatie, plaatsing en afronding worden voorgesteld op basis van de status van de kandidaat."
+      "omschrijving": "Automatiseren van de vastlegging van subsidies (werkgeversvoordelen) in de systemen",
+      "opmerkingen": "Dit project is al eerder opgestart, staat los hiervan"
     },
     {
       "id": "uc-024",
-      "titel": "CV's opschonen en anonimiseren voor opdrachtgevers",
-      "afdeling": "Jeij",
-      "instuurder": "Consultants",
-      "tijdsbesparing_uren_per_week": 6,
-      "status": "Done",
-      "omschrijving": "Aangeleverde CV's worden omgezet naar het eigen format en waar nodig geanonimiseerd, klaar om te delen met de opdrachtgever."
+      "titel": "Acties koppelen aan conclusies",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Nathalie van den Plas",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Verdere vertaalslag maken uit conclusies door er concrete acties aan te koppelen",
+      "opmerkingen": "Moet nog opgevolgd worden"
     },
     {
       "id": "uc-025",
-      "titel": "Facturatiecontrole op afwijkende urenregistraties",
-      "afdeling": "TSF",
-      "instuurder": "Financiën",
-      "tijdsbesparing_uren_per_week": 4,
-      "status": "In behandeling",
-      "omschrijving": "Afwijkende of onwaarschijnlijke urenregistraties worden gesignaleerd voordat de factuurrun start, zodat correcties achteraf afnemen."
+      "titel": "Analyse van cijfers",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Nathalie van den Plas",
+      "tijdsbesparing_uren_per_week": 8,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van het trekken van conclusies uit cijfers en deze inzichtelijk maken",
+      "opmerkingen": "Moet nog opgevolgd worden"
     },
     {
       "id": "uc-026",
-      "titel": "Automatisch afhandelen van declaratievragen",
-      "afdeling": "TSF",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 3,
+      "titel": "Automatisch uploaden van contactpersonen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Lieke Timmers",
+      "tijdsbesparing_uren_per_week": 0.25,
       "status": "Idee",
-      "omschrijving": "Veelgestelde vragen over declaraties en betaaldata worden direct beantwoord vanuit de eigen procesdocumentatie."
+      "omschrijving": "Bye bye idee: Handmatig contactpersonen toevoegen vervangen door automatische upload en zoekfunctie op internet",
+      "opmerkingen": "Moet nog opgevolgd worden\n170326: De FG wil bij concreet uitvoeren van dit project actief betrokken worden."
     },
     {
       "id": "uc-027",
-      "titel": "Klantvragen routeren naar de juiste specialist",
-      "afdeling": "Lüün",
-      "instuurder": "Servicedesk",
-      "tijdsbesparing_uren_per_week": 4,
-      "status": "Done",
-      "omschrijving": "Binnenkomende mails worden geclassificeerd op onderwerp en urgentie en automatisch bij de juiste specialist neergelegd."
+      "titel": "Slim plannen van afspraken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Aaron Moris",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Idee",
+      "omschrijving": "Zelf intakes inplannen via Teams/Outlook automatiseren",
+      "opmerkingen": "Vorig jaar proces geinventariseerd, destijds bleek het onvoldoende toegevoegde waarde te hebben omdat dit meestal tegelijkertijd werd gedaan wanneer men de kandidaat of klant sprak."
     },
     {
       "id": "uc-028",
-      "titel": "Rapportage over klanttevredenheid uit open feedback",
-      "afdeling": "Lüün",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 2,
-      "status": "Idee",
-      "omschrijving": "Open feedback uit enquêtes wordt samengevat tot thema's met voorbeelden, als input voor het kwartaaloverleg."
+      "titel": "Conceptteksten voor offertes",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Bernhard Bergman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Snelle basisteksten voor het schrijven van offertes zodat onze afdeling zich kan richten op maatwerk en meerwaarde voor de klant",
+      "opmerkingen": "Wordt afgedekt met aankoop softwarepakket voor Aanbestedingen\n\nTim: Kunnen jullie aangeven wat de daadwerkelijke tijdsbesparing is? 576 uur per week lijkt mij onwaarschijnlijk"
     },
     {
       "id": "uc-029",
-      "titel": "Notulen en actielijsten van projectoverleggen",
-      "afdeling": "Programmamanagement",
-      "instuurder": "PMO",
-      "tijdsbesparing_uren_per_week": 6,
+      "titel": "Secrets vervangen door AI",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Rick Voermans",
+      "tijdsbesparing_uren_per_week": 12,
       "status": "Done",
-      "omschrijving": "Van elk projectoverleg worden automatisch notulen en een actielijst met eigenaar en deadline opgesteld."
+      "omschrijving": "Secrets vervangen door AI",
+      "opmerkingen": "Besproken. Er zit niet veel ruimte om dit verder te automatiseren, het betreft ongeveer 12 uur per jaar"
     },
     {
       "id": "uc-030",
-      "titel": "Voortgangsrapportages samenstellen uit projectbronnen",
-      "afdeling": "Programmamanagement",
-      "instuurder": "PMO",
-      "tijdsbesparing_uren_per_week": 5,
-      "status": "In behandeling",
-      "omschrijving": "Statusinformatie uit verschillende systemen wordt gebundeld tot een conceptrapportage per programma."
+      "titel": "Inzicht in frequentie klantcontact + signalering",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Steffanie Schroijen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Makkelijk inzichtelijk krijgen welke klanten lang geen contact hebben gehad of vacatures hebben uitgezet",
+      "opmerkingen": "Wordt bij integratie Hubspot meegenomen"
     },
     {
       "id": "uc-031",
-      "titel": "Opstellen van conceptantwoorden op aanbestedingen",
-      "afdeling": "Programmamanagement",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 7,
-      "status": "Idee",
-      "omschrijving": "Eerdere aanbestedingsteksten worden gebruikt om per vraag een onderbouwd conceptantwoord voor te stellen."
+      "titel": "Goede mailinglijsten genereren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Steffanie Schroijen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Goede mailinglijsten genereren",
+      "opmerkingen": "Wordt bij integratie Hubspot meegenomen"
     },
     {
       "id": "uc-032",
-      "titel": "Interne zoekmachine over alle beleidsdocumenten",
-      "afdeling": "Overig",
-      "instuurder": "IT",
+      "titel": "Geautomatiseerde analyse bestek aanbestedingen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Onbekend",
       "tijdsbesparing_uren_per_week": 8,
-      "status": "In behandeling",
-      "omschrijving": "Eén zoekingang over intranet, handboeken en procesbeschrijvingen, met antwoord plus bronverwijzing."
+      "status": "Done",
+      "omschrijving": "Tool die het bestek kan analyseren en de belangrijkste punten eruit haalt (kapstok maken voor aanbesteding, eerste bronze versie voor aanbestedingen en bestek de highlights uit pakken)",
+      "opmerkingen": "Wordt afgedekt met aankoop softwarepakket voor Aanbestedingen"
     },
     {
       "id": "uc-033",
-      "titel": "Vertalen van interne communicatie",
-      "afdeling": "Overig",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": 2,
-      "status": "Done",
-      "omschrijving": "Nieuwsberichten en instructies worden automatisch vertaald voor medewerkers die het Nederlands nog niet machtig zijn."
+      "titel": "Slim plannen van afspraken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Julia Serné",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Handige manier om afspraken met aantal externen en een paar collega’s handiger te kunnen verzetten c.q. inplannen (innovatie)",
+      "opmerkingen": "Moet nog opgevolgd worden"
     },
     {
       "id": "uc-034",
-      "titel": "Beoordelingsgesprekken laten schrijven door AI",
-      "afdeling": "Overig",
-      "instuurder": null,
-      "tijdsbesparing_uren_per_week": null,
-      "status": "Geen AI",
-      "omschrijving": "Bewust niet geautomatiseerd: het oordeel over en gesprek met een medewerker hoort bij de leidinggevende te blijven."
+      "titel": "Automatische uitnodigingen bedrijfsarts",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Richard van Beek",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Idee",
+      "omschrijving": "Automatisch uitnodigingen versturen voor consult bedrijfsarts",
+      "opmerkingen": "Moet nog opgevolgd worden"
     },
     {
       "id": "uc-035",
-      "titel": "Signaleren van verlopende contracten en certificeringen",
-      "afdeling": "Overig",
-      "instuurder": "Backoffice",
+      "titel": "Automatiseren van recruitmentproces",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Intercedent KI&S",
+      "tijdsbesparing_uren_per_week": 2.5,
+      "status": "Idee",
+      "omschrijving": "Administratieve taken die ik nu als recruiter doe zoals lijsten mailen, invul lijsten sturen etc.",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-036",
+      "titel": "Geautomatiseerd uitnodigen consult bedrijfsarts",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Richard van Beek",
+      "tijdsbesparing_uren_per_week": 12,
+      "status": "Idee",
+      "omschrijving": "Automatisch uitnodigingen versturen voor consult bedrijfsarts",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-037",
+      "titel": "Geautomatiseerd beantwoorden van vragen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Milou Houkes",
+      "tijdsbesparing_uren_per_week": 7.5,
+      "status": "Done",
+      "omschrijving": "Automatiseren van het beantwoorden van vragen over declaraties waarbij steeds hetzelfde antwoord en dezelfde opties gegeven worden.",
+      "opmerkingen": "Onderdeel van bestaand project 'Bereikbaarheid' (subproject Chatbot Dries)"
+    },
+    {
+      "id": "uc-038",
+      "titel": "Whatsapp programma gebruiksvriendelijker",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Janneke de Haan",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Whatsapp programma gebruiksvriendelijker maken voor snellere communicatie en kleine contactmomentjes (innovatie)",
+      "opmerkingen": "Onderdeel van bestaand project 'Bereikbaarheid'. Hierbij zijn wel beperkingen tov huidige inrichting Teams/Roger365"
+    },
+    {
+      "id": "uc-039",
+      "titel": "Automatische screening los van de tests",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Adil Tirsi",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Automatische screening los van de tests die momenteel worden verstuurd die precies 1 op 1 aansluiten door het kunnen toevoegen van de wensen van de klant als in personas zodat we sneller en efficiënter voorstellen kunnen maken. Hierbij kunnen wensen van de klant worden toegevoegd als een persoonlijk en professioneel lijstje dat direct inhoudelijk op CV's en motivatiebrieven wordt gekoppeld.",
+      "opmerkingen": "Moet nog opgevolgd worden\n170326: De FG wil bij concreet uitvoeren van dit project actief betrokken worden."
+    },
+    {
+      "id": "uc-040",
+      "titel": "Vergaderverslagen incl acties en besluiten",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Frans Coppus",
       "tijdsbesparing_uren_per_week": null,
       "status": "Idee",
-      "omschrijving": "Tijdige signalering van aflopende contracten, VOG's en certificaten met een voorstel voor de vervolgactie. Besparing nog in te schatten."
+      "omschrijving": "Vergaderverslagen inclusief actie- en besluiten lijst automatisch maken",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-041",
+      "titel": "AI agent Vera (VerAI)",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Vera Evers",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Op zorgvoorwerkgeluk een digitale Vera die je helpt bij al je vraagstukken. Verwijst naar bestaande documentatie en klantcases, benoemt hoe we je met je vraagstuk kunnen helpen (inspiratie artikel delen oid) en doorverwijzen naar het juiste bedrijf of de echte Vera",
+      "opmerkingen": "Hans pakt op met Vera"
+    },
+    {
+      "id": "uc-042",
+      "titel": "Expert zoeker",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Jessi Gruszka",
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Idee",
+      "omschrijving": "Het zoeken van de juiste experts, invloedhebbenden of wat dan ook bij artikelen, thema’s, events - meer kwalitatieve en vooruitstrevende content mogelijk maken",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-043",
+      "titel": "Automatische HR nieuws spotter en samenvatter",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Femke Beemer",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "HR nieuws automatisch bijhouden en wekelijks een samenvatting geven van de belangrijkste highlights van bronnen zoals CHRO, HR rendement, HR praktijk, PWnet en andere relevante platforms (innovatie-idee).",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-044",
+      "titel": "Geautomatiseerde analyse op LinkedIn posts",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Femke Beemer",
+      "tijdsbesparing_uren_per_week": 1.0,
+      "status": "Idee",
+      "omschrijving": "Statistieken bijhouden en analyseren van LinkedIn posts (3 per week) en nieuwsbrieven (om de week) automatisch laten doen met AI/automatisering",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-045",
+      "titel": "Automatische reacties mediakit-aanvraag",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Femke Beemer",
+      "tijdsbesparing_uren_per_week": 1.5,
+      "status": "Idee",
+      "omschrijving": "Automatische reacties versturen naar organisaties die de mediakit aanvragen en deze aanvragen met statussen vastleggen in een Excelbestand (mogelijk later CRM).",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-046",
+      "titel": "Automatiseren toevoegen nieuwe klanten",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Ruben Kuunders",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van het toevoegen van nieuwe klanten om tijd te besparen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-047",
+      "titel": "AI agent die HR vragen beantwoord",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Demi van den Eijnde",
+      "tijdsbesparing_uren_per_week": 20,
+      "status": "In behandeling",
+      "omschrijving": "HR-vragen van medewerkers beantwoorden met de informatie die op RAP (arbeidsvoorwaarden/personeelshandboek) staat, geautomatiseerd doen in plaats van handmatig door HR-medewerkers",
+      "opmerkingen": "260821 - AI25 - testfase (ZR)"
+    },
+    {
+      "id": "uc-048",
+      "titel": "AI planning laten genereren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Joyce Kampen",
+      "tijdsbesparing_uren_per_week": 8,
+      "status": "In behandeling",
+      "omschrijving": "Basis planning maken",
+      "opmerkingen": "Onderdeel van bestaand project voor unit Onderwijs"
+    },
+    {
+      "id": "uc-049",
+      "titel": "Automatische samenvattingen van aanbestedingen",
+      "afdeling": "Haert",
+      "instuurder": "Wendy Spanjaard",
+      "tijdsbesparing_uren_per_week": 6,
+      "status": "Idee",
+      "omschrijving": "Samenvattingen maken van aanbestedingen en relevante risico's in kaart brengen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-050",
+      "titel": "Automatisering in Nétive",
+      "afdeling": "Haert",
+      "instuurder": "Kaoutar",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Omslachtigheid in het systeem (Netive), waarbij sommige taken dubbel uitgevoerd moeten worden; het systeem kan praktischer worden ingericht om dit te voorkomen.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-051",
+      "titel": "Automatiseren verslaglegging",
+      "afdeling": "IJK",
+      "instuurder": "Yvonne Kraaijvanger",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Automatiseren van het maken van notulen tijdens (klant) overleggen, wat zorgt voor het niet meer handmatig hoeven doen en betere vastlegging van gemaakte afspraken (combinatie van bye bye en innovatie).",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-052",
+      "titel": "AI-chatbot klanten tickets",
+      "afdeling": "IJK",
+      "instuurder": "Rogier van Dijk",
+      "tijdsbesparing_uren_per_week": 20,
+      "status": "Idee",
+      "omschrijving": "Chatbot / doorverwijzing voor klanten tickets, waarbij aan de voorkant gescreend wordt op vragen die al op een helpdesk of onze kennisbank te vinden zijn zodat minder standaardvragen binnenkomen.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-053",
+      "titel": "Plannen van afspraken automatiseren",
+      "afdeling": "IJK",
+      "instuurder": "Helen Nijssen",
+      "tijdsbesparing_uren_per_week": 2,
+      "status": "Idee",
+      "omschrijving": "Plannen van afspraken automatiseren of in ieder geval beter in ondersteunen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-054",
+      "titel": "Urenregistratie automatiseren",
+      "afdeling": "IJK",
+      "instuurder": "Yari Vinken",
+      "tijdsbesparing_uren_per_week": 60,
+      "status": "Idee",
+      "omschrijving": "Het automatiseren van het boeken van uren bij outsourcing van IJK (bye bye idee)",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-055",
+      "titel": "Automatisering mbt contactpersonen/dossier prospects",
+      "afdeling": "IJK",
+      "instuurder": "Marian van Vijfeijken",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Automatisering in contactpersonen en direct dossier prospects inzien in 1 oogopslag",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-056",
+      "titel": "Klanttickets via spraak beantwoorden",
+      "afdeling": "IJK",
+      "instuurder": "Thomas Moonen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Klanttickets via spraak beantwoorden en vastleggen via klantportaal",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-057",
+      "titel": "Klantgesprekken automatisch inschieten in CRM",
+      "afdeling": "IJK",
+      "instuurder": "Thomas Moonen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Klantgesprekken automatisch invoeren in CRM en klantportaal IJK",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-058",
+      "titel": "Urenregistratie automatiseren",
+      "afdeling": "IJK",
+      "instuurder": "Laura Clarijs",
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Idee",
+      "omschrijving": "Het goedkeuren van uren die door de collega’s uit de teams (ijk outsourcing) geschreven worden, waar bijvoorbeeld maandelijks een analyse uitrolt over de productiviteit van collega’s",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-059",
+      "titel": "Urenregistratie automatiseren",
+      "afdeling": "IJK",
+      "instuurder": "Laura Clarijs",
+      "tijdsbesparing_uren_per_week": 3,
+      "status": "Idee",
+      "omschrijving": "Het proces van uren schrijven voor de teams automatiseren",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-060",
+      "titel": "Ticket vergelijken met eerder ingestuurd",
+      "afdeling": "IJK",
+      "instuurder": "Sophie van Spreuwel",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Ticket vergelijken met eerder ingestuurde tickets van dezelfde klant in het klantportaal, mogelijk tijdsbesparing van 2 uur per collega per week",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-061",
+      "titel": "Een slimme zoek- en terugvindfunctie in Teams",
+      "afdeling": "IJK",
+      "instuurder": "Salarisadviseur IJk",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Een slimme zoek- en terugvindfunctie voor informatie in Teams-chats omdat het soms onduidelijk is waar wat staat.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-062",
+      "titel": "Communicatie beschikbaarheid + uren automatiseren",
+      "afdeling": "IJK",
+      "instuurder": "Jeroen van Dierendonck",
+      "tijdsbesparing_uren_per_week": 8,
+      "status": "Idee",
+      "omschrijving": "Communiceren over beschikbaarheid consultants, deels automatiseren samen met het controleren van uren",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-063",
+      "titel": "Gebruik van n8n in AFAS",
+      "afdeling": "IJK",
+      "instuurder": "Casper de koning",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Idee",
+      "omschrijving": "Gebruik van n8n voor makkelijke processen in Afas",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-064",
+      "titel": "Geautomatiseerd functioneel  ontwerp",
+      "afdeling": "IJK",
+      "instuurder": "Martijn Huisman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Inrichting AFAS beschrijven in Word, dus een functioneel ontwerp maken",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-065",
+      "titel": "Self-service visuals voor data-analyse",
+      "afdeling": "IJK",
+      "instuurder": "Rens van Kalken",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Klanten van de analysemanager zouden zelf visuals voor data analysis kunnen genereren met AI",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-066",
+      "titel": "Activiteitenlogger",
+      "afdeling": "IJK",
+      "instuurder": "Iris",
+      "tijdsbesparing_uren_per_week": 2.5,
+      "status": "Idee",
+      "omschrijving": "Na een werkdag in detail beschrijven wat er is gedaan, inclusief terugzoeken van wat is ingericht in Afas, automatiseren om tijd te besparen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-067",
+      "titel": "Logger tijd besteed aan klantvragen",
+      "afdeling": "IJK",
+      "instuurder": "Gerke van Berkel",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "AI gebruiken om tijd besteed aan klantvragen in de klantportaal automatisch te loggen met uren schrijven.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-068",
+      "titel": "Vacature scraper Jeij",
+      "afdeling": "Jeij",
+      "instuurder": "Ruud Vermunt",
+      "tijdsbesparing_uren_per_week": 5,
+      "status": "Done",
+      "omschrijving": "Een goede vacature scraper speciaal voor Jeij met vacatures in de publieke sector",
+      "opmerkingen": "Johnny met Ruud opgepakt: Jobfeed ingezet"
+    },
+    {
+      "id": "uc-069",
+      "titel": "AI sourcer/aanjager",
+      "afdeling": "Jeij",
+      "instuurder": "Dirk Smulders",
+      "tijdsbesparing_uren_per_week": 16,
+      "status": "Idee",
+      "omschrijving": "Het sourcen en aanjagen van kandidaten door AI laten doen, waarbij het systeem compatibel is met LinkedIn.",
+      "opmerkingen": "170326: De FG wil bij concreet worden van dit project actief betrokken worden."
+    },
+    {
+      "id": "uc-070",
+      "titel": "Geautomatiseerde e-mails arbeidsbemiddeling",
+      "afdeling": "TSF",
+      "instuurder": "Priscilla Fleur Hellemons",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "Idee",
+      "omschrijving": "Automatische e-mails klaarzetten om kandidaten af te wijzen en uit te nodigen voor een gesprek, waarbij alleen gecontroleerd en op verzenden gedrukt hoeft te worden.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-071",
+      "titel": "Geautomatiseerd formuleren invullen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Shajeda van der Made",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Invullen formulier aanvraag AO, Bloeij spoor 2 en UWV formulier PvA",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-072",
+      "titel": "Urenregistratie automatiseren in OnsDriessen",
+      "afdeling": "TSF",
+      "instuurder": "Sheik Rajabali",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Uren schrijven automatiseren (moet nu handmatig klant selecteren, werksoort selecteren en uren schrijven in Ons Driessen)",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-073",
+      "titel": "Slim plannen van afspraken",
+      "afdeling": "IJK",
+      "instuurder": "Helen Nijssen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Planningstool voor inplannen afspraken met meerdere personen (rekening houdend met of afspraak live/hybride of digitaal mag, aangeven of er over andere afspraken heen geplan mag worden, voorkeur binnen bepaalde termijn etc)",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-074",
+      "titel": "Automatiseringsslagen backoffice Haert",
+      "afdeling": "Haert",
+      "instuurder": "Renske Cox",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Repeterende taken Haert: facturen nakijken, workflow ZZP contracten, Reversed Billing",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-075",
+      "titel": "Binnenkomende telefoontjes slim routeren",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Saskia",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Binnenkomende telefoontjes (vooral voor IJk) sneller op juiste plek laten landen",
+      "opmerkingen": "bleek meer CRM vraag, wordt opgepakt"
+    },
+    {
+      "id": "uc-076",
+      "titel": "Content FvB bundelen + publiceren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Jessi Gruszka",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Alle door FvB extern gepubliceerde content verzamelen en in interne nieuwsbrief ter beschikking stellen",
+      "opmerkingen": "Hans en Ad met Jessi Gesproken, Jessie verzamelt sites waar gepubliceerd wordt zodat flow gemaakt kan worden"
+    },
+    {
+      "id": "uc-077",
+      "titel": "AI-chatbot opleidingsuitvraag",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Debbie van Ganzenwinkel",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Done",
+      "omschrijving": "Een chatbot die opleidingen uitvraagt bij collega's zodat we dit kunnen inventariseren",
+      "opmerkingen": "Ad gebouwd en werkt"
+    },
+    {
+      "id": "uc-078",
+      "titel": "Lijstenvergelijker Goed Bekend dagen/bijeenkomsten",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Moniek Bax",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Done",
+      "omschrijving": "Automatisch lijsten vergelijken voor uitnodigingen van kerstbijeenkomst",
+      "opmerkingen": "Ad gebouwd en werkt. ZOu eigenlijk in UpNext gemaakt moeten worden (structureel)"
+    },
+    {
+      "id": "uc-079",
+      "titel": "Automatisch doorzetten niet koppelbare Invio mails",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Chantal Scherders",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Chantal Scherders ontvangt nu nog dagelijks alle mailtjes die niet door Invio gekoppeld konden worden aan de juiste collega/team (en zet ze handmatig door). Dat zou toch ook door AI moeten kunnen gebeuren?",
+      "opmerkingen": "Johnny kijkt hier naar met zijn team"
+    },
+    {
+      "id": "uc-080",
+      "titel": "AI chatbot Mijn Team",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Manon van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Een AI chatbot die eerstelijns vragen van leidinggevenden tbv het gebruik van Mijn Team beantwoord alvorens evt. HR support wordt ingeschakeld",
+      "opmerkingen": "260821 - AI01 - Testfase (ZR)"
+    },
+    {
+      "id": "uc-081",
+      "titel": "Invullen formulier aanvraag bloeij spoor",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Shajeda van der Made",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Invullen formulier aanvraag Bloeij spoor 2 traject",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-082",
+      "titel": "AI planner terugkerende afspraken officeteam",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Moniek Bax",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Jaarlijks terugkerende afspraken (in excel) in laten plannen door een AI agent in outlook",
+      "opmerkingen": "260821 - AI08 - Backlog (ZR)"
+    },
+    {
+      "id": "uc-083",
+      "titel": "Invullen uwv formulier plan van aanpak",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Shajeda van der Made",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Invullen UWV formulier plan van aanpak",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-084",
+      "titel": "Notuleren officeteam overnemen/vergemakkelijken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Moniek Bax",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Notuleren officeteam overnemen/vergemakkelijken",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-085",
+      "titel": "AI Subsidie en fondsen tracker",
+      "afdeling": "Driessen Foundation",
+      "instuurder": "Bianca van Lieshout",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Inzicht in subsidies en fondsen door een AI agent die de relevante websites hiervoor uitleest, de juiste informatie extraheert en een advies geeft",
+      "opmerkingen": "A41"
+    },
+    {
+      "id": "uc-086",
+      "titel": "Automatiseren van contactpersonen/gegevens in CRM",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Moniek Bax",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Automatisch inschieten/checken van contactgegevens in CRM nav (ingeplande) kennismakingsgesprekken van Jeroen",
+      "opmerkingen": "260821 - AI09 - Backlog (ZR)"
+    },
+    {
+      "id": "uc-087",
+      "titel": "S(kan) sneller",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Heidi Verhoeven",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Het proces volgend op het inscannen van UWV brieven tbv Driessen wordt geautomatiseerd waarbij een AI agent de analyse doet van de ingescande brief (om op basis daarvan de juiste informatie door te sturen per mail",
+      "opmerkingen": "260723 - AI02 (ZR)"
+    },
+    {
+      "id": "uc-088",
+      "titel": "SahW matchingsproces automatiseren",
+      "afdeling": "Driessen Foundation",
+      "instuurder": "Bianca van Lieshout",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "SahW matchingsproces automatiseren",
+      "opmerkingen": "AI10"
+    },
+    {
+      "id": "uc-089",
+      "titel": "Ondersteuningsbureau projecten PRM",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Tim Brons",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Ons eigen projectenbureau bouwen dat programmamanagers in elke fase (initiatie, project intake, projectvoorbereiding, realisatie en afronding) van een project/programma ondersteunt en zo veel mogelijk zelfstandig uitvoert.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-090",
+      "titel": "AI offerteschrijver Haert",
+      "afdeling": "Haert",
+      "instuurder": "Wendy Spanjaard",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Het inzetten van AI om op basis van historische aanbestedingsoffertes automatisch een basistekst te genereren voor nieuwe aanbestedingen. Dit vormt een startpunt dat vervolgens door ons aanbestedingsteam wordt verrijkt en toegespitst op de specifieke klantvraag.",
+      "opmerkingen": "260821 - AI03 - testen (ZR)"
+    },
+    {
+      "id": "uc-091",
+      "titel": "AI 'warm houder' via LinkedIn",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Nick van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Overzicht vanuit een bot met een signaal van mensen die 'open to work' gaan op LinkedIn. Via een bot warm contact \nhouden, die berichten stuurt \nvia WhatsApp om contact te \nhouden",
+      "opmerkingen": "Moet nog opgevolgd worden"
+    },
+    {
+      "id": "uc-092",
+      "titel": "Rappie (RAP herschrijver)",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Manon van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Herschrijven van RAP",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-093",
+      "titel": "AI als sparringpartner voor sterke HR-content",
+      "afdeling": "Reijn",
+      "instuurder": "Noortje van Oorschot - de Vries",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Een AI-agent ondersteunt HRM-consultants van Reijn bij het schrijven van contentartikelen. De agent fungeert niet als auteur, maar als sparringpartner die helpt bij onderwerpkeuze, verdieping, doelgroepgerichtheid, structuur en redactionele kwaliteit. Door gebruik te maken van kennisbestanden zoals briefings, doelgroepinformatie en tone-of-voice-richtlijnen ontstaan sterkere, relevantere en minder generieke artikelen.",
+      "opmerkingen": "Tim heeft deze use case toegevoegd aan deze sheet"
+    },
+    {
+      "id": "uc-094",
+      "titel": "Verjaardag-envelop automatiseerder",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Heidi Verhoeven",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Verjaardag-envelop-automatiseren met voornaam, achternaam, geboortedag en plaatje.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-095",
+      "titel": "Marketing toolkit met agents",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Robin Stekelenburg",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Toolkit ontwikkelen voor afdeling met specifieke marketing agents",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-096",
+      "titel": "AI-based ICT knowledge base verrijker",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Frans Coppus",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Proactief mogelijke tickets doorzoeken om knowledgebase  direct aan medewerkers terug te koppelen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-097",
+      "titel": "Facilitator telefonie receptie",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Heidi Verhoeven",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Geen AI",
+      "omschrijving": "Telefoonnummers koppelen en op scherm tonen wie er belt en samenvatting van onderwerp en reden",
+      "opmerkingen": "260723 - Er loopt een apart project voor dit vraagstuk (ZR)"
+    },
+    {
+      "id": "uc-098",
+      "titel": "AI agents ter ondersteuning sales funnel Lüün",
+      "afdeling": "Lüün",
+      "instuurder": "Theo Voortman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Sales funnel verder inrichten zodat we potentiele klanten  bereiken en top of mind blijven om ook andere diensten aan te bieden. Dit doen we door agents te ontwikkelen met methodieken en binnen eigen website klanten hiermee laten spelen",
+      "opmerkingen": "170326: De FG wil bij concreet worden van dit project actief betrokken worden."
+    },
+    {
+      "id": "uc-099",
+      "titel": "B-Corp game",
+      "afdeling": "Programmamanagement",
+      "instuurder": "Koen de Rooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Done",
+      "omschrijving": "Een B-Corp game om door middel van gamification B-Corp en de gedachten daarachter dichter bij de collega's te brengen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-100",
+      "titel": "KvK jaarrekeningen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Rob Korzilius",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Done",
+      "omschrijving": "Een geautomatiseerd (gratis!) koppeling met KvK om jaarrekeningen op te vragen",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-101",
+      "titel": "AI‑gestuurde e‑mailverwerking in Invio",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Heidi Verhoeven",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "AI kan inkomende e‑mails op werk@driessen.nl automatisch analyseren en doorsturen naar het juiste klantenteam, ook als het e-mailadres nog niet in Invio staat. Daarnaast kan automatisch een taak voor HRS worden aangemaakt om nieuwe e‑mailadressen in Invio toe te voegen.",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-102",
+      "titel": "OR notulen vereenvoudigen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Kim Senders",
+      "tijdsbesparing_uren_per_week": 1,
+      "status": "Done",
+      "omschrijving": "Vereenvoudigen van de OR notulen. Liefst transcriberen",
+      "opmerkingen": "Transcriberen werkt niet goed in zo'n grote groep/ruimte. Maar wat wel nu werkt: CoPilot aantekeningen laten uitwerken naar een verslag incl actiepunten"
+    },
+    {
+      "id": "uc-103",
+      "titel": "Facturen automatisch inlezen en boeken",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Danny Akkers en Leon van den Hoogen",
+      "tijdsbesparing_uren_per_week": 80,
+      "status": "In behandeling",
+      "omschrijving": "Facturen die binnenkomen automatische omzetten in data/inlezen in AFAS en automatisch boeken op juiste plaatsen.",
+      "opmerkingen": "ScanSys wordt ingericht bij DG en IJk verkent dit ook"
+    },
+    {
+      "id": "uc-104",
+      "titel": "Verslaglegging kantoorteam Reijn",
+      "afdeling": "Reijn",
+      "instuurder": "Susan van Vijfeyken",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Verslaglegging kantoorteam Reijn \n(teamoverleg, evaluatiegesprekken, klantbezoeken, functioneringsgesprekken, bijpraatmomenten)",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-105",
+      "titel": "Terugkoppeling evaluaties interne trainingen",
+      "afdeling": "Reijn",
+      "instuurder": "Susan van Vijfeyken",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Terugkoppeling evaluaties interne trainingen (Inge)",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-106",
+      "titel": "Signaleerder van CAO wijzigingen irt gelijkwaardige beloning",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Signaleerder van CAO wijzigingen irt gelijkwaardige beloning",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-107",
+      "titel": "Een team van AI HR specialisten",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Een team van AI HR specialisten (oa recruitment, arbeidsrechtelijk, verzuim, HR analytics) om de HRM consultant te ondersteunen in zijn/haar werk",
+      "opmerkingen": null
+    },
+    {
+      "id": "uc-108",
+      "titel": "Campagneflow Vrouw & Werk whitepaper",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Yvonne de Jong",
+      "tijdsbesparing_uren_per_week": 4,
+      "status": "Done",
+      "omschrijving": "Een geautomatiseerde flow voor het aanvragen van de whitepaper light, automatisch toesturen incl mogelijkheid om uitgebreide versie aan te vragen, dat alles wegschrijven in Excel/database (tbv sales) waarbij door AI (perplexity) ook aantal gegevens van organisatie opgezocht worden (aantal mdw, sector, vestigingsplaats) en geautomatiseerd ook dossieritem in Afas ingeschoten wordt .",
+      "opmerkingen": "260821 - AI18 - staat in proeftuin, naar productie"
+    },
+    {
+      "id": "uc-109",
+      "titel": "Automatiseren rapport 2e spoor",
+      "afdeling": "Bloeij",
+      "instuurder": "Walter",
+      "tijdsbesparing_uren_per_week": 2.5,
+      "status": "Done",
+      "omschrijving": "Uploaden van FML, AD onderzoek, CV etc en dan automatisch rapport genereren",
+      "opmerkingen": "AI33 - live in de proeftuin, nog niet in productie"
+    },
+    {
+      "id": "uc-110",
+      "titel": "Interactieve kennisbank voor medewerkers",
+      "afdeling": "Bloeij",
+      "instuurder": "Jip",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Een chatgebaseerde kennisbank die up-to-date interne documenten, processen, richtlijnen, handboeken en externe bronnen (UWV, wet Verbetering Poortwachter, cao's) doorzoekbaar maakt en begrijpelijke antwoorden geeft op vragen van medewerkers. (we denken aan een soortgelijke oplossing als IJK nu in gebruik heeft)",
+      "opmerkingen": "AI32"
+    },
+    {
+      "id": "uc-111",
+      "titel": "Automatische verzuimrapportage",
+      "afdeling": "Bloeij",
+      "instuurder": "Jip",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Een tool die op basis van aangeleverde geanonimiseerde data (bijv. CSV, Excel of JSON-export uit Xpert Suite) automatisch een verzuimrapport genereert, volledig passend bij het Bloeij-format en de klantverwachting.",
+      "opmerkingen": "260821 - AI31 - testen"
+    },
+    {
+      "id": "uc-112",
+      "titel": "Concept e-mail opstellen nav afspraken in bezoekverslagen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Harm Engelsman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "Automatisch genereren van concept opvolg e-mails in Outlook op basis van AFAS bezoekverslagen en historische e-mails.",
+      "opmerkingen": "260821 - AI24 - testen"
+    },
+    {
+      "id": "uc-113",
+      "titel": "Event- en opvolgproces",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Harm Engelsman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Opvolging en inschrijving niuewbrief bij events",
+      "opmerkingen": "260821 - AI23 - backlog"
+    },
+    {
+      "id": "uc-114",
+      "titel": "Analyse van CRM bezoekverslagen",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Harm Engelsman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Deze agent analyseert bezoekverslagen uit het CRM en bepaalt welke bedrijven en entiteiten uit de holding worden genoemd, inclusief een automatische zakelijke samenvatting en inzichten.",
+      "opmerkingen": "260821 - AI22 - backlog"
+    },
+    {
+      "id": "uc-115",
+      "titel": "Nieuwsbriefverwerking en Actualiteitenoverzicht",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Harm Engelsman",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Ontwikkel een AI-agent die dagelijks binnenkomende nieuwsbrieven verzamelt, analyseert en samenvat. De agent verstuurt maximaal twee keer per week een overzichtsmail met de belangrijkste actualiteiten, trends en ontwikkelingen die relevant zijn voor onze organisatie.",
+      "opmerkingen": "260821 - AI21 - backlog"
+    },
+    {
+      "id": "uc-116",
+      "titel": "Medewerker dossier export",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Manon van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A45 - testen"
+    },
+    {
+      "id": "uc-117",
+      "titel": "Documenten UWV Portaal",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Manon van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI35 - backlog"
+    },
+    {
+      "id": "uc-118",
+      "titel": "AI analist talentmanagementdata",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Manon van Oorschot",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI11 - backlog"
+    },
+    {
+      "id": "uc-119",
+      "titel": "AFAS Profit Dossier AVG",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Susanne Smeets",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI17 - ter goedkeuring"
+    },
+    {
+      "id": "uc-120",
+      "titel": "Updaten contactpersonen nav Automatisch Antwoorden mails",
+      "afdeling": "Brainport Human Campus",
+      "instuurder": "Petra Suurs",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "​​​De wens is om alleen de mails in de Inbox van de gedeelde mailbox mailer@driessengroep.nl te zien waar een actie op nodig is.​​",
+      "opmerkingen": "260821 - A40 - bouwen"
+    },
+    {
+      "id": "uc-121",
+      "titel": "Opvolging Summerschool",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Yvonne de Jong",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI19 - bouwen"
+    },
+    {
+      "id": "uc-122",
+      "titel": "contactpersonen AFAS verifiëren",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Ad van Zutphen",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A37 - backlog"
+    },
+    {
+      "id": "uc-123",
+      "titel": "Ted aanbesteding screener | Aanvulling DF en Sprank",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Lincy van Middelaar",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A30 - backlog"
+    },
+    {
+      "id": "uc-124",
+      "titel": "Ted aanbesteding screener | Aanvulling Tendernet",
+      "afdeling": "Driessen Groep",
+      "instuurder": "Danielle van der Vorst",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A44 - backlog"
+    },
+    {
+      "id": "uc-125",
+      "titel": "Opdrachtenbeoordelaar",
+      "afdeling": "Haert",
+      "instuurder": "Renske Cox",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Automatische opdrachtenbeoordelaar -> Op basis van aantal basiscriteria checkt AI de opdracht op compliance",
+      "opmerkingen": "260821 - AI06 - idee"
+    },
+    {
+      "id": "uc-126",
+      "titel": "ondernemerschecklist controleur",
+      "afdeling": "Haert",
+      "instuurder": "Renske Cox",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "Ondernemerschecklist controleren door AI (of in het kernsysteem)",
+      "opmerkingen": "260821 - AI07 - idee"
+    },
+    {
+      "id": "uc-127",
+      "titel": "CAO Monitor",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI04 - idee"
+    },
+    {
+      "id": "uc-128",
+      "titel": "CAO Monitor - berichtgeving",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A42 - idee"
+    },
+    {
+      "id": "uc-129",
+      "titel": "CAO Monitor - scraper",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "Idee",
+      "omschrijving": "",
+      "opmerkingen": "260821 - A43 - idee"
+    },
+    {
+      "id": "uc-130",
+      "titel": "Agent contentartikelen",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI38 - proces goedkeuren"
+    },
+    {
+      "id": "uc-131",
+      "titel": "HRM Quickscan",
+      "afdeling": "Reijn",
+      "instuurder": "Koen de Mooij",
+      "tijdsbesparing_uren_per_week": null,
+      "status": "In behandeling",
+      "omschrijving": "",
+      "opmerkingen": "260821 - AI04 - in proeftuin, naar productie"
     }
   ]
 }

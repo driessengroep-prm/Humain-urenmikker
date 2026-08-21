@@ -14,7 +14,7 @@ export function AfdelingOverzicht({ totalen }: AfdelingOverzichtProps) {
   return (
     <section className="paneel" aria-labelledby="afdelingen-titel">
       <h2 id="afdelingen-titel" className="paneel__titel">
-        Besparing per afdeling (uur/jaar)
+        Besparing per bedrijf (uur/jaar)
       </h2>
       <div className="afdelingen">
         {totalen.map((totaal) => {
@@ -35,7 +35,7 @@ export function AfdelingOverzicht({ totalen }: AfdelingOverzichtProps) {
             </div>
           );
         })}
-        {totalen.length === 0 && <p className="afdeling__meta">Geen afdelingen in deze selectie.</p>}
+        {totalen.length === 0 && <p className="afdeling__meta">Geen bedrijven in deze selectie.</p>}
       </div>
     </section>
   );

@@ -95,5 +95,7 @@ function parseUseCase(ruw: unknown, index: number): UseCase {
     tijdsbesparing_uren_per_week: typeof uren === 'number' && Number.isFinite(uren) ? uren : null,
     status,
     omschrijving: typeof r.omschrijving === 'string' ? r.omschrijving : '',
+    opmerkingen:
+      typeof r.opmerkingen === 'string' && r.opmerkingen.trim() ? r.opmerkingen : null,
   };
 }

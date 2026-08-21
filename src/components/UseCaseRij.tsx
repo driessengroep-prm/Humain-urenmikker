@@ -70,6 +70,12 @@ export function UseCaseRij({
         <div className="rij__cel rij__cel--titel">
           <h3 className="rij__titel">{useCase.titel}</h3>
           {useCase.omschrijving && <p className="rij__omschrijving">{useCase.omschrijving}</p>}
+          {useCase.opmerkingen && (
+            <p className="rij__opmerking">
+              <span className="alleen-screenreader">Opmerking: </span>
+              {useCase.opmerkingen}
+            </p>
+          )}
         </div>
 
         <div className="rij__cel">
@@ -80,7 +86,7 @@ export function UseCaseRij({
         </div>
 
         <div className="rij__cel">
-          <span className="rij__label">Afdeling</span>
+          <span className="rij__label">Bedrijf</span>
           <span>{useCase.afdeling}</span>
         </div>
 

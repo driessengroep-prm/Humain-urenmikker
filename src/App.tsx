@@ -29,7 +29,7 @@ export default function App() {
   const opties = useMemo(() => ({ werkweken, telModus }), [werkweken, telModus]);
 
   /**
-   * De meter volgt het afdelingsfilter (zo zie je de bijdrage van één label),
+   * De meter volgt het bedrijfsfilter (zo zie je de bijdrage van één label),
    * maar niet het statusfilter: welke statussen meetellen bepaalt de telmodus.
    */
   const meterSet = useMemo(
@@ -116,7 +116,7 @@ export default function App() {
               <h2 id="buis-titel">De Urenmikker</h2>
               <p>
                 {afdelingFilter === 'alle'
-                  ? 'Alle afdelingen samen'
+                  ? 'Alle bedrijven samen'
                   : `Selectie: ${afdelingFilter}`}
               </p>
             </div>
@@ -169,7 +169,7 @@ export default function App() {
             <div className="lijst__kop" aria-hidden="true">
               <span>Use case</span>
               <span>Instuurder</span>
-              <span>Afdeling</span>
+              <span>Bedrijf</span>
               <span>Tijdsbesparing</span>
               <span>Status</span>
               <span />

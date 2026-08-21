@@ -1,12 +1,20 @@
 import type { UseCase, UseCasesBestand } from '../types';
 
 /** Bouwt de inhoud van een geldige use-cases.json uit de huidige dataset. */
+/**
+ * Vaste notitie van de Functionaris Gegevensbescherming uit de bronsheet. Staat
+ * hier zodat hij bij een export niet uit het bestand verdwijnt.
+ */
+const OPMERKING_FG =
+  'Algemene opmerking FG: houd er rekening mee dat de FG bij nagenoeg ieder traject actief betrokken moet zijn en dat de kans aannemelijk is dat voor het grootste deel van onderstaande een DPIA opgesteld moet worden.';
+
 export function bouwBestand(useCases: UseCase[]): UseCasesBestand {
   return {
     versie: 1,
     bijgewerkt_op: new Date().toISOString().slice(0, 10),
     toelichting:
       'Bronbestand voor de HUMAIN Urenmikker. tijdsbesparing_uren_per_week is de geschatte besparing PER WEEK; de app rekent dit om naar uren per jaar met het aantal werkweken uit src/config.ts.',
+    opmerking_fg: OPMERKING_FG,
     use_cases: useCases.map((useCase) => ({
       id: useCase.id,
       titel: useCase.titel,
@@ -15,6 +23,7 @@ export function bouwBestand(useCases: UseCase[]): UseCasesBestand {
       tijdsbesparing_uren_per_week: useCase.tijdsbesparing_uren_per_week,
       status: useCase.status,
       omschrijving: useCase.omschrijving,
+      opmerkingen: useCase.opmerkingen,
     })),
   };
 }
