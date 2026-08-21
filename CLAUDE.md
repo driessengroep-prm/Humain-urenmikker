@@ -29,10 +29,16 @@ knikkers vult. Geen backend, geen login: alle data komt uit
    en nullable. Zet nooit een afdeling in de bedrijvenlijst — daar ging het mis
    toen Programmamanagement als bedrijf in de sheet stond. De parser accepteert
    `afdeling` nog als alias voor `bedrijf` voor oudere bestanden.
-6. **Nullable blijft nullable.** `instuurder`, `team`, `opmerkingen` en
+6. **Het invoerscherm eist titel, omschrijving, instuurder en tijdsbesparing.**
+   Het urenveld is bewust geen `type="number"`: daar slikt de browser ongeldige
+   tekens stil in en kan er geen melding verschijnen. Het is een tekstveld met
+   eigen controle die cijfers en één decimaalteken toelaat en de rest weigert.
+   Dat is er om invoer als "onbekend" of "1 tot 6" te voorkomen, precies wat in
+   de bronsheet misging.
+7. **Nullable blijft nullable.** `instuurder`, `team`, `opmerkingen` en
    `tijdsbesparing_uren_per_week` mogen `null` zijn; toon dat als "anoniem
    ingestuurd" en "nog niet ingevuld" in plaats van als 0.
-7. **Wijzigingen zijn niet persistent.** Zolang `dataStore.persistent === false`
+8. **Wijzigingen zijn niet persistent.** Zolang `dataStore.persistent === false`
    moet de UI eerlijk melden dat wijzigingen alleen in deze sessie bestaan, en
    moet de export een geldige `use-cases.json` opleveren.
 
