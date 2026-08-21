@@ -140,6 +140,27 @@ telmodus.
 
 ---
 
+## Zelf bekijken zonder server
+
+`npm run standalone` bouwt `dist/humain-urenmikker-standalone.html`: één bestand
+met de opmaak, de code en de dataset erin. Dubbelklikken opent het in de browser,
+zonder webserver en zonder Node. Handig zolang de repository private is (Pages
+publiceert dan niet) en om de tool te delen met iemand zonder ontwikkelomgeving.
+
+Toevoegen, wijzigen en exporteren werken er gewoon in; wijzigingen blijven zoals
+altijd in de browsersessie. Wil je een versie met de namen erin, draai dan eerst
+het conversiescript zonder `--anoniem` en daarna `npm run standalone`.
+
+## Intern hosten
+
+De build in `dist/` is een gewone statische site: zet de inhoud op een interne
+webserver, IIS, een netwerkschijf met webtoegang of een SharePoint-bibliotheek.
+Draait de site niet in de hoofdmap, geef dan het subpad mee:
+
+```bash
+BASE_PATH=/urenmikker/ npm run build
+```
+
 ## Deploy naar GitHub Pages
 
 `.github/workflows/deploy.yml` draait bij elke push naar `main` en is ook

@@ -52,6 +52,12 @@ cirkels uit de "d" van het logo, pill-vormige knoppen. De letters "AI" in
 HUMAIN zijn altijd gemarkeerd. Kleuren staan als CSS-custom-properties boven in
 `src/styles/app.css`; gebruik die tokens en geen losse hex-waarden.
 
+`npm run standalone` bouwt één HTML-bestand met alles erin, voor bekijken en
+delen zonder server; `scripts/bouw-standalone.mjs` doet het inlinen. Let daar op
+twee valkuilen die er al in zitten: `String.replace` breidt `$&` en `` $` `` in de
+vervangtekst uit (gebruik daarom een functie als vervanging), en een letterlijke
+`</script>` in de inhoud sluit de tag vroegtijdig af.
+
 `humain-urenmikker.html` in de root is de losse visuele referentie: één bestand
 zonder build, met dezelfde look en dezelfde buis-interactie. Handig om de
 vormgeving te bekijken of te delen zonder `npm install`.

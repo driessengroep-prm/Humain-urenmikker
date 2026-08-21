@@ -54,6 +54,13 @@ export class JsonDataStore implements DataStore {
   }
 
   private async laadBestand(): Promise<UseCase[]> {
+    // In de standalone build zit de dataset al in de pagina; dan is er geen
+    // fetch nodig (en die zou op een file://-URL toch geblokkeerd worden).
+    const ingebouwd = (globalThis as { __URENMIKKER_DATA__?: unknown }).__URENMIKKER_DATA__;
+    if (ingebouwd) {
+      this.useCases = parseBestand(ingebouwd);
+      return this.useCases;
+    }
     const response = await fetch(this.url, { cache: 'no-cache' });
     if (!response.ok) {
       throw new Error(`Kon ${this.url} niet laden (HTTP ${response.status}).`);
