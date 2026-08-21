@@ -112,7 +112,8 @@ export function Filters({
         </select>
       </div>
 
-      <p className="filters__telling" aria-live="polite">
+      {/* Niet in beeld, wel hoorbaar: schermlezers melden zo het filterresultaat. */}
+      <p className="alleen-screenreader" aria-live="polite">
         {aantal} use case{aantal === 1 ? '' : 's'} in beeld
       </p>
     </div>

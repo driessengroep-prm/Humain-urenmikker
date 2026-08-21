@@ -119,7 +119,7 @@ export function NieuweUseCaseModal({
                 setTitel(event.target.value);
                 meldFout('titel');
               }}
-              placeholder="Waar helpt AI en/of automatisering jou om je werk makkelijker en menselijker te maken?"
+              placeholder="Waar helpt AI en/of automatisering jou?"
               aria-required="true"
               aria-invalid={Boolean(fouten.titel)}
               aria-describedby={fouten.titel ? 'fout-titel' : undefined}

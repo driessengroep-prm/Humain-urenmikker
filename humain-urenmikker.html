@@ -231,7 +231,7 @@
       document.getElementById('pot').textContent = nl.format(potentieel);
 
       // --- Kaarten met markering in de buis ---------------------------------
-      const badgeKlasse = { Done: 'done', 'In behandeling': 'bezig', Idee: 'idee', 'Geen AI': 'idee' };
+      const badgeKlasse = { Done: 'done', 'In behandeling': 'bezig', Idee: 'idee' };
       document.getElementById('kaarten').innerHTML = [...cases]
         .sort((a, b) => perJaar(b) - perJaar(a))
         .map((c) => `

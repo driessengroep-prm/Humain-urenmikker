@@ -57,7 +57,7 @@ te bewerken als op de gepubliceerde site op te vragen.
       "team": "Programmamanagement",           // afdeling of team, mag null zijn
       "instuurder": "Team Recruitment",      // mag null zijn (geanonimiseerd)
       "tijdsbesparing_uren_per_week": 6,     // mag null zijn (nog niet ingeschat)
-      "status": "Done",                      // Idee | In behandeling | Done | Geen AI
+      "status": "Done",                      // Idee | In behandeling | Done
       "omschrijving": "…",
       "opmerkingen": "wordt meegenomen bij …"  // mag null zijn
     }
@@ -127,7 +127,7 @@ Alles staat in **`src/config.ts`**:
 | --- | --- | --- |
 | `jaardoelUren` | `10000` | Bij deze waarde is de buis vol. |
 | `werkwekenPerJaar` | `46` | Omrekenfactor week → jaar. |
-| `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alles behalve `Geen AI` mee. |
+| `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alle use cases mee. |
 | `gerealiseerdeStatussen` | `['Done']` | Wat als gerealiseerd geldt. |
 | `potentieleStatussen` | `['Idee', 'In behandeling']` | Wat als potentieel geldt. |
 

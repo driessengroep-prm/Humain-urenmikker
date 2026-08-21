@@ -204,7 +204,7 @@ export default function App() {
               <h2 id="buis-titel">De Urenmikker</h2>
               <p>
                 {bedrijfFilter === 'alle' && teamFilter === 'alle'
-                  ? 'Alle bedrijven samen'
+                  ? 'Totaal familie van bedrijven'
                   : `Selectie: ${[bedrijfFilter, teamFilter]
                       .filter((waarde) => waarde !== 'alle')
                       .join(' · ')}`}

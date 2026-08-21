@@ -660,12 +660,6 @@ textarea {
 .veld--breed textarea {
   width: 100%;
 }
-.filters__telling {
-  margin-left: auto;
-  font-size: 13px;
-  color: var(--tekst-zacht);
-  padding-bottom: 10px;
-}
 
 /* --- Use case-lijst ------------------------------------------------------- */
 
@@ -895,10 +889,6 @@ textarea {
   background: rgba(222, 90, 44, 0.12);
   color: var(--terracotta-donker);
 }
-.badge--geen {
-  background: #f0eae4;
-  color: #7b6f66;
-}
 
 .leeg {
   background: var(--wit);
@@ -1074,11 +1064,6 @@ textarea {
   }
   .filters .veld {
     flex: 1 1 140px;
-  }
-  .filters__telling {
-    margin-left: 0;
-    width: 100%;
-    padding-bottom: 0;
   }
   .rij {
     padding: 14px;

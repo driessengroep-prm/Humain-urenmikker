@@ -1,5 +1,5 @@
 /** Alle statussen die een use case kan hebben. */
-export const STATUSSEN = ['Idee', 'In behandeling', 'Done', 'Geen AI'] as const;
+export const STATUSSEN = ['Idee', 'In behandeling', 'Done'] as const;
 export type Status = (typeof STATUSSEN)[number];
 
 /**

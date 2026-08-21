@@ -46,8 +46,9 @@ BEDRIJVEN = {
     "programmamanagement": ("Driessen Groep", "Programmamanagement"),
 }
 
+# "Geen AI" bestaat niet meer als status; die rijen worden een idee.
 STATUSSEN = {"idee": "Idee", "in behandeling": "In behandeling",
-             "done": "Done", "geen ai": "Geen AI"}
+             "done": "Done", "geen ai": "Idee"}
 
 # Namen die in omschrijving of opmerkingen voorkomen maar nergens als instuurder,
 # en daarom niet automatisch gevonden worden. Met de hand aanvullen na controle.

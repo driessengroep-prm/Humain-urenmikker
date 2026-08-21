@@ -40,7 +40,7 @@ export interface TelOpties {
 
 /** Bepaalt of een use case meetelt in de meter, gegeven de telmodus. */
 export function teltMee(useCase: UseCase, telModus = config.telModus): boolean {
-  if (telModus === 'alle-statussen') return useCase.status !== 'Geen AI';
+  if (telModus === 'alle-statussen') return true;
   return isGerealiseerd(useCase.status);
 }
 
@@ -58,9 +58,7 @@ export function berekenTotalen(useCases: UseCase[], opties: TelOpties = {}): Tot
   for (const useCase of useCases) {
     const uren = urenPerJaar(useCase.tijdsbesparing_uren_per_week, werkweken);
     bedrijven.add(useCase.bedrijf);
-    if (useCase.tijdsbesparing_uren_per_week === null && useCase.status !== 'Geen AI') {
-      aantalZonderBesparing += 1;
-    }
+    if (useCase.tijdsbesparing_uren_per_week === null) aantalZonderBesparing += 1;
     if (isGerealiseerd(useCase.status)) gerealiseerdeUren += uren;
     if (isPotentieel(useCase.status)) potentieleUren += uren;
     if (teltMee(useCase, telModus)) meetellendeUren += uren;
