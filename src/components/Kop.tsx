@@ -20,7 +20,7 @@ export function Kop({ onNieuweUseCase, onExporteer }: KopProps) {
         </div>
         <div className="kop__acties">
           <button type="button" className="knop knop--rand" onClick={onExporteer}>
-            Exporteer bijgewerkte JSON
+            Exporteer <span className="alleen-breed">bijgewerkte </span>JSON
           </button>
           <button type="button" className="knop knop--goud" onClick={onNieuweUseCase}>
             + Nieuwe use case
