@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { config, type TelModus } from './config';
 import { useUseCases } from './hooks/useUseCases';
 import { berekenSegmenten, berekenTotalen, perBedrijf, teltMee, urenPerJaar } from './lib/uren';
+import { getal, percentage } from './lib/format';
 import type { Bedrijf, NieuweUseCase, Status } from './types';
 import { BedrijfOverzicht } from './components/BedrijfOverzicht';
 import { Buis } from './components/Buis';
@@ -10,6 +11,7 @@ import { Filters, type Sortering } from './components/Filters';
 import { Instellingen } from './components/Instellingen';
 import { Kop } from './components/Kop';
 import { NieuweUseCaseModal } from './components/NieuweUseCaseModal';
+import { PaneelKnop } from './components/PaneelKnop';
 import { Teller } from './components/Teller';
 import { UseCaseRij } from './components/UseCaseRij';
 
@@ -24,6 +26,8 @@ export default function App() {
   const [werkweken, setWerkweken] = useState(config.werkwekenPerJaar);
   const [telModus, setTelModus] = useState<TelModus>(config.telModus);
   const [gemarkeerdeId, setGemarkeerdeId] = useState<string | null>(null);
+  const [toonTeller, setToonTeller] = useState(false);
+  const [toonInstellingen, setToonInstellingen] = useState(false);
   const [toonNieuw, setToonNieuw] = useState(false);
   const [toonExport, setToonExport] = useState(false);
 
@@ -129,7 +133,48 @@ export default function App() {
           </p>
         )}
 
-        <div className="dashboard">
+        <div className="paneelbalk">
+          <div className="knoppenbalk">
+            <PaneelKnop
+              waarde={`${getal(totalen.meetellendeUren)} uur`}
+              label={telModus === 'alle-statussen' ? 'besparing' : 'gerealiseerd'}
+              badge={percentage(totalen.percentage)}
+              open={toonTeller}
+              paneelId="paneel-teller"
+              onClick={() => setToonTeller((huidig) => !huidig)}
+            />
+            <PaneelKnop
+              waarde={`${werkweken}`}
+              label="werkweken · rekeninstellingen"
+              open={toonInstellingen}
+              paneelId="paneel-instellingen"
+              onClick={() => setToonInstellingen((huidig) => !huidig)}
+            />
+          </div>
+
+          <div id="paneel-teller" hidden={!toonTeller}>
+            {toonTeller && (
+              <Teller
+                totalen={totalen}
+                jaardoel={config.jaardoelUren}
+                werkweken={werkweken}
+                telModus={telModus}
+              />
+            )}
+          </div>
+          <div id="paneel-instellingen" hidden={!toonInstellingen}>
+            {toonInstellingen && (
+              <Instellingen
+                werkweken={werkweken}
+                telModus={telModus}
+                onWerkweken={setWerkweken}
+                onTelModus={setTelModus}
+              />
+            )}
+          </div>
+        </div>
+
+        <div className="band">
           <section className="paneel buis-paneel" aria-labelledby="buis-titel">
             <div className="buis-paneel__kop">
               <h2 id="buis-titel">De Urenmikker</h2>
@@ -151,21 +196,7 @@ export default function App() {
             />
           </section>
 
-          <div className="rechterkolom">
-            <Teller
-              totalen={totalen}
-              jaardoel={config.jaardoelUren}
-              werkweken={werkweken}
-              telModus={telModus}
-            />
-            <Instellingen
-              werkweken={werkweken}
-              telModus={telModus}
-              onWerkweken={setWerkweken}
-              onTelModus={setTelModus}
-            />
-            <BedrijfOverzicht totalen={bedrijfTotalen} />
-          </div>
+          <BedrijfOverzicht totalen={bedrijfTotalen} />
         </div>
 
         <h2 id="use-cases" className="alleen-screenreader">

@@ -66,6 +66,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
+- Indeling van de pagina: bovenaan twee uitklapknoppen (gerealiseerde besparing
+  en rekeninstellingen) met hun paneel eronder, daarna de band met de buis links
+  en de besparing per bedrijf ernaast, daaronder de filters en de lijst over de
+  volle breedte. De knop toont het getal ook als het paneel dicht is.
 - De use cases staan in een lijst met kolommen (use case, instuurder, bedrijf,
   afdeling/team, tijdsbesparing, status). Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
