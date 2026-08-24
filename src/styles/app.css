@@ -660,7 +660,15 @@ textarea {
 .filters__teller {
   /* fit-content, anders vult het blok de hele breedte en doet margin auto niets. */
   width: fit-content;
-  margin: 0 0 14px auto;
+  /*
+   * De negatieve ondermarge trekt de teller op de hoogte van de kolomkop, zodat
+   * hij daar rechts naast staat in plaats van er een eigen regel boven te
+   * krijgen. Sticky met dezelfde offset laat hem meelopen als die kop vastzet.
+   */
+  margin: 8px -2px -46px auto;
+  position: sticky;
+  top: calc(var(--kop-hoogte) + 8px);
+  z-index: 6;
   min-width: 44px;
   height: 44px;
   padding: 0 13px;
