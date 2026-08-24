@@ -108,8 +108,10 @@ export function UseCaseRij({
 
         <div className="rij__cel rij__cel--titel">
           <h3 className="rij__titel">{useCase.titel}</h3>
-          {useCase.omschrijving && <p className="rij__omschrijving">{useCase.omschrijving}</p>}
-          {useCase.opmerkingen && (
+          {!wijzigen && useCase.omschrijving && (
+            <p className="rij__omschrijving">{useCase.omschrijving}</p>
+          )}
+          {!wijzigen && useCase.opmerkingen && (
             <p className="rij__opmerking">
               <span className="alleen-screenreader">Opmerking: </span>
               {useCase.opmerkingen}
@@ -158,11 +160,26 @@ export function UseCaseRij({
             onClick={() => setWijzigen((huidig) => !huidig)}
             aria-expanded={wijzigen}
           >
-            {wijzigen ? 'Sluiten' : 'Wijzigen'}
+            {wijzigen ? 'Sluiten' : 'Openen of wijzigen'}
             <span className="alleen-screenreader"> — {useCase.titel}</span>
           </button>
         </div>
       </div>
+
+      {wijzigen && (
+        <div className="rij__details">
+          <div>
+            <h4 className="rij__detailkop">Omschrijving</h4>
+            <p>{useCase.omschrijving || 'Niet ingevuld.'}</p>
+          </div>
+          {useCase.opmerkingen && (
+            <div>
+              <h4 className="rij__detailkop">Opmerkingen</h4>
+              <p>{useCase.opmerkingen}</p>
+            </div>
+          )}
+        </div>
+      )}
 
       {wijzigen && (
         <form className="bewerk" onSubmit={opslaan}>

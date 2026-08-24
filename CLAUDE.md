@@ -90,6 +90,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
   tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
   de dataStore, want die kent de hele verzameling.
+- Omschrijving en opmerkingen zijn in de lijst tot twee regels afgekapt. De knop
+  "Openen of wijzigen" toont ze eronder volledig over de hele breedte
+  (`.rij__details`, `white-space: pre-line` zodat regeleinden uit de sheet
+  blijven staan); de afgekapte versie verdwijnt dan om dubbeling te voorkomen.
 - Verwijderen zit achter een bevestiging (`Modal` in `UseCaseRij`), en die knop
   staat in het wijzigformulier zodat je er niet per ongeluk op klikt. Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene
