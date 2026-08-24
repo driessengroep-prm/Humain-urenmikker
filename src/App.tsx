@@ -243,6 +243,7 @@ export default function App() {
               segmenten={segmenten}
               gemarkeerdeId={gemarkeerdeId}
               potentieelTeltMee={telModus === 'alle-statussen'}
+              selectieSleutel={`${bedrijfFilter}|${teamFilter}|${instuurderFilter}|${telModus}|${werkweken}`}
             />
           </section>
 

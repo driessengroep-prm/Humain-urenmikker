@@ -81,6 +81,9 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
+- Komen er knikkers bij, dan vallen ze van bovenaf in de buis (`knikkerValt`).
+  Dat hoort alleen te gebeuren als er iets is afgerond, niet bij filteren; de
+  buis vergelijkt daarvoor de `selectieSleutel` met de vorige render.
 - Indeling van de pagina: bovenaan drie uitklapknoppen (gerealiseerde besparing,
   rekeninstellingen, besparing per bedrijf) met hun paneel eronder. Daaronder de
   band: de buis links, meescrollend, en rechts de filters met de use case-lijst.

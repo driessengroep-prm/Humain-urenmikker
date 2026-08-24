@@ -440,6 +440,33 @@ textarea {
   opacity: 0;
   transform: translateY(26px) scale(0.55);
 }
+/* Een afgeronde use case gooit zijn knikkers van bovenaf in de buis. */
+@keyframes knikkerValt {
+  0% {
+    transform: translateY(var(--val-afstand, -300px)) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  62% {
+    transform: translateY(0) scale(1);
+  }
+  74% {
+    transform: translateY(-7px) scale(1.05);
+  }
+  86% {
+    transform: translateY(0) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+.buis__knikker--valt {
+  opacity: 1;
+  animation: knikkerValt 0.85s cubic-bezier(0.4, 0, 0.6, 1) backwards;
+}
+
 .buis__knikker--gemarkeerd {
   filter: drop-shadow(0 0 5px rgba(222, 90, 44, 0.95));
 }
