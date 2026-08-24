@@ -13,13 +13,17 @@ export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
 interface FiltersProps {
   bedrijf: Bedrijf | 'alle';
   team: string | 'alle';
+  instuurder: string | 'alle';
   status: Status | 'alle';
   sortering: Sortering;
   aantal: number;
   /** Teams die in de huidige selectie voorkomen, alfabetisch. */
   teams: string[];
+  /** Instuurders die in de huidige selectie voorkomen, alfabetisch. */
+  instuurders: string[];
   onBedrijf(waarde: Bedrijf | 'alle'): void;
   onTeam(waarde: string | 'alle'): void;
+  onInstuurder(waarde: string | 'alle'): void;
   onStatus(waarde: Status | 'alle'): void;
   onSortering(waarde: Sortering): void;
 }
@@ -27,12 +31,15 @@ interface FiltersProps {
 export function Filters({
   bedrijf,
   team,
+  instuurder,
   status,
   sortering,
   aantal,
   teams,
+  instuurders,
   onBedrijf,
   onTeam,
+  onInstuurder,
   onStatus,
   onSortering,
 }: FiltersProps) {
@@ -70,6 +77,27 @@ export function Filters({
             {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
           </option>
           {teams.map((naam) => (
+            <option key={naam} value={naam}>
+              {naam}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="veld">
+        <label className="veld__label" htmlFor="filter-instuurder">
+          Instuurder
+        </label>
+        <select
+          id="filter-instuurder"
+          value={instuurder}
+          onChange={(event) => onInstuurder(event.target.value)}
+          disabled={instuurders.length === 0}
+        >
+          <option value="alle">
+            {instuurders.length === 0 ? 'Geen instuurders ingevuld' : 'Alle instuurders'}
+          </option>
+          {instuurders.map((naam) => (
             <option key={naam} value={naam}>
               {naam}
             </option>

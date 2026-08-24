@@ -29,6 +29,7 @@ export default function App() {
 
   const [bedrijfFilter, setBedrijfFilter] = useState<Bedrijf | 'alle'>('alle');
   const [teamFilter, setTeamFilter] = useState<string | 'alle'>('alle');
+  const [instuurderFilter, setInstuurderFilter] = useState<string | 'alle'>('alle');
   const [statusFilter, setStatusFilter] = useState<Status | 'alle'>('alle');
   const [sortering, setSortering] = useState<Sortering>('besparing');
   const [werkweken, setWerkweken] = useState(config.werkwekenPerJaar);
@@ -52,9 +53,10 @@ export default function App() {
       useCases.filter(
         (useCase) =>
           (bedrijfFilter === 'alle' || useCase.bedrijf === bedrijfFilter) &&
-          (teamFilter === 'alle' || useCase.team === teamFilter),
+          (teamFilter === 'alle' || useCase.team === teamFilter) &&
+          (instuurderFilter === 'alle' || useCase.instuurder === instuurderFilter),
       ),
-    [useCases, bedrijfFilter, teamFilter],
+    [useCases, bedrijfFilter, teamFilter, instuurderFilter],
   );
 
   /** Teams die voorkomen binnen het gekozen bedrijf, alfabetisch en zonder dubbele. */
@@ -67,15 +69,39 @@ export default function App() {
     return [...namen].sort((a, b) => a.localeCompare(b, 'nl'));
   }, [useCases, bedrijfFilter]);
 
-  // Een team dat niet meer bestaat binnen het gekozen bedrijf mag niet blijven hangen.
+  /** Instuurders binnen het gekozen bedrijf en team, alfabetisch en zonder dubbele. */
+  const instuurders = useMemo(() => {
+    const binnenSelectie = useCases.filter(
+      (useCase) =>
+        (bedrijfFilter === 'alle' || useCase.bedrijf === bedrijfFilter) &&
+        (teamFilter === 'alle' || useCase.team === teamFilter),
+    );
+    const namen = new Set<string>();
+    for (const useCase of binnenSelectie) if (useCase.instuurder) namen.add(useCase.instuurder);
+    return [...namen].sort((a, b) => a.localeCompare(b, 'nl'));
+  }, [useCases, bedrijfFilter, teamFilter]);
+
+  // Een keuze die niet meer in de selectie voorkomt mag niet blijven hangen.
   useEffect(() => {
     if (teamFilter !== 'alle' && !teams.includes(teamFilter)) setTeamFilter('alle');
   }, [teams, teamFilter]);
 
+  useEffect(() => {
+    if (instuurderFilter !== 'alle' && !instuurders.includes(instuurderFilter)) {
+      setInstuurderFilter('alle');
+    }
+  }, [instuurders, instuurderFilter]);
+
   const totalen = useMemo(() => berekenTotalen(meterSet, opties), [meterSet, opties]);
   const bedrijfTotalen = useMemo(
-    () => perBedrijf(bedrijfFilter === 'alle' && teamFilter === 'alle' ? useCases : meterSet, opties),
-    [useCases, meterSet, bedrijfFilter, teamFilter, opties],
+    () =>
+      perBedrijf(
+        bedrijfFilter === 'alle' && teamFilter === 'alle' && instuurderFilter === 'alle'
+          ? useCases
+          : meterSet,
+        opties,
+      ),
+    [useCases, meterSet, bedrijfFilter, teamFilter, instuurderFilter, opties],
   );
 
   // Grootste bijdrage onderin de buis, zodat de volgorde stabiel en leesbaar is.
@@ -203,9 +229,9 @@ export default function App() {
             <div className="buis-paneel__kop">
               <h2 id="buis-titel">De Urenmikker</h2>
               <p>
-                {bedrijfFilter === 'alle' && teamFilter === 'alle'
+                {bedrijfFilter === 'alle' && teamFilter === 'alle' && instuurderFilter === 'alle'
                   ? 'Totaal familie van bedrijven'
-                  : `Selectie: ${[bedrijfFilter, teamFilter]
+                  : `Selectie: ${[bedrijfFilter, teamFilter, instuurderFilter]
                       .filter((waarde) => waarde !== 'alle')
                       .join(' · ')}`}
               </p>
@@ -227,12 +253,15 @@ export default function App() {
           <Filters
             bedrijf={bedrijfFilter}
             team={teamFilter}
+            instuurder={instuurderFilter}
             status={statusFilter}
             sortering={sortering}
             aantal={zichtbaar.length}
             teams={teams}
+            instuurders={instuurders}
             onBedrijf={setBedrijfFilter}
             onTeam={setTeamFilter}
+            onInstuurder={setInstuurderFilter}
             onStatus={setStatusFilter}
             onSortering={setSortering}
           />
