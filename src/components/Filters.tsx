@@ -44,105 +44,108 @@ export function Filters({
   onSortering,
 }: FiltersProps) {
   return (
-    <div className="filters">
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-bedrijf">
-          Bedrijf
-        </label>
-        <select
-          id="filter-bedrijf"
-          value={bedrijf}
-          onChange={(event) => onBedrijf(event.target.value as Bedrijf | 'alle')}
-        >
-          <option value="alle">Alle bedrijven</option>
-          {BEDRIJVEN.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
-            </option>
-          ))}
-        </select>
-      </div>
+    <>
+      <div className="filters">
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-bedrijf">
+            Bedrijf
+          </label>
+          <select
+            id="filter-bedrijf"
+            value={bedrijf}
+            onChange={(event) => onBedrijf(event.target.value as Bedrijf | 'alle')}
+          >
+            <option value="alle">Alle bedrijven</option>
+            {BEDRIJVEN.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-team">
-          Afdeling / team
-        </label>
-        <select
-          id="filter-team"
-          value={team}
-          onChange={(event) => onTeam(event.target.value)}
-          disabled={teams.length === 0}
-        >
-          <option value="alle">
-            {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
-          </option>
-          {teams.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-team">
+            Afdeling / team
+          </label>
+          <select
+            id="filter-team"
+            value={team}
+            onChange={(event) => onTeam(event.target.value)}
+            disabled={teams.length === 0}
+          >
+            <option value="alle">
+              {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
             </option>
-          ))}
-        </select>
-      </div>
+            {teams.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-instuurder">
-          Instuurder
-        </label>
-        <select
-          id="filter-instuurder"
-          value={instuurder}
-          onChange={(event) => onInstuurder(event.target.value)}
-          disabled={instuurders.length === 0}
-        >
-          <option value="alle">
-            {instuurders.length === 0 ? 'Geen instuurders ingevuld' : 'Alle instuurders'}
-          </option>
-          {instuurders.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-instuurder">
+            Instuurder
+          </label>
+          <select
+            id="filter-instuurder"
+            value={instuurder}
+            onChange={(event) => onInstuurder(event.target.value)}
+            disabled={instuurders.length === 0}
+          >
+            <option value="alle">
+              {instuurders.length === 0 ? 'Geen instuurders ingevuld' : 'Alle instuurders'}
             </option>
-          ))}
-        </select>
-      </div>
+            {instuurders.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-status">
-          Status
-        </label>
-        <select
-          id="filter-status"
-          value={status}
-          onChange={(event) => onStatus(event.target.value as Status | 'alle')}
-        >
-          <option value="alle">Alle statussen</option>
-          {STATUSSEN.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
-            </option>
-          ))}
-        </select>
-      </div>
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-status">
+            Status
+          </label>
+          <select
+            id="filter-status"
+            value={status}
+            onChange={(event) => onStatus(event.target.value as Status | 'alle')}
+          >
+            <option value="alle">Alle statussen</option>
+            {STATUSSEN.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-sortering">
-          Sorteren op
-        </label>
-        <select
-          id="filter-sortering"
-          value={sortering}
-          onChange={(event) => onSortering(event.target.value as Sortering)}
-        >
-          {sorteerOpties.map((optie) => (
-            <option key={optie.waarde} value={optie.waarde}>
-              {optie.label}
-            </option>
-          ))}
-        </select>
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-sortering">
+            Sorteren op
+          </label>
+          <select
+            id="filter-sortering"
+            value={sortering}
+            onChange={(event) => onSortering(event.target.value as Sortering)}
+          >
+            {sorteerOpties.map((optie) => (
+              <option key={optie.waarde} value={optie.waarde}>
+                {optie.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {/*
-        Compacte teller van wat het filter oplevert. Het getal staat in beeld,
-        de volledige zin zit in het label voor schermlezers en als tooltip.
+        Compacte teller van wat het filter oplevert, onder de filterrij en rechts
+        uitgelijnd. Het getal staat in beeld; de volledige zin zit in het label
+        voor schermlezers en als tooltip.
       */}
       <p
         className="filters__teller"
@@ -154,6 +157,6 @@ export function Filters({
           {aantal} use case{aantal === 1 ? '' : 's'} in beeld
         </span>
       </p>
-    </div>
+    </>
   );
 }

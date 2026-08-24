@@ -608,11 +608,15 @@ textarea {
 /* --- Filters -------------------------------------------------------------- */
 
 .filters {
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin: 0 0 16px;
+  /*
+   * Raster in plaats van flex: zo delen de keuzelijsten de breedte gelijk en
+   * duwt een lange optie er niet één naar de volgende regel.
+   */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 12px 14px;
+  align-items: end;
+  margin: 0 0 12px;
 }
 .veld {
   display: grid;
@@ -654,7 +658,9 @@ textarea {
 }
 /* Teller rechtsboven de lijst: hoeveel use cases het filter oplevert. */
 .filters__teller {
-  margin: 0 0 0 auto;
+  /* fit-content, anders vult het blok de hele breedte en doet margin auto niets. */
+  width: fit-content;
+  margin: 0 0 14px auto;
   min-width: 44px;
   height: 44px;
   padding: 0 13px;
