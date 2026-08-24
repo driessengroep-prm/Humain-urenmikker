@@ -685,7 +685,7 @@ textarea {
 
 .lijst-blok {
   /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
-  --lijst-kolommen: 42px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 128px 108px 172px;
+  --lijst-kolommen: 42px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 128px 108px 154px;
   /*
    * De lijst staat naast de buis, dus zijn eigen breedte bepaalt of de kolommen
    * nog passen - niet die van het venster.

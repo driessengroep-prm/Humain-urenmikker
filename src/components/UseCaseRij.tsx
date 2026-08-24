@@ -160,7 +160,7 @@ export function UseCaseRij({
             onClick={() => setWijzigen((huidig) => !huidig)}
             aria-expanded={wijzigen}
           >
-            {wijzigen ? 'Sluiten' : 'Openen of wijzigen'}
+            {wijzigen ? 'Sluiten' : 'Openen/wijzigen'}
             <span className="alleen-screenreader"> — {useCase.titel}</span>
           </button>
         </div>
