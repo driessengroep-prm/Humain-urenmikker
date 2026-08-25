@@ -15,9 +15,8 @@ knikkers vult. Geen backend, geen login: alle data komt uit
 1. **Alles loopt via de dataStore.** Componenten en hooks importeren nooit
    `use-cases.json` en doen nooit zelf een `fetch`. De enige toegang is
    `src/data/dataStore.ts` (`getAll` / `add` / `update`), via
-   `createDataStore()` en de hook `useUseCases`. Dit is de reden dat de opslag
-   verwisseld kon worden voor Buddy Data zonder één component aan te raken —
-   breek het niet.
+   `createDataStore()` en de hook `useUseCases`. Dit is de reden dat Supabase er
+   later in te schuiven is zonder de UI aan te raken — breek het niet.
 2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken en telmodus
    horen daar, niet als los getal in een component. Rekenen zelf gebeurt in
    `src/lib/uren.ts`.
@@ -73,10 +72,8 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Kleine, reviewbare commits met een Nederlandse beschrijving.
 - Bij een wijziging in het datamodel: `src/types.ts`, de parser in
-  `jsonDataStore.ts`, de vertaling in `buddyDataStore.ts` en de export in
-  `lib/exporteer.ts` samen bijwerken. Een nieuwe kolom hoort óók in Buddy Data
-  te staan; dat regel je in het beheerscherm of via de Buddy Data MCP-server,
-  niet met SQL.
+  `jsonDataStore.ts`, de export in `lib/exporteer.ts` en het voorbeeld in
+  `supabaseDataStore.ts.voorbeeld` samen bijwerken.
 - De dataset komt uit de AI-ideeën Excel en wordt gegenereerd met
   `scripts/converteer-excel.py`. Werk de sheet bij en draai het script opnieuw
   in plaats van `use-cases.json` handmatig te redigeren; de mappingregels
@@ -84,22 +81,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
 - `instuurder` bevat echte namen en de site is publiek. Anonimiseren kan door
   het veld op `null` te zetten; de UI toont dan "anoniem ingestuurd".
 
-## Opslag
-
-De use cases staan in Buddy Data (database `urenmikker`, tabel `use_cases`,
-aangemaakt als *gedeeld*). Inloggen gaat met het gewone Buddy-account van de
-medewerker; er staat geen sleutel in deze app.
-
-`src/data/buddyClient.ts` is met opzet een klein, op zichzelf staand bestand en
-geen npm-pakket: GitHub Actions bouwt met `npm ci` en heeft alleen deze repo. Het
-spiegelt `@driessen/buddy-client` uit agent-swarm.
-
-Zonder de `VITE_BUDDY_`-variabelen valt de app terug op `use-cases.json` in het
-geheugen. Die terugval is er voor een demo en om lokaal te kunnen werken zonder de
-rest van de omgeving — niet als tweede opslag.
-
 ## Wat er nog niet is
 
+- Supabase: opslag, login en rechten per eigenaar. De blauwdruk staat in
+  `src/data/supabaseDataStore.ts.voorbeeld` en het stappenplan in de README.
 - Geen datumveld op een use case. "Nieuwste eerst" gebruikt nu de volgorde van
   de dataStore (nieuw toegevoegd staat vooraan). Komt er een
   `aangemaakt_op`-veld, sorteer daar dan op.
