@@ -158,8 +158,9 @@ src/
   types.ts                     UseCase, Status, Afdeling
   data/
     dataStore.ts               de interface waar alles doorheen gaat
-    jsonDataStore.ts           huidige implementatie: JSON + in-memory
-    supabaseDataStore.ts.voorbeeld   blauwdruk voor later
+    jsonDataStore.ts           terugval: JSON + in-memory, zonder database
+    buddyDataStore.ts          de echte opslag: Buddy Data
+    buddyClient.ts             inloggen en praten met de data-API
     index.ts                   createDataStore(): kiest de implementatie
   hooks/useUseCases.ts         enige koppeling tussen UI en dataStore
   lib/
@@ -173,10 +174,10 @@ src/
 
 ---
 
-## Data-laag: nu JSON, later Supabase
+## Data-laag: Buddy Data, met JSON als terugval
 
 De hele app praat via één interface (`src/data/dataStore.ts`) en nooit
-rechtstreeks met het JSON-bestand:
+rechtstreeks met een bestand of een API:
 
 ```ts
 interface DataStore {
@@ -188,33 +189,52 @@ interface DataStore {
 }
 ```
 
-`JsonDataStore` leest `use-cases.json` één keer in en houdt wijzigingen in het
-geheugen vast. Omdat er niets buiten de sessie wordt opgeslagen staat
-`persistent` op `false`; daarop toont de UI de melding dat wijzigingen nog niet
-gedeeld zijn.
+Er zijn twee implementaties, en `createDataStore()` kiest op basis van de
+omgevingsvariabelen:
 
-**Overstappen naar Supabase** raakt de UI niet:
+- **`BuddyDataStore`** — de use cases staan in Buddy Data. Wijzigingen blijven
+  bestaan en collega's zien ze meteen. Actief zodra `VITE_BUDDY_URL`,
+  `VITE_BUDDY_DATA_URL` en `VITE_BUDDY_PROJECT` gezet zijn.
+- **`JsonDataStore`** — leest `use-cases.json` en houdt wijzigingen in het
+  geheugen. Handig voor een demo of een omgeving zonder Buddy; `persistent` staat
+  dan op `false` en de UI meldt dat er niets bewaard wordt.
 
-1. `npm install @supabase/supabase-js`.
-2. Hernoem `src/data/supabaseDataStore.ts.voorbeeld` naar `.ts`. Daarin staan de
-   tabeldefinitie, de row-level-security-policies voor rechten per eigenaar en
-   de implementatie van dezelfde drie methodes.
-3. Laat `createDataStore()` in `src/data/index.ts` de Supabase-variant
-   teruggeven zodra `VITE_SUPABASE_URL` en `VITE_SUPABASE_ANON_KEY` gezet zijn:
+### Inloggen
 
-   ```ts
-   export function createDataStore(): DataStore {
-     const url = import.meta.env.VITE_SUPABASE_URL;
-     const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
-     return url && key ? new SupabaseDataStore(url, key) : new JsonDataStore();
-   }
-   ```
+De medewerker logt in met zijn gewone Buddy-account. Er staat geen sleutel in deze
+app, en er is ook geen apart wachtwoord.
 
-4. Zet de twee variabelen als repository-secrets en geef ze mee in de workflow.
+Dat gaat via een omweg, en dat is met opzet: de sessiecookie van Buddy staat op
+`SameSite=Lax` en gaat dus niet mee met een verzoek vanaf github.io — precies
+waar die instelling voor is. In plaats daarvan gaat de gebruiker eenmalig naar
+Buddy (een gewone paginanavigatie, waarbij de cookie wél meegaat) en komt terug
+met een token in het fragment van de URL. Een fragment gaat nooit naar een
+server, dus het belandt niet in logbestanden. Het token is een uur geldig en
+staat in `sessionStorage`.
 
-Zodra `persistent` op `true` staat verdwijnt de melding over niet-opgeslagen
-wijzigingen vanzelf. Login en rechten per eigenaar komen erbij als een
-`auth`-laag om dezelfde store heen; de componenten blijven ongewijzigd.
+Het adres van deze app moet daarvoor bij Buddy bekend zijn
+(`BuddyData:AllowedAppOrigins`); anders weigert de inlogstap. Dat voorkomt dat
+iemand met een link naar Buddy een geldig token voor zijn eigen pagina ophaalt.
+
+### De tabel
+
+`use_cases` is aangemaakt als **gedeeld**: elke ingelogde medewerker leest en
+bewerkt dezelfde lijst. Dat past bij wat deze app is — een gezamenlijk overzicht
+van de organisatie, geen persoonlijke lijst. Verwijderen kan bewust niet vanuit de
+browser; dan zou één misklik het werk van een ander wegvagen.
+
+### In gebruik nemen
+
+```bash
+cp .env.example .env          # vul de drie VITE_BUDDY_-waarden in
+
+# eenmalig de bestaande use cases overzetten (met een rw-sleutel uit het beheerscherm)
+BUDDY_CLIENT_ID=bd_... BUDDY_CLIENT_SECRET=... node scripts/importeer-naar-buddy.mjs
+```
+
+Voor GitHub Pages horen `VITE_BUDDY_URL`, `VITE_BUDDY_DATA_URL` en
+`VITE_BUDDY_PROJECT` als repository-variabelen in de workflow. Geheimen zijn het
+niet: er zit geen sleutel in, alleen adressen.
 
 ---
 
