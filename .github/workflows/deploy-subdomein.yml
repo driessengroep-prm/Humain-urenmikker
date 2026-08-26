@@ -1,0 +1,75 @@
+# Publiceert de Urenmikker naar urenmikker.driessengroep.nl, naast de bestaande
+# publicatie op GitHub Pages (deploy.yml). Beide draaien op een push naar main.
+#
+# Waarom twee builds en niet één: Pages serveert de app onder /Humain-urenmikker/
+# en het subdomein onder /. Die basis zit in de gebouwde bestanden, dus dat is
+# twee keer bouwen — een kwestie van veertig seconden.
+#
+# Op de server draait geen applicatie: Caddy serveert alleen de bestanden uit
+# /data/caddy/apps/urenmikker. Publiceren is dus niets meer dan die map vervangen.
+name: Deploy naar urenmikker.driessengroep.nl
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: subdomein
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+
+      - name: Build
+        env:
+          # Onder / en niet onder /Humain-urenmikker/ — dat is het verschil met Pages.
+          BASE_PATH: /
+          VITE_BUDDY_URL: https://buddy.driessengroep.nl
+          VITE_BUDDY_DATA_URL: https://buddy.driessengroep.nl/data
+          VITE_BUDDY_PROJECT: urenmikker
+          VITE_ENTRA_CLIENT_ID: ${{ vars.ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ vars.ENTRA_TENANT_ID }}
+        run: npm run build
+
+      - name: Controleer dat de database erin zit
+        # Zonder de VITE_-variabelen snoeit Vite de hele datalaag weg als dode code en
+        # publiceert hij stilzwijgend de versie die use-cases.json leest. Dat wil je niet
+        # pas merken als iemand belt dat zijn wijziging weg is.
+        run: |
+          if ! grep -rq "buddy.driessengroep.nl" dist/assets/*.js; then
+            echo "::error::De build bevat geen verbinding met Buddy Data."
+            echo "Staan ENTRA_CLIENT_ID en ENTRA_TENANT_ID als repository-variabelen ingesteld?"
+            exit 1
+          fi
+
+      - name: Sleutel klaarzetten
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.VM_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 40.115.59.118 >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Publiceren
+        # --delete ruimt bestanden op die uit de build verdwenen zijn; zonder dat blijven
+        # oude bundels voor altijd staan. index.html gaat als laatste, zodat de browser
+        # nooit een pagina krijgt die naar nog-niet-aanwezige bestanden verwijst.
+        run: |
+          rsync -az --delete --exclude=index.html \
+            dist/ buddy-admin@40.115.59.118:/data/caddy/apps/urenmikker/
+          rsync -az dist/index.html \
+            buddy-admin@40.115.59.118:/data/caddy/apps/urenmikker/index.html
+
+      - name: Controleren
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 https://urenmikker.driessengroep.nl/)
+          echo "https://urenmikker.driessengroep.nl/ → HTTP $code"
+          [ "$code" = "200" ]

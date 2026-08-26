@@ -236,9 +236,36 @@ cp .env.example .env          # vul de drie VITE_BUDDY_-waarden in
 BUDDY_CLIENT_ID=bd_... BUDDY_CLIENT_SECRET=... node scripts/importeer-naar-buddy.mjs
 ```
 
-Voor GitHub Pages horen `VITE_BUDDY_URL`, `VITE_BUDDY_DATA_URL` en
-`VITE_BUDDY_PROJECT` als repository-variabelen in de workflow. Geheimen zijn het
-niet: er zit geen sleutel in, alleen adressen.
+### Waar de app draait
+
+Op twee plekken, allebei vanaf een push naar `main`:
+
+| | adres | workflow |
+|---|---|---|
+| GitHub Pages | `driessengroep-prm.github.io/Humain-urenmikker/` | `deploy.yml` |
+| Eigen subdomein | `urenmikker.driessengroep.nl` | `deploy-subdomein.yml` |
+
+Twee keer bouwen, want Pages serveert onder `/Humain-urenmikker/` en het
+subdomein onder `/`. Dat pad zit in de gebouwde bestanden.
+
+Op het subdomein draait geen applicatie: Caddy serveert de bestanden uit
+`/data/caddy/apps/urenmikker` op de buddy-production VM. Publiceren is die map
+vervangen, meer niet.
+
+Wat er eenmalig moet staan:
+
+- een A-record `urenmikker.driessengroep.nl` → `40.115.59.118`
+- het repository-secret `VM_SSH_KEY` — een privésleutel waarmee de workflow bij
+  `buddy-admin@40.115.59.118` kan
+- de repository-variabelen `ENTRA_CLIENT_ID` en `ENTRA_TENANT_ID`
+- beide adressen als redirect-URI in de Entra-app-registratie
+
+De `VITE_BUDDY_`-waarden staan vast in de workflows; geheimen zijn het niet.
+
+Beide workflows controleren na het bouwen of de verbinding met Buddy Data
+daadwerkelijk in de bundel zit. Zonder die controle publiceert een ontbrekende
+variabele stilzwijgend de versie die `use-cases.json` leest — en dan merk je pas
+weken later dat wijzigingen nergens heen gingen.
 
 ---
 

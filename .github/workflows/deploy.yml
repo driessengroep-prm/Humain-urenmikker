@@ -38,6 +38,17 @@ jobs:
           VITE_ENTRA_CLIENT_ID: ${{ vars.ENTRA_CLIENT_ID }}
           VITE_ENTRA_TENANT_ID: ${{ vars.ENTRA_TENANT_ID }}
         run: npm run build
+
+      - name: Controleer dat de database erin zit
+        # Zonder de VITE_-variabelen snoeit Vite de hele datalaag weg als dode code en
+        # publiceert hij stilzwijgend de versie die use-cases.json leest. Dat wil je niet
+        # pas merken als iemand belt dat zijn wijziging weg is.
+        run: |
+          if ! grep -rq "buddy.driessengroep.nl" dist/assets/*.js; then
+            echo "::error::De build bevat geen verbinding met Buddy Data."
+            echo "Staan ENTRA_CLIENT_ID en ENTRA_TENANT_ID als repository-variabelen ingesteld?"
+            exit 1
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
