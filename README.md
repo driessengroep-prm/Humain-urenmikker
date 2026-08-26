@@ -201,20 +201,24 @@ omgevingsvariabelen:
 
 ### Inloggen
 
-De medewerker logt in met zijn gewone Buddy-account. Er staat geen sleutel in deze
-app, en er is ook geen apart wachtwoord.
+De medewerker logt in met zijn **Driessen-werkaccount**. Er is geen apart account
+voor deze app en er staat geen sleutel in de code; wie in dienst komt kan meteen
+inloggen.
 
-Dat gaat via een omweg, en dat is met opzet: de sessiecookie van Buddy staat op
-`SameSite=Lax` en gaat dus niet mee met een verzoek vanaf github.io — precies
-waar die instelling voor is. In plaats daarvan gaat de gebruiker eenmalig naar
-Buddy (een gewone paginanavigatie, waarbij de cookie wél meegaat) en komt terug
-met een token in het fragment van de URL. Een fragment gaat nooit naar een
-server, dus het belandt niet in logbestanden. Het token is een uur geldig en
-staat in `sessionStorage`.
+Dat gaat in twee stappen:
 
-Het adres van deze app moet daarvoor bij Buddy bekend zijn
-(`BuddyData:AllowedAppOrigins`); anders weigert de inlogstap. Dat voorkomt dat
-iemand met een link naar Buddy een geldig token voor zijn eigen pagina ophaalt.
+1. `entraLogin.ts` laat MSAL de gebruiker inloggen bij Microsoft en levert een
+   ID-token. Op een werklaptop merk je hier meestal niets van — je bent al
+   ingelogd.
+2. `buddyClient.ts` ruilt dat token bij Buddy in voor een token dat de database
+   begrijpt (`grant_type=urn:ietf:params:oauth:grant-type:token-exchange`).
+
+Waarom twee tokens: Microsoft zegt wíe je bent, maar Postgres kent Microsoft
+niet. Het Buddy-token zegt welke rol je in de database krijgt.
+
+Buddy controleert het Microsoft-token op handtekening, tenant en audience. Het
+adres van deze app moet als redirect-URI in de Entra-app-registratie staan,
+anders weigert Microsoft de omleiding.
 
 ### De tabel
 

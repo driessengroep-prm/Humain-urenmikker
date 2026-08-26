@@ -1,3 +1,5 @@
+import { haalEntraToken, type EntraConfig } from './entraLogin';
+
 /**
  * De verbinding met Buddy Data.
  *
@@ -6,22 +8,23 @@
  * `@driessen/buddy-client` uit agent-swarm; zodra dat pakket ergens gepubliceerd staat, kan dit
  * bestand daardoor vervangen worden zonder dat de dataStore hoeft te veranderen.
  *
- * Inloggen gaat via een omweg, en dat is met opzet. De sessiecookie van Buddy staat op
- * SameSite=Lax en gaat dus niet mee met een verzoek vanaf github.io — precies waar die instelling
- * voor bedoeld is. In plaats daarvan gebruiken we de standaard voor een app die geen geheim kan
- * bewaren: OAuth 2.0 authorization code met PKCE (RFC 7636). De gebruiker gaat eenmalig naar Buddy
- * (een gewone paginanavigatie, waarbij de cookie wél meegaat) en komt terug met een code. Die code
- * is waardeloos zonder de verifier die alleen dit tabblad heeft; het token zelf komt daarna over
- * een POST en staat dus nergens in een adresbalk of in een logregel.
+ * Inloggen gaat met het Driessen-werkaccount: de gebruiker logt in bij Microsoft (zie
+ * entraLogin.ts) en dat token ruilen we hier in bij Buddy voor een token dat de database begrijpt.
+ * Er is dus geen apart account voor deze app, en wie in dienst komt kan meteen inloggen.
+ *
+ * Waarom twee tokens: Microsoft zegt wíe je bent, maar Postgres kent Microsoft niet. Het
+ * Buddy-token zegt welke rol je in de database krijgt. Buddy is de vertaler.
  */
 
 export interface BuddyConfig {
-  /** Waar Buddy zelf draait; hier wordt ingelogd. */
+  /** Waar Buddy zelf draait; hier wordt het Microsoft-token ingewisseld. */
   buddyUrl: string;
   /** Waar de data-API draait; hier gaan de rijen heen en vandaan. */
   dataUrl: string;
   /** De korte naam van de database. */
   project: string;
+  /** De app-registratie in Entra waarmee de medewerker inlogt. */
+  entra: EntraConfig;
 }
 
 export class BuddyFout extends Error {
@@ -37,7 +40,6 @@ interface Token {
 }
 
 const OPSLAGSLEUTEL = 'buddy_token';
-const PKCE_SLEUTEL = 'buddy_pkce';
 
 export class BuddyClient {
   private token: Token | null = null;
@@ -49,19 +51,13 @@ export class BuddyClient {
   }
 
   /**
-   * Zorgt dat er een geldig token is. Kan de pagina laten navigeren naar Buddy; in dat geval komt
-   * deze belofte niet meer terug en wordt de app na terugkeer opnieuw geladen.
+   * Zorgt dat er een geldig token is. Kan de pagina laten navigeren naar het loginscherm van
+   * Microsoft; in dat geval komt deze belofte niet meer terug en begint de app na terugkeer
+   * opnieuw.
    */
   private async zorgVoorToken(): Promise<string> {
     if (this.token !== null && Date.now() < this.token.verlooptOp) {
       return this.token.waarde;
-    }
-
-    const teruggekeerd = await ruilCodeIn(this.config.buddyUrl);
-    if (teruggekeerd !== null) {
-      this.token = teruggekeerd;
-      bewaar(teruggekeerd);
-      return teruggekeerd.waarde;
     }
 
     const bewaardToken = leesBewaardToken();
@@ -70,27 +66,35 @@ export class BuddyClient {
       return bewaardToken.waarde;
     }
 
-    const verifier = willekeurigeTekst();
-    const state = willekeurigeTekst();
-    const terug = window.location.href.split('#')[0].split('?')[0];
+    const entraToken = await haalEntraToken(this.config.entra);
 
-    // In sessionStorage: de pagina navigeert weg en komt als nieuwe pagina terug, dus een
-    // variabele zou de verifier niet overleven.
-    sessionStorage.setItem(PKCE_SLEUTEL, JSON.stringify({ verifier, state, redirectUri: terug }));
-
-    const query = new URLSearchParams({
-      project: this.config.project,
-      redirectUri: terug,
-      codeChallenge: await s256(verifier),
-      codeChallengeMethod: 'S256',
-      state,
+    const antwoord = await fetch(`${this.config.buddyUrl}/api/buddy-data/token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams({
+        grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+        subject_token: entraToken,
+        project: this.config.project,
+      }),
     });
 
-    window.location.assign(`${this.config.buddyUrl}/api/buddy-data/authorize?${query}`);
+    if (!antwoord.ok) {
+      throw new BuddyFout(
+        antwoord.status === 403
+          ? 'Je bent ingelogd bij Microsoft, maar hebt geen toegang tot deze gegevens.'
+          : 'Inloggen bij Buddy Data mislukte.',
+        antwoord.status,
+      );
+    }
 
-    // De pagina vertrekt. Deze belofte lost bewust niet op: anders zou de app doorgaan met
-    // renderen terwijl de browser al weg navigeert.
-    return new Promise<string>(() => {});
+    const body = (await antwoord.json()) as { access_token: string; expires_in: number };
+
+    // Een minuut marge, zodat een token dat bij het versturen nog gold niet onderweg verloopt.
+    const nieuw = { waarde: body.access_token, verlooptOp: Date.now() + (body.expires_in - 60) * 1000 };
+    this.token = nieuw;
+    bewaar(nieuw);
+
+    return nieuw.waarde;
   }
 
   async verzoek<T>(
@@ -148,66 +152,6 @@ export class BuddyClient {
 
     return (tekst === '' ? undefined : JSON.parse(tekst)) as T;
   }
-}
-
-/** Wisselt de code uit de terugkeer-URL in voor een token. Null = we komen hier niet net vandaan. */
-async function ruilCodeIn(buddyUrl: string): Promise<Token | null> {
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get('code');
-  if (code === null) return null;
-
-  const bewaardePoging = sessionStorage.getItem(PKCE_SLEUTEL);
-  sessionStorage.removeItem(PKCE_SLEUTEL);
-  if (bewaardePoging === null) throw new BuddyFout('Deze inlogpoging hoort niet bij dit tabblad.');
-
-  const { verifier, state, redirectUri } = JSON.parse(bewaardePoging) as {
-    verifier: string; state: string; redirectUri: string;
-  };
-
-  // Zonder deze controle kan iemand jou zijn code laten inwisselen, en zit je in zijn gegevens te
-  // kijken zonder het te merken.
-  if (params.get('state') !== state) throw new BuddyFout('De inlogpoging klopt niet.');
-
-  // De code uit de adresbalk halen vóór het inwisselen: hij is eenmalig en hoort niet in de
-  // geschiedenis te blijven staan.
-  params.delete('code');
-  params.delete('state');
-  const rest = params.toString();
-  window.history.replaceState(null, '', window.location.pathname + (rest ? `?${rest}` : ''));
-
-  const antwoord = await fetch(`${buddyUrl}/api/buddy-data/token`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'authorization_code',
-      code,
-      code_verifier: verifier,
-      redirect_uri: redirectUri,
-    }),
-  });
-
-  if (!antwoord.ok) throw new BuddyFout('Inloggen bij Buddy Data mislukte.', antwoord.status);
-
-  const body = (await antwoord.json()) as { access_token: string; expires_in: number };
-
-  // Een minuut marge, zodat een token dat bij het versturen nog gold niet onderweg verloopt.
-  return { waarde: body.access_token, verlooptOp: Date.now() + (body.expires_in - 60) * 1000 };
-}
-
-/** 32 willekeurige bytes als base64url — voldoet aan de lengte-eis voor een code_verifier. */
-function willekeurigeTekst(): string {
-  const bytes = new Uint8Array(32);
-  crypto.getRandomValues(bytes);
-  return base64url(bytes);
-}
-
-async function s256(waarde: string): Promise<string> {
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(waarde));
-  return base64url(new Uint8Array(digest));
-}
-
-function base64url(bytes: Uint8Array): string {
-  return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
 }
 
 function bewaar(token: Token): void {

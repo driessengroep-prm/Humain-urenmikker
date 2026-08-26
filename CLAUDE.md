@@ -87,8 +87,9 @@ vormgeving te bekijken of te delen zonder `npm install`.
 ## Opslag
 
 De use cases staan in Buddy Data (database `urenmikker`, tabel `use_cases`,
-aangemaakt als *gedeeld*). Inloggen gaat met het gewone Buddy-account van de
-medewerker; er staat geen sleutel in deze app.
+aangemaakt als *gedeeld*). Inloggen gaat met het Driessen-werkaccount via Entra
+(`src/data/entraLogin.ts`); er staat geen sleutel in deze app en er is geen
+apart account nodig.
 
 `src/data/buddyClient.ts` is met opzet een klein, op zichzelf staand bestand en
 geen npm-pakket: GitHub Actions bouwt met `npm ci` en heeft alleen deze repo. Het

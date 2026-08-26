@@ -28,11 +28,15 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           # Waar de use cases staan. Geen geheimen: er zit geen sleutel in deze app, de
-          # medewerker logt in met zijn eigen Buddy-account. Blijven ze leeg, dan valt de
-          # app terug op use-cases.json en bewaart hij niets.
+          # medewerker logt in met zijn eigen Driessen-account. Blijven deze waarden leeg,
+          # dan valt de app terug op use-cases.json en bewaart hij niets.
           VITE_BUDDY_URL: https://buddy.driessengroep.nl
           VITE_BUDDY_DATA_URL: https://buddy.driessengroep.nl/data
           VITE_BUDDY_PROJECT: urenmikker
+          # De app-registratie waarmee een medewerker inlogt. Openbare identificatoren,
+          # geen secrets — vandaar env en geen repository-secret.
+          VITE_ENTRA_CLIENT_ID: ${{ vars.ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ vars.ENTRA_TENANT_ID }}
         run: npm run build
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
