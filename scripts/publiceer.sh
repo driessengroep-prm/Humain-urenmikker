@@ -17,8 +17,11 @@ export BASE_PATH=/
 export VITE_BUDDY_URL=https://buddy.driessengroep.nl
 export VITE_BUDDY_DATA_URL=https://buddy.driessengroep.nl/data
 export VITE_BUDDY_PROJECT=urenmikker
-export VITE_ENTRA_CLIENT_ID="${VITE_ENTRA_CLIENT_ID:-}"
-export VITE_ENTRA_TENANT_ID="${VITE_ENTRA_TENANT_ID:-}"
+# Niet met een lege standaardwaarde exporteren: een lege omgevingsvariabele wint van .env,
+# en dan bouw je zwijgend de versie zonder database. Staat hij al in je omgeving, dan gaat
+# die voor; anders leest Vite hem gewoon uit .env.
+[ -n "${VITE_ENTRA_CLIENT_ID:-}" ] && export VITE_ENTRA_CLIENT_ID
+[ -n "${VITE_ENTRA_TENANT_ID:-}" ] && export VITE_ENTRA_TENANT_ID
 
 echo "▶ Bouwen"
 rm -rf dist
