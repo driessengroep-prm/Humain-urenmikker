@@ -210,15 +210,23 @@ Dat gaat in twee stappen:
 1. `entraLogin.ts` laat MSAL de gebruiker inloggen bij Microsoft en levert een
    ID-token. Op een werklaptop merk je hier meestal niets van — je bent al
    ingelogd.
-2. `buddyClient.ts` ruilt dat token bij Buddy in voor een token dat de database
-   begrijpt (`grant_type=urn:ietf:params:oauth:grant-type:token-exchange`).
+2. `buddyClient.ts` stuurt dat token bij elk verzoek mee naar Buddy. Geen tweede
+   token, geen sessie, niets om te vernieuwen.
 
-Waarom twee tokens: Microsoft zegt wíe je bent, maar Postgres kent Microsoft
-niet. Het Buddy-token zegt welke rol je in de database krijgt.
+Alle verzoeken gaan naar Buddy en niet rechtstreeks naar de database. Dat is geen
+omweg: het is de enige plek waar te zien is wie wat doet. In het beheerscherm
+staat per pagina wie er langs kwam en wat die met de gegevens deed.
 
-Buddy controleert het Microsoft-token op handtekening, tenant en audience. Het
-adres van deze app moet als redirect-URI in de Entra-app-registratie staan,
-anders weigert Microsoft de omleiding.
+Buddy controleert het Microsoft-token op handtekening, tenant en audience, en
+kijkt of je de rol hebt die de pagina verlangt. Het adres van deze app moet als
+redirect-URI in de Entra-app-registratie staan, anders weigert Microsoft de
+omleiding.
+
+### Pagina en database
+
+`VITE_BUDDY_PAGE` bepaalt waar je bij mag, `VITE_BUDDY_DATABASE` waar deze app in
+leest en schrijft. Een pagina kan meerdere databases hebben; deze app gebruikt er
+één.
 
 ### De tabel
 

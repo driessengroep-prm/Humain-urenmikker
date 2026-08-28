@@ -22,27 +22,33 @@ export class BuddyDataStore implements DataStore {
   }
 
   async getAll(): Promise<UseCase[]> {
-    const rijen = await this.client.verzoek<BuddyRij[]>(
-      `/${this.tabel}?order=created_at.desc&limit=1000`,
-    );
+    const rijen = await this.client.run<BuddyRij>({
+      operation: 'select',
+      table: this.tabel,
+      order: 'created_at.desc',
+      limit: 1000,
+    });
 
     return rijen.map(naarUseCase);
   }
 
   async add(nieuwe: NieuweUseCase): Promise<UseCase> {
-    const [rij] = await this.client.verzoek<BuddyRij[]>(`/${this.tabel}`, {
-      methode: 'POST',
-      body: naarRij(nieuwe),
+    const [rij] = await this.client.run<BuddyRij>({
+      operation: 'insert',
+      table: this.tabel,
+      values: naarRij(nieuwe),
     });
 
     return naarUseCase(rij);
   }
 
   async update(id: string, patch: UseCasePatch): Promise<UseCase> {
-    const rijen = await this.client.verzoek<BuddyRij[]>(
-      `/${this.tabel}?id=eq.${encodeURIComponent(id)}`,
-      { methode: 'PATCH', body: naarRij(patch) },
-    );
+    const rijen = await this.client.run<BuddyRij>({
+      operation: 'update',
+      table: this.tabel,
+      filters: [{ column: 'id', operator: 'eq', value: id }],
+      values: naarRij(patch),
+    });
 
     // Een lege uitkomst betekent hier "geen rij met dit id"; de API geeft daar geen 404 voor.
     if (rijen.length === 0) throw new UseCaseNietGevondenError(id);

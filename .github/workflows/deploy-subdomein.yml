@@ -34,8 +34,8 @@ jobs:
           # Onder / en niet onder /Humain-urenmikker/ — dat is het verschil met Pages.
           BASE_PATH: /
           VITE_BUDDY_URL: https://buddy.driessengroep.nl
-          VITE_BUDDY_DATA_URL: https://buddy.driessengroep.nl/data
-          VITE_BUDDY_PROJECT: urenmikker
+          VITE_BUDDY_PAGE: urenmikker
+          VITE_BUDDY_DATABASE: urenmikker
           VITE_ENTRA_CLIENT_ID: ${{ vars.ENTRA_CLIENT_ID }}
           VITE_ENTRA_TENANT_ID: ${{ vars.ENTRA_TENANT_ID }}
         run: npm run build

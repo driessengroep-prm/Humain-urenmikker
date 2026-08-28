@@ -15,13 +15,13 @@ import type { DataStore } from './dataStore';
  */
 export function createDataStore(): DataStore {
   const buddyUrl = import.meta.env.VITE_BUDDY_URL;
-  const dataUrl = import.meta.env.VITE_BUDDY_DATA_URL;
-  const project = import.meta.env.VITE_BUDDY_PROJECT;
+  const page = import.meta.env.VITE_BUDDY_PAGE;
+  const database = import.meta.env.VITE_BUDDY_DATABASE;
   const clientId = import.meta.env.VITE_ENTRA_CLIENT_ID;
   const tenantId = import.meta.env.VITE_ENTRA_TENANT_ID;
 
-  if (buddyUrl && dataUrl && project && clientId && tenantId) {
-    return new BuddyDataStore({ buddyUrl, dataUrl, project, entra: { clientId, tenantId } });
+  if (buddyUrl && page && database && clientId && tenantId) {
+    return new BuddyDataStore({ buddyUrl, page, database, entra: { clientId, tenantId } });
   }
 
   return new JsonDataStore();
