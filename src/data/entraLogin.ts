@@ -1,4 +1,4 @@
-import { PublicClientApplication, InteractionRequiredAuthError } from '@azure/msal-browser';
+import { PublicClientApplication } from '@azure/msal-browser';
 import type { AccountInfo } from '@azure/msal-browser';
 
 /**
@@ -61,9 +61,11 @@ export async function haalEntraToken(config: EntraConfig): Promise<string> {
       const resultaat = await msal.acquireTokenSilent({ scopes, account });
       return resultaat.idToken;
     } catch (fout) {
-      // Alleen als Microsoft écht om de gebruiker vraagt gaan we omleiden. Andere fouten — geen
-      // netwerk bijvoorbeeld — moeten zichtbaar blijven in plaats van in een omleiding verdwijnen.
-      if (!(fout instanceof InteractionRequiredAuthError)) throw fout;
+      // Stil vernieuwen gaat via een verborgen iframe en kan op allerlei manieren stuklopen:
+      // geblokkeerde cookies van derden, een iframe die niet terugmeldt, een verlopen sessie.
+      // Wat de reden ook is, opnieuw inloggen lost het op — en dat is minder erg dan een
+      // foutmelding waar de gebruiker niets mee kan. De reden gaat wel naar de console.
+      console.warn('Stil vernieuwen mislukte, opnieuw inloggen:', fout);
     }
   }
 
