@@ -1,45 +1,42 @@
 # Nog te doen
 
-## Publiceren naar het subdomein automatiseren
+## Een eigen Entra-registratie
 
-`urenmikker.driessengroep.nl` wordt op dit moment **met de hand** gepubliceerd:
+De app logt in via de registratie **n8n SharePoint**
+(`cb2c6818-aff1-4b27-b84b-df3373b158a1`). Die bestaat voor iets heel anders: n8n
+dat bij SharePoint moet.
 
-```bash
-./scripts/publiceer.sh
-```
+Technisch werkt het, maar je deelt één identiteit tussen twee losse dingen. Moet
+die registratie ooit vervangen worden vanwege n8n — een secret gelekt, rechten
+aangepast — dan valt de Urenmikker mee om, en niemand die dat verwacht.
 
-Een push naar `main` publiceert alleen naar GitHub Pages. Wie het subdomein wil
-bijwerken, moet dat script draaien — vergeet iemand dat, dan lopen de twee
-adressen uiteen zonder dat iets erover klaagt.
+Een eigen registratie kost een paar minuten en heeft niets nodig: geen secret,
+geen Graph-rechten. Alleen:
 
-Automatiseren kan met `.github/workflows/deploy-subdomein.yml` (staat klaar,
-maar draait nog niet). Daarvoor is één ding nodig: een SSH-sleutel waarmee
-GitHub Actions bij `buddy-admin@40.115.59.118` mag.
+- platform **Toepassing met één pagina**, met redirect-URI
+  `https://urenmikker.driessengroep.nl/`
+- beheerderstoestemming, zodat een medewerker niet zelf om machtigingen
+  gevraagd wordt
 
-```bash
-ssh-keygen -t ed25519 -f ~/urenmikker-deploy -N "" -C "github-actions urenmikker"
-```
+Daarna de client-id vervangen op drie plekken: de repository-variabele
+`ENTRA_CLIENT_ID`, `BUDDY_ENTRA_CLIENT_ID` in `~/brain-stack/.env` op de server,
+en je eigen `.env`.
 
-- publieke helft (`~/urenmikker-deploy.pub`) in `~/.ssh/authorized_keys` van
-  `buddy-admin` op de VM
-- private helft als repository-secret `VM_SSH_KEY`, **base64-gecodeerd**:
-  `base64 -i ~/urenmikker-deploy | pbcopy`. Zonder die codering sneuvelt de
-  laatste regelovergang bij het plakken en komt de sleutel aan als
-  "error in libcrypto".
+## Rollen, als "iedereen binnen Driessen" te ruim wordt
 
-Een eigen sleutel en niet je persoonlijke: met die van jou kan GitHub alles wat
-jij op die server kunt.
+De pagina staat nu open voor iedereen met een Driessen-account. Wil je het
+beperken, dan definieer je in Entra een app-rol en zet je de naam ervan in het
+Buddy-beheerscherm bij deze pagina onder Instellingen.
 
-## Entra invullen
+Buddy leest die rol uit het token; toewijzen blijft in Entra. Er is dus geen
+tweede rechtenadministratie.
 
-De app logt in met het Driessen-werkaccount, maar de gegevens van de
-app-registratie staan nog nergens:
+## Afgerond
 
-- `VITE_ENTRA_CLIENT_ID` en `VITE_ENTRA_TENANT_ID` — lokaal in `.env`, en als
-  repository-variabelen voor de Pages-build
-- `BUDDY_ENTRA_TENANT_ID` en `BUDDY_ENTRA_CLIENT_ID` in `~/brain-stack/.env` op
-  de server, zodat Buddy die tokens accepteert
-- `https://urenmikker.driessengroep.nl/` als redirect-URI in de registratie
-
-Zonder deze vier valt de app terug op `use-cases.json` en bewaart hij niets.
-Het publiceerscript weigert dan te publiceren.
+- **Publiceren naar het subdomein** — een push naar `main` publiceert nu naar
+  zowel GitHub Pages als `urenmikker.driessengroep.nl`. Handmatig kan nog met
+  `./scripts/publiceer.sh`.
+- **Opslag in Buddy Data** — de use cases staan in de gedeelde tabel
+  `app_urenmikker.use_cases`; wijzigingen blijven bestaan en collega's zien ze.
+- **Inloggen met het werkaccount** — via Entra, zonder apart account en zonder
+  sleutel in deze app.
