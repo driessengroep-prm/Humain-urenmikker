@@ -34,8 +34,28 @@ jobs:
         # Bij een eigen domein: BASE_PATH: /
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
+          # Waar de use cases staan. Geen geheimen: er zit geen sleutel in deze app, de
+          # medewerker logt in met zijn eigen Driessen-account. Blijven deze waarden leeg,
+          # dan valt de app terug op use-cases.json en bewaart hij niets.
+          VITE_BUDDY_URL: https://buddy.driessengroep.nl
+          VITE_BUDDY_PAGE: urenmikker
+          VITE_BUDDY_DATABASE: urenmikker
+          # De app-registratie waarmee een medewerker inlogt. Openbare identificatoren,
+          # geen secrets — vandaar env en geen repository-secret.
+          VITE_ENTRA_CLIENT_ID: ${{ vars.ENTRA_CLIENT_ID }}
+          VITE_ENTRA_TENANT_ID: ${{ vars.ENTRA_TENANT_ID }}
         run: npm run build
 
+      - name: Controleer dat de database erin zit
+        # Zonder de VITE_-variabelen snoeit Vite de hele datalaag weg als dode code en
+        # publiceert hij stilzwijgend de versie die use-cases.json leest. Dat wil je niet
+        # pas merken als iemand belt dat zijn wijziging weg is.
+        run: |
+          if ! grep -rq "buddy.driessengroep.nl" dist/assets/*.js; then
+            echo "::error::De build bevat geen verbinding met Buddy Data."
+            echo "Staan ENTRA_CLIENT_ID en ENTRA_TENANT_ID als repository-variabelen ingesteld?"
+            exit 1
+          fi
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

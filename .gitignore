@@ -5,3 +5,10 @@ dist
 .vite
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+
+# Bevat een projectsleutel voor Buddy Data.
+.mcp.json
+
+# Adressen per omgeving; niet in git.
+.env
+.env.local

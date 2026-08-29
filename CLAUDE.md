@@ -124,6 +124,21 @@ vormgeving te bekijken of te delen zonder `npm install`.
 - `instuurder` bevat echte namen en de site is publiek. Anonimiseren kan door
   het veld op `null` te zetten; de UI toont dan "anoniem ingestuurd".
 
+## Opslag
+
+De use cases staan in Buddy Data (database `urenmikker`, tabel `use_cases`,
+aangemaakt als *gedeeld*). Inloggen gaat met het Driessen-werkaccount via Entra
+(`src/data/entraLogin.ts`); er staat geen sleutel in deze app en er is geen
+apart account nodig.
+
+`src/data/buddyClient.ts` is met opzet een klein, op zichzelf staand bestand en
+geen npm-pakket: GitHub Actions bouwt met `npm ci` en heeft alleen deze repo. Het
+spiegelt `@driessen/buddy-client` uit agent-swarm.
+
+Zonder de `VITE_BUDDY_`-variabelen valt de app terug op `use-cases.json` in het
+geheugen. Die terugval is er voor een demo en om lokaal te kunnen werken zonder de
+rest van de omgeving — niet als tweede opslag.
+
 ## Wat er nog niet is
 
 - Supabase: opslag, login en rechten per eigenaar. De blauwdruk staat in

@@ -238,6 +238,79 @@ gedeeld zijn.
 3. Laat `createDataStore()` in `src/data/index.ts` de Supabase-variant
    teruggeven zodra `VITE_SUPABASE_URL` en `VITE_SUPABASE_ANON_KEY` gezet zijn:
 
+De medewerker logt in met zijn **Driessen-werkaccount**. Er is geen apart account
+voor deze app en er staat geen sleutel in de code; wie in dienst komt kan meteen
+inloggen.
+
+Dat gaat in twee stappen:
+
+1. `entraLogin.ts` laat MSAL de gebruiker inloggen bij Microsoft en levert een
+   ID-token. Op een werklaptop merk je hier meestal niets van — je bent al
+   ingelogd.
+2. `buddyClient.ts` stuurt dat token bij elk verzoek mee naar Buddy. Geen tweede
+   token, geen sessie, niets om te vernieuwen.
+
+Alle verzoeken gaan naar Buddy en niet rechtstreeks naar de database. Dat is geen
+omweg: het is de enige plek waar te zien is wie wat doet. In het beheerscherm
+staat per pagina wie er langs kwam en wat die met de gegevens deed.
+
+Buddy controleert het Microsoft-token op handtekening, tenant en audience, en
+kijkt of je de rol hebt die de pagina verlangt. Het adres van deze app moet als
+redirect-URI in de Entra-app-registratie staan, anders weigert Microsoft de
+omleiding.
+
+### Pagina en database
+
+`VITE_BUDDY_PAGE` bepaalt waar je bij mag, `VITE_BUDDY_DATABASE` waar deze app in
+leest en schrijft. Een pagina kan meerdere databases hebben; deze app gebruikt er
+één.
+
+### De tabel
+
+`use_cases` is aangemaakt als **gedeeld**: elke ingelogde medewerker leest en
+bewerkt dezelfde lijst. Dat past bij wat deze app is — een gezamenlijk overzicht
+van de organisatie, geen persoonlijke lijst. Verwijderen kan bewust niet vanuit de
+browser; dan zou één misklik het werk van een ander wegvagen.
+
+### In gebruik nemen
+
+```bash
+cp .env.example .env          # vul de drie VITE_BUDDY_-waarden in
+
+# eenmalig de bestaande use cases overzetten (met een rw-sleutel uit het beheerscherm)
+BUDDY_CLIENT_ID=bd_... BUDDY_CLIENT_SECRET=... node scripts/importeer-naar-buddy.mjs
+```
+
+### Waar de app draait
+
+Op twee plekken, allebei vanaf een push naar `main`:
+
+| | adres | workflow |
+|---|---|---|
+| GitHub Pages | `driessengroep-prm.github.io/Humain-urenmikker/` | `deploy.yml` |
+| Eigen subdomein | `urenmikker.driessengroep.nl` | `deploy-subdomein.yml` |
+
+Twee keer bouwen, want Pages serveert onder `/Humain-urenmikker/` en het
+subdomein onder `/`. Dat pad zit in de gebouwde bestanden.
+
+Op het subdomein draait geen applicatie: Caddy serveert de bestanden uit
+`/data/caddy/apps/urenmikker` op de buddy-production VM. Publiceren is die map
+vervangen, meer niet.
+
+Wat er eenmalig moet staan:
+
+- een A-record `urenmikker.driessengroep.nl` → `40.115.59.118`
+- het repository-secret `VM_SSH_KEY` — een privésleutel waarmee de workflow bij
+  `buddy-admin@40.115.59.118` kan
+- de repository-variabelen `ENTRA_CLIENT_ID` en `ENTRA_TENANT_ID`
+- beide adressen als redirect-URI in de Entra-app-registratie
+
+De `VITE_BUDDY_`-waarden staan vast in de workflows; geheimen zijn het niet.
+
+Beide workflows controleren na het bouwen of de verbinding met Buddy Data
+daadwerkelijk in de bundel zit. Zonder die controle publiceert een ontbrekende
+variabele stilzwijgend de versie die `use-cases.json` leest — en dan merk je pas
+weken later dat wijzigingen nergens heen gingen.
    ```ts
    export function createDataStore(): DataStore {
      const url = import.meta.env.VITE_SUPABASE_URL;
