@@ -22,7 +22,10 @@ ssh-keygen -t ed25519 -f ~/urenmikker-deploy -N "" -C "github-actions urenmikker
 
 - publieke helft (`~/urenmikker-deploy.pub`) in `~/.ssh/authorized_keys` van
   `buddy-admin` op de VM
-- private helft als repository-secret `VM_SSH_KEY`
+- private helft als repository-secret `VM_SSH_KEY`, **base64-gecodeerd**:
+  `base64 -i ~/urenmikker-deploy | pbcopy`. Zonder die codering sneuvelt de
+  laatste regelovergang bij het plakken en komt de sleutel aan als
+  "error in libcrypto".
 
 Een eigen sleutel en niet je persoonlijke: met die van jou kan GitHub alles wat
 jij op die server kunt.
