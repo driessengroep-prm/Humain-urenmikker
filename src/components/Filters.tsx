@@ -1,91 +1,162 @@
-import { AFDELINGEN, STATUSSEN } from '../types';
-import type { Afdeling, Status } from '../types';
+import { BEDRIJVEN, STATUSSEN } from '../types';
+import type { Bedrijf, Status } from '../types';
 
-export type Sortering = 'besparing' | 'nieuwste' | 'in-te-vullen';
+export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen';
 
 export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
   { waarde: 'besparing', label: 'Meeste besparing' },
+  { waarde: 'nummer', label: 'Nummer uit de sheet' },
   { waarde: 'nieuwste', label: 'Nieuwste eerst' },
   { waarde: 'in-te-vullen', label: 'Nog in te vullen' },
 ];
 
 interface FiltersProps {
-  afdeling: Afdeling | 'alle';
+  bedrijf: Bedrijf | 'alle';
+  team: string | 'alle';
+  instuurder: string | 'alle';
   status: Status | 'alle';
   sortering: Sortering;
   aantal: number;
-  onAfdeling(waarde: Afdeling | 'alle'): void;
+  /** Teams die in de huidige selectie voorkomen, alfabetisch. */
+  teams: string[];
+  /** Instuurders die in de huidige selectie voorkomen, alfabetisch. */
+  instuurders: string[];
+  onBedrijf(waarde: Bedrijf | 'alle'): void;
+  onTeam(waarde: string | 'alle'): void;
+  onInstuurder(waarde: string | 'alle'): void;
   onStatus(waarde: Status | 'alle'): void;
   onSortering(waarde: Sortering): void;
 }
 
 export function Filters({
-  afdeling,
+  bedrijf,
+  team,
+  instuurder,
   status,
   sortering,
   aantal,
-  onAfdeling,
+  teams,
+  instuurders,
+  onBedrijf,
+  onTeam,
+  onInstuurder,
   onStatus,
   onSortering,
 }: FiltersProps) {
   return (
-    <div className="filters">
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-afdeling">
-          Bedrijf
-        </label>
-        <select
-          id="filter-afdeling"
-          value={afdeling}
-          onChange={(event) => onAfdeling(event.target.value as Afdeling | 'alle')}
-        >
-          <option value="alle">Alle bedrijven</option>
-          {AFDELINGEN.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
+    <>
+      <div className="filters">
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-bedrijf">
+            Bedrijf
+          </label>
+          <select
+            id="filter-bedrijf"
+            value={bedrijf}
+            onChange={(event) => onBedrijf(event.target.value as Bedrijf | 'alle')}
+          >
+            <option value="alle">Alle bedrijven</option>
+            {BEDRIJVEN.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-team">
+            Afdeling / team
+          </label>
+          <select
+            id="filter-team"
+            value={team}
+            onChange={(event) => onTeam(event.target.value)}
+            disabled={teams.length === 0}
+          >
+            <option value="alle">
+              {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
             </option>
-          ))}
-        </select>
+            {teams.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-instuurder">
+            Instuurder
+          </label>
+          <select
+            id="filter-instuurder"
+            value={instuurder}
+            onChange={(event) => onInstuurder(event.target.value)}
+            disabled={instuurders.length === 0}
+          >
+            <option value="alle">
+              {instuurders.length === 0 ? 'Geen instuurders ingevuld' : 'Alle instuurders'}
+            </option>
+            {instuurders.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-status">
+            Status
+          </label>
+          <select
+            id="filter-status"
+            value={status}
+            onChange={(event) => onStatus(event.target.value as Status | 'alle')}
+          >
+            <option value="alle">Alle statussen</option>
+            {STATUSSEN.map((naam) => (
+              <option key={naam} value={naam}>
+                {naam}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-sortering">
+            Sorteren op
+          </label>
+          <select
+            id="filter-sortering"
+            value={sortering}
+            onChange={(event) => onSortering(event.target.value as Sortering)}
+          >
+            {sorteerOpties.map((optie) => (
+              <option key={optie.waarde} value={optie.waarde}>
+                {optie.label}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-status">
-          Status
-        </label>
-        <select
-          id="filter-status"
-          value={status}
-          onChange={(event) => onStatus(event.target.value as Status | 'alle')}
-        >
-          <option value="alle">Alle statussen</option>
-          {STATUSSEN.map((naam) => (
-            <option key={naam} value={naam}>
-              {naam}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <div className="veld">
-        <label className="veld__label" htmlFor="filter-sortering">
-          Sorteren op
-        </label>
-        <select
-          id="filter-sortering"
-          value={sortering}
-          onChange={(event) => onSortering(event.target.value as Sortering)}
-        >
-          {sorteerOpties.map((optie) => (
-            <option key={optie.waarde} value={optie.waarde}>
-              {optie.label}
-            </option>
-          ))}
-        </select>
-      </div>
-
-      <p className="filters__telling" aria-live="polite">
-        {aantal} use case{aantal === 1 ? '' : 's'} in beeld
+      {/*
+        Compacte teller van wat het filter oplevert, onder de filterrij en rechts
+        uitgelijnd. Het getal staat in beeld; de volledige zin zit in het label
+        voor schermlezers en als tooltip.
+      */}
+      <p
+        className="filters__teller"
+        title={`${aantal} use case${aantal === 1 ? '' : 's'} in beeld`}
+        aria-live="polite"
+      >
+        <span aria-hidden="true">{aantal}</span>
+        <span className="alleen-screenreader">
+          {aantal} use case{aantal === 1 ? '' : 's'} in beeld
+        </span>
       </p>
-    </div>
+    </>
   );
 }

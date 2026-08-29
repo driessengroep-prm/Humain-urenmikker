@@ -17,8 +17,10 @@ export function bouwBestand(useCases: UseCase[]): UseCasesBestand {
     opmerking_fg: OPMERKING_FG,
     use_cases: useCases.map((useCase) => ({
       id: useCase.id,
+      nummer: useCase.nummer,
       titel: useCase.titel,
-      afdeling: useCase.afdeling,
+      bedrijf: useCase.bedrijf,
+      team: useCase.team,
       instuurder: useCase.instuurder,
       tijdsbesparing_uren_per_week: useCase.tijdsbesparing_uren_per_week,
       status: useCase.status,

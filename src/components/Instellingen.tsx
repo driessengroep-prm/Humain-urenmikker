@@ -51,7 +51,7 @@ export function Instellingen({
             onChange={(event) => onTelModus(event.target.value as TelModus)}
           >
             <option value="alleen-done">Alleen gerealiseerd (Done)</option>
-            <option value="alle-statussen">Alle statussen behalve Geen AI</option>
+            <option value="alle-statussen">Alle statussen</option>
           </select>
         </div>
       </div>

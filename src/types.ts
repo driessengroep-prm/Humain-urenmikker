@@ -1,9 +1,14 @@
 /** Alle statussen die een use case kan hebben. */
-export const STATUSSEN = ['Idee', 'In behandeling', 'Done', 'Geen AI'] as const;
+export const STATUSSEN = ['Idee', 'In behandeling', 'Done'] as const;
 export type Status = (typeof STATUSSEN)[number];
 
-/** Vaste lijst met afdelingen binnen Driessen Groep. */
-export const AFDELINGEN = [
+/**
+ * De werkmaatschappijen binnen Driessen Groep.
+ * Let op: een afdeling of team (bijvoorbeeld Programmamanagement) hoort niet in
+ * deze lijst maar in het losse veld `team`.
+ */
+export const BEDRIJVEN = [
+  'Driessen',
   'Driessen Groep',
   'IJK',
   'Reijn',
@@ -14,20 +19,23 @@ export const AFDELINGEN = [
   'Jeij',
   'TSF',
   'Lüün',
-  'Programmamanagement',
-  'Overig',
 ] as const;
-export type Afdeling = (typeof AFDELINGEN)[number];
+export type Bedrijf = (typeof BEDRIJVEN)[number];
 
 /**
  * Eén use case zoals die in use-cases.json staat.
- * `instuurder` en `tijdsbesparing_uren_per_week` zijn bewust nullable: een case
- * mag geanonimiseerd zijn en de besparing hoeft nog niet ingeschat te zijn.
+ * `instuurder`, `team`, `tijdsbesparing_uren_per_week` en `opmerkingen` zijn
+ * bewust nullable: een case mag geanonimiseerd zijn, hoeft niet aan een team te
+ * hangen en de besparing hoeft nog niet ingeschat te zijn.
  */
 export interface UseCase {
   id: string;
+  /** Volgnummer uit kolom A van de bronsheet; null voor cases die hier zijn toegevoegd. */
+  nummer: number | null;
   titel: string;
-  afdeling: Afdeling;
+  bedrijf: Bedrijf;
+  /** Afdeling of team binnen het bedrijf, vrije tekst. */
+  team: string | null;
   instuurder: string | null;
   tijdsbesparing_uren_per_week: number | null;
   status: Status;
@@ -56,6 +64,6 @@ export function isStatus(waarde: unknown): waarde is Status {
   return typeof waarde === 'string' && (STATUSSEN as readonly string[]).includes(waarde);
 }
 
-export function isAfdeling(waarde: unknown): waarde is Afdeling {
-  return typeof waarde === 'string' && (AFDELINGEN as readonly string[]).includes(waarde);
+export function isBedrijf(waarde: unknown): waarde is Bedrijf {
+  return typeof waarde === 'string' && (BEDRIJVEN as readonly string[]).includes(waarde);
 }

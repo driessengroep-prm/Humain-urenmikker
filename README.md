@@ -51,11 +51,13 @@ te bewerken als op de gepubliceerde site op te vragen.
   "use_cases": [
     {
       "id": "uc-001",
+      "nummer": 1,                           // volgnummer uit kolom A van de sheet
       "titel": "Automatisch samenvatten van intakegesprekken",
-      "afdeling": "Driessen Groep",
+      "bedrijf": "Driessen Groep",
+      "team": "Programmamanagement",           // afdeling of team, mag null zijn
       "instuurder": "Team Recruitment",      // mag null zijn (geanonimiseerd)
       "tijdsbesparing_uren_per_week": 6,     // mag null zijn (nog niet ingeschat)
-      "status": "Done",                      // Idee | In behandeling | Done | Geen AI
+      "status": "Done",                      // Idee | In behandeling | Done
       "omschrijving": "…",
       "opmerkingen": "wordt meegenomen bij …"  // mag null zijn
     }
@@ -63,11 +65,19 @@ te bewerken als op de gepubliceerde site op te vragen.
 }
 ```
 
-Bedrijven (in de code en de JSON heet dit veld `afdeling`): Driessen Groep, IJK,
-Reijn, Haert, Bloeij, Brainport Human Campus, Driessen Foundation, Jeij, TSF,
-Lüün, Programmamanagement, Overig.
-Onbekende waarden voor `status` of `afdeling` vallen bij het inlezen terug op
-`Idee` respectievelijk `Overig`, zodat een typefout de app niet breekt. Een kale
+Bedrijven (veld `bedrijf`): Driessen, Driessen Groep, IJK, Reijn, Haert, Bloeij,
+Brainport Human Campus, Driessen Foundation, Jeij, TSF, Lüün. Driessen en
+Driessen Groep zijn twee aparte werkmaatschappijen; de bronsheet gebruikt beide
+namen door elkaar en het conversiescript houdt ze uit elkaar. Een afdeling of team
+binnen zo'n bedrijf hoort niet in die lijst maar in het vrije veld `team`
+(bijvoorbeeld bedrijf `Driessen Groep` met team `Programmamanagement`).
+
+Het oudere veld `afdeling` wordt bij het inlezen nog geaccepteerd als alias voor
+`bedrijf`, zodat bestanden van voor deze wijziging blijven werken.
+Een onbekende `status` valt bij het inlezen terug op `Idee`. Een onbekend
+`bedrijf` komt op het eerste bedrijf uit de lijst te staan met een waarschuwing
+in de console; het conversiescript meldt zulke waarden apart, zodat je er een
+mapping voor toevoegt in plaats van dat ze stilzwijgend ergens belanden. Een kale
 array in plaats van het object hierboven wordt ook geaccepteerd.
 
 De dataset komt uit de AI-ideeën Excel van Driessen Groep, omgezet met
@@ -78,7 +88,9 @@ pip install openpyxl
 python3 scripts/converteer-excel.py AIideeen.xlsx public/use-cases.json
 ```
 
-Het script normaliseert de bedrijfsnamen, vult een lege status aan als `Idee` en
+Het `id` volgt het nummer uit kolom A (`nummer: 42` wordt `uc-042`), zodat een
+regel in de tool en een regel in de sheet naar hetzelfde verwijzen. Het script
+normaliseert de bedrijfsnamen, vult een lege status aan als `Idee` en
 laat een besparing leeg als die niet eenduidig te herleiden is (`Onbekend`,
 `1 tot 6`, `540 uur` zonder periode). Het rapporteert precies welke rijen dat
 betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
@@ -92,8 +104,8 @@ betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
 1. Open de tool en vul besparing en status in bij de regels in de lijst, of voeg use cases
    toe met **+ Nieuwe use case**. Wijzigingen blijven in je browsersessie; de app
    zegt dat er ook bij.
-2. Klik op **Exporteer bijgewerkte JSON** en kies downloaden of kopiëren naar het
-   klembord.
+2. In diezelfde melding staat **Exporteer de bijgewerkte JSON**; kies daar
+   downloaden of kopiëren naar het klembord.
 3. Vervang `public/use-cases.json` in de repository door dat bestand en commit
    naar `main`.
 4. De Actions-workflow bouwt en publiceert automatisch; daarna ziet iedereen de
@@ -115,7 +127,7 @@ Alles staat in **`src/config.ts`**:
 | --- | --- | --- |
 | `jaardoelUren` | `10000` | Bij deze waarde is de buis vol. |
 | `werkwekenPerJaar` | `46` | Omrekenfactor week → jaar. |
-| `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alles behalve `Geen AI` mee. |
+| `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alle use cases mee. |
 | `gerealiseerdeStatussen` | `['Done']` | Wat als gerealiseerd geldt. |
 | `potentieleStatussen` | `['Idee', 'In behandeling']` | Wat als potentieel geldt. |
 
@@ -129,10 +141,32 @@ VITE_WERKWEKEN=48 VITE_TELMODUS=alle-statussen npm run build
 In de tool zelf zitten werkweken en telmodus ook onder **Rekeninstellingen**.
 Dat past alleen de huidige sessie aan; de startwaarden komen uit de config.
 
-De meter volgt het **afdelingsfilter** (zo zie je de bijdrage van één label),
-maar niet het statusfilter — welke statussen meetellen bepaalt de telmodus.
+De meter volgt het **bedrijfs- en teamfilter** (zo zie je de bijdrage van één
+label), maar niet het statusfilter — welke statussen meetellen bepaalt de
+telmodus.
 
 ---
+
+## Zelf bekijken zonder server
+
+`npm run standalone` bouwt `dist/humain-urenmikker-standalone.html`: één bestand
+met de opmaak, de code en de dataset erin. Dubbelklikken opent het in de browser,
+zonder webserver en zonder Node. Handig zolang de repository private is (Pages
+publiceert dan niet) en om de tool te delen met iemand zonder ontwikkelomgeving.
+
+Toevoegen, wijzigen en exporteren werken er gewoon in; wijzigingen blijven zoals
+altijd in de browsersessie. Wil je een versie met de namen erin, draai dan eerst
+het conversiescript zonder `--anoniem` en daarna `npm run standalone`.
+
+## Intern hosten
+
+De build in `dist/` is een gewone statische site: zet de inhoud op een interne
+webserver, IIS, een netwerkschijf met webtoegang of een SharePoint-bibliotheek.
+Draait de site niet in de hoofdmap, geef dan het subpad mee:
+
+```bash
+BASE_PATH=/urenmikker/ npm run build
+```
 
 ## Deploy naar GitHub Pages
 
@@ -152,15 +186,15 @@ repository blijft de deploy kloppen. Bij een eigen domein zet je `BASE_PATH: /`.
 
 ```
 public/use-cases.json          bronbestand met alle use cases
+public/beeldmerk.png           HUMAIN-beeldmerk met Buddy, voor in de kop
 humain-urenmikker.html         losse visuele referentie (één bestand, geen build)
 src/
   config.ts                    jaardoel, werkweken, telmodus
   types.ts                     UseCase, Status, Afdeling
   data/
     dataStore.ts               de interface waar alles doorheen gaat
-    jsonDataStore.ts           terugval: JSON + in-memory, zonder database
-    buddyDataStore.ts          de echte opslag: Buddy Data
-    buddyClient.ts             inloggen en praten met de data-API
+    jsonDataStore.ts           huidige implementatie: JSON + in-memory
+    supabaseDataStore.ts.voorbeeld   blauwdruk voor later
     index.ts                   createDataStore(): kiest de implementatie
   hooks/useUseCases.ts         enige koppeling tussen UI en dataStore
   lib/
@@ -174,10 +208,10 @@ src/
 
 ---
 
-## Data-laag: Buddy Data, met JSON als terugval
+## Data-laag: nu JSON, later Supabase
 
 De hele app praat via één interface (`src/data/dataStore.ts`) en nooit
-rechtstreeks met een bestand of een API:
+rechtstreeks met het JSON-bestand:
 
 ```ts
 interface DataStore {
@@ -186,20 +220,23 @@ interface DataStore {
   getAll(): Promise<UseCase[]>;
   add(useCase: NieuweUseCase): Promise<UseCase>;
   update(id: string, patch: UseCasePatch): Promise<UseCase>;
+  verwijder(id: string): Promise<void>;
 }
 ```
 
-Er zijn twee implementaties, en `createDataStore()` kiest op basis van de
-omgevingsvariabelen:
+`JsonDataStore` leest `use-cases.json` één keer in en houdt wijzigingen in het
+geheugen vast. Omdat er niets buiten de sessie wordt opgeslagen staat
+`persistent` op `false`; daarop toont de UI de melding dat wijzigingen nog niet
+gedeeld zijn.
 
-- **`BuddyDataStore`** — de use cases staan in Buddy Data. Wijzigingen blijven
-  bestaan en collega's zien ze meteen. Actief zodra `VITE_BUDDY_URL`,
-  `VITE_BUDDY_DATA_URL` en `VITE_BUDDY_PROJECT` gezet zijn.
-- **`JsonDataStore`** — leest `use-cases.json` en houdt wijzigingen in het
-  geheugen. Handig voor een demo of een omgeving zonder Buddy; `persistent` staat
-  dan op `false` en de UI meldt dat er niets bewaard wordt.
+**Overstappen naar Supabase** raakt de UI niet:
 
-### Inloggen
+1. `npm install @supabase/supabase-js`.
+2. Hernoem `src/data/supabaseDataStore.ts.voorbeeld` naar `.ts`. Daarin staan de
+   tabeldefinitie, de row-level-security-policies voor rechten per eigenaar en
+   de implementatie van dezelfde drie methodes.
+3. Laat `createDataStore()` in `src/data/index.ts` de Supabase-variant
+   teruggeven zodra `VITE_SUPABASE_URL` en `VITE_SUPABASE_ANON_KEY` gezet zijn:
 
 De medewerker logt in met zijn **Driessen-werkaccount**. Er is geen apart account
 voor deze app en er staat geen sleutel in de code; wie in dienst komt kan meteen
@@ -274,6 +311,19 @@ Beide workflows controleren na het bouwen of de verbinding met Buddy Data
 daadwerkelijk in de bundel zit. Zonder die controle publiceert een ontbrekende
 variabele stilzwijgend de versie die `use-cases.json` leest — en dan merk je pas
 weken later dat wijzigingen nergens heen gingen.
+   ```ts
+   export function createDataStore(): DataStore {
+     const url = import.meta.env.VITE_SUPABASE_URL;
+     const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+     return url && key ? new SupabaseDataStore(url, key) : new JsonDataStore();
+   }
+   ```
+
+4. Zet de twee variabelen als repository-secrets en geef ze mee in de workflow.
+
+Zodra `persistent` op `true` staat verdwijnt de melding over niet-opgeslagen
+wijzigingen vanzelf. Login en rechten per eigenaar komen erbij als een
+`auth`-laag om dezelfde store heen; de componenten blijven ongewijzigd.
 
 ---
 

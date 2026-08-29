@@ -56,13 +56,16 @@ const bestand = JSON.parse(
 );
 
 const rijen = (bestand.use_cases ?? []).map((useCase) => ({
+  nummer: useCase.nummer ?? null,
   titel: useCase.titel,
-  afdeling: useCase.afdeling,
+  bedrijf: useCase.bedrijf,
+  team: useCase.team ?? null,
   instuurder: useCase.instuurder ?? null,
   tijdsbesparing_uren_per_week: useCase.tijdsbesparing_uren_per_week ?? null,
   status: useCase.status,
   omschrijving: useCase.omschrijving ?? '',
   opmerkingen: useCase.opmerkingen ?? null,
+  verwijderd: false,
 }));
 
 // Eerst kijken of er al iets staat: twee keer draaien zou anders alles verdubbelen, en dat is aan

@@ -1,10 +1,7 @@
-node_modules/
-dist/
+node_modules
+dist
+.DS_Store
+*.local
+.vite
 tsconfig.tsbuildinfo
-
-# Bevat de adressen van Buddy Data voor deze omgeving.
-.env
-.env.local
-
-# Bevat een projectsleutel voor Buddy Data.
-.mcp.json
+*.tsbuildinfo

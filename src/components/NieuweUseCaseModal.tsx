@@ -1,58 +1,103 @@
 import { useState } from 'react';
-import { AFDELINGEN, STATUSSEN } from '../types';
-import type { Afdeling, NieuweUseCase, Status } from '../types';
+import { BEDRIJVEN, STATUSSEN } from '../types';
+import type { Bedrijf, NieuweUseCase, Status } from '../types';
 import { Modal } from './Modal';
 
 interface NieuweUseCaseModalProps {
-  standaardAfdeling?: Afdeling;
+  standaardBedrijf?: Bedrijf;
   onSluit(): void;
   onOpslaan(useCase: NieuweUseCase): Promise<unknown>;
 }
 
+/**
+ * Toegestane invoer voor de tijdsbesparing: cijfers, eventueel met één komma of
+ * punt als decimaalteken. Alles daarbuiten (letters, "onbekend", "1 tot 6")
+ * wordt geweigerd, want daar liep de bronsheet juist op vast.
+ */
+const ALLEEN_CIJFERS = /^\d*(?:[.,]\d*)?$/;
+
+type Velden = 'titel' | 'omschrijving' | 'instuurder' | 'uren';
+
 export function NieuweUseCaseModal({
-  standaardAfdeling,
+  standaardBedrijf,
   onSluit,
   onOpslaan,
 }: NieuweUseCaseModalProps) {
   const [titel, setTitel] = useState('');
   const [omschrijving, setOmschrijving] = useState('');
-  const [afdeling, setAfdeling] = useState<Afdeling>(standaardAfdeling ?? 'Driessen Groep');
+  const [bedrijf, setBedrijf] = useState<Bedrijf>(standaardBedrijf ?? 'Driessen Groep');
+  const [team, setTeam] = useState('');
   const [status, setStatus] = useState<Status>('Idee');
   const [instuurder, setInstuurder] = useState('');
   const [uren, setUren] = useState('');
-  const [fout, setFout] = useState<string | null>(null);
+  const [fouten, setFouten] = useState<Partial<Record<Velden, string>>>({});
   const [bezig, setBezig] = useState(false);
+
+  function meldFout(veld: Velden, melding?: string) {
+    setFouten((huidig) => {
+      const volgende = { ...huidig };
+      if (melding) volgende[veld] = melding;
+      else delete volgende[veld];
+      return volgende;
+    });
+  }
+
+  /** Weigert de toetsaanslag zodra er iets anders dan een getal in komt. */
+  function urenInvoer(waarde: string) {
+    if (!ALLEEN_CIJFERS.test(waarde)) {
+      meldFout('uren', 'Vul alleen cijfers in, bijvoorbeeld 4 of 2,5.');
+      return;
+    }
+    meldFout('uren');
+    setUren(waarde);
+  }
 
   async function verstuur(event: React.FormEvent) {
     event.preventDefault();
-    if (!titel.trim()) {
-      setFout('Geef de use case een titel.');
-      return;
-    }
+    const nieuweFouten: Partial<Record<Velden, string>> = {};
+    if (!titel.trim()) nieuweFouten.titel = 'Dit veld is verplicht.';
+    if (!omschrijving.trim()) nieuweFouten.omschrijving = 'Dit veld is verplicht.';
+    if (!instuurder.trim()) nieuweFouten.instuurder = 'Dit veld is verplicht.';
+
     const genormaliseerd = uren.trim().replace(',', '.');
-    const waarde = genormaliseerd === '' ? null : Number(genormaliseerd);
-    if (waarde !== null && (!Number.isFinite(waarde) || waarde < 0)) {
-      setFout('Vul een geldig aantal uren per week in (of laat het veld leeg).');
+    const waarde = Number(genormaliseerd);
+    if (!genormaliseerd) nieuweFouten.uren = 'Dit veld is verplicht.';
+    else if (!Number.isFinite(waarde) || waarde < 0) nieuweFouten.uren = 'Vul een geldig aantal uren in.';
+
+    if (Object.keys(nieuweFouten).length > 0) {
+      setFouten(nieuweFouten);
       return;
     }
-    setFout(null);
+
     setBezig(true);
     try {
       await onOpslaan({
         titel: titel.trim(),
         omschrijving: omschrijving.trim(),
-        afdeling,
+        bedrijf,
+        team: team.trim() || null,
         status,
-        instuurder: instuurder.trim() || null,
+        instuurder: instuurder.trim(),
         tijdsbesparing_uren_per_week: waarde,
         opmerkingen: null,
+        nummer: null,
       });
       onSluit();
     } catch (error) {
-      setFout(error instanceof Error ? error.message : 'Opslaan is niet gelukt.');
+      setFouten({ titel: error instanceof Error ? error.message : 'Opslaan is niet gelukt.' });
     } finally {
       setBezig(false);
     }
+  }
+
+  /** Foutmelding onder een veld, gekoppeld voor schermlezers. */
+  function Fout({ veld }: { veld: Velden }) {
+    if (!fouten[veld]) return null;
+    return (
+      <p className="veld__fout" id={`fout-${veld}`} role="alert">
+        {fouten[veld]}
+      </p>
+    );
   }
 
   return (
@@ -61,7 +106,7 @@ export function NieuweUseCaseModal({
       omschrijving="De besparing vul je in per week; de Urenmikker rekent het om naar uren per jaar."
       onSluit={onSluit}
     >
-      <form onSubmit={verstuur}>
+      <form onSubmit={verstuur} noValidate>
         <div className="modal__velden">
           <div className="veld veld--breed">
             <label className="veld__label" htmlFor="nieuw-titel">
@@ -70,10 +115,16 @@ export function NieuweUseCaseModal({
             <input
               id="nieuw-titel"
               value={titel}
-              onChange={(event) => setTitel(event.target.value)}
-              placeholder="Waar helpt AI mee?"
-              required
+              onChange={(event) => {
+                setTitel(event.target.value);
+                meldFout('titel');
+              }}
+              placeholder="Waar helpt AI en/of automatisering jou?"
+              aria-required="true"
+              aria-invalid={Boolean(fouten.titel)}
+              aria-describedby={fouten.titel ? 'fout-titel' : undefined}
             />
+            <Fout veld="titel" />
           </div>
 
           <div className="veld veld--breed">
@@ -83,22 +134,29 @@ export function NieuweUseCaseModal({
             <textarea
               id="nieuw-omschrijving"
               value={omschrijving}
-              onChange={(event) => setOmschrijving(event.target.value)}
-              placeholder="Wat gebeurt er nu handmatig, en wat neemt AI over?"
+              onChange={(event) => {
+                setOmschrijving(event.target.value);
+                meldFout('omschrijving');
+              }}
+              placeholder="Wat gebeurt er nu handmatig, en wat neemt AI en/of automatisering over?"
+              aria-required="true"
+              aria-invalid={Boolean(fouten.omschrijving)}
+              aria-describedby={fouten.omschrijving ? 'fout-omschrijving' : undefined}
             />
+            <Fout veld="omschrijving" />
           </div>
 
           <div className="modal__rij">
             <div className="veld">
-              <label className="veld__label" htmlFor="nieuw-afdeling">
+              <label className="veld__label" htmlFor="nieuw-bedrijf">
                 Bedrijf
               </label>
               <select
-                id="nieuw-afdeling"
-                value={afdeling}
-                onChange={(event) => setAfdeling(event.target.value as Afdeling)}
+                id="nieuw-bedrijf"
+                value={bedrijf}
+                onChange={(event) => setBedrijf(event.target.value as Bedrijf)}
               >
-                {AFDELINGEN.map((naam) => (
+                {BEDRIJVEN.map((naam) => (
                   <option key={naam} value={naam}>
                     {naam}
                   </option>
@@ -125,38 +183,59 @@ export function NieuweUseCaseModal({
 
           <div className="modal__rij">
             <div className="veld">
+              <label className="veld__label" htmlFor="nieuw-team">
+                Afdeling / team (optioneel)
+              </label>
+              <input
+                id="nieuw-team"
+                value={team}
+                onChange={(event) => setTeam(event.target.value)}
+                placeholder="bijv. Programmamanagement"
+              />
+            </div>
+            <div className="veld">
               <label className="veld__label" htmlFor="nieuw-instuurder">
-                Instuurder (optioneel)
+                Instuurder
               </label>
               <input
                 id="nieuw-instuurder"
                 value={instuurder}
-                onChange={(event) => setInstuurder(event.target.value)}
-                placeholder="Naam of team — mag leeg blijven"
+                onChange={(event) => {
+                  setInstuurder(event.target.value);
+                  meldFout('instuurder');
+                }}
+                placeholder="Naam"
+                aria-required="true"
+                aria-invalid={Boolean(fouten.instuurder)}
+                aria-describedby={fouten.instuurder ? 'fout-instuurder' : undefined}
               />
-            </div>
-            <div className="veld">
-              <label className="veld__label" htmlFor="nieuw-uren">
-                Uren per week (optioneel)
-              </label>
-              <input
-                id="nieuw-uren"
-                type="number"
-                min="0"
-                step="0.5"
-                inputMode="decimal"
-                value={uren}
-                onChange={(event) => setUren(event.target.value)}
-                placeholder="bijv. 4"
-              />
+              <Fout veld="instuurder" />
             </div>
           </div>
 
-          {fout && (
-            <p className="modal__fout" role="alert">
-              {fout}
-            </p>
-          )}
+          <div className="modal__rij">
+            <div className="veld">
+              <label className="veld__label" htmlFor="nieuw-uren">
+                Tijdsbesparing per week in uren
+              </label>
+              <input
+                id="nieuw-uren"
+                /*
+                 * Bewust geen type="number": daar slikt de browser ongeldige
+                 * tekens stil in, en dan kan er geen melding verschijnen.
+                 */
+                type="text"
+                inputMode="decimal"
+                value={uren}
+                onChange={(event) => urenInvoer(event.target.value)}
+                placeholder="bijv. 4"
+                aria-required="true"
+                aria-invalid={Boolean(fouten.uren)}
+                aria-describedby={fouten.uren ? 'fout-uren' : undefined}
+              />
+              <Fout veld="uren" />
+            </div>
+          </div>
         </div>
 
         <div className="modal__acties">

@@ -1,0 +1,85 @@
+/**
+ * VOORBEELD - nog niet actief.
+ *
+ * Zo ziet de Supabase-implementatie van dezelfde DataStore-interface eruit.
+ * Hernoem dit bestand naar supabaseDataStore.ts, installeer @supabase/supabase-js
+ * en laat createDataStore() in src/data/index.ts deze klasse teruggeven zodra de
+ * omgevingsvariabelen gezet zijn. De UI hoeft niet aangepast te worden.
+ *
+ * Verwachte tabel (Postgres):
+ *
+ *   create table use_cases (
+ *     id uuid primary key default gen_random_uuid(),
+ *     nummer integer,
+ *     titel text not null,
+ *     bedrijf text not null,
+ *     team text,
+ *     instuurder text,
+ *     tijdsbesparing_uren_per_week numeric,
+ *     status text not null default 'Idee',
+ *     omschrijving text not null default '',
+ *     opmerkingen text,
+ *     eigenaar uuid references auth.users (id) default auth.uid(),
+ *     aangemaakt_op timestamptz not null default now()
+ *   );
+ *
+ * Rechten per eigenaar met row level security:
+ *
+ *   alter table use_cases enable row level security;
+ *   create policy "iedereen leest" on use_cases for select using (true);
+ *   create policy "ingelogd voegt toe" on use_cases for insert
+ *     with check (auth.uid() = eigenaar);
+ *   create policy "eigenaar bewerkt" on use_cases for update
+ *     using (auth.uid() = eigenaar);
+ *   create policy "eigenaar verwijdert" on use_cases for delete
+ *     using (auth.uid() = eigenaar);
+ */
+
+import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import type { NieuweUseCase, UseCase, UseCasePatch } from '../types';
+import { UseCaseNietGevondenError, type DataStore } from './dataStore';
+
+export class SupabaseDataStore implements DataStore {
+  readonly naam = 'Supabase';
+  readonly persistent = true;
+
+  private readonly client: SupabaseClient;
+
+  constructor(url: string, anonKey: string) {
+    this.client = createClient(url, anonKey);
+  }
+
+  async getAll(): Promise<UseCase[]> {
+    const { data, error } = await this.client
+      .from('use_cases')
+      .select(
+        'id, nummer, titel, bedrijf, team, instuurder, tijdsbesparing_uren_per_week, status, omschrijving, opmerkingen',
+      )
+      .order('aangemaakt_op', { ascending: false });
+    if (error) throw new Error(error.message);
+    return (data ?? []) as UseCase[];
+  }
+
+  async add(useCase: NieuweUseCase): Promise<UseCase> {
+    const { data, error } = await this.client.from('use_cases').insert(useCase).select().single();
+    if (error) throw new Error(error.message);
+    return data as UseCase;
+  }
+
+  async update(id: string, patch: UseCasePatch): Promise<UseCase> {
+    const { data, error } = await this.client
+      .from('use_cases')
+      .update(patch)
+      .eq('id', id)
+      .select()
+      .maybeSingle();
+    if (error) throw new Error(error.message);
+    if (!data) throw new UseCaseNietGevondenError(id);
+    return data as UseCase;
+  }
+
+  async verwijder(id: string): Promise<void> {
+    const { error } = await this.client.from('use_cases').delete().eq('id', id);
+    if (error) throw new Error(error.message);
+  }
+}

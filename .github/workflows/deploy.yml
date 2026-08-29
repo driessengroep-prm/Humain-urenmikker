@@ -3,6 +3,7 @@ name: Deploy naar GitHub Pages
 on:
   push:
     branches: [main]
+  # Handmatig draaien, bijvoorbeeld nadat use-cases.json is bijgewerkt.
   workflow_dispatch:
 
 permissions:
@@ -10,6 +11,7 @@ permissions:
   pages: write
   id-token: write
 
+# Eén deploy tegelijk; een nieuwe push mag een lopende run niet afbreken.
 concurrency:
   group: pages
   cancel-in-progress: false
@@ -19,12 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
+
       - name: Build
+        # De site staat op https://<org>.github.io/<repo>/, dus de basis is de reponaam.
+        # Bij een eigen domein: BASE_PATH: /
         env:
           BASE_PATH: /${{ github.event.repository.name }}/
           # Waar de use cases staan. Geen geheimen: er zit geen sleutel in deze app, de
@@ -50,6 +57,7 @@ jobs:
             exit 1
           fi
       - uses: actions/configure-pages@v5
+
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

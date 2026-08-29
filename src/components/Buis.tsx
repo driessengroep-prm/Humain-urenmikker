@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { aantalKnikkers, buis, buisPad, knikkerStraal, maakKnikkers, yVoorUren } from '../lib/knikkers';
 import { getal, percentage } from '../lib/format';
 import type { Segment } from '../lib/uren';
@@ -15,6 +15,12 @@ interface BuisProps {
   gemarkeerdeId: string | null;
   /** Wordt het potentieel al meegeteld in meetellendeUren? */
   potentieelTeltMee: boolean;
+  /**
+   * Verandert zodra de selectie of de rekeninstellingen wijzigen. Daarmee weet
+   * de buis of er knikkers bij komen omdat er iets is afgerond, of alleen omdat
+   * er anders gefilterd wordt - in dat laatste geval hoort er niets te vallen.
+   */
+  selectieSleutel: string;
 }
 
 const tickWaarden = Array.from({ length: 11 }, (_, i) => i * 1000);
@@ -26,11 +32,38 @@ export function Buis({
   segmenten,
   gemarkeerdeId,
   potentieelTeltMee,
+  selectieSleutel,
 }: BuisProps) {
   const knikkers = useMemo(() => maakKnikkers(jaardoel), [jaardoel]);
 
   const ratio = jaardoel > 0 ? Math.min(meetellendeUren / jaardoel, 1) : 0;
   const zichtbaarTot = Math.round(ratio * aantalKnikkers);
+
+  // Vanaf welke knikker er gevallen wordt; null als er niets te vallen valt.
+  const [valtVanaf, setValtVanaf] = useState<number | null>(null);
+  const vorigeTelling = useRef(zichtbaarTot);
+  const vorigeSleutel = useRef(selectieSleutel);
+  const eersteKeer = useRef(true);
+
+  useEffect(() => {
+    const zelfdeSelectie = vorigeSleutel.current === selectieSleutel;
+    const erbij = zichtbaarTot > vorigeTelling.current;
+    const vanaf = vorigeTelling.current;
+
+    vorigeSleutel.current = selectieSleutel;
+    vorigeTelling.current = zichtbaarTot;
+
+    // De eerste vulling is het inladen van de pagina, niet een afgeronde case.
+    if (eersteKeer.current) {
+      eersteKeer.current = false;
+      return;
+    }
+    if (!zelfdeSelectie || !erbij) return;
+
+    setValtVanaf(vanaf);
+    const timer = setTimeout(() => setValtVanaf(null), 1600);
+    return () => clearTimeout(timer);
+  }, [zichtbaarTot, selectieSleutel]);
 
   const gemarkeerd = gemarkeerdeId
     ? segmenten.find((segment) => segment.id === gemarkeerdeId) ?? null
@@ -168,6 +201,7 @@ export function Buis({
               gemarkeerd !== null &&
               knikker.totUren > gemarkeerd.vanUren &&
               knikker.vanUren < gemarkeerd.totUren;
+            const valt = valtVanaf !== null && knikker.index >= valtVanaf && zichtbaar;
             return (
               <g
                 key={knikker.index}
@@ -175,10 +209,19 @@ export function Buis({
                   'buis__knikker',
                   zichtbaar ? '' : 'buis__knikker--verborgen',
                   markeer ? 'buis__knikker--gemarkeerd' : '',
+                  valt ? 'buis__knikker--valt' : '',
                 ]
                   .filter(Boolean)
                   .join(' ')}
-                style={{ transitionDelay: `${Math.min(knikker.index * 6, 700)}ms` }}
+                style={
+                  valt
+                    ? {
+                        // Boven de opening van de buis beginnen en naar de eigen plek vallen.
+                        ['--val-afstand' as string]: `${buis.vulTop - knikker.cy - 40}px`,
+                        animationDelay: `${(knikker.index - valtVanaf) * 70}ms`,
+                      }
+                    : { transitionDelay: `${Math.min(knikker.index * 6, 700)}ms` }
+                }
               >
                 <circle
                   cx={knikker.cx}

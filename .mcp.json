@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "buddy-data": {
+      "command": "node",
+      "args": [
+        "/Users/arnolieshoutvan/Projecten/Arno/agent-swarm/src/buddy-data-mcp/dist/src/index.js"
+      ],
+      "env": {
+        "BUDDY_PROJECT": "urenmikker",
+        "BUDDY_CLIENT_ID": "bd_Xf8b9F9JC0u4vEop",
+        "BUDDY_CLIENT_SECRET": "37A7ikQ7RiJN6spNFW6c4nmcZZrc2xALj4fIGRym4fx6Xbvx",
+        "BUDDY_MANAGEMENT_URL": "http://localhost:5000",
+        "BUDDY_DATA_URL": "http://localhost:5010"
+      }
+    }
+  }
+}

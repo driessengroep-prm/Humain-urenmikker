@@ -26,9 +26,9 @@
   --font-kop: 'Poppins', 'Segoe UI', system-ui, sans-serif;
   --font-body: 'Inter', 'Segoe UI', system-ui, sans-serif;
 
-  --maxbreedte: 1180px;
+  --maxbreedte: 1520px;
   /* Hoogte van de vastgezette kopbalk op desktop; de kolomkop plakt eronder. */
-  --kop-hoogte: 95px;
+  --kop-hoogte: 81px;
 }
 
 *,
@@ -149,6 +149,17 @@ textarea {
   border-color: var(--terracotta);
   color: var(--terracotta);
 }
+.knop--gevaar {
+  background: var(--wit);
+  color: var(--terracotta-donker);
+  border-color: rgba(222, 90, 44, 0.45);
+}
+.knop--gevaar:hover {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: var(--wit);
+}
+
 .knop--klein {
   padding: 7px 14px;
   font-size: 13px;
@@ -177,48 +188,46 @@ textarea {
   gap: 16px;
   flex-wrap: wrap;
 }
-.kop__merk {
+.kop__titel {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  margin: 0;
   margin-right: auto;
+  min-width: 0;
+  font-size: 26px;
+  line-height: 1;
 }
-.kop__titel {
-  font-size: 20px;
+
+/* Het HUMAIN-beeldmerk met Buddy; de hoogte bepaalt de maat van de kop. */
+.kop__beeldmerk {
+  height: 52px;
+  width: auto;
+  flex: none;
+}
+
+/* Terugval als het beeldbestand ontbreekt. */
+.kop__terugval {
   font-weight: 700;
-  line-height: 1.1;
+  color: var(--petrol);
+  letter-spacing: -0.015em;
 }
-.kop__titel .ai {
-  color: var(--terracotta);
-  position: relative;
+.kop__ai {
+  color: var(--goud);
 }
-.kop__titel .ai::after {
-  content: '';
-  position: absolute;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  height: 6px;
-  background: var(--goud);
-  border-radius: var(--radius-pill);
-  opacity: 0.55;
-  z-index: -1;
+
+.kop__product {
+  font-weight: 500;
+  font-size: 23px;
+  color: var(--petrol);
+  opacity: 0.8;
+  white-space: nowrap;
 }
-.kop__sub {
-  font-size: 12.5px;
-  color: var(--tekst-zacht);
-}
+
 .kop__acties {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-}
-
-/* Logo: halve cirkel + boog, afgeleid van de "d". */
-.logo {
-  width: 40px;
-  height: 40px;
-  flex: none;
 }
 
 /* --- Layout --------------------------------------------------------------- */
@@ -245,6 +254,19 @@ textarea {
   background: rgba(222, 90, 44, 0.1);
   border-color: rgba(222, 90, 44, 0.4);
 }
+.melding__link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--terracotta-donker);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.melding__link:hover {
+  color: var(--terracotta);
+}
+
 .melding__punt {
   width: 8px;
   height: 8px;
@@ -253,19 +275,115 @@ textarea {
   margin-top: 7px;
   flex: none;
 }
-.melding--fout .melding__punt {
+.melding--fout .melding__link {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: var(--terracotta-donker);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.melding__link:hover {
+  color: var(--terracotta);
+}
+
+.melding__punt {
   background: var(--terracotta);
 }
 
-.dashboard {
+.paneelbalk {
   display: grid;
-  grid-template-columns: minmax(240px, 300px) 1fr;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.knoppenbalk {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Pill-knop die het paneel eronder open- en dichtklapt. */
+.paneelknop {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 9px;
+  background: var(--wit);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  padding: 11px 20px;
+  cursor: pointer;
+  box-shadow: var(--schaduw-zacht);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+.paneelknop:hover {
+  border-color: var(--goud);
+}
+.paneelknop--open {
+  border-color: var(--goud);
+  box-shadow: 0 6px 20px rgba(227, 169, 58, 0.24);
+}
+.paneelknop__waarde {
+  font-family: var(--font-kop);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--petrol);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.paneelknop__label {
+  font-size: 13.5px;
+  color: var(--tekst-zacht);
+}
+.paneelknop__badge {
+  background: var(--petrol);
+  color: var(--wit);
+  border-radius: var(--radius-pill);
+  padding: 3px 11px;
+  font-family: var(--font-kop);
+  font-weight: 600;
+  font-size: 12.5px;
+  font-variant-numeric: tabular-nums;
+  align-self: center;
+}
+/* Chevron uit de boogvormtaal; draait bij openklappen. */
+.paneelknop__chevron {
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid var(--terracotta);
+  border-bottom: 2px solid var(--terracotta);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 0.2s ease;
+  align-self: center;
+}
+.paneelknop--open .paneelknop__chevron {
+  transform: rotate(225deg) translate(-2px, -2px);
+}
+
+/* Buis links uitgelijnd, besparing per bedrijf ernaast over dezelfde hoogte. */
+.band {
+  display: grid;
+  grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
   gap: 22px;
   align-items: start;
 }
+
+.band__lijst {
+  min-width: 0;
+}
+
+/* De buis blijft in beeld terwijl je door de lijst scrolt. */
+.band > .buis-paneel {
+  position: sticky;
+  top: calc(var(--kop-hoogte) + 16px);
+}
 @media (max-width: 820px) {
-  .dashboard {
+  .band {
     grid-template-columns: 1fr;
+  }
+  .band > .buis-paneel {
+    position: static;
   }
 }
 
@@ -285,11 +403,6 @@ textarea {
   color: var(--tekst-zacht);
   font-family: var(--font-kop);
   margin-bottom: 14px;
-}
-
-.rechterkolom {
-  display: grid;
-  gap: 22px;
 }
 
 /* --- Buis ----------------------------------------------------------------- */
@@ -327,6 +440,33 @@ textarea {
   opacity: 0;
   transform: translateY(26px) scale(0.55);
 }
+/* Een afgeronde use case gooit zijn knikkers van bovenaf in de buis. */
+@keyframes knikkerValt {
+  0% {
+    transform: translateY(var(--val-afstand, -300px)) scale(0.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  62% {
+    transform: translateY(0) scale(1);
+  }
+  74% {
+    transform: translateY(-7px) scale(1.05);
+  }
+  86% {
+    transform: translateY(0) scale(0.98);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+.buis__knikker--valt {
+  opacity: 1;
+  animation: knikkerValt 0.85s cubic-bezier(0.4, 0, 0.6, 1) backwards;
+}
+
 .buis__knikker--gemarkeerd {
   filter: drop-shadow(0 0 5px rgba(222, 90, 44, 0.95));
 }
@@ -446,6 +586,7 @@ textarea {
 .afdelingen {
   display: grid;
   gap: 9px;
+  align-content: start;
 }
 .afdeling {
   display: grid;
@@ -494,15 +635,30 @@ textarea {
 /* --- Filters -------------------------------------------------------------- */
 
 .filters {
-  display: flex;
-  gap: 12px;
-  align-items: flex-end;
-  flex-wrap: wrap;
-  margin: 32px 0 18px;
+  /*
+   * Raster in plaats van flex: zo delen de keuzelijsten de breedte gelijk en
+   * duwt een lange optie er niet één naar de volgende regel.
+   */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 12px 14px;
+  align-items: end;
+  margin: 0 0 12px;
 }
 .veld {
   display: grid;
   gap: 5px;
+  /*
+   * Een input of select heeft een eigen minimumbreedte. Zonder min-width: 0
+   * krimpt de cel daar niet onder, waardoor het veld buiten zijn rasterkolom
+   * loopt en over het volgende veld heen valt.
+   */
+  min-width: 0;
+}
+.veld input,
+.veld select,
+.veld textarea {
+  min-width: 0;
 }
 .veld__label {
   font-size: 12px;
@@ -527,6 +683,36 @@ textarea {
   min-height: 92px;
   font-family: var(--font-body);
 }
+/* Teller rechtsboven de lijst: hoeveel use cases het filter oplevert. */
+.filters__teller {
+  /* fit-content, anders vult het blok de hele breedte en doet margin auto niets. */
+  width: fit-content;
+  /*
+   * De negatieve ondermarge trekt de teller op de hoogte van de kolomkop, zodat
+   * hij daar rechts naast staat in plaats van er een eigen regel boven te
+   * krijgen. Sticky met dezelfde offset laat hem meelopen als die kop vastzet.
+   */
+  margin: 8px -2px -46px auto;
+  position: sticky;
+  top: calc(var(--kop-hoogte) + 8px);
+  z-index: 6;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wit);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-kop);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--petrol);
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--schaduw-zacht);
+}
+
 .veld--breed {
   width: 100%;
 }
@@ -535,18 +721,17 @@ textarea {
 .veld--breed textarea {
   width: 100%;
 }
-.filters__telling {
-  margin-left: auto;
-  font-size: 13px;
-  color: var(--tekst-zacht);
-  padding-bottom: 10px;
-}
 
 /* --- Use case-lijst ------------------------------------------------------- */
 
 .lijst-blok {
   /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
-  --lijst-kolommen: minmax(0, 2.6fr) minmax(0, 1.15fr) minmax(0, 1.15fr) 150px 130px 112px;
+  --lijst-kolommen: 42px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 128px 108px 154px;
+  /*
+   * De lijst staat naast de buis, dus zijn eigen breedte bepaalt of de kolommen
+   * nog passen - niet die van het venster.
+   */
+  container-type: inline-size;
 }
 
 .lijst {
@@ -566,7 +751,7 @@ textarea {
   backdrop-filter: blur(8px);
   display: grid;
   grid-template-columns: var(--lijst-kolommen);
-  gap: 16px;
+  gap: 14px;
   /* 1px extra zodat de kop uitlijnt met de rand van de rijen eronder. */
   padding: 10px 19px 8px;
   font-family: var(--font-kop);
@@ -576,8 +761,8 @@ textarea {
   letter-spacing: 0.07em;
   color: var(--tekst-zacht);
 }
-.lijst__kop span:nth-child(4),
-.lijst__kop span:nth-child(5) {
+.lijst__kop span:nth-child(6),
+.lijst__kop span:nth-child(7) {
   text-align: right;
 }
 
@@ -600,7 +785,7 @@ textarea {
 .rij__hoofd {
   display: grid;
   grid-template-columns: var(--lijst-kolommen);
-  gap: 16px;
+  gap: 14px;
   align-items: center;
 }
 
@@ -626,6 +811,15 @@ textarea {
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--tekst-zacht);
+}
+
+/* Volgnummer uit de bronsheet; smal en rustig, het is een verwijzing. */
+.rij__nr {
+  font-family: var(--font-kop);
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--tekst-zacht);
+  font-variant-numeric: tabular-nums;
 }
 
 .rij__titel {
@@ -679,6 +873,32 @@ textarea {
   color: var(--tekst-zacht);
 }
 
+/* Volledige tekst van een geopende regel, over de hele breedte leesbaar. */
+.rij__details {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: var(--wit);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+}
+.rij__details p {
+  margin: 0;
+  font-size: 13.5px;
+  color: #4a616a;
+  white-space: pre-line;
+}
+.rij__detailkop {
+  margin: 0 0 3px;
+  font-family: var(--font-kop);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--tekst-zacht);
+}
+
 .bewerk {
   display: grid;
   gap: 12px;
@@ -687,26 +907,33 @@ textarea {
   padding: 14px;
   margin-top: 12px;
 }
-.bewerk__rij {
+.bewerk__velden {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  max-width: 420px;
+  grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap: 12px 14px;
 }
 .bewerk__acties {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
+}
+/* Verwijderen staat los van opslaan en annuleren. */
+.bewerk__acties .knop--gevaar {
+  margin-left: auto;
 }
 
-/* Onder deze breedte past het raster niet meer: rijen worden blokjes. */
-@media (max-width: 900px) {
+/* Past het raster niet meer in de kolom, dan worden de rijen blokjes. */
+@container (max-width: 1080px) {
   .lijst__kop {
     display: none;
   }
   .rij__hoofd {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
     gap: 12px;
     align-items: start;
+  }
+  .rij__cel--nummer {
+    grid-column: 1 / -1;
   }
   .rij__cel--titel {
     grid-column: 1 / -1;
@@ -748,27 +975,6 @@ textarea {
 .badge--idee {
   background: rgba(222, 90, 44, 0.12);
   color: var(--terracotta-donker);
-}
-.badge--geen {
-  background: #f0eae4;
-  color: #7b6f66;
-}
-
-.bewerk {
-  display: grid;
-  gap: 12px;
-  background: var(--creme);
-  border-radius: 14px;
-  padding: 14px;
-}
-.bewerk__rij {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.bewerk__acties {
-  display: flex;
-  gap: 8px;
 }
 
 .leeg {
@@ -845,11 +1051,36 @@ textarea {
   margin-top: 22px;
   flex-wrap: wrap;
 }
+.veld__fout {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--terracotta-donker);
+}
+.veld input[aria-invalid='true'],
+.veld textarea[aria-invalid='true'] {
+  border-color: var(--terracotta);
+}
+
 .modal__fout {
   color: var(--terracotta-donker);
   font-size: 13px;
   margin: 0;
 }
+.modal__vraag {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.modal__doel {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--creme);
+  border-radius: 14px;
+  font-family: var(--font-kop);
+  font-weight: 600;
+  color: var(--petrol);
+}
+
 .modal__code {
   background: var(--creme);
   border: 1px solid var(--hairline);
@@ -864,7 +1095,7 @@ textarea {
 }
 @media (max-width: 560px) {
   .modal__rij,
-  .bewerk__rij {
+  .bewerk__velden {
     grid-template-columns: 1fr;
   }
 }
@@ -884,11 +1115,14 @@ textarea {
     padding: 12px 16px;
     gap: 12px;
   }
-  .kop__merk {
-    width: 100%;
-    margin-right: 0;
-  }
   .kop__titel {
+    font-size: 20px;
+    gap: 10px;
+  }
+  .kop__beeldmerk {
+    height: 40px;
+  }
+  .kop__product {
     font-size: 18px;
   }
   .kop__acties {
@@ -918,15 +1152,10 @@ textarea {
   .filters .veld {
     flex: 1 1 140px;
   }
-  .filters__telling {
-    margin-left: 0;
-    width: 100%;
-    padding-bottom: 0;
-  }
   .rij {
     padding: 14px;
   }
-  .bewerk__rij {
+  .bewerk__velden {
     grid-template-columns: 1fr;
   }
   .modal {
