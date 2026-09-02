@@ -138,8 +138,14 @@ vormgeving te bekijken of te delen zonder `npm install`.
   `scripts/converteer-excel.py`. Werk de sheet bij en draai het script opnieuw
   in plaats van `use-cases.json` handmatig te redigeren; de mappingregels
   (bedrijfsnamen, lege status, onherleidbare besparing) staan in dat script.
-- `instuurder` bevat echte namen en de site is publiek. Anonimiseren kan door
-  het veld op `null` te zetten; de UI toont dan "anoniem ingestuurd".
+- `instuurder` bevat echte namen en **de repository is publiek**. Daarom staat in
+  `public/use-cases.json` de geanonimiseerde set; de namen horen alleen in Buddy
+  Data, achter de login. Genereer een bestand mét namen lokaal
+  (`converteer-excel.py` zonder `--anoniem`) en commit dat niet.
+  Let op: de eenmalige import draaide ooit op het geanonimiseerde bestand,
+  waardoor de database zonder eigenaren kwam te staan. Beide scripts stoppen daar
+  nu op; `scripts/vul-instuurders-aan.mjs` repareert het achteraf, gekoppeld op
+  `nummer`.
 
 ## Opslag en inloggen
 

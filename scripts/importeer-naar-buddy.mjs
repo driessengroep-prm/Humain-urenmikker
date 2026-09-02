@@ -68,6 +68,16 @@ const rijen = (bestand.use_cases ?? []).map((useCase) => ({
   verwijderd: false,
 }));
 
+// public/use-cases.json is bewust geanonimiseerd omdat de repository publiek is. Importeren uit
+// dat bestand levert een database zonder eigenaren op, en dat viel pas veel later op.
+if (rijen.length > 0 && rijen.every((rij) => !rij.instuurder)) {
+  console.error(
+    'Geen enkele use case heeft een instuurder. Dit is de geanonimiseerde versie van het bestand.\n' +
+      'Draai eerst: python3 scripts/converteer-excel.py <sheet>.xlsx public/use-cases.json',
+  );
+  process.exit(1);
+}
+
 // Eerst kijken of er al iets staat: twee keer draaien zou anders alles verdubbelen, en dat is aan
 // de urentelling niet te zien.
 const bestaand = await fetch(`${config.dataUrl}/use_cases?select=id&limit=1`, {
