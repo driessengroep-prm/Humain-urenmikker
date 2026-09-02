@@ -36,6 +36,11 @@ export default function App() {
   const werkweken = config.werkwekenPerJaar;
   const telModus = config.telModus;
   const [gemarkeerdeId, setGemarkeerdeId] = useState<string | null>(null);
+  /*
+   * Loopt op bij een herstel. De teller zit in de key van elke regel, zodat een
+   * regel die openstond weer dichtklapt: die stand zit in de regel zelf.
+   */
+  const [herstelTeller, setHerstelTeller] = useState(0);
   const [toonTeller, setToonTeller] = useState(false);
   const [toonBedrijven, setToonBedrijven] = useState(false);
   const [toonNieuw, setToonNieuw] = useState(false);
@@ -144,6 +149,21 @@ export default function App() {
     return gesorteerd;
   }, [meterSet, statusFilter, zoekterm, sortering, werkweken]);
 
+  /** Alles terug naar hoe de pagina er bij het openen uitziet. */
+  function herstelBeginstand() {
+    setBedrijfFilter('alle');
+    setTeamFilter('alle');
+    setInstuurderFilter('alle');
+    setStatusFilter('alle');
+    setZoekterm('');
+    setSortering('besparing');
+    setToonTeller(false);
+    setToonBedrijven(false);
+    setGemarkeerdeId(null);
+    setHerstelTeller((huidig) => huidig + 1);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   async function opslaanNieuw(nieuwe: NieuweUseCase) {
     const useCase = await voegToe(nieuwe);
     setSortering('nieuwste');
@@ -155,7 +175,7 @@ export default function App() {
       <a className="overslaan" href="#use-cases">
         Naar de use cases
       </a>
-      <Kop onNieuweUseCase={() => setToonNieuw(true)} />
+      <Kop onNieuweUseCase={() => setToonNieuw(true)} onHerstel={herstelBeginstand} />
 
       <main className="hoofd">
         {laadStatus === 'fout' && (
@@ -190,7 +210,11 @@ export default function App() {
               onClick={() => setToonTeller((huidig) => !huidig)}
             />
             <PaneelKnop
-              label="Tijdsbesparing per bedrijf (uur / jaar)"
+              label={
+                <>
+                  <strong>Tijdsbesparing per bedrijf</strong> (uur / jaar)
+                </>
+              }
               open={toonBedrijven}
               paneelId="paneel-bedrijven"
               onClick={() => setToonBedrijven((huidig) => !huidig)}
@@ -276,7 +300,7 @@ export default function App() {
               <ul className="lijst">
                 {zichtbaar.map((useCase) => (
                   <UseCaseRij
-                    key={useCase.id}
+                    key={`${useCase.id}-${herstelTeller}`}
                     useCase={useCase}
                     werkweken={werkweken}
                     teltMee={teltMee(useCase, telModus)}

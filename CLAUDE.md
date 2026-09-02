@@ -62,7 +62,9 @@ Poppins voor koppen en cijfers, Inter voor bodytekst. Vormtaal: bogen en halve
 cirkels, pill-vormige knoppen. De kop bestaat uit het HUMAIN-beeldmerk met
 mascotte Buddy (`public/beeldmerk.png`) en het woord "Urenmikker" ernaast, verder
 niets. Ontbreekt het beeldbestand, dan valt `src/components/Beeldmerk.tsx` terug
-op het woordmerk in tekst.
+op het woordmerk in tekst. Het beeldmerk is een knop: klikken zet de pagina terug
+in de beginstand. Een opengeklapte regel houdt zijn stand in de regel zelf, dus
+die gaat via `herstelTeller` in de `key` weer dicht.
 
 Het beeldmerk is afgeleid van `Beeldmerk Humain_RGB.png` (1920x1010). Dat bestand
 heeft een halftransparante groene waas over het hele vlak en een spiegeling onder

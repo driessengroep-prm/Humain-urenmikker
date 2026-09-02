@@ -14,7 +14,7 @@ export function BedrijfOverzicht({ totalen }: BedrijfOverzichtProps) {
   return (
     <section className="paneel" aria-labelledby="bedrijven-titel">
       <h2 id="bedrijven-titel" className="paneel__titel">
-        Tijdsbesparing per bedrijf (uur / jaar)
+        <strong>Tijdsbesparing per bedrijf</strong> (uur / jaar)
       </h2>
       <div className="afdelingen">
         {totalen.map((totaal) => {

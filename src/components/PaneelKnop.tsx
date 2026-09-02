@@ -1,7 +1,9 @@
+import type { ReactNode } from 'react';
+
 interface PaneelKnopProps {
   /** Het getal dat ook zonder uitklappen zichtbaar moet zijn; mag ontbreken. */
   waarde?: string;
-  label: string;
+  label: ReactNode;
   /** Klein accent rechts in de knop, bijvoorbeeld het percentage. */
   badge?: string;
   open: boolean;

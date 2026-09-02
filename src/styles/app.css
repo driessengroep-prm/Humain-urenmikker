@@ -199,6 +199,22 @@ textarea {
   line-height: 1;
 }
 
+/* Het beeldmerk is een knop: klikken zet de pagina terug in de beginstand. */
+.kop__thuis {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: opacity 0.15s ease;
+}
+.kop__thuis:hover {
+  opacity: 0.75;
+}
+
 /* Het HUMAIN-beeldmerk met Buddy; de hoogte bepaalt de maat van de kop. */
 .kop__beeldmerk {
   height: 52px;
@@ -332,6 +348,12 @@ textarea {
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
+.paneelknop__label strong {
+  font-family: var(--font-kop);
+  font-weight: 600;
+  color: var(--petrol);
+}
+
 .paneelknop__label {
   font-size: 13.5px;
   color: var(--tekst-zacht);
@@ -393,6 +415,11 @@ textarea {
   border-radius: var(--radius-kaart);
   box-shadow: var(--schaduw-zacht);
   padding: 20px;
+}
+
+.paneel__titel strong {
+  font-weight: 700;
+  color: var(--petrol);
 }
 
 .paneel__titel {
