@@ -1,6 +1,7 @@
 import { config } from '../config';
 import { BEDRIJVEN, isBedrijf, isStatus } from '../types';
 import type { Bedrijf, NieuweUseCase, UseCase, UseCasePatch, UseCasesBestand } from '../types';
+import { volgendNummer } from '../lib/nummering';
 import { UseCaseNietGevondenError, type DataStore } from './dataStore';
 
 /**
@@ -28,7 +29,7 @@ export class JsonDataStore implements DataStore {
   async add(nieuwe: NieuweUseCase): Promise<UseCase> {
     const cases = await this.zorgVoorData();
     // De nummering loopt door op de hoogste die er al is.
-    const nummer = nieuwe.nummer ?? this.volgendNummer(cases);
+    const nummer = nieuwe.nummer ?? volgendNummer(cases);
     const useCase: UseCase = { ...nieuwe, nummer, id: `uc-${String(nummer).padStart(3, '0')}` };
     cases.unshift(useCase);
     return { ...useCase };
@@ -48,10 +49,6 @@ export class JsonDataStore implements DataStore {
     const index = cases.findIndex((c) => c.id === id);
     if (index === -1) throw new UseCaseNietGevondenError(id);
     cases.splice(index, 1);
-  }
-
-  private volgendNummer(cases: UseCase[]): number {
-    return cases.reduce((hoogste, c) => Math.max(hoogste, c.nummer ?? 0), 0) + 1;
   }
 
   private zorgVoorData(): Promise<UseCase[]> {

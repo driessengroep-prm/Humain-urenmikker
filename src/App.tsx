@@ -293,13 +293,6 @@ export default function App() {
 
       </main>
 
-      <footer className="voet">
-        <p>
-          HUMAIN Urenmikker · jaardoel {config.jaardoelUren.toLocaleString('nl-NL')} uur · bron:{' '}
-          <code>use-cases.json</code> · wijzigingen in deze versie zijn nog niet centraal opgeslagen.
-        </p>
-      </footer>
-
       {toonNieuw && (
         <NieuweUseCaseModal
           standaardBedrijf={bedrijfFilter === 'alle' ? undefined : bedrijfFilter}

@@ -105,7 +105,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   bedrijf, afdeling/team, tijdsbesparing, status). `nummer` is het volgnummer uit
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
   tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
-  de dataStore, want die kent de hele verzameling.
+  de dataStore, want die kent de hele verzameling. Beide implementaties gebruiken
+  daarvoor `lib/nummering.ts`: één hoger dan het hoogste nummer dat in gebruik
+  is, zodat een verwijderd nummer weer vrijkomt en bestaande nummers naar
+  dezelfde regel in de sheet blijven wijzen.
 - Omschrijving en opmerkingen zijn in de lijst tot twee regels afgekapt. De knop
   "Openen of wijzigen" toont ze eronder volledig over de hele breedte
   (`.rij__details`, `white-space: pre-line` zodat regeleinden uit de sheet

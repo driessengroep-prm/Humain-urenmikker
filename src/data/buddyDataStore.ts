@@ -1,5 +1,6 @@
 import { BEDRIJVEN, isBedrijf, isStatus } from '../types';
 import type { Bedrijf, NieuweUseCase, UseCase, UseCasePatch } from '../types';
+import { volgendNummer } from '../lib/nummering';
 import { BuddyClient, type BuddyConfig } from './buddyClient';
 import { UseCaseNietGevondenError, type DataStore } from './dataStore';
 
@@ -34,10 +35,17 @@ export class BuddyDataStore implements DataStore {
   }
 
   async add(nieuwe: NieuweUseCase): Promise<UseCase> {
+    /*
+     * Het volgnummer wordt hier bepaald en niet in het formulier: alleen de
+     * dataStore kent de hele lijst. Dat betekent één extra leesactie, maar de
+     * lijst staat er toch al zodat het uit de cache van Buddy komt.
+     */
+    const nummer = nieuwe.nummer ?? volgendNummer(await this.getAll());
+
     const [rij] = await this.client.run<BuddyRij>({
       operation: 'insert',
       table: this.tabel,
-      values: naarRij(nieuwe),
+      values: naarRij({ ...nieuwe, nummer }),
     });
 
     return naarUseCase(rij);
