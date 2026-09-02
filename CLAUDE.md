@@ -96,6 +96,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   rekeninstellingen, besparing per bedrijf) met hun paneel eronder. Daaronder de
   band: de buis links, meescrollend, en rechts de filters met de use case-lijst.
   Elke knop toont zijn getal ook als het paneel dicht is.
+- Het zoekveld boven de filters kijkt letterlijk in titel en omschrijving,
+  hoofdletterongevoelig. Bewust geen stamherkenning: "factur" vindt "Facturen",
+  "factuur" niet. Voorspelbaar boven slim, maar houd het in de gaten als
+  gebruikers erover vallen.
 - De use cases staan in een lijst met kolommen (nr, use case, instuurder,
   bedrijf, afdeling/team, tijdsbesparing, status). `nummer` is het volgnummer uit
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de

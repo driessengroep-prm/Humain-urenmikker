@@ -31,6 +31,7 @@ export default function App() {
   const [teamFilter, setTeamFilter] = useState<string | 'alle'>('alle');
   const [instuurderFilter, setInstuurderFilter] = useState<string | 'alle'>('alle');
   const [statusFilter, setStatusFilter] = useState<Status | 'alle'>('alle');
+  const [zoekterm, setZoekterm] = useState('');
   const [sortering, setSortering] = useState<Sortering>('besparing');
   const [werkweken, setWerkweken] = useState(config.werkwekenPerJaar);
   const [telModus, setTelModus] = useState<TelModus>(config.telModus);
@@ -115,8 +116,14 @@ export default function App() {
   }, [meterSet, werkweken, opties]);
 
   const zichtbaar = useMemo(() => {
+    // Hoofdletterongevoelig zoeken op een woord of zin in titel of omschrijving.
+    const zoek = zoekterm.trim().toLowerCase();
     const gefilterd = meterSet.filter(
-      (useCase) => statusFilter === 'alle' || useCase.status === statusFilter,
+      (useCase) =>
+        (statusFilter === 'alle' || useCase.status === statusFilter) &&
+        (zoek === '' ||
+          useCase.titel.toLowerCase().includes(zoek) ||
+          useCase.omschrijving.toLowerCase().includes(zoek)),
     );
     const gesorteerd = [...gefilterd];
     if (sortering === 'besparing') {
@@ -136,7 +143,7 @@ export default function App() {
     }
     // 'nieuwste' houdt de volgorde van de dataStore aan: nieuw toegevoegd staat vooraan.
     return gesorteerd;
-  }, [meterSet, statusFilter, sortering, werkweken]);
+  }, [meterSet, statusFilter, zoekterm, sortering, werkweken]);
 
   async function opslaanNieuw(nieuwe: NieuweUseCase) {
     const useCase = await voegToe(nieuwe);
@@ -256,6 +263,7 @@ export default function App() {
             team={teamFilter}
             instuurder={instuurderFilter}
             status={statusFilter}
+            zoekterm={zoekterm}
             sortering={sortering}
             aantal={zichtbaar.length}
             teams={teams}
@@ -264,6 +272,7 @@ export default function App() {
             onTeam={setTeamFilter}
             onInstuurder={setInstuurderFilter}
             onStatus={setStatusFilter}
+            onZoekterm={setZoekterm}
             onSortering={setSortering}
           />
 

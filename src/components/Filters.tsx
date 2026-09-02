@@ -15,6 +15,7 @@ interface FiltersProps {
   team: string | 'alle';
   instuurder: string | 'alle';
   status: Status | 'alle';
+  zoekterm: string;
   sortering: Sortering;
   aantal: number;
   /** Teams die in de huidige selectie voorkomen, alfabetisch. */
@@ -25,6 +26,7 @@ interface FiltersProps {
   onTeam(waarde: string | 'alle'): void;
   onInstuurder(waarde: string | 'alle'): void;
   onStatus(waarde: Status | 'alle'): void;
+  onZoekterm(waarde: string): void;
   onSortering(waarde: Sortering): void;
 }
 
@@ -33,6 +35,7 @@ export function Filters({
   team,
   instuurder,
   status,
+  zoekterm,
   sortering,
   aantal,
   teams,
@@ -41,10 +44,24 @@ export function Filters({
   onTeam,
   onInstuurder,
   onStatus,
+  onZoekterm,
   onSortering,
 }: FiltersProps) {
   return (
     <>
+      <div className="veld zoekveld">
+        <label className="veld__label" htmlFor="filter-zoek">
+          Zoeken
+        </label>
+        <input
+          id="filter-zoek"
+          type="search"
+          value={zoekterm}
+          onChange={(event) => onZoekterm(event.target.value)}
+          placeholder="Zoek een woord of zin in de titel of de omschrijving"
+        />
+      </div>
+
       <div className="filters">
         <div className="veld">
           <label className="veld__label" htmlFor="filter-bedrijf">

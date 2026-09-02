@@ -634,6 +634,18 @@ textarea {
 
 /* --- Filters -------------------------------------------------------------- */
 
+/* Zoekveld over de volle breedte, boven de keuzelijsten. */
+.zoekveld {
+  margin: 0 0 12px;
+}
+.zoekveld input {
+  width: 100%;
+}
+/* De kruisjes die de browser zelf tekent, in de kleur van de tool. */
+.zoekveld input::-webkit-search-cancel-button {
+  cursor: pointer;
+}
+
 .filters {
   /*
    * Raster in plaats van flex: zo delen de keuzelijsten de breedte gelijk en
