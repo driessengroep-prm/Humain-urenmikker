@@ -126,7 +126,7 @@ Alles staat in **`src/config.ts`**:
 | Waarde | Default | Betekenis |
 | --- | --- | --- |
 | `jaardoelUren` | `10000` | Bij deze waarde is de buis vol. |
-| `werkwekenPerJaar` | `50.8` | Omrekenfactor week → jaar. |
+| `werkwekenPerJaar` | `46` | Omrekenfactor week → jaar. |
 | `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alle use cases mee. |
 | `gerealiseerdeStatussen` | `['Done']` | Wat als gerealiseerd geldt. |
 | `potentieleStatussen` | `['Idee', 'In behandeling']` | Wat als potentieel geldt. |

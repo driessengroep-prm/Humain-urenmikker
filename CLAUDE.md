@@ -20,7 +20,7 @@ voor lokaal werken zonder Buddy.
    `createDataStore()` en de hook `useUseCases`. Dat is de reden dat de opslag
    verwisseld kon worden voor Buddy Data zonder één component aan te raken —
    breek het niet.
-2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken (50,8) en
+2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken (46) en
    telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
    in de UI te wijzigen: één stand voor iedereen die de tool opent. Rekenen zelf gebeurt in
    `src/lib/uren.ts`.

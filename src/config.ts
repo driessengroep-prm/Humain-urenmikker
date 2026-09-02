@@ -25,7 +25,7 @@ export const config = {
    * Aantal werkweken per jaar waarmee week -> jaar wordt gerekend.
    * uren_per_jaar = uren_per_week * werkweken
    */
-  werkwekenPerJaar: getal(import.meta.env.VITE_WERKWEKEN, 50.8),
+  werkwekenPerJaar: getal(import.meta.env.VITE_WERKWEKEN, 46),
 
   /**
    * Standaard telt alleen gerealiseerde besparing (status = Done) mee in de meter.
