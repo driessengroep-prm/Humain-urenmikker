@@ -20,8 +20,9 @@ voor lokaal werken zonder Buddy.
    `createDataStore()` en de hook `useUseCases`. Dat is de reden dat de opslag
    verwisseld kon worden voor Buddy Data zonder één component aan te raken —
    breek het niet.
-2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken en telmodus
-   horen daar, niet als los getal in een component. Rekenen zelf gebeurt in
+2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken (50,8) en
+   telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
+   in de UI te wijzigen: één stand voor iedereen die de tool opent. Rekenen zelf gebeurt in
    `src/lib/uren.ts`.
 3. **Brondata is per week, de meter toont per jaar.** `urenPerJaar()` is de
    enige plek waar die omrekening staat.
@@ -92,8 +93,8 @@ vormgeving te bekijken of te delen zonder `npm install`.
 - Komen er knikkers bij, dan vallen ze van bovenaf in de buis (`knikkerValt`).
   Dat hoort alleen te gebeuren als er iets is afgerond, niet bij filteren; de
   buis vergelijkt daarvoor de `selectieSleutel` met de vorige render.
-- Indeling van de pagina: bovenaan drie uitklapknoppen (gerealiseerde besparing,
-  rekeninstellingen, besparing per bedrijf) met hun paneel eronder. Daaronder de
+- Indeling van de pagina: bovenaan twee uitklapknoppen (gerealiseerde besparing
+  en tijdsbesparing per bedrijf) met hun paneel eronder. Daaronder de
   band: de buis links, meescrollend, en rechts de filters met de use case-lijst.
   Elke knop toont zijn getal ook als het paneel dicht is.
 - Het zoekveld boven de filters kijkt letterlijk in titel en omschrijving,

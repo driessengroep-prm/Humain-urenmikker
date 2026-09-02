@@ -126,7 +126,7 @@ Alles staat in **`src/config.ts`**:
 | Waarde | Default | Betekenis |
 | --- | --- | --- |
 | `jaardoelUren` | `10000` | Bij deze waarde is de buis vol. |
-| `werkwekenPerJaar` | `46` | Omrekenfactor week → jaar. |
+| `werkwekenPerJaar` | `50.8` | Omrekenfactor week → jaar. |
 | `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alle use cases mee. |
 | `gerealiseerdeStatussen` | `['Done']` | Wat als gerealiseerd geldt. |
 | `potentieleStatussen` | `['Idee', 'In behandeling']` | Wat als potentieel geldt. |
@@ -138,8 +138,9 @@ een scenario te publiceren zonder de code aan te passen:
 VITE_WERKWEKEN=48 VITE_TELMODUS=alle-statussen npm run build
 ```
 
-In de tool zelf zitten werkweken en telmodus ook onder **Rekeninstellingen**.
-Dat past alleen de huidige sessie aan; de startwaarden komen uit de config.
+Deze waarden zijn niet in de tool zelf in te stellen: de meter rekent altijd met
+het aantal werkweken hierboven en telt alleen use cases met status `Done`. Wil je
+dat anders, pas dan de config aan (of geef de env-variabele mee) en bouw opnieuw.
 
 De meter volgt het **bedrijfs- en teamfilter** (zo zie je de bijdrage van één
 label), maar niet het statusfilter — welke statussen meetellen bepaalt de

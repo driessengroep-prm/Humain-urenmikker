@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { config, type TelModus } from './config';
+import { config } from './config';
 import { useUseCases } from './hooks/useUseCases';
 import { berekenSegmenten, berekenTotalen, perBedrijf, teltMee, urenPerJaar } from './lib/uren';
 import { getal, percentage } from './lib/format';
@@ -8,7 +8,6 @@ import { BedrijfOverzicht } from './components/BedrijfOverzicht';
 import { Buis } from './components/Buis';
 import { ExportModal } from './components/ExportModal';
 import { Filters, type Sortering } from './components/Filters';
-import { Instellingen } from './components/Instellingen';
 import { Kop } from './components/Kop';
 import { NieuweUseCaseModal } from './components/NieuweUseCaseModal';
 import { PaneelKnop } from './components/PaneelKnop';
@@ -33,11 +32,11 @@ export default function App() {
   const [statusFilter, setStatusFilter] = useState<Status | 'alle'>('alle');
   const [zoekterm, setZoekterm] = useState('');
   const [sortering, setSortering] = useState<Sortering>('besparing');
-  const [werkweken, setWerkweken] = useState(config.werkwekenPerJaar);
-  const [telModus, setTelModus] = useState<TelModus>(config.telModus);
+  // Vaste rekenwaarden uit src/config.ts; niet meer in te stellen in de UI.
+  const werkweken = config.werkwekenPerJaar;
+  const telModus = config.telModus;
   const [gemarkeerdeId, setGemarkeerdeId] = useState<string | null>(null);
   const [toonTeller, setToonTeller] = useState(false);
-  const [toonInstellingen, setToonInstellingen] = useState(false);
   const [toonBedrijven, setToonBedrijven] = useState(false);
   const [toonNieuw, setToonNieuw] = useState(false);
   const [toonExport, setToonExport] = useState(false);
@@ -191,15 +190,7 @@ export default function App() {
               onClick={() => setToonTeller((huidig) => !huidig)}
             />
             <PaneelKnop
-              waarde={`${werkweken}`}
-              label="werkweken · rekeninstellingen"
-              open={toonInstellingen}
-              paneelId="paneel-instellingen"
-              onClick={() => setToonInstellingen((huidig) => !huidig)}
-            />
-            <PaneelKnop
-              waarde={`${bedrijfTotalen.length}`}
-              label="bedrijven · besparing per bedrijf"
+              label="Tijdsbesparing per bedrijf (uur / jaar)"
               open={toonBedrijven}
               paneelId="paneel-bedrijven"
               onClick={() => setToonBedrijven((huidig) => !huidig)}
@@ -213,16 +204,6 @@ export default function App() {
                 jaardoel={config.jaardoelUren}
                 werkweken={werkweken}
                 telModus={telModus}
-              />
-            )}
-          </div>
-          <div id="paneel-instellingen" hidden={!toonInstellingen}>
-            {toonInstellingen && (
-              <Instellingen
-                werkweken={werkweken}
-                telModus={telModus}
-                onWerkweken={setWerkweken}
-                onTelModus={setTelModus}
               />
             )}
           </div>
@@ -250,7 +231,7 @@ export default function App() {
               segmenten={segmenten}
               gemarkeerdeId={gemarkeerdeId}
               potentieelTeltMee={telModus === 'alle-statussen'}
-              selectieSleutel={`${bedrijfFilter}|${teamFilter}|${instuurderFilter}|${telModus}|${werkweken}`}
+              selectieSleutel={`${bedrijfFilter}|${teamFilter}|${instuurderFilter}`}
             />
           </section>
 

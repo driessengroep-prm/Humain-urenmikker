@@ -4,6 +4,9 @@
  * Alles wat met rekenen en tellen te maken heeft staat hier, zodat er geen
  * losse magische getallen door de UI zwerven. Waarden zijn te overschrijven met
  * env-variabelen bij de build (bijv. VITE_WERKWEKEN=48 npm run build).
+ *
+ * Deze waarden staan niet meer in de UI: de tool rekent altijd met het aantal
+ * werkweken hieronder en telt alleen gerealiseerde use cases mee.
  */
 
 /** Welke statussen tellen mee in de meter. */
@@ -22,7 +25,7 @@ export const config = {
    * Aantal werkweken per jaar waarmee week -> jaar wordt gerekend.
    * uren_per_jaar = uren_per_week * werkweken
    */
-  werkwekenPerJaar: getal(import.meta.env.VITE_WERKWEKEN, 46),
+  werkwekenPerJaar: getal(import.meta.env.VITE_WERKWEKEN, 50.8),
 
   /**
    * Standaard telt alleen gerealiseerde besparing (status = Done) mee in de meter.

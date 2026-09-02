@@ -1,6 +1,6 @@
 interface PaneelKnopProps {
-  /** Het getal dat ook zonder uitklappen zichtbaar moet zijn. */
-  waarde: string;
+  /** Het getal dat ook zonder uitklappen zichtbaar moet zijn; mag ontbreken. */
+  waarde?: string;
   label: string;
   /** Klein accent rechts in de knop, bijvoorbeeld het percentage. */
   badge?: string;
@@ -27,7 +27,7 @@ export function PaneelKnop({
       aria-expanded={open}
       aria-controls={paneelId}
     >
-      <span className="paneelknop__waarde">{waarde}</span>
+      {waarde && <span className="paneelknop__waarde">{waarde}</span>}
       <span className="paneelknop__label">{label}</span>
       {badge && <span className="paneelknop__badge">{badge}</span>}
       <span className="paneelknop__chevron" aria-hidden="true" />

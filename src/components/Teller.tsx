@@ -1,4 +1,4 @@
-import { getal, percentage } from '../lib/format';
+import { decimaal, getal, percentage } from '../lib/format';
 import type { Totalen } from '../lib/uren';
 import type { TelModus } from '../config';
 
@@ -22,7 +22,7 @@ export function Teller({ totalen, jaardoel, werkweken, telModus }: TellerProps) 
         <span className="teller__badge">{percentage(totalen.percentage)}</span>
       </div>
       <p className="teller__label">
-        Omgerekend met {werkweken} werkweken per jaar
+        Omgerekend met {decimaal(werkweken)} werkweken per jaar
         {alleStatussen ? ' — ideeën en trajecten tellen mee' : ' — alleen use cases met status Done'}
       </p>
 

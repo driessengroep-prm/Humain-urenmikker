@@ -16,3 +16,8 @@ export function urenPerWeekLabel(waarde: number | null): string {
   if (waarde === null) return 'nog niet ingevuld';
   return `${eenDecimaal.format(waarde)} uur/week`;
 }
+
+/** 50.8 -> "50,8", 46 -> "46" — Nederlandse notatie voor de werkweken. */
+export function decimaal(waarde: number): string {
+  return eenDecimaal.format(waarde);
+}
