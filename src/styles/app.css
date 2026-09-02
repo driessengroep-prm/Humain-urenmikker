@@ -634,9 +634,25 @@ textarea {
 
 /* --- Filters -------------------------------------------------------------- */
 
-/* Zoekveld over de volle breedte, boven de keuzelijsten. */
-.zoekveld {
+/*
+ * Het zoekveld staat boven de keuzelijsten en beslaat twee van hun kolommen.
+ * Exact hetzelfde raster als .filters, inclusief auto-fit, zodat de kolommen
+ * even breed uitvallen.
+ */
+.zoekbalk {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 12px 14px;
   margin: 0 0 12px;
+}
+.zoekveld {
+  grid-column: span 2;
+}
+/* Past er maar één kolom, dan is twee overspannen breder dan het scherm. */
+@media (max-width: 560px) {
+  .zoekveld {
+    grid-column: 1 / -1;
+  }
 }
 .zoekveld input {
   width: 100%;

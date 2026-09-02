@@ -49,17 +49,26 @@ export function Filters({
 }: FiltersProps) {
   return (
     <>
-      <div className="veld zoekveld">
-        <label className="veld__label" htmlFor="filter-zoek">
-          Zoeken
-        </label>
-        <input
-          id="filter-zoek"
-          type="search"
-          value={zoekterm}
-          onChange={(event) => onZoekterm(event.target.value)}
-          placeholder="Zoek een woord of zin in de titel of de omschrijving"
-        />
+      <div className="zoekbalk">
+        <div className="veld zoekveld">
+          <label className="veld__label" htmlFor="filter-zoek">
+            Zoeken
+          </label>
+          <input
+            id="filter-zoek"
+            type="search"
+            value={zoekterm}
+            onChange={(event) => onZoekterm(event.target.value)}
+            placeholder="Zoek een woord of zin"
+          />
+        </div>
+        {/*
+          Drie lege cellen houden de overige kolommen bezet. Zonder die zou
+          auto-fit ze wegklappen en werd het zoekveld breder dan twee filters.
+        */}
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
+        <span aria-hidden="true" />
       </div>
 
       <div className="filters">
