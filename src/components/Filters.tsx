@@ -5,7 +5,7 @@ export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen';
 
 export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
   { waarde: 'besparing', label: 'Meeste besparing' },
-  { waarde: 'nummer', label: 'Nummer uit de sheet' },
+  { waarde: 'nummer', label: 'Use case nummer' },
   { waarde: 'nieuwste', label: 'Nieuwste eerst' },
   { waarde: 'in-te-vullen', label: 'Nog in te vullen' },
 ];
