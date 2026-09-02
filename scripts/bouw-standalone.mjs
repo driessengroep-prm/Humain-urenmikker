@@ -56,7 +56,8 @@ resultaat = vervang(
     beeldmerk ? `window.__BEELDMERK__ = ${JSON.stringify(beeldmerk)};` : ''
   }</script>\n    <script type="module">${escape(js)}</script>`,
 );
-resultaat = vervang(resultaat, /<link rel="icon"[^>]*>/, '');
+// Icoonverwijzingen wijzen naar losse bestanden; die zijn er niet in één bestand.
+resultaat = resultaat.replace(/\s*<link rel="(?:icon|apple-touch-icon)"[^>]*>/g, '');
 
 const doel = join(dist, 'humain-urenmikker-standalone.html');
 writeFileSync(doel, resultaat);

@@ -71,6 +71,10 @@ heel), de band onder y=592 links van x=1440 helemaal wissen (de spiegeling, maar
 niet Buddy's poten), bijsnijden op de inhoud en schalen naar 120 px hoog. Kleuren staan als CSS-custom-properties boven in
 `src/styles/app.css`; gebruik die tokens en geen losse hex-waarden.
 
+Het tabblad-icoon (`public/favicon.png` en `apple-touch-icon.png`) is de kop van
+Buddy, bijgesneden uit `humAIn_1_basis.png`. Bewust zijn kop en niet zijn hele
+lijf: op 16 en 32 px valt daar niets meer van te herkennen.
+
 `npm run standalone` bouwt één HTML-bestand met alles erin, voor bekijken en
 delen zonder server; `scripts/bouw-standalone.mjs` doet het inlinen. Let daar op
 twee valkuilen die er al in zitten: `String.replace` breidt `$&` en `` $` `` in de
