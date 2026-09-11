@@ -1,19 +1,13 @@
-import { BEDRIJVEN, STATUSSEN } from '../types';
-import type { Bedrijf, Status } from '../types';
+import { BEDRIJVEN, GEVOELIGE_DATA_OPTIES, STATUSSEN } from '../types';
+import type { Bedrijf, GevoeligeData, Status } from '../types';
 
-export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen' | 'gevoelige-data';
+export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen';
 
 export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
   { waarde: 'besparing', label: 'Meeste besparing' },
   { waarde: 'nummer', label: 'Use case nummer' },
   { waarde: 'nieuwste', label: 'Nieuwste eerst' },
   { waarde: 'in-te-vullen', label: 'Nog in te vullen' },
-  /*
-   * Kort gehouden: de volledige vraag ("Privacy- en/of bedrijfsgevoelige data?")
-   * valt in het dichtgeklapte keuzeveld halverwege een woord weg. Deze tekst is
-   * dezelfde als de kolomkop in de lijst, dus het is duidelijk waar hij op slaat.
-   */
-  { waarde: 'gevoelige-data', label: 'Gevoelige data' },
 ];
 
 interface FiltersProps {
@@ -21,6 +15,7 @@ interface FiltersProps {
   team: string | 'alle';
   instuurder: string | 'alle';
   status: Status | 'alle';
+  gevoeligeData: GevoeligeData | 'alle';
   zoekterm: string;
   sortering: Sortering;
   aantal: number;
@@ -32,6 +27,7 @@ interface FiltersProps {
   onTeam(waarde: string | 'alle'): void;
   onInstuurder(waarde: string | 'alle'): void;
   onStatus(waarde: Status | 'alle'): void;
+  onGevoeligeData(waarde: GevoeligeData | 'alle'): void;
   onZoekterm(waarde: string): void;
   onSortering(waarde: Sortering): void;
 }
@@ -41,6 +37,7 @@ export function Filters({
   team,
   instuurder,
   status,
+  gevoeligeData,
   zoekterm,
   sortering,
   aantal,
@@ -50,6 +47,7 @@ export function Filters({
   onTeam,
   onInstuurder,
   onStatus,
+  onGevoeligeData,
   onZoekterm,
   onSortering,
 }: FiltersProps) {
@@ -69,9 +67,12 @@ export function Filters({
           />
         </div>
         {/*
-          Drie lege cellen houden de overige kolommen bezet. Zonder die zou
-          auto-fit ze wegklappen en werd het zoekveld breder dan twee filters.
+          Lege cellen houden de overige kolommen bezet. Zonder die zou auto-fit ze
+          wegklappen en werd het zoekveld breder dan twee filters. Het aantal hoort
+          gelijk te zijn aan het aantal keuzelijsten hieronder, anders rekenen de
+          twee rasters met een andere kolombreedte.
         */}
+        <span aria-hidden="true" />
         <span aria-hidden="true" />
         <span aria-hidden="true" />
         <span aria-hidden="true" />
@@ -107,7 +108,8 @@ export function Filters({
             disabled={teams.length === 0}
           >
             <option value="alle">
-              {teams.length === 0 ? 'Geen teams ingevuld' : 'Alle afdelingen / teams'}
+              {/* Kort: het label erboven zegt al "Afdeling / team", en de kolom is smal. */}
+              {teams.length === 0 ? 'Geen teams' : 'Alle afdelingen'}
             </option>
             {teams.map((naam) => (
               <option key={naam} value={naam}>
@@ -128,7 +130,7 @@ export function Filters({
             disabled={instuurders.length === 0}
           >
             <option value="alle">
-              {instuurders.length === 0 ? 'Geen instuurders ingevuld' : 'Alle instuurders'}
+              {instuurders.length === 0 ? 'Geen instuurders' : 'Alle instuurders'}
             </option>
             {instuurders.map((naam) => (
               <option key={naam} value={naam}>
@@ -151,6 +153,25 @@ export function Filters({
             {STATUSSEN.map((naam) => (
               <option key={naam} value={naam}>
                 {naam}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div className="veld">
+          <label className="veld__label" htmlFor="filter-gevoelige-data">
+            Gevoelige data
+          </label>
+          <select
+            id="filter-gevoelige-data"
+            value={gevoeligeData}
+            title="Privacy- en/of bedrijfsgevoelige data?"
+            onChange={(event) => onGevoeligeData(event.target.value as GevoeligeData | 'alle')}
+          >
+            <option value="alle">Alle antwoorden</option>
+            {GEVOELIGE_DATA_OPTIES.map((optie) => (
+              <option key={optie} value={optie}>
+                {optie}
               </option>
             ))}
           </select>

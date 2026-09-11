@@ -14,9 +14,6 @@ import { PaneelKnop } from './components/PaneelKnop';
 import { Teller } from './components/Teller';
 import { UseCaseRij } from './components/UseCaseRij';
 
-/** Rangorde bij sorteren op gevoelige data: eerst wat aandacht vraagt. */
-const GEVOELIG_VOLGORDE: Record<GevoeligeData, number> = { Ja: 0, Onbekend: 1, Nee: 2 };
-
 export default function App() {
   const {
     useCases,
@@ -33,6 +30,7 @@ export default function App() {
   const [teamFilter, setTeamFilter] = useState<string | 'alle'>('alle');
   const [instuurderFilter, setInstuurderFilter] = useState<string | 'alle'>('alle');
   const [statusFilter, setStatusFilter] = useState<Status | 'alle'>('alle');
+  const [gevoeligFilter, setGevoeligFilter] = useState<GevoeligeData | 'alle'>('alle');
   const [zoekterm, setZoekterm] = useState('');
   const [sortering, setSortering] = useState<Sortering>('besparing');
   // Vaste rekenwaarden uit src/config.ts; niet meer in te stellen in de UI.
@@ -128,6 +126,7 @@ export default function App() {
     const gefilterd = meterSet.filter(
       (useCase) =>
         (statusFilter === 'alle' || useCase.status === statusFilter) &&
+        (gevoeligFilter === 'alle' || useCase.gevoelige_data === gevoeligFilter) &&
         (zoek === '' ||
           useCase.titel.toLowerCase().includes(zoek) ||
           useCase.omschrijving.toLowerCase().includes(zoek)),
@@ -141,10 +140,6 @@ export default function App() {
       );
     } else if (sortering === 'nummer') {
       gesorteerd.sort((a, b) => (a.nummer ?? Infinity) - (b.nummer ?? Infinity));
-    } else if (sortering === 'gevoelige-data') {
-      // Op volgorde van wat aandacht vraagt: eerst de cases met gevoelige data, dan die waar
-      // niemand de vraag nog beantwoord heeft, en als laatste de cases waar het niet speelt.
-      gesorteerd.sort((a, b) => GEVOELIG_VOLGORDE[a.gevoelige_data] - GEVOELIG_VOLGORDE[b.gevoelige_data]);
     } else if (sortering === 'in-te-vullen') {
       gesorteerd.sort((a, b) => {
         const aLeeg = a.tijdsbesparing_uren_per_week === null ? 0 : 1;
@@ -154,7 +149,7 @@ export default function App() {
     }
     // 'nieuwste' houdt de volgorde van de dataStore aan: nieuw toegevoegd staat vooraan.
     return gesorteerd;
-  }, [meterSet, statusFilter, zoekterm, sortering, werkweken]);
+  }, [meterSet, statusFilter, gevoeligFilter, zoekterm, sortering, werkweken]);
 
   /** Alles terug naar hoe de pagina er bij het openen uitziet. */
   function herstelBeginstand() {
@@ -162,6 +157,7 @@ export default function App() {
     setTeamFilter('alle');
     setInstuurderFilter('alle');
     setStatusFilter('alle');
+    setGevoeligFilter('alle');
     setZoekterm('');
     setSortering('besparing');
     setToonTeller(false);
@@ -275,6 +271,7 @@ export default function App() {
             team={teamFilter}
             instuurder={instuurderFilter}
             status={statusFilter}
+            gevoeligeData={gevoeligFilter}
             zoekterm={zoekterm}
             sortering={sortering}
             aantal={zichtbaar.length}
@@ -284,6 +281,7 @@ export default function App() {
             onTeam={setTeamFilter}
             onInstuurder={setInstuurderFilter}
             onStatus={setStatusFilter}
+            onGevoeligeData={setGevoeligFilter}
             onZoekterm={setZoekterm}
             onSortering={setSortering}
           />

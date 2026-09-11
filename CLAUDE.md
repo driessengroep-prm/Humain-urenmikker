@@ -104,6 +104,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   en tijdsbesparing per bedrijf) met hun paneel eronder. Daaronder de
   band: de buis links, meescrollend, en rechts de filters met de use case-lijst.
   Elke knop toont zijn getal ook als het paneel dicht is.
+- Het zoekveld staat in een eigen raster boven de filterrij en overspant twee
+  kolommen. Die twee rasters moeten evenveel kolommen hebben, anders rekenen ze
+  met een andere kolombreedte en is het zoekveld niet meer even breed als twee
+  filters: komt er een filter bij, zet er dan ook een lege cel bij in `.zoekbalk`.
 - Het zoekveld boven de filters kijkt letterlijk in titel en omschrijving,
   hoofdletterongevoelig. Bewust geen stamherkenning: "factur" vindt "Facturen",
   "factuur" niet. Voorspelbaar boven slim, maar houd het in de gaten als
@@ -112,11 +116,12 @@ vormgeving te bekijken of te delen zonder `npm install`.
   bedrijf, afdeling/team, tijdsbesparing, gevoelige data, status). In die kolom
   krijgt alleen `Ja` een markering: dat is het antwoord waar de FG iets mee moet.
   `Nee` en `Onbekend` blijven stil, anders staat de lijst vol gekleurde vlakjes
-  die niets betekenen. Sorteren op die kolom zet ze op volgorde van wat aandacht
-  vraagt: `Ja`, dan `Onbekend`, dan `Nee` (`GEVOELIG_VOLGORDE` in `App.tsx`) - niet
-  alfabetisch, want dan begint de lijst bij `Ja` en eindigt hij bij `Onbekend`
-  terwijl daar juist nog werk ligt. In het keuzeveld heet die optie kortweg
-  "Gevoelige data": de hele vraag valt daar halverwege een woord weg. `nummer` is het volgnummer uit
+  die niets betekenen. Er is een filter "Gevoelige data" naast
+  Status; sorteren op dit veld zat er even in maar is eruit gehaald, want dat
+  schuift alleen en laat de rest gewoon staan - wie de vraag stelt wil de andere
+  antwoorden niet zien. Het filter heet kortweg "Gevoelige data", net als de
+  kolomkop: de hele vraag valt in een dichtgeklapt keuzeveld halverwege een woord
+  weg. Hij staat wel voluit in de `title`. `nummer` is het volgnummer uit
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
   tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
   de dataStore, want die kent de hele verzameling. Beide implementaties gebruiken
