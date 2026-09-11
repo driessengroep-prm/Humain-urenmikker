@@ -112,7 +112,11 @@ vormgeving te bekijken of te delen zonder `npm install`.
   bedrijf, afdeling/team, tijdsbesparing, gevoelige data, status). In die kolom
   krijgt alleen `Ja` een markering: dat is het antwoord waar de FG iets mee moet.
   `Nee` en `Onbekend` blijven stil, anders staat de lijst vol gekleurde vlakjes
-  die niets betekenen. `nummer` is het volgnummer uit
+  die niets betekenen. Sorteren op die kolom zet ze op volgorde van wat aandacht
+  vraagt: `Ja`, dan `Onbekend`, dan `Nee` (`GEVOELIG_VOLGORDE` in `App.tsx`) - niet
+  alfabetisch, want dan begint de lijst bij `Ja` en eindigt hij bij `Onbekend`
+  terwijl daar juist nog werk ligt. In het keuzeveld heet die optie kortweg
+  "Gevoelige data": de hele vraag valt daar halverwege een woord weg. `nummer` is het volgnummer uit
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
   tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
   de dataStore, want die kent de hele verzameling. Beide implementaties gebruiken

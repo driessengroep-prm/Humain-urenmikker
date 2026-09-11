@@ -3,7 +3,7 @@ import { config } from './config';
 import { useUseCases } from './hooks/useUseCases';
 import { berekenSegmenten, berekenTotalen, perBedrijf, teltMee, urenPerJaar } from './lib/uren';
 import { getal, percentage } from './lib/format';
-import type { Bedrijf, NieuweUseCase, Status } from './types';
+import type { Bedrijf, GevoeligeData, NieuweUseCase, Status } from './types';
 import { BedrijfOverzicht } from './components/BedrijfOverzicht';
 import { Buis } from './components/Buis';
 import { ExportModal } from './components/ExportModal';
@@ -13,6 +13,9 @@ import { NieuweUseCaseModal } from './components/NieuweUseCaseModal';
 import { PaneelKnop } from './components/PaneelKnop';
 import { Teller } from './components/Teller';
 import { UseCaseRij } from './components/UseCaseRij';
+
+/** Rangorde bij sorteren op gevoelige data: eerst wat aandacht vraagt. */
+const GEVOELIG_VOLGORDE: Record<GevoeligeData, number> = { Ja: 0, Onbekend: 1, Nee: 2 };
 
 export default function App() {
   const {
@@ -138,6 +141,10 @@ export default function App() {
       );
     } else if (sortering === 'nummer') {
       gesorteerd.sort((a, b) => (a.nummer ?? Infinity) - (b.nummer ?? Infinity));
+    } else if (sortering === 'gevoelige-data') {
+      // Op volgorde van wat aandacht vraagt: eerst de cases met gevoelige data, dan die waar
+      // niemand de vraag nog beantwoord heeft, en als laatste de cases waar het niet speelt.
+      gesorteerd.sort((a, b) => GEVOELIG_VOLGORDE[a.gevoelige_data] - GEVOELIG_VOLGORDE[b.gevoelige_data]);
     } else if (sortering === 'in-te-vullen') {
       gesorteerd.sort((a, b) => {
         const aLeeg = a.tijdsbesparing_uren_per_week === null ? 0 : 1;

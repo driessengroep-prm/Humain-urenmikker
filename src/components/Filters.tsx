@@ -1,13 +1,19 @@
 import { BEDRIJVEN, STATUSSEN } from '../types';
 import type { Bedrijf, Status } from '../types';
 
-export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen';
+export type Sortering = 'besparing' | 'nummer' | 'nieuwste' | 'in-te-vullen' | 'gevoelige-data';
 
 export const sorteerOpties: Array<{ waarde: Sortering; label: string }> = [
   { waarde: 'besparing', label: 'Meeste besparing' },
   { waarde: 'nummer', label: 'Use case nummer' },
   { waarde: 'nieuwste', label: 'Nieuwste eerst' },
   { waarde: 'in-te-vullen', label: 'Nog in te vullen' },
+  /*
+   * Kort gehouden: de volledige vraag ("Privacy- en/of bedrijfsgevoelige data?")
+   * valt in het dichtgeklapte keuzeveld halverwege een woord weg. Deze tekst is
+   * dezelfde als de kolomkop in de lijst, dus het is duidelijk waar hij op slaat.
+   */
+  { waarde: 'gevoelige-data', label: 'Gevoelige data' },
 ];
 
 interface FiltersProps {
