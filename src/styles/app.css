@@ -781,7 +781,8 @@ textarea {
 
 .lijst-blok {
   /* Eén raster voor de kopregel en alle rijen, zodat de kolommen uitlijnen. */
-  --lijst-kolommen: 42px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 128px 108px 154px;
+  --lijst-kolommen: 42px minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) 128px 100px
+    108px 154px;
   /*
    * De lijst staat naast de buis, dus zijn eigen breedte bepaalt of de kolommen
    * nog passen - niet die van het venster.
@@ -817,7 +818,8 @@ textarea {
   color: var(--tekst-zacht);
 }
 .lijst__kop span:nth-child(6),
-.lijst__kop span:nth-child(7) {
+.lijst__kop span:nth-child(7),
+.lijst__kop span:nth-child(8) {
   text-align: right;
 }
 
@@ -849,8 +851,31 @@ textarea {
   font-size: 13.5px;
 }
 .rij__cel--uren,
+.rij__cel--gevoelig,
 .rij__cel--status {
   text-align: right;
+}
+
+/*
+ * Privacy- en/of bedrijfsgevoelige data. Alleen "Ja" krijgt een markering: dat is
+ * het antwoord waar de FG iets mee moet. "Nee" en "Onbekend" blijven stil, anders
+ * staat de lijst vol met gekleurde vlakjes die niets betekenen.
+ */
+.gevoelig {
+  font-size: 13px;
+}
+.gevoelig--ja {
+  display: inline-block;
+  border-radius: var(--radius-pill);
+  padding: 3px 10px;
+  background: rgba(222, 90, 44, 0.14);
+  color: var(--terracotta-donker);
+  font-family: var(--font-kop);
+  font-size: 11.5px;
+  font-weight: 600;
+}
+.gevoelig--onbekend {
+  color: var(--tekst-zacht);
 }
 .rij__cel--actie {
   display: flex;
@@ -994,8 +1019,13 @@ textarea {
     grid-column: 1 / -1;
   }
   .rij__cel--uren,
+  .rij__cel--gevoelig,
   .rij__cel--status {
     text-align: left;
+  }
+  /* In blokweergave staat de kolomnaam er al; het onzichtbare label is dan dubbelop. */
+  .rij__cel--gevoelig .alleen-screenreader {
+    display: none;
   }
   .rij__cel--actie {
     grid-column: 1 / -1;

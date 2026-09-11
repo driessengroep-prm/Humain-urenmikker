@@ -23,6 +23,14 @@ export const BEDRIJVEN = [
 export type Bedrijf = (typeof BEDRIJVEN)[number];
 
 /**
+ * Antwoord op de vraag of er privacy- of bedrijfsgevoelige data bij een use case
+ * betrokken is. 'Onbekend' is geen verlegenheidswaarde maar een echt antwoord:
+ * bij de bestaande cases is het nooit gevraagd, en dat hoort zichtbaar te zijn.
+ */
+export const GEVOELIGE_DATA_OPTIES = ['Ja', 'Nee', 'Onbekend'] as const;
+export type GevoeligeData = (typeof GEVOELIGE_DATA_OPTIES)[number];
+
+/**
  * Eén use case zoals die in use-cases.json staat.
  * `instuurder`, `team`, `tijdsbesparing_uren_per_week` en `opmerkingen` zijn
  * bewust nullable: een case mag geanonimiseerd zijn, hoeft niet aan een team te
@@ -42,6 +50,8 @@ export interface UseCase {
   omschrijving: string;
   /** Vrije notitie uit de bronsheet (bijv. "wordt meegenomen bij integratie X"). */
   opmerkingen: string | null;
+  /** Of er privacy- en/of bedrijfsgevoelige data in het spel is. */
+  gevoelige_data: GevoeligeData;
 }
 
 /** Velden die de gebruiker opgeeft bij een nieuwe use case; het id komt uit de dataStore. */
@@ -66,4 +76,8 @@ export function isStatus(waarde: unknown): waarde is Status {
 
 export function isBedrijf(waarde: unknown): waarde is Bedrijf {
   return typeof waarde === 'string' && (BEDRIJVEN as readonly string[]).includes(waarde);
+}
+
+export function isGevoeligeData(waarde: unknown): waarde is GevoeligeData {
+  return typeof waarde === 'string' && (GEVOELIGE_DATA_OPTIES as readonly string[]).includes(waarde);
 }

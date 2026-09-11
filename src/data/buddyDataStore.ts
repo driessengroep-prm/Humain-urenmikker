@@ -1,4 +1,4 @@
-import { BEDRIJVEN, isBedrijf, isStatus } from '../types';
+import { BEDRIJVEN, isBedrijf, isGevoeligeData, isStatus } from '../types';
 import type { Bedrijf, NieuweUseCase, UseCase, UseCasePatch } from '../types';
 import { volgendNummer } from '../lib/nummering';
 import { BuddyClient, type BuddyConfig } from './buddyClient';
@@ -17,6 +17,17 @@ export class BuddyDataStore implements DataStore {
 
   private readonly client: BuddyClient;
 
+  /**
+   * Of de kolom `gevoelige_data` al in de tabel staat. Een kolom wordt niet vanzelf aangemaakt als
+   * dit veld in de code verschijnt: dat gebeurt in het beheerscherm van Buddy. Zolang hij ontbreekt
+   * blijft de rest van de tool gewoon werken en weigert alleen het opslaan van dit ene veld, met
+   * een melding die zegt wat er moet gebeuren. Stilzwijgend weglaten zou erger zijn: dan lijkt het
+   * opgeslagen en is het na een herlaadbeurt weg.
+   *
+   * null = nog niet vastgesteld; dat blijft zo tot er een rij langskomt.
+   */
+  private kolomAanwezig: boolean | null = null;
+
   constructor(config: BuddyConfig, private readonly tabel = 'use_cases') {
     this.client = new BuddyClient(config);
   }
@@ -30,6 +41,9 @@ export class BuddyDataStore implements DataStore {
       order: 'created_at.desc',
       limit: 1000,
     });
+
+    // Een select haalt alle kolommen op, dus de eerste rij vertelt of het veld bestaat.
+    if (rijen.length > 0) this.kolomAanwezig = 'gevoelige_data' in rijen[0];
 
     return rijen.map(naarUseCase);
   }
@@ -45,7 +59,7 @@ export class BuddyDataStore implements DataStore {
     const [rij] = await this.client.run<BuddyRij>({
       operation: 'insert',
       table: this.tabel,
-      values: naarRij({ ...nieuwe, nummer }),
+      values: this.controleerKolom(naarRij({ ...nieuwe, nummer })),
     });
 
     return naarUseCase(rij);
@@ -56,7 +70,7 @@ export class BuddyDataStore implements DataStore {
       operation: 'update',
       table: this.tabel,
       filters: [{ column: 'id', operator: 'eq', value: id }],
-      values: naarRij(patch),
+      values: this.controleerKolom(naarRij(patch)),
     });
 
     // Een lege uitkomst betekent hier "geen rij met dit id"; de API geeft daar geen 404 voor.
@@ -80,6 +94,27 @@ export class BuddyDataStore implements DataStore {
 
     if (rijen.length === 0) throw new UseCaseNietGevondenError(id);
   }
+
+  /**
+   * Houdt tegen dat een antwoord op de vraag over gevoelige data in het niets verdwijnt zolang de
+   * kolom nog niet bestaat. 'Onbekend' gaat er stilletjes af - dat is de stand die de database
+   * zonder die kolom toch al teruggeeft, dus daar raakt niemand iets kwijt. Bij een echt antwoord
+   * stopt het opslaan met een melding die zegt wat er moet gebeuren.
+   */
+  private controleerKolom(rij: Record<string, unknown>): Record<string, unknown> {
+    if (this.kolomAanwezig !== false || !('gevoelige_data' in rij)) return rij;
+
+    if (rij.gevoelige_data === 'Onbekend') {
+      const { gevoelige_data: _weg, ...rest } = rij;
+      return rest;
+    }
+
+    throw new Error(
+      'De kolom "gevoelige_data" bestaat nog niet in Buddy Data, dus dit antwoord kan niet ' +
+        'bewaard worden. Een beheerder voegt hem toe via Databases > urenmikker > Tabellen > ' +
+        'use_cases > Kolom (tekst, standaardwaarde Onbekend).',
+    );
+  }
 }
 
 /** Eén rij zoals de database hem teruggeeft. */
@@ -94,6 +129,7 @@ interface BuddyRij {
   status: string;
   omschrijving: string;
   opmerkingen: string | null;
+  gevoelige_data?: string | null;
 }
 
 function naarUseCase(rij: BuddyRij): UseCase {
@@ -121,6 +157,8 @@ function naarUseCase(rij: BuddyRij): UseCase {
     status: isStatus(rij.status) ? rij.status : 'Idee',
     omschrijving: rij.omschrijving ?? '',
     opmerkingen: rij.opmerkingen,
+    // Rijen van voor deze kolom hebben nog geen antwoord; dat is precies wat 'Onbekend' betekent.
+    gevoelige_data: isGevoeligeData(rij.gevoelige_data) ? rij.gevoelige_data : 'Onbekend',
   };
 }
 
@@ -145,6 +183,7 @@ function naarRij(waarden: UseCasePatch): Record<string, unknown> {
   if (waarden.status !== undefined) rij.status = waarden.status;
   if (waarden.omschrijving !== undefined) rij.omschrijving = waarden.omschrijving;
   if (waarden.opmerkingen !== undefined) rij.opmerkingen = waarden.opmerkingen;
+  if (waarden.gevoelige_data !== undefined) rij.gevoelige_data = waarden.gevoelige_data;
 
   return rij;
 }

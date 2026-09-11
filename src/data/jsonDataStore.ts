@@ -1,5 +1,5 @@
 import { config } from '../config';
-import { BEDRIJVEN, isBedrijf, isStatus } from '../types';
+import { BEDRIJVEN, isBedrijf, isGevoeligeData, isStatus } from '../types';
 import type { Bedrijf, NieuweUseCase, UseCase, UseCasePatch, UseCasesBestand } from '../types';
 import { volgendNummer } from '../lib/nummering';
 import { UseCaseNietGevondenError, type DataStore } from './dataStore';
@@ -120,5 +120,7 @@ function parseUseCase(ruw: unknown, index: number): UseCase {
     omschrijving: typeof r.omschrijving === 'string' ? r.omschrijving : '',
     opmerkingen:
       typeof r.opmerkingen === 'string' && r.opmerkingen.trim() ? r.opmerkingen : null,
+    // Bestaande bestanden kennen het veld niet; die cases zijn dus 'Onbekend'.
+    gevoelige_data: isGevoeligeData(r.gevoelige_data) ? r.gevoelige_data : 'Onbekend',
   };
 }

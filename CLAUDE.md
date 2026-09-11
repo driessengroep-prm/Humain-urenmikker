@@ -39,10 +39,15 @@ voor lokaal werken zonder Buddy.
    eigen controle die cijfers en één decimaalteken toelaat en de rest weigert.
    Dat is er om invoer als "onbekend" of "1 tot 6" te voorkomen, precies wat in
    de bronsheet misging.
-7. **Nullable blijft nullable.** `instuurder`, `team`, `opmerkingen` en
+7. **`gevoelige_data` is nooit leeg.** Het antwoord op "Privacy- en/of
+   bedrijfsgevoelige data?" is `Ja`, `Nee` of `Onbekend`, en `Onbekend` is een
+   echt antwoord: bij de 131 use cases uit de bronsheet is het nooit gevraagd.
+   Ontbreekt het veld in een bestand of een databaserij, dan wordt het `Onbekend`
+   en niet `null`.
+8. **Nullable blijft nullable.** `instuurder`, `team`, `opmerkingen` en
    `tijdsbesparing_uren_per_week` mogen `null` zijn; toon dat als "anoniem
    ingestuurd" en "nog niet ingevuld" in plaats van als 0.
-8. **Zeg eerlijk of iets bewaard wordt.** Draait de app op de terugval
+9. **Zeg eerlijk of iets bewaard wordt.** Draait de app op de terugval
    (`dataStore.persistent === false`), dan moet de UI melden dat wijzigingen
    alleen in deze sessie bestaan, en moet de export een geldige
    `use-cases.json` opleveren.
@@ -104,7 +109,10 @@ vormgeving te bekijken of te delen zonder `npm install`.
   "factuur" niet. Voorspelbaar boven slim, maar houd het in de gaten als
   gebruikers erover vallen.
 - De use cases staan in een lijst met kolommen (nr, use case, instuurder,
-  bedrijf, afdeling/team, tijdsbesparing, status). `nummer` is het volgnummer uit
+  bedrijf, afdeling/team, tijdsbesparing, gevoelige data, status). In die kolom
+  krijgt alleen `Ja` een markering: dat is het antwoord waar de FG iets mee moet.
+  `Nee` en `Onbekend` blijven stil, anders staat de lijst vol gekleurde vlakjes
+  die niets betekenen. `nummer` is het volgnummer uit
   kolom A van de sheet en bepaalt ook het `id` (`uc-042`). Een case die in de
   tool wordt toegevoegd krijgt het eerstvolgende nummer; die toekenning hoort in
   de dataStore, want die kent de hele verzameling. Beide implementaties gebruiken
@@ -193,6 +201,14 @@ Buddy:
 
 Let op: een verplichte kolom kan alleen mét standaardwaarde, anders zouden de
 bestaande rijen ineens ongeldig zijn.
+
+Zo is `gevoelige_data` erbij gekomen (tekst, standaardwaarde `Onbekend`). De app
+wacht die kolom niet af: `BuddyDataStore` ziet aan de opgehaalde rijen of hij
+bestaat, laat een `Onbekend` stilletjes weg zolang dat niet zo is (dat is toch de
+stand die de database teruggeeft) en weigert een echt antwoord met een melding die
+zegt wat er moet gebeuren. Zodra de kolom er staat werkt het zonder nieuwe deploy.
+`node scripts/controleer-kolommen.mjs` zegt met een rw-sleutel welke kolommen er
+al zijn.
 
 De kolom is meteen bruikbaar; je hoeft niets opnieuw te starten. Werk daarna
 `types.ts`, `jsonDataStore.ts`, `buddyDataStore.ts` en `lib/exporteer.ts` bij.

@@ -294,6 +294,7 @@ export default function App() {
                 <span>Bedrijf</span>
                 <span>Afdeling / team</span>
                 <span>Tijdsbesparing</span>
+                <span>Gevoelige data</span>
                 <span>Status</span>
                 <span />
               </div>

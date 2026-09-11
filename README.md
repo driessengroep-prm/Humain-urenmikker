@@ -59,7 +59,8 @@ te bewerken als op de gepubliceerde site op te vragen.
       "tijdsbesparing_uren_per_week": 6,     // mag null zijn (nog niet ingeschat)
       "status": "Done",                      // Idee | In behandeling | Done
       "omschrijving": "…",
-      "opmerkingen": "wordt meegenomen bij …"  // mag null zijn
+      "opmerkingen": "wordt meegenomen bij …",  // mag null zijn
+      "gevoelige_data": "Ja"                 // Ja | Nee | Onbekend
     }
   ]
 }
@@ -74,6 +75,12 @@ binnen zo'n bedrijf hoort niet in die lijst maar in het vrije veld `team`
 
 Het oudere veld `afdeling` wordt bij het inlezen nog geaccepteerd als alias voor
 `bedrijf`, zodat bestanden van voor deze wijziging blijven werken.
+`gevoelige_data` is het antwoord op de vraag "Privacy- en/of bedrijfsgevoelige
+data?" en is nooit leeg: ontbreekt het veld, dan staat er `Onbekend`. Dat is een
+echt antwoord en geen verlegenheidswaarde — bij de use cases uit de bronsheet is
+het nooit gevraagd, en dat hoort te zien te zijn. De vraag staat niet in de sheet;
+hij wordt in de tool zelf beantwoord.
+
 Een onbekende `status` valt bij het inlezen terug op `Idee`. Een onbekend
 `bedrijf` komt op het eerste bedrijf uit de lijst te staan met een waarschuwing
 in de console; het conversiescript meldt zulke waarden apart, zodat je er een
@@ -280,7 +287,17 @@ cp .env.example .env          # vul de drie VITE_BUDDY_-waarden in
 
 # eenmalig de bestaande use cases overzetten (met een rw-sleutel uit het beheerscherm)
 BUDDY_CLIENT_ID=bd_... BUDDY_CLIENT_SECRET=... node scripts/importeer-naar-buddy.mjs
+
+# nakijken of de tabel alle kolommen heeft die de app verwacht
+BUDDY_CLIENT_ID=bd_... BUDDY_CLIENT_SECRET=... node scripts/controleer-kolommen.mjs
 ```
+
+Een kolom ontstaat niet vanzelf als er een veld bij komt in de code; die maak je
+aan in het beheerscherm (Databases > urenmikker > Tabellen > `use_cases` > knop
+Kolom). Zolang een kolom ontbreekt blijft de rest van de tool werken en weigert
+alleen het opslaan van dat ene veld, met een melding die zegt wat er moet
+gebeuren. Stilzwijgend weglaten zou erger zijn: dan lijkt het opgeslagen en is
+het na een herlaadbeurt weg.
 
 ### Waar de app draait
 

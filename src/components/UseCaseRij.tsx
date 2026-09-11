@@ -1,6 +1,6 @@
 import { useEffect, useId, useState } from 'react';
-import { BEDRIJVEN, STATUSSEN } from '../types';
-import type { Bedrijf, Status, UseCase, UseCasePatch } from '../types';
+import { BEDRIJVEN, GEVOELIGE_DATA_OPTIES, STATUSSEN } from '../types';
+import type { Bedrijf, GevoeligeData, Status, UseCase, UseCasePatch } from '../types';
 import { getal, urenPerWeekLabel } from '../lib/format';
 import { urenPerJaar } from '../lib/uren';
 import { StatusBadge } from './StatusBadge';
@@ -40,6 +40,7 @@ export function UseCaseRij({
   const [instuurder, setInstuurder] = useState('');
   const [bedrijf, setBedrijf] = useState<Bedrijf>(useCase.bedrijf);
   const [team, setTeam] = useState('');
+  const [gevoeligeData, setGevoeligeData] = useState<GevoeligeData>(useCase.gevoelige_data);
   const [fout, setFout] = useState<string | null>(null);
   const [bezig, setBezig] = useState(false);
   const [vraagVerwijderen, setVraagVerwijderen] = useState(false);
@@ -56,12 +57,14 @@ export function UseCaseRij({
     setInstuurder(useCase.instuurder ?? '');
     setBedrijf(useCase.bedrijf);
     setTeam(useCase.team ?? '');
+    setGevoeligeData(useCase.gevoelige_data);
   }, [
     useCase.tijdsbesparing_uren_per_week,
     useCase.status,
     useCase.instuurder,
     useCase.bedrijf,
     useCase.team,
+    useCase.gevoelige_data,
   ]);
 
   const perJaar = urenPerJaar(useCase.tijdsbesparing_uren_per_week, werkweken);
@@ -83,8 +86,12 @@ export function UseCaseRij({
         instuurder: instuurder.trim() || null,
         bedrijf,
         team: team.trim() || null,
+        gevoelige_data: gevoeligeData,
       });
       setWijzigen(false);
+    } catch (error) {
+      // Zonder dit blijft het formulier open zonder uit te leggen waarom er niets gebeurde.
+      setFout(error instanceof Error ? error.message : 'Opslaan is niet gelukt.');
     } finally {
       setBezig(false);
     }
@@ -146,6 +153,14 @@ export function UseCaseRij({
           ) : (
             <span className="rij__leeg rij__leeg--nadruk">nog niet ingevuld</span>
           )}
+        </div>
+
+        <div className="rij__cel rij__cel--gevoelig">
+          <span className="rij__label">Gevoelige data</span>
+          <span className={`gevoelig gevoelig--${useCase.gevoelige_data.toLowerCase()}`}>
+            <span className="alleen-screenreader">Privacy- en/of bedrijfsgevoelige data: </span>
+            {useCase.gevoelige_data}
+          </span>
         </div>
 
         <div className="rij__cel rij__cel--status">
@@ -253,6 +268,23 @@ export function UseCaseRij({
                 {STATUSSEN.map((naam) => (
                   <option key={naam} value={naam}>
                     {naam}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="veld">
+              <label className="veld__label" htmlFor={`${veldId}-gevoelige-data`}>
+                Privacy- en/of bedrijfsgevoelige data?
+              </label>
+              <select
+                id={`${veldId}-gevoelige-data`}
+                value={gevoeligeData}
+                onChange={(event) => setGevoeligeData(event.target.value as GevoeligeData)}
+              >
+                {GEVOELIGE_DATA_OPTIES.map((optie) => (
+                  <option key={optie} value={optie}>
+                    {optie}
                   </option>
                 ))}
               </select>

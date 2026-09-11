@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { BEDRIJVEN, STATUSSEN } from '../types';
-import type { Bedrijf, NieuweUseCase, Status } from '../types';
+import { BEDRIJVEN, GEVOELIGE_DATA_OPTIES, STATUSSEN } from '../types';
+import type { Bedrijf, GevoeligeData, NieuweUseCase, Status } from '../types';
 import { Modal } from './Modal';
 
 interface NieuweUseCaseModalProps {
@@ -30,6 +30,7 @@ export function NieuweUseCaseModal({
   const [status, setStatus] = useState<Status>('Idee');
   const [instuurder, setInstuurder] = useState('');
   const [uren, setUren] = useState('');
+  const [gevoeligeData, setGevoeligeData] = useState<GevoeligeData>('Onbekend');
   const [fouten, setFouten] = useState<Partial<Record<Velden, string>>>({});
   const [bezig, setBezig] = useState(false);
 
@@ -79,6 +80,7 @@ export function NieuweUseCaseModal({
         status,
         instuurder: instuurder.trim(),
         tijdsbesparing_uren_per_week: waarde,
+        gevoelige_data: gevoeligeData,
         opmerkingen: null,
         nummer: null,
       });
@@ -234,6 +236,22 @@ export function NieuweUseCaseModal({
                 aria-describedby={fouten.uren ? 'fout-uren' : undefined}
               />
               <Fout veld="uren" />
+            </div>
+            <div className="veld">
+              <label className="veld__label" htmlFor="nieuw-gevoelige-data">
+                Privacy- en/of bedrijfsgevoelige data?
+              </label>
+              <select
+                id="nieuw-gevoelige-data"
+                value={gevoeligeData}
+                onChange={(event) => setGevoeligeData(event.target.value as GevoeligeData)}
+              >
+                {GEVOELIGE_DATA_OPTIES.map((optie) => (
+                  <option key={optie} value={optie}>
+                    {optie}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
         </div>

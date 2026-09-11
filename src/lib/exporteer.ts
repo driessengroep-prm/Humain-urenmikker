@@ -26,6 +26,7 @@ export function bouwBestand(useCases: UseCase[]): UseCasesBestand {
       status: useCase.status,
       omschrijving: useCase.omschrijving,
       opmerkingen: useCase.opmerkingen,
+      gevoelige_data: useCase.gevoelige_data,
     })),
   };
 }

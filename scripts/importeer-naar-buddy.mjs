@@ -65,6 +65,7 @@ const rijen = (bestand.use_cases ?? []).map((useCase) => ({
   status: useCase.status,
   omschrijving: useCase.omschrijving ?? '',
   opmerkingen: useCase.opmerkingen ?? null,
+  gevoelige_data: useCase.gevoelige_data ?? 'Onbekend',
   verwijderd: false,
 }));
 

@@ -161,6 +161,9 @@ for index, rij in enumerate(rijen, start=1):
         "opmerkingen": (
             verwijder_namen(tekst(opmerking), alle_namen) if ANONIEM else tekst(opmerking)
         ),
+        # De vraag naar privacy- of bedrijfsgevoelige data staat niet in de sheet; die
+        # wordt in de tool zelf beantwoord. Uit de sheet komt dus altijd "Onbekend".
+        "gevoelige_data": "Onbekend",
     })
 
 bestand = {
