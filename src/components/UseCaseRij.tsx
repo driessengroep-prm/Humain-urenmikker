@@ -25,6 +25,18 @@ function leesUren(invoer: string): number | null | undefined {
   return waarde;
 }
 
+/**
+ * Hoogte van een tekstvlak in het wijzigformulier, meegroeiend met de inhoud.
+ * De vlakken staan over de hele breedte, dus zo'n 110 tekens per regel is een
+ * redelijke schatting; met de greep rechtsonder kan het altijd bijgesteld worden.
+ */
+function regelsVoor(tekst: string): number {
+  const regels = tekst
+    .split('\n')
+    .reduce((totaal, regel) => totaal + Math.max(1, Math.ceil(regel.length / 110)), 0);
+  return Math.min(16, Math.max(3, regels));
+}
+
 /** Eén regel in de use case-lijst: titel, instuurder, bedrijf, team, besparing, status. */
 export function UseCaseRij({
   useCase,
@@ -35,6 +47,9 @@ export function UseCaseRij({
   onVerwijder,
 }: UseCaseRijProps) {
   const [wijzigen, setWijzigen] = useState(false);
+  const [titel, setTitel] = useState(useCase.titel);
+  const [omschrijving, setOmschrijving] = useState(useCase.omschrijving);
+  const [opmerkingen, setOpmerkingen] = useState('');
   const [uren, setUren] = useState('');
   const [status, setStatus] = useState<Status>(useCase.status);
   const [instuurder, setInstuurder] = useState('');
@@ -58,6 +73,9 @@ export function UseCaseRij({
     setBedrijf(useCase.bedrijf);
     setTeam(useCase.team ?? '');
     setGevoeligeData(useCase.gevoelige_data);
+    setTitel(useCase.titel);
+    setOmschrijving(useCase.omschrijving);
+    setOpmerkingen(useCase.opmerkingen ?? '');
   }, [
     useCase.tijdsbesparing_uren_per_week,
     useCase.status,
@@ -65,6 +83,9 @@ export function UseCaseRij({
     useCase.bedrijf,
     useCase.team,
     useCase.gevoelige_data,
+    useCase.titel,
+    useCase.omschrijving,
+    useCase.opmerkingen,
   ]);
 
   const perJaar = urenPerJaar(useCase.tijdsbesparing_uren_per_week, werkweken);
@@ -77,10 +98,18 @@ export function UseCaseRij({
       setFout('Vul een geldig aantal uren per week in, of laat het veld leeg.');
       return;
     }
+    // Zonder titel is een regel in de lijst niet meer te herkennen.
+    if (!titel.trim()) {
+      setFout('Vul een titel in.');
+      return;
+    }
     setFout(null);
     setBezig(true);
     try {
       await onOpslaan(useCase.id, {
+        titel: titel.trim(),
+        omschrijving: omschrijving.trim(),
+        opmerkingen: opmerkingen.trim() || null,
         tijdsbesparing_uren_per_week: urenWaarde,
         status,
         instuurder: instuurder.trim() || null,
@@ -182,23 +211,20 @@ export function UseCaseRij({
       </div>
 
       {wijzigen && (
-        <div className="rij__details">
-          <div>
-            <h4 className="rij__detailkop">Omschrijving</h4>
-            <p>{useCase.omschrijving || 'Niet ingevuld.'}</p>
-          </div>
-          {useCase.opmerkingen && (
-            <div>
-              <h4 className="rij__detailkop">Opmerkingen</h4>
-              <p>{useCase.opmerkingen}</p>
-            </div>
-          )}
-        </div>
-      )}
-
-      {wijzigen && (
         <form className="bewerk" onSubmit={opslaan}>
           <div className="bewerk__velden">
+            <div className="veld veld--vol">
+              <label className="veld__label" htmlFor={`${veldId}-titel`}>
+                Titel
+              </label>
+              <input
+                id={`${veldId}-titel`}
+                value={titel}
+                onChange={(event) => setTitel(event.target.value)}
+                aria-required="true"
+              />
+            </div>
+
             <div className="veld">
               <label className="veld__label" htmlFor={`${veldId}-instuurder`}>
                 Instuurder
@@ -288,6 +314,32 @@ export function UseCaseRij({
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="veld veld--vol">
+              <label className="veld__label" htmlFor={`${veldId}-omschrijving`}>
+                Omschrijving
+              </label>
+              <textarea
+                id={`${veldId}-omschrijving`}
+                value={omschrijving}
+                rows={regelsVoor(omschrijving)}
+                placeholder="Wat gebeurt er nu handmatig, en wat neemt AI en/of automatisering over?"
+                onChange={(event) => setOmschrijving(event.target.value)}
+              />
+            </div>
+
+            <div className="veld veld--vol">
+              <label className="veld__label" htmlFor={`${veldId}-opmerkingen`}>
+                Opmerkingen
+              </label>
+              <textarea
+                id={`${veldId}-opmerkingen`}
+                value={opmerkingen}
+                rows={regelsVoor(opmerkingen)}
+                placeholder="Bijvoorbeeld: wordt meegenomen bij de integratie van X"
+                onChange={(event) => setOpmerkingen(event.target.value)}
+              />
             </div>
           </div>
 

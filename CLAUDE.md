@@ -129,9 +129,16 @@ vormgeving te bekijken of te delen zonder `npm install`.
   is, zodat een verwijderd nummer weer vrijkomt en bestaande nummers naar
   dezelfde regel in de sheet blijven wijzen.
 - Omschrijving en opmerkingen zijn in de lijst tot twee regels afgekapt. De knop
-  "Openen of wijzigen" toont ze eronder volledig over de hele breedte
-  (`.rij__details`, `white-space: pre-line` zodat regeleinden uit de sheet
-  blijven staan); de afgekapte versie verdwijnt dan om dubbeling te voorkomen.
+  "Openen/wijzigen" toont ze eronder volledig én aanpasbaar, als tekstvlakken over
+  de hele breedte van het formulier (`.veld--vol`); de afgekapte versie verdwijnt
+  dan om dubbeling te voorkomen. Er staat bewust geen apart leesblok meer boven
+  het formulier: dat toonde dezelfde tekst een tweede keer. Een tekstvlak bewaart
+  de regeleinden uit de sheet en groeit mee met de inhoud (`regelsVoor`), met een
+  greep om bij te stellen.
+- In het wijzigformulier zijn titel, omschrijving en opmerkingen ook aan te
+  passen; alleen de titel is verplicht, want zonder titel is een regel in de lijst
+  niet meer te herkennen. Omschrijving en opmerkingen mogen leeg, anders zou een
+  case die uit de sheet zonder omschrijving kwam niet meer op te slaan zijn.
 - Verwijderen zit achter een bevestiging (`Modal` in `UseCaseRij`), en die knop
   staat in het wijzigformulier zodat je er niet per ongeluk op klikt. Kopregel en regels delen één rasterdefinitie via
   `--lijst-kolommen` op `.lijst-blok`; wijzig je een kolom, pas dan die ene

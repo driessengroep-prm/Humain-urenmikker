@@ -954,31 +954,6 @@ textarea {
 }
 
 /* Volledige tekst van een geopende regel, over de hele breedte leesbaar. */
-.rij__details {
-  display: grid;
-  gap: 12px;
-  margin-top: 12px;
-  padding: 14px 16px;
-  background: var(--wit);
-  border: 1px solid var(--hairline);
-  border-radius: 14px;
-}
-.rij__details p {
-  margin: 0;
-  font-size: 13.5px;
-  color: #4a616a;
-  white-space: pre-line;
-}
-.rij__detailkop {
-  margin: 0 0 3px;
-  font-family: var(--font-kop);
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--tekst-zacht);
-}
-
 .bewerk {
   display: grid;
   gap: 12px;
@@ -991,6 +966,16 @@ textarea {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr));
   gap: 12px 14px;
+}
+/* Titel en de twee tekstvlakken over de hele breedte; de rest deelt de kolommen. */
+.bewerk__velden .veld--vol {
+  grid-column: 1 / -1;
+}
+.bewerk textarea {
+  /* Hoger dan een invoerveld en met een greep, want hier staan hele alinea's in. */
+  border-radius: 16px;
+  line-height: 1.5;
+  resize: vertical;
 }
 .bewerk__acties {
   display: flex;
