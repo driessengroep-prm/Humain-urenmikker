@@ -42,6 +42,7 @@ BEDRIJVEN = {
     "tsf": ("TSF", None),
     "driessen foundation": ("Driessen Foundation", None),
     "lüün": ("Lüün", None),
+    "talentscoutz": ("Talentscoutz", None),
     # Geen werkmaatschappij maar een team binnen Driessen Groep.
     "programmamanagement": ("Driessen Groep", "Programmamanagement"),
 }

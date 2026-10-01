@@ -67,7 +67,7 @@ te bewerken als op de gepubliceerde site op te vragen.
 ```
 
 Bedrijven (veld `bedrijf`): Driessen, Driessen Groep, IJK, Reijn, Haert, Bloeij,
-Brainport Human Campus, Driessen Foundation, Jeij, TSF, Lüün. Driessen en
+Brainport Human Campus, Driessen Foundation, Jeij, TSF, Lüün, Talentscoutz. Driessen en
 Driessen Groep zijn twee aparte werkmaatschappijen; de bronsheet gebruikt beide
 namen door elkaar en het conversiescript houdt ze uit elkaar. Een afdeling of team
 binnen zo'n bedrijf hoort niet in die lijst maar in het vrije veld `team`

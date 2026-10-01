@@ -19,6 +19,7 @@ export const BEDRIJVEN = [
   'Jeij',
   'TSF',
   'Lüün',
+  'Talentscoutz',
 ] as const;
 export type Bedrijf = (typeof BEDRIJVEN)[number];
 
