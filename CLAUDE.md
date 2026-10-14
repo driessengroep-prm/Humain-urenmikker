@@ -20,8 +20,8 @@ voor lokaal werken zonder Buddy.
    `createDataStore()` en de hook `useUseCases`. Dat is de reden dat de opslag
    verwisseld kon worden voor Buddy Data zonder één component aan te raken —
    breek het niet.
-2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel, werkweken (46) en
-   telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
+2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel (10.000), het maximum van
+   de buis (25.000), werkweken (46) en telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
    in de UI te wijzigen: één stand voor iedereen die de tool opent. Rekenen zelf gebeurt in
    `src/lib/uren.ts`.
 3. **Brondata is per week, de meter toont per jaar.** `urenPerJaar()` is de
@@ -97,6 +97,13 @@ vormgeving te bekijken of te delen zonder `npm install`.
 
 - Toegankelijk: zichtbare focus, bedienbaar met toetsenbord, focus-trap in
   modals, `prefers-reduced-motion` gerespecteerd, tekstalternatief voor de buis.
+- Doel en schaal zijn twee dingen. De buis loopt tot `buisMaximumUren`; de
+  gestreepte lijn erin staat op `jaardoelUren`, het doel dat in 2026 gehaald is.
+  Die lijn blijft staan: hij laat zien dat het doel voorbij is en waar het lag.
+  Zodra de meter erboven uitkomt heet hij "doel 10.000 gehaald". Het label zit op
+  een crèmekleurig pilletje, want dwars door de buis valt platte tekst weg tegen
+  het glas en de knikkers. De knop boven de buis toont bewust geen percentage
+  meer: boven de 100% zegt dat niets meer.
 - Komen er knikkers bij, dan vallen ze van bovenaf in de buis (`knikkerValt`).
   Dat hoort alleen te gebeuren als er iets is afgerond, niet bij filteren; de
   buis vergelijkt daarvoor de `selectieSleutel` met de vorige render.

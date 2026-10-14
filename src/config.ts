@@ -18,8 +18,15 @@ function getal(waarde: string | undefined, fallback: number): number {
 }
 
 export const config = {
-  /** Jaardoel in uren. De buis is vol bij deze waarde. */
+  /**
+   * Het oorspronkelijke doel in uren. Dat is gehaald, dus het is niet langer de
+   * bovenkant van de buis maar de streep halverwege: de meter blijft zo laten
+   * zien wat er daarna nog bij komt, met het doel als herkenbaar ijkpunt.
+   */
   jaardoelUren: getal(import.meta.env.VITE_JAARDOEL_UREN, 10_000),
+
+  /** Waar de buis vol is. Hoger dan het doel, zodat er boven de streep ruimte blijft. */
+  buisMaximumUren: getal(import.meta.env.VITE_BUIS_MAXIMUM, 25_000),
 
   /**
    * Aantal werkweken per jaar waarmee week -> jaar wordt gerekend.

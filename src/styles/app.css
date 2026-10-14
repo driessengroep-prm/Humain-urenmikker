@@ -358,17 +358,6 @@ textarea {
   font-size: 13.5px;
   color: var(--tekst-zacht);
 }
-.paneelknop__badge {
-  background: var(--petrol);
-  color: var(--wit);
-  border-radius: var(--radius-pill);
-  padding: 3px 11px;
-  font-family: var(--font-kop);
-  font-weight: 600;
-  font-size: 12.5px;
-  font-variant-numeric: tabular-nums;
-  align-self: center;
-}
 /* Chevron uit de boogvormtaal; draait bij openklappen. */
 .paneelknop__chevron {
   width: 9px;

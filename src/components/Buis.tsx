@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { aantalKnikkers, buis, buisPad, knikkerStraal, maakKnikkers, yVoorUren } from '../lib/knikkers';
-import { getal, percentage } from '../lib/format';
+import { getal } from '../lib/format';
 import type { Segment } from '../lib/uren';
 
 interface BuisProps {
@@ -8,7 +8,10 @@ interface BuisProps {
   meetellendeUren: number;
   /** Uren per jaar aan potentieel (ideeën en trajecten in behandeling). */
   potentieleUren: number;
+  /** Het oorspronkelijke doel; de gestreepte lijn in de buis. */
   jaardoel: number;
+  /** Waar de buis vol is. De hele schaalverdeling loopt hier tegenaan, niet tegen het doel. */
+  maximum: number;
   /** Segmentverdeling van de meetellende use cases over de buis. */
   segmenten: Segment[];
   /** Id van de use case waar de gebruiker overheen zweeft of die focus heeft. */
@@ -23,20 +26,27 @@ interface BuisProps {
   selectieSleutel: string;
 }
 
-const tickWaarden = Array.from({ length: 11 }, (_, i) => i * 1000);
+/** Streepje per 1.000 uur, een getal erbij per 5.000. */
+const TICK_STAP = 1000;
+const TICK_LABEL_STAP = 5000;
 
 export function Buis({
   meetellendeUren,
   potentieleUren,
   jaardoel,
+  maximum,
   segmenten,
   gemarkeerdeId,
   potentieelTeltMee,
   selectieSleutel,
 }: BuisProps) {
-  const knikkers = useMemo(() => maakKnikkers(jaardoel), [jaardoel]);
+  const knikkers = useMemo(() => maakKnikkers(maximum), [maximum]);
+  const tickWaarden = useMemo(
+    () => Array.from({ length: Math.floor(maximum / TICK_STAP) + 1 }, (_, i) => i * TICK_STAP),
+    [maximum],
+  );
 
-  const ratio = jaardoel > 0 ? Math.min(meetellendeUren / jaardoel, 1) : 0;
+  const ratio = maximum > 0 ? Math.min(meetellendeUren / maximum, 1) : 0;
   const zichtbaarTot = Math.round(ratio * aantalKnikkers);
 
   // Vanaf welke knikker er gevallen wordt; null als er niets te vallen valt.
@@ -72,17 +82,25 @@ export function Buis({
   // Potentieel als doorzichtige band bovenop de gevulde knikkers.
   const potentieelTop = potentieelTeltMee
     ? null
-    : Math.min(meetellendeUren + potentieleUren, jaardoel);
+    : Math.min(meetellendeUren + potentieleUren, maximum);
   const toonPotentieel = potentieelTop !== null && potentieelTop > meetellendeUren + 1;
 
-  const yVul = yVoorUren(meetellendeUren, jaardoel);
-  const yPotentieel = yVoorUren(potentieelTop ?? 0, jaardoel);
-  const yMarkeerVan = gemarkeerd ? yVoorUren(gemarkeerd.vanUren, jaardoel) : 0;
-  const yMarkeerTot = gemarkeerd ? yVoorUren(gemarkeerd.totUren, jaardoel) : 0;
+  const yVul = yVoorUren(meetellendeUren, maximum);
+  const yPotentieel = yVoorUren(potentieelTop ?? 0, maximum);
+  const yMarkeerVan = gemarkeerd ? yVoorUren(gemarkeerd.vanUren, maximum) : 0;
+  const yMarkeerTot = gemarkeerd ? yVoorUren(gemarkeerd.totUren, maximum) : 0;
+
+  // De streep van het oorspronkelijke doel; die staat nu middenin de buis.
+  const yDoel = yVoorUren(jaardoel, maximum);
+  const doelGehaald = meetellendeUren >= jaardoel;
+  const doelTekst = `doel ${getal(jaardoel)}${doelGehaald ? ' gehaald' : ''}`;
+  // Ruwe tekstbreedte: Poppins 600 op 10 px loopt op ongeveer 5,6 px per teken.
+  const doelBreedte = Math.round(doelTekst.length * 5.6) + 16;
 
   const beschrijving =
-    `De buis is voor ${percentage((meetellendeUren / jaardoel) * 100)} gevuld: ` +
-    `${getal(meetellendeUren)} van ${getal(jaardoel)} uur per jaar.` +
+    `De buis loopt tot ${getal(maximum)} uur per jaar en is gevuld tot ` +
+    `${getal(meetellendeUren)} uur. Het doel van ${getal(jaardoel)} uur is ` +
+    `${doelGehaald ? 'gehaald' : 'nog niet gehaald'}; dat staat als streep in de buis.` +
     (toonPotentieel ? ` Daarbovenop staat ${getal(potentieleUren)} uur aan potentieel.` : '');
 
   return (
@@ -124,11 +142,11 @@ export function Buis({
           </clipPath>
         </defs>
 
-        {/* Maatstreepjes 0 - 10.000 */}
+        {/* Maatstreepjes langs de hele schaal */}
         <g aria-hidden="true">
           {tickWaarden.map((waarde) => {
-            const y = yVoorUren(waarde, jaardoel);
-            const groot = waarde % 2000 === 0;
+            const y = yVoorUren(waarde, maximum);
+            const groot = waarde % TICK_LABEL_STAP === 0;
             return (
               <g key={waarde}>
                 <line
@@ -299,26 +317,41 @@ export function Buis({
           </g>
         )}
 
-        {/* Doelstreep */}
+        {/*
+          Doelstreep. Die loopt niet meer langs de bovenrand maar dwars door de
+          buis, dus het label staat op een crèmekleurig pilletje: anders valt het
+          weg tegen het glas en de knikkers eronder.
+        */}
         <g aria-hidden="true">
           <line
             x1={buis.x - 12}
-            y1={buis.vulTop}
+            y1={yDoel}
             x2={buis.x + buis.breedte + 16}
-            y2={buis.vulTop}
+            y2={yDoel}
             stroke="#2e5561"
             strokeWidth="1.6"
             strokeDasharray="6 4"
           />
+          <rect
+            x={buis.x - 12}
+            y={yDoel - 19}
+            width={doelBreedte}
+            height="16"
+            rx="8"
+            fill="#fbf1e9"
+            stroke="#2e5561"
+            strokeWidth="0.9"
+          />
           <text
-            x={buis.x - 14}
-            y={buis.vulTop - 7}
-            fontSize="11"
+            x={buis.x - 12 + doelBreedte / 2}
+            y={yDoel - 7.5}
+            fontSize="10"
             fontFamily="Poppins, sans-serif"
             fontWeight="600"
             fill="#2e5561"
+            textAnchor="middle"
           >
-            doel {getal(jaardoel)}
+            {doelTekst}
           </text>
         </g>
 

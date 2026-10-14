@@ -122,7 +122,9 @@ betreft, zodat je die handmatig kunt aanvullen — er wordt niets geschat.
 
 ## Uren-logica en configuratie
 
-De brondata is besparing **per week**, het doel is **10.000 uur per jaar**:
+De brondata is besparing **per week**. Het oorspronkelijke doel van **10.000 uur
+per jaar** is gehaald; de buis loopt daarom door tot 25.000 uur, met het doel als
+gestreepte lijn halverwege:
 
 ```
 uren_per_jaar = tijdsbesparing_uren_per_week × werkweken
@@ -132,7 +134,8 @@ Alles staat in **`src/config.ts`**:
 
 | Waarde | Default | Betekenis |
 | --- | --- | --- |
-| `jaardoelUren` | `10000` | Bij deze waarde is de buis vol. |
+| `jaardoelUren` | `10000` | Het oorspronkelijke doel; de gestreepte lijn in de buis. |
+| `buisMaximumUren` | `25000` | Bij deze waarde is de buis vol. |
 | `werkwekenPerJaar` | `46` | Omrekenfactor week → jaar. |
 | `telModus` | `'alleen-done'` | `'alleen-done'` telt alleen status `Done` in de meter; `'alle-statussen'` telt alle use cases mee. |
 | `gerealiseerdeStatussen` | `['Done']` | Wat als gerealiseerd geldt. |

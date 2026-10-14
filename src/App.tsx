@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { config } from './config';
 import { useUseCases } from './hooks/useUseCases';
 import { berekenSegmenten, berekenTotalen, perBedrijf, teltMee, urenPerJaar } from './lib/uren';
-import { getal, percentage } from './lib/format';
+import { getal } from './lib/format';
 import type { Bedrijf, GevoeligeData, NieuweUseCase, Status } from './types';
 import { BedrijfOverzicht } from './components/BedrijfOverzicht';
 import { Buis } from './components/Buis';
@@ -207,7 +207,6 @@ export default function App() {
             <PaneelKnop
               waarde={`${getal(totalen.meetellendeUren)} uur`}
               label={telModus === 'alle-statussen' ? 'besparing' : 'gerealiseerd'}
-              badge={percentage(totalen.percentage)}
               open={toonTeller}
               paneelId="paneel-teller"
               onClick={() => setToonTeller((huidig) => !huidig)}
@@ -255,6 +254,7 @@ export default function App() {
               meetellendeUren={totalen.meetellendeUren}
               potentieleUren={totalen.potentieleUren}
               jaardoel={config.jaardoelUren}
+              maximum={config.buisMaximumUren}
               segmenten={segmenten}
               gemarkeerdeId={gemarkeerdeId}
               potentieelTeltMee={telModus === 'alle-statussen'}
