@@ -227,7 +227,6 @@ export default function App() {
             {toonTeller && (
               <Teller
                 totalen={totalen}
-                jaardoel={config.jaardoelUren}
                 werkweken={werkweken}
                 telModus={telModus}
               />

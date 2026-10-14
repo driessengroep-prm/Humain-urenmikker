@@ -93,7 +93,7 @@ export function Buis({
   // De streep van het oorspronkelijke doel; die staat nu middenin de buis.
   const yDoel = yVoorUren(jaardoel, maximum);
   const doelGehaald = meetellendeUren >= jaardoel;
-  const doelTekst = `doel ${getal(jaardoel)}${doelGehaald ? ' gehaald' : ''}`;
+  const doelTekst = `Doel 2026: ${getal(jaardoel)}`;
   // Ruwe tekstbreedte: Poppins 600 op 10 px loopt op ongeveer 5,6 px per teken.
   const doelBreedte = Math.round(doelTekst.length * 5.6) + 16;
 

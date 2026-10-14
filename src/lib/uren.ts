@@ -22,8 +22,6 @@ export interface Totalen {
   gerealiseerdeUren: number;
   /** Uren per jaar van ideeën en trajecten in behandeling. */
   potentieleUren: number;
-  /** Percentage van het jaardoel (0-100+, niet afgekapt). */
-  percentage: number;
   /** Aantal use cases in de dataset (na filtering). */
   aantalUseCases: number;
   /** Aantal use cases zonder ingevulde besparing. */
@@ -35,7 +33,6 @@ export interface Totalen {
 export interface TelOpties {
   werkweken?: number;
   telModus?: typeof config.telModus;
-  jaardoel?: number;
 }
 
 /** Bepaalt of een use case meetelt in de meter, gegeven de telmodus. */
@@ -47,7 +44,6 @@ export function teltMee(useCase: UseCase, telModus = config.telModus): boolean {
 export function berekenTotalen(useCases: UseCase[], opties: TelOpties = {}): Totalen {
   const werkweken = opties.werkweken ?? config.werkwekenPerJaar;
   const telModus = opties.telModus ?? config.telModus;
-  const jaardoel = opties.jaardoel ?? config.jaardoelUren;
 
   let meetellendeUren = 0;
   let gerealiseerdeUren = 0;
@@ -68,7 +64,6 @@ export function berekenTotalen(useCases: UseCase[], opties: TelOpties = {}): Tot
     meetellendeUren,
     gerealiseerdeUren,
     potentieleUren,
-    percentage: jaardoel > 0 ? (meetellendeUren / jaardoel) * 100 : 0,
     aantalUseCases: useCases.length,
     aantalZonderBesparing,
     aantalBedrijven: bedrijven.size,

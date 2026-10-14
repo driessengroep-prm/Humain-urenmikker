@@ -1,15 +1,14 @@
-import { decimaal, getal, percentage } from '../lib/format';
+import { decimaal, getal } from '../lib/format';
 import type { Totalen } from '../lib/uren';
 import type { TelModus } from '../config';
 
 interface TellerProps {
   totalen: Totalen;
-  jaardoel: number;
   werkweken: number;
   telModus: TelModus;
 }
 
-export function Teller({ totalen, jaardoel, werkweken, telModus }: TellerProps) {
+export function Teller({ totalen, werkweken, telModus }: TellerProps) {
   const alleStatussen = telModus === 'alle-statussen';
   return (
     <section className="paneel" aria-labelledby="teller-titel">
@@ -18,8 +17,8 @@ export function Teller({ totalen, jaardoel, werkweken, telModus }: TellerProps) 
       </h2>
       <div className="teller__hoofd">
         <span className="teller__getal">{getal(totalen.meetellendeUren)}</span>
-        <span className="teller__doel">van {getal(jaardoel)} uur/jaar</span>
-        <span className="teller__badge">{percentage(totalen.percentage)}</span>
+        {/* Geen doel of percentage meer: dat doel is gehaald, de teller loopt gewoon door. */}
+        <span className="teller__doel">uur per jaar</span>
       </div>
       <p className="teller__label">
         Omgerekend met {decimaal(werkweken)} werkweken per jaar

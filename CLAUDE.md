@@ -100,10 +100,12 @@ vormgeving te bekijken of te delen zonder `npm install`.
 - Doel en schaal zijn twee dingen. De buis loopt tot `buisMaximumUren`; de
   gestreepte lijn erin staat op `jaardoelUren`, het doel dat in 2026 gehaald is.
   Die lijn blijft staan: hij laat zien dat het doel voorbij is en waar het lag.
-  Zodra de meter erboven uitkomt heet hij "doel 10.000 gehaald". Het label zit op
-  een crèmekleurig pilletje, want dwars door de buis valt platte tekst weg tegen
-  het glas en de knikkers. De knop boven de buis toont bewust geen percentage
-  meer: boven de 100% zegt dat niets meer.
+  Het label ("Doel 2026: 10.000") zit op een crèmekleurig pilletje, want dwars
+  door de buis valt platte tekst weg tegen het glas en de knikkers.
+- Nergens in de tool staat nog een percentage van het doel, en `Totalen` rekent
+  het ook niet meer uit. Boven de 100% zegt zo'n getal niets meer; de teller toont
+  "14.286 uur per jaar" en verder niets. Komt er ooit een nieuw doel, zet dan
+  `jaardoelUren` om in plaats van er een percentage bij te verzinnen.
 - Komen er knikkers bij, dan vallen ze van bovenaf in de buis (`knikkerValt`).
   Dat hoort alleen te gebeuren als er iets is afgerond, niet bij filteren; de
   buis vergelijkt daarvoor de `selectieSleutel` met de vorige render.
