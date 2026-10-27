@@ -72,11 +72,15 @@ jobs:
         # --delete ruimt bestanden op die uit de build verdwenen zijn; zonder dat blijven
         # oude bundels voor altijd staan. index.html gaat als laatste, zodat de browser
         # nooit een pagina krijgt die naar nog-niet-aanwezige bestanden verwijst.
+        #
+        # De sleutel mag op de VM alleen rsync doen binnen /data/caddy/apps (rrsync in
+        # authorized_keys). rrsync leest een pad dat met / begint vanaf die map, dus
+        # /urenmikker/ is /data/caddy/apps/urenmikker/.
         run: |
           rsync -az --delete --exclude=index.html \
-            dist/ buddy-admin@40.115.59.118:/data/caddy/apps/urenmikker/
+            dist/ buddy-admin@40.115.59.118:/urenmikker/
           rsync -az dist/index.html \
-            buddy-admin@40.115.59.118:/data/caddy/apps/urenmikker/index.html
+            buddy-admin@40.115.59.118:/urenmikker/index.html
 
       - name: Controleren
         run: |
