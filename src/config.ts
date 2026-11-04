@@ -26,7 +26,7 @@ export const config = {
   jaardoelUren: getal(import.meta.env.VITE_JAARDOEL_UREN, 10_000),
 
   /** Waar de buis vol is. Hoger dan het doel, zodat er boven de streep ruimte blijft. */
-  buisMaximumUren: getal(import.meta.env.VITE_BUIS_MAXIMUM, 25_000),
+  buisMaximumUren: getal(import.meta.env.VITE_BUIS_MAXIMUM, 50_000),
 
   /**
    * Aantal werkweken per jaar waarmee week -> jaar wordt gerekend.
