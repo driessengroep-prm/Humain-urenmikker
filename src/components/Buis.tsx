@@ -26,9 +26,18 @@ interface BuisProps {
   selectieSleutel: string;
 }
 
-/** Streepje per 1.000 uur, een getal erbij per 5.000. */
-const TICK_STAP = 1000;
-const TICK_LABEL_STAP = 5000;
+/**
+ * De maatverdeling schaalt mee met de buis: een streepje per ronde stap, een
+ * getal bij elke vijfde. De stap komt uit een lijst ronde getallen - deel je de
+ * schaal gewoon door een vast aantal, dan staat er bij 50.000 ineens een streepje
+ * per 1.923 uur.
+ */
+const NETTE_STAPPEN = [100, 250, 500, 1000, 2000, 2500, 5000, 10_000];
+const MAX_STREEPJES = 26;
+
+function tickStap(maximum: number): number {
+  return NETTE_STAPPEN.find((stap) => maximum / stap <= MAX_STREEPJES) ?? maximum / 10;
+}
 
 export function Buis({
   meetellendeUren,
@@ -41,9 +50,11 @@ export function Buis({
   selectieSleutel,
 }: BuisProps) {
   const knikkers = useMemo(() => maakKnikkers(maximum), [maximum]);
+  const stap = tickStap(maximum);
+  const labelStap = stap * 5;
   const tickWaarden = useMemo(
-    () => Array.from({ length: Math.floor(maximum / TICK_STAP) + 1 }, (_, i) => i * TICK_STAP),
-    [maximum],
+    () => Array.from({ length: Math.floor(maximum / stap) + 1 }, (_, i) => i * stap),
+    [maximum, stap],
   );
 
   const ratio = maximum > 0 ? Math.min(meetellendeUren / maximum, 1) : 0;
@@ -146,7 +157,7 @@ export function Buis({
         <g aria-hidden="true">
           {tickWaarden.map((waarde) => {
             const y = yVoorUren(waarde, maximum);
-            const groot = waarde % TICK_LABEL_STAP === 0;
+            const groot = waarde % labelStap === 0;
             return (
               <g key={waarde}>
                 <line

@@ -21,7 +21,7 @@ voor lokaal werken zonder Buddy.
    verwisseld kon worden voor Buddy Data zonder één component aan te raken —
    breek het niet.
 2. **Rekenwaarden staan in `src/config.ts`.** Jaardoel (10.000), het maximum van
-   de buis (25.000), werkweken (46) en telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
+   de buis (50.000), werkweken (46) en telmodus horen daar, niet als los getal in een component. Ze zijn bewust niet
    in de UI te wijzigen: één stand voor iedereen die de tool opent. Rekenen zelf gebeurt in
    `src/lib/uren.ts`.
 3. **Brondata is per week, de meter toont per jaar.** `urenPerJaar()` is de
@@ -101,7 +101,11 @@ vormgeving te bekijken of te delen zonder `npm install`.
   gestreepte lijn erin staat op `jaardoelUren`, het doel dat in 2026 gehaald is.
   Die lijn blijft staan: hij laat zien dat het doel voorbij is en waar het lag.
   Het label ("Doel 2026: 10.000") zit op een crèmekleurig pilletje, want dwars
-  door de buis valt platte tekst weg tegen het glas en de knikkers.
+  door de buis valt platte tekst weg tegen het glas en de knikkers. De
+  maatverdeling schaalt mee: `tickStap()` kiest een ronde stap uit een vaste lijst
+  zodat er zo'n 25 streepjes staan, met een getal bij elke vijfde. Zet
+  `buisMaximumUren` hoger en de schaal klopt vanzelf - deel niet zelf door een
+  vast aantal, want dan komt er een streepje per 1.923 uur.
 - Nergens in de tool staat nog een percentage van het doel, en `Totalen` rekent
   het ook niet meer uit. Boven de 100% zegt zo'n getal niets meer; de teller toont
   "14.286 uur per jaar" en verder niets. Komt er ooit een nieuw doel, zet dan
